@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/TestRest/TestRest.iml" filepath="$PROJECT_DIR$/TestRest/TestRest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TestRest/TestRest-TestRest.iml" filepath="$PROJECT_DIR$/TestRest/TestRest-TestRest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TestRestProject.iml" filepath="$PROJECT_DIR$/TestRestProject.iml" />
+    </modules>
+  </component>
+</project>
+
