@@ -5,4 +5,8 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="basic_padding">
+        <item name="android:padding">4dp</item>
+    </style>
+
 </resources>

@@ -5,8 +5,79 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView
-        android:text="Request"
-        android:layout_height="match_parent" android:layout_width="match_parent"/>
+   <RadioGroup
+           android:gravity="center"
+           android:layout_height="wrap_content" android:layout_width="match_parent"
+           android:orientation="horizontal"
+           android:checkedButton="@+id/checkbox_get">
+       <RadioButton
+               android:id="@+id/checkbox_get"
+               android:text="@string/get"
+               android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+       <RadioButton
+               android:id="@+id/checkbox_post"
+               android:text="@string/post"
+               android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+       <RadioButton
+               android:id="@+id/checkbox_put"
+               android:text="@string/put"
+               android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+       <RadioButton
+               android:id="@+id/checkbox_delete"
+               android:text="@string/delete"
+               android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+   </RadioGroup>
+
+    <LinearLayout
+            style="@style/basic_padding"
+            android:orientation="vertical"
+            android:layout_height="wrap_content" android:layout_width="match_parent">
+
+        <TextView
+                android:text="@string/baseurl"
+                android:layout_height="wrap_content" android:layout_width="match_parent"/>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_height="wrap_content" android:layout_width="match_parent">
+
+            <pro.anton.averin.networking.testrest.views.ProtocolToggleButton
+                    android:id="@+id/protocol_button"
+                    android:text="@string/http"
+                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"/>
+
+            <EditText
+                    android:id="@+id/baseurl"
+                    android:editable="true"
+                    android:linksClickable="false"
+                    android:hint="@string/baseurl_hint"
+                    android:layout_height="wrap_content" android:layout_width="match_parent"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/add_query_button"
+                    android:text="@string/add_query"
+                    android:clickable="true"
+                    android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+
+            <pro.anton.averin.networking.testrest.views.TokenizedEditText
+                    android:id="@+id/method_url"
+                    android:editable="true"
+                    android:linksClickable="false"
+                    android:inputType="textNoSuggestions"
+                    android:hint="@string/methodurl_hint"
+                    android:layout_height="wrap_content" android:layout_width="match_parent"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>
