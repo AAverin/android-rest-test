@@ -7,4 +7,19 @@
     <string name="title_section3">Section 3</string>
     <string name="action_settings">Settings</string>
 
+    <string name="get">GET</string>
+    <string name="post">POST</string>
+    <string name="put">PUT</string>
+    <string name="delete">DELETE</string>
+
+    <string name="baseurl_hint">Enter baseURL</string>
+    <string name="baseurl">BaseURL</string>
+    <string name="methodurl_hint">Enter REST method url</string>
+
+    <string name="http">http://</string>
+    <string name="https">https://</string>
+
+    <string name="add_query">Add query parameter</string>
+
+
 </resources>

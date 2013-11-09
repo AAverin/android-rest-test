@@ -8,6 +8,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import pro.anton.averin.networking.testrest.views.ProtocolToggleButton;
 
 /**
  * Created by AAverin on 09.11.13.
@@ -17,6 +20,8 @@ public class TestRestFragment extends Fragment {
     private View mGroupRoot;
 
     private ViewPager mViewPager;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +35,7 @@ public class TestRestFragment extends Fragment {
 
         return mGroupRoot;
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
