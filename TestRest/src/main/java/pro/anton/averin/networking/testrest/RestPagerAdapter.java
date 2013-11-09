@@ -9,19 +9,27 @@ import android.support.v4.app.FragmentPagerAdapter;
  */
 public class RestPagerAdapter extends FragmentPagerAdapter {
 
+    private FragmentManager fragmentManager;
+
     private Class[] pagerViews = new Class[] {
         RequestFragment.class,
         ResponseFragment.class
     };
+    private String[] pageTitles;
 
-    public RestPagerAdapter(FragmentManager fm) {
+    public RestPagerAdapter(FragmentManager fm, String[] titles) {
         super(fm);
+        this.fragmentManager = fm;
+        if (titles.length != pagerViews.length) {
+            throw new RuntimeException("illegal number of titles");
+        }
+        this.pageTitles = titles;
     }
 
     @Override
     public Fragment getItem(int i) {
         try {
-            return (Fragment)pagerViews[i].newInstance();
+            return (Fragment) pagerViews[i].newInstance();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -31,7 +39,12 @@ public class RestPagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
+    public CharSequence getPageTitle(int position) {
+        return this.pageTitles[position];
+    }
+
+    @Override
     public int getCount() {
-        return 2;
+        return pagerViews.length;
     }
 }

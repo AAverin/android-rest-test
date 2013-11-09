@@ -23,7 +23,10 @@ public class TestRestFragment extends Fragment {
         mGroupRoot = inflater.inflate(R.layout.fragment_main, null);
 
         mViewPager = (ViewPager) mGroupRoot.findViewById(R.id.pager);
-        mViewPager.setAdapter(new RestPagerAdapter(getFragmentManager()));
+        mViewPager.setAdapter(new RestPagerAdapter(getFragmentManager(), new String[] {
+                getString(R.string.requestViewTitle),
+                getString(R.string.responseViewTitle)
+        }));
 
         return mGroupRoot;
     }
