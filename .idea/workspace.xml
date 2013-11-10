@@ -65,6 +65,23 @@
       </breakpoint>
     </breakpoint_any>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <line_breakpoints>
+      <breakpoint url="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/views/QueryMenuPopupWindow.java" line="31" class="pro.anton.averin.networking.testrest.views.QueryMenuPopupWindow$1" package="pro.anton.averin.networking.testrest.views">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -86,14 +103,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RequestFragment.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="RequestFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/RequestFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="37" selection-start="2337" selection-end="2337" vertical-scroll-proportion="0.47605634" vertical-offset="817" max-vertical-offset="2006">
+            <state line="47" column="9" selection-start="1636" selection-end="1636" vertical-scroll-proportion="0.0" vertical-offset="512" max-vertical-offset="1921">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#highlightQueryButton#0;class#RequestFragment#0" expanded="false" />
-                <element signature="e#5378#5414#0" expanded="true" />
+                <element signature="e#4934#4970#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QueryMenuPopupWindow.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/views/QueryMenuPopupWindow.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="52" column="34" selection-start="1767" selection-end="1767" vertical-scroll-proportion="0.47605634" vertical-offset="630" max-vertical-offset="1054">
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -121,15 +149,6 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="editquery_popupmenu.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TestRest/src/main/res/menu/editquery_popupmenu.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="0" selection-start="106" selection-end="106" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="187">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -499,7 +518,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/RestPagerAdapter.java" />
         <option value="$PROJECT_DIR$/TestRest/src/main/res/layout/fragment_main.xml" />
         <option value="$PROJECT_DIR$/TestRest/src/main/res/values/dimens.xml" />
         <option value="$PROJECT_DIR$/TestRest/src/main/res/values/styles.xml" />
@@ -510,11 +528,12 @@
         <option value="$PROJECT_DIR$/TestRest/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/TestRest/src/main/res/menu/editquery_popupmenu.xml" />
         <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/views/IconedPopupMenu.java" />
-        <option value="$PROJECT_DIR$/TestRest/src/main/res/layout/editquery_popupwindow.xml" />
         <option value="$PROJECT_DIR$/TestRest/build.gradle" />
         <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/views/ClickableArrowKeyMovementMethod.java" />
         <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/views/TokenizedEditText.java" />
+        <option value="$PROJECT_DIR$/TestRest/src/main/res/layout/editquery_popupwindow.xml" />
         <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/RequestFragment.java" />
+        <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/views/QueryMenuPopupWindow.java" />
       </list>
     </option>
   </component>
@@ -1053,6 +1072,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2716593" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49691358" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1073,7 +1093,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2716593" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1090,28 +1109,9 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/TestRest/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="37" selection-start="88" selection-end="88" vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="153">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-19/android.jar!/android/animation/ValueAnimator.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="160" selection-end="160" vertical-scroll-proportion="0.13957307" vertical-offset="0" max-vertical-offset="1717" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TestRest/src/main/res/values/dimens.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="44" selection-start="185" selection-end="185" vertical-scroll-proportion="-2.04" vertical-offset="0" max-vertical-offset="204">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestRest/src/main/res/menu/editquery_popupmenu.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="106" selection-end="106" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="187">
           <folding />
         </state>
       </provider>
@@ -1127,16 +1127,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestRest/src/main/res/layout/editquery_popupwindow.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="51" selection-start="261" selection-end="261" vertical-scroll-proportion="0.2852349" vertical-offset="0" max-vertical-offset="357">
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1182,15 +1172,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/views/ClickableArrowKeyMovementMethod.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="61" selection-start="2028" selection-end="2028" vertical-scroll-proportion="0.0" vertical-offset="253" max-vertical-offset="1258">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/views/TokenizedEditText.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="42" column="5" selection-start="1303" selection-end="1303" vertical-scroll-proportion="0.0" vertical-offset="173" max-vertical-offset="1870">
@@ -1204,13 +1185,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/TestRest/src/main/res/menu/editquery_popupmenu.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="0" selection-start="106" selection-end="106" vertical-scroll-proportion="0.15454546" vertical-offset="0" max-vertical-offset="330">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestRest/src/main/res/layout/editquery_popupwindow.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="48" selection-start="538" selection-end="538" vertical-scroll-proportion="0.6643836" vertical-offset="27" max-vertical-offset="391">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/views/ClickableArrowKeyMovementMethod.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="61" selection-start="2028" selection-end="2028" vertical-scroll-proportion="0.0" vertical-offset="253" max-vertical-offset="1258">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-19/android.jar!/android/view/View.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="13" selection-start="155" selection-end="155" vertical-scroll-proportion="0.24853802" vertical-offset="0" max-vertical-offset="20196">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/RequestFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="37" selection-start="2337" selection-end="2337" vertical-scroll-proportion="0.47605634" vertical-offset="817" max-vertical-offset="2006">
+        <state line="47" column="9" selection-start="1636" selection-end="1636" vertical-scroll-proportion="0.0" vertical-offset="512" max-vertical-offset="1921">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#highlightQueryButton#0;class#RequestFragment#0" expanded="false" />
-            <element signature="e#5378#5414#0" expanded="true" />
+            <element signature="e#4934#4970#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/views/QueryMenuPopupWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="34" selection-start="1767" selection-end="1767" vertical-scroll-proportion="0.47605634" vertical-offset="630" max-vertical-offset="1054">
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
