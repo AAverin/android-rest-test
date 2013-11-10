@@ -62,6 +62,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
             popup.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
             popup.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
             popup.setFocusable(true);
+            popup.setOutsideTouchable(true);
             popup.setBackgroundDrawable(new BitmapDrawable());
 
             int[] location = new int[2];

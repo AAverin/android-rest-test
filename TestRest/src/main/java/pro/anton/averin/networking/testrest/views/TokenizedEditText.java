@@ -2,14 +2,23 @@ package pro.anton.averin.networking.testrest.views;
 
 import android.content.Context;
 import android.text.Editable;
+import android.text.Layout;
+import android.text.Selection;
+import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextWatcher;
+import android.text.method.ArrowKeyMovementMethod;
+import android.text.method.BaseMovementMethod;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.TextAppearanceSpan;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +33,14 @@ public class TokenizedEditText extends EditText {
     private Pattern tokenRegexp;
     private Pattern tokenStringContainsRegexp;
     private Context context;
+    private TokenListener tokenListener;
+
+    private SpannableStringBuilder spannableStringBuilder = null;
     private boolean inTokenizer = false;
 
     public interface TokenListener {
         public ClickableSpan onCreateTokenSpan(String chip);
     }
-
-    private TokenListener tokenListener;
 
     public TokenizedEditText(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -47,10 +57,19 @@ public class TokenizedEditText extends EditText {
         init(context);
     }
 
+    OnFocusChangeListener focusChangeListener = new OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View view, boolean b) {
+            if (!b) {
+                applyTokens();
+            }
+        }
+    };
+
     private void init(Context context) {
         addTextChangedListener(tokenizer);
         this.context = context;
-        setMovementMethod(LinkMovementMethod.getInstance());
+        setMovementMethod(ClickableArrowKeyMovementMethod.getInstance());
     }
 
     public void setTokenRegexp(String regexp) {
@@ -81,9 +100,17 @@ public class TokenizedEditText extends EditText {
         }
     };
 
+    private void applyTokens() {
+        if (spannableStringBuilder != null) {
+            int oldSelection = getSelectionEnd();
+            setText(spannableStringBuilder);
+            setSelection(oldSelection);
+        }
+    }
+
     private void tokenize(String sequence) {
         inTokenizer = true;
-        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(sequence);
+        spannableStringBuilder = new SpannableStringBuilder(sequence);
         ArrayList<String> chips = new ArrayList<String>();
         Matcher matcher = tokenRegexp.matcher(sequence);
         while (matcher.find()) {
@@ -94,8 +121,7 @@ public class TokenizedEditText extends EditText {
             int chipStart = sequence.indexOf(chip);
             spannableStringBuilder.setSpan(span, chipStart, chipStart + chip.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
-        setText(spannableStringBuilder);
-        setSelection(getText().length());
+        applyTokens();
         inTokenizer = false;
     }
 }
