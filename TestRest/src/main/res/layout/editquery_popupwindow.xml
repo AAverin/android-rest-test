@@ -6,13 +6,10 @@
               android:layout_height="match_parent">
 
     <ImageButton
-            android:id="@+id/query_edit_button"
-            android:src="@android:drawable/ic_menu_edit"
-            android:layout_height="wrap_content" android:layout_width="wrap_content"/>
-
-    <ImageButton
+            android:background="@null"
             android:id="@+id/query_delete_button"
-            android:src="@android:drawable/ic_menu_delete"
-            android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+            android:src="@android:drawable/btn_dialog"
+            android:layout_height="15dp"
+            android:layout_width="15dp"/>
 
 </LinearLayout>

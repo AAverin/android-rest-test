@@ -20,7 +20,6 @@ public class QueryMenuPopupWindow extends PopupWindow {
     private RequestFragment.QuerySpan chip;
 
     public interface ChipListener {
-        void onChipEdited(RequestFragment.QuerySpan chip);
         void onChipDeleted(RequestFragment.QuerySpan chip);
     }
 
@@ -28,9 +27,6 @@ public class QueryMenuPopupWindow extends PopupWindow {
         @Override
         public void onClick(View view) {
             switch(view.getId()) {
-                case R.id.query_edit_button:
-                    chipListener.onChipEdited(chip);
-                    break;
                 case R.id.query_delete_button:
                     chipListener.onChipDeleted(chip);
                     break;
@@ -47,7 +43,6 @@ public class QueryMenuPopupWindow extends PopupWindow {
         this.chip = chip;
 
         View popupView = LayoutInflater.from(context).inflate(R.layout.editquery_popupwindow, null);
-        popupView.findViewById(R.id.query_edit_button).setOnClickListener(queryMenuClickListener);
         popupView.findViewById(R.id.query_delete_button).setOnClickListener(queryMenuClickListener);
 
         setContentView(popupView);
