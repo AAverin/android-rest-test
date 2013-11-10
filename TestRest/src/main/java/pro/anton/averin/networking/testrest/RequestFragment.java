@@ -37,10 +37,6 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     };
 
     QueryMenuPopupWindow.ChipListener chipListener = new QueryMenuPopupWindow.ChipListener() {
-        @Override
-        public void onChipEdited(QuerySpan chip) {
-            Toast.makeText(getActivity(), "chip  edited " + chip.chip, 5).show();
-        }
 
         @Override
         public void onChipDeleted(QuerySpan chip) {
@@ -60,9 +56,13 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
             int[] location = new int[2];
             view.getLocationOnScreen(location);
 
+            TokenizedEditText textView = (TokenizedEditText)view;
+            String text = textView.getText().toString();
+            int dx = Math.round(textView.getPaint().measureText(text.substring(0, text.indexOf(chip) + chip.length())));
+
             QueryMenuPopupWindow popup = new QueryMenuPopupWindow(getActivity(), this);
             popup.setChipListener(chipListener);
-            popup.showAtLocation(view, Gravity.NO_GRAVITY, location[0], location[1] + view.getMeasuredHeight());
+            popup.showAtLocation(view, Gravity.NO_GRAVITY, location[0] + dx, location[1]);
         }
 
         @Override

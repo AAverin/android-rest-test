@@ -40,6 +40,11 @@ public class ClickableArrowKeyMovementMethod extends ArrowKeyMovementMethod {
     }
 
     @Override
+    public boolean onKeyOther(TextView widget, Spannable text, KeyEvent event) {
+        return super.onKeyOther(widget, text, event);
+    }
+
+    @Override
     public boolean onTouchEvent(TextView widget, Spannable buffer, MotionEvent event) {
         int action = event.getAction();
 
@@ -61,7 +66,7 @@ public class ClickableArrowKeyMovementMethod extends ArrowKeyMovementMethod {
                 spans[0].onClick(widget);
                 return super.onTouchEvent(widget, buffer, event);
             }
-            return true;
+            return super.onTouchEvent(widget, buffer, event);
         }
         return super.onTouchEvent(widget, buffer, event);
     }
