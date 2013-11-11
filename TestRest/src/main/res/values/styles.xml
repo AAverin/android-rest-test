@@ -8,5 +8,10 @@
     <style name="basic_padding">
         <item name="android:padding">4dp</item>
     </style>
+    
+    <style name="QueryPopupAnimation">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter_animation</item>
+        <item name="android:windowExitAnimation">@anim/dialog_exit_animation</item>
+    </style>
 
 </resources>

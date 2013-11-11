@@ -14,6 +14,7 @@ import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.ArgbEvaluator;
 import com.nineoldandroids.animation.ValueAnimator;
 
+import pro.anton.averin.networking.testrest.views.AddQueryPopup;
 import pro.anton.averin.networking.testrest.views.ProtocolToggleButton;
 import pro.anton.averin.networking.testrest.views.QueryMenuPopupWindow;
 import pro.anton.averin.networking.testrest.views.TokenizedEditText;
@@ -83,7 +84,8 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         addQueryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //add query dialog
+                AddQueryPopup popup = new AddQueryPopup(getActivity());
+                popup.showAtLocation(mGroupRoot, Gravity.CENTER, 0, 0);
             }
         });
 

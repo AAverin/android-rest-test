@@ -65,6 +65,7 @@
             <TextView
                     android:id="@+id/add_query_button"
                     android:text="@string/add_query"
+                    android:focusable="true"
                     android:clickable="true"
                     android:layout_height="wrap_content" android:layout_width="wrap_content"/>
 
