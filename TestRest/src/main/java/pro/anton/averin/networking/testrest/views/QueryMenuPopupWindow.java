@@ -2,7 +2,6 @@ package pro.anton.averin.networking.testrest.views;
 
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -42,7 +41,7 @@ public class QueryMenuPopupWindow extends PopupWindow {
 
         this.chip = chip;
 
-        View popupView = LayoutInflater.from(context).inflate(R.layout.editquery_popupwindow, null);
+        View popupView = LayoutInflater.from(context).inflate(R.layout.querymenu_popup, null);
         popupView.findViewById(R.id.query_delete_button).setOnClickListener(queryMenuClickListener);
 
         setContentView(popupView);

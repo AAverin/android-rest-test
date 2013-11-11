@@ -20,6 +20,7 @@
     <string name="https">https://</string>
 
     <string name="add_query">Add query parameter</string>
-
+    <string name="key">Key</string>
+    <string name="value">Value</string>
 
 </resources>
