@@ -73,7 +73,7 @@
                     android:id="@+id/method_url"
                     android:editable="true"
                     android:linksClickable="false"
-                    android:inputType="textNoSuggestions"
+                    android:inputType="text|textNoSuggestions"
                     android:hint="@string/methodurl_hint"
                     android:layout_height="wrap_content" android:layout_width="match_parent"/>
 

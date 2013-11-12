@@ -105,6 +105,7 @@ public class TokenizedEditText extends EditText {
             int oldSelection = getSelectionEnd();
             setText(spannableStringBuilder);
             setSelection(oldSelection);
+            spannableStringBuilder = null;
         }
     }
 
