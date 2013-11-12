@@ -38,6 +38,7 @@ public class QueryMenuPopupWindow extends PopupWindow {
     }
 
     public QueryMenuPopupWindow(Context context, RequestFragment.QuerySpan chip) {
+        super(context);
 
         this.chip = chip;
 

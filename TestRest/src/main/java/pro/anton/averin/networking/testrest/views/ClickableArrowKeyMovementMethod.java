@@ -66,7 +66,6 @@ public class ClickableArrowKeyMovementMethod extends ArrowKeyMovementMethod {
                 spans[0].onClick(widget);
                 return super.onTouchEvent(widget, buffer, event);
             }
-            return super.onTouchEvent(widget, buffer, event);
         }
         return super.onTouchEvent(widget, buffer, event);
     }

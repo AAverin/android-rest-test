@@ -18,6 +18,7 @@ import pro.anton.averin.networking.testrest.R;
 public class AddQueryPopup extends PopupWindow {
 
     public AddQueryPopup(Context context) {
+        super(context);
         View popupView = LayoutInflater.from(context).inflate(R.layout.addquery_popup, null);
 
         // retrieve display dimensions
@@ -25,6 +26,7 @@ public class AddQueryPopup extends PopupWindow {
         Window window = ((Activity)context).getWindow();
         window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
         popupView.setMinimumWidth((int)(displayRectangle.width() * 0.7f));
+
         setContentView(popupView);
         setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
         setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
