@@ -12,6 +12,10 @@
     <string name="put">PUT</string>
     <string name="delete">DELETE</string>
 
+    <string name="action_save">Save</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_load">Load</string>
+
     <string name="baseurl_hint">Enter baseURL</string>
     <string name="baseurl">BaseURL</string>
     <string name="methodurl_hint">Enter REST method url</string>
@@ -22,5 +26,9 @@
     <string name="add_query">Add query parameter</string>
     <string name="key">Key</string>
     <string name="value">Value</string>
+    <string name="error_keyValue">Please enter both key and value</string>
+
+    <string name="add_header">Add header</string>
+    <string name="header_name">Header</string>
 
 </resources>

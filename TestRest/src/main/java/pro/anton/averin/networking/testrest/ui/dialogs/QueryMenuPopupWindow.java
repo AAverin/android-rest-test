@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest.views;
+package pro.anton.averin.networking.testrest.ui.dialogs;
 
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import pro.anton.averin.networking.testrest.R;
-import pro.anton.averin.networking.testrest.RequestFragment;
+import pro.anton.averin.networking.testrest.ui.RequestFragment;
 
 /**
  * Created by AAverin on 10.11.13.

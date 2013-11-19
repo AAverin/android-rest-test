@@ -1,8 +1,11 @@
-package pro.anton.averin.networking.testrest;
+package pro.anton.averin.networking.testrest.ui.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import pro.anton.averin.networking.testrest.ui.RequestFragment;
+import pro.anton.averin.networking.testrest.ui.ResponseFragment;
 
 /**
  * Created by AAverin on 09.11.13.

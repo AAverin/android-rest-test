@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest;
+package pro.anton.averin.networking.testrest.ui;
 
 import android.support.v4.app.Fragment;
 

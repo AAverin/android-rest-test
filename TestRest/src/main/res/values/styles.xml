@@ -8,6 +8,11 @@
     <style name="basic_padding">
         <item name="android:padding">4dp</item>
     </style>
+
+    <style name="text_title">
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">4dp</item>
+    </style>
     
     <style name="QueryPopupAnimation">
         <item name="android:windowEnterAnimation">@anim/dialog_enter_animation</item>

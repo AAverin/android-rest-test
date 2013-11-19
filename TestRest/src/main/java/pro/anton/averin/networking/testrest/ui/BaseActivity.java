@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest;
+package pro.anton.averin.networking.testrest.ui;
 
 import android.support.v7.app.ActionBarActivity;
 

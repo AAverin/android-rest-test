@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest;
+package pro.anton.averin.networking.testrest.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,9 +8,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-import pro.anton.averin.networking.testrest.views.ProtocolToggleButton;
+import pro.anton.averin.networking.testrest.R;
+import pro.anton.averin.networking.testrest.ui.adapters.RestPagerAdapter;
 
 /**
  * Created by AAverin on 09.11.13.

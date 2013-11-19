@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest.views;
+package pro.anton.averin.networking.testrest.ui.views;
 
 import android.text.Layout;
 import android.text.Selection;

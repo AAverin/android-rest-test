@@ -27,4 +27,5 @@ dependencies {
 	compile 'com.android.support:gridlayout-v7:19.0.0'
 	compile 'com.android.support:appcompat-v7:19.0.0'
     compile 'com.nineoldandroids:library:2.4.0'
+    compile files('libs/android-sqlite-asset-helper.jar')
 }
