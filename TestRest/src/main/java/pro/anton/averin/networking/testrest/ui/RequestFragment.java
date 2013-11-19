@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest;
+package pro.anton.averin.networking.testrest.ui;
 
 import android.os.Bundle;
 import android.text.TextPaint;
@@ -7,6 +7,10 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,10 +18,13 @@ import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.ArgbEvaluator;
 import com.nineoldandroids.animation.ValueAnimator;
 
-import pro.anton.averin.networking.testrest.views.AddQueryPopup;
-import pro.anton.averin.networking.testrest.views.ProtocolToggleButton;
-import pro.anton.averin.networking.testrest.views.QueryMenuPopupWindow;
-import pro.anton.averin.networking.testrest.views.TokenizedEditText;
+import pro.anton.averin.networking.testrest.R;
+import pro.anton.averin.networking.testrest.models.Request;
+import pro.anton.averin.networking.testrest.ui.dialogs.AddHeaderPopup;
+import pro.anton.averin.networking.testrest.ui.dialogs.AddQueryPopup;
+import pro.anton.averin.networking.testrest.ui.views.ProtocolToggleButton;
+import pro.anton.averin.networking.testrest.ui.dialogs.QueryMenuPopupWindow;
+import pro.anton.averin.networking.testrest.ui.views.TokenizedEditText;
 
 /**
  * Created by AAverin on 09.11.13.
@@ -29,6 +36,13 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     private ProtocolToggleButton protocolToggleButton;
     private TokenizedEditText methodUrlEditText;
     private TextView addQueryButton;
+    private TextView addHeadersButton;
+
+    private RadioGroup methodRadioGroup;
+    private EditText baseUrlEditText;
+    private LinearLayout headersLayout;
+
+    private Request request = new Request();
 
     View.OnClickListener protocolToggleListener = new View.OnClickListener() {
         @Override
@@ -45,6 +59,9 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         }
     };
 
+    public RequestFragment() {
+    }
+
     public class QuerySpan extends ClickableSpan {
 
         public String chip;
@@ -54,16 +71,16 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
 
         @Override
         public void onClick(View view) {
-            int[] location = new int[2];
-            view.getLocationOnScreen(location);
+//            int[] location = new int[2];
+//            view.getLocationOnScreen(location);
+//
+//            TokenizedEditText textView = (TokenizedEditText)view;
+//            String text = textView.getText().toString();
+//            int dx = Math.round(textView.getPaint().measureText(text.substring(0, text.indexOf(chip) + chip.length())));
 
-            TokenizedEditText textView = (TokenizedEditText)view;
-            String text = textView.getText().toString();
-            int dx = Math.round(textView.getPaint().measureText(text.substring(0, text.indexOf(chip) + chip.length())));
-
-            QueryMenuPopupWindow popup = new QueryMenuPopupWindow(getActivity(), this);
-            popup.setChipListener(chipListener);
-            popup.showAtLocation(view, Gravity.NO_GRAVITY, location[0] + dx, location[1]);
+//            QueryMenuPopupWindow popup = new QueryMenuPopupWindow(getActivity(), this);
+//            popup.setChipListener(chipListener);
+//            popup.showAtLocation(view, Gravity.NO_GRAVITY, location[0] + dx, location[1]);
         }
 
         @Override
@@ -80,11 +97,27 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         protocolToggleButton = (ProtocolToggleButton) mGroupRoot.findViewById(R.id.protocol_button);
         protocolToggleButton.setOnClickListener(protocolToggleListener);
 
+        methodRadioGroup = (RadioGroup) mGroupRoot.findViewById(R.id.method_radiogroup);
+        baseUrlEditText = (EditText) mGroupRoot.findViewById(R.id.baseurl);
+
+        headersLayout = (LinearLayout) mGroupRoot.findViewById(R.id.headers_layout);
+
         addQueryButton = (TextView) mGroupRoot.findViewById(R.id.add_query_button);
         addQueryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AddQueryPopup popup = new AddQueryPopup(getActivity());
+                popup.setQueryPopupListener(queryPopupListener);
+                popup.showAtLocation(mGroupRoot, Gravity.CENTER, 0, 0);
+            }
+        });
+
+        addHeadersButton = (TextView) mGroupRoot.findViewById(R.id.add_header_button);
+        addHeadersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddHeaderPopup popup = new AddHeaderPopup(getActivity());
+                popup.setHeaderPopupListener(headerPopupListener);
                 popup.showAtLocation(mGroupRoot, Gravity.CENTER, 0, 0);
             }
         });
@@ -107,6 +140,26 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
 
         return mGroupRoot;
     }
+
+    AddQueryPopup.QueryPopupListener queryPopupListener = new AddQueryPopup.QueryPopupListener() {
+        @Override
+        public void onOk(String key, String value) {
+            StringBuffer newValue = new StringBuffer();
+            newValue.append(methodUrlEditText.getText().toString());
+            newValue.append("&");
+            newValue.append(key);
+            newValue.append("=");
+            newValue.append(value);
+            methodUrlEditText.setText(newValue.toString());
+        }
+    };
+
+    AddHeaderPopup.HeaderPopupListener headerPopupListener = new AddHeaderPopup.HeaderPopupListener() {
+        @Override
+        public void onOk(String key, String value) {
+
+        }
+    };
 
     private void highlightQueryButton() {
         ValueAnimator animation = ValueAnimator.ofObject(new ArgbEvaluator(), getResources().getColor(android.R.color.black),
@@ -152,5 +205,14 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     @Override
     public ClickableSpan onCreateTokenSpan(String chip) {
         return new QuerySpan(chip);
+    }
+
+    private Request buildRequest() {
+        request.baseUrl = baseUrlEditText.getText().toString();
+        CheckBox checkedBox = (CheckBox) mGroupRoot.findViewById(methodRadioGroup.getCheckedRadioButtonId());
+        request.method = checkedBox.getText().toString();
+        request.queryString = methodUrlEditText.getText().toString();
+
+        return request;
     }
 }

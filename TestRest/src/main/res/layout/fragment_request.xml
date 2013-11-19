@@ -6,6 +6,7 @@
               android:layout_height="match_parent">
 
    <RadioGroup
+           android:id="@+id/method_radiogroup"
            android:gravity="center"
            android:layout_height="wrap_content" android:layout_width="match_parent"
            android:orientation="horizontal"
@@ -34,6 +35,7 @@
             android:layout_height="wrap_content" android:layout_width="match_parent">
 
         <TextView
+                style="@style/text_title"
                 android:text="@string/baseurl"
                 android:layout_height="wrap_content" android:layout_width="match_parent"/>
 
@@ -41,7 +43,7 @@
                 android:orientation="horizontal"
                 android:layout_height="wrap_content" android:layout_width="match_parent">
 
-            <pro.anton.averin.networking.testrest.views.ProtocolToggleButton
+            <pro.anton.averin.networking.testrest.ui.views.ProtocolToggleButton
                     android:id="@+id/protocol_button"
                     android:text="@string/http"
                     android:layout_height="wrap_content"
@@ -56,28 +58,46 @@
 
         </LinearLayout>
 
-        <LinearLayout
-                android:layout_marginTop="8dp"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:orientation="vertical">
+        <ScrollView android:layout_height="wrap_content" android:layout_width="match_parent">
+            <LinearLayout
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical">
 
-            <TextView
-                    android:id="@+id/add_query_button"
-                    android:text="@string/add_query"
-                    android:focusable="true"
-                    android:clickable="true"
-                    android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                <TextView
+                        style="@style/text_title"
+                        android:id="@+id/add_query_button"
+                        android:text="@string/add_query"
+                        android:focusable="true"
+                        android:clickable="true"
+                        android:layout_height="wrap_content" android:layout_width="wrap_content"/>
 
-            <pro.anton.averin.networking.testrest.views.TokenizedEditText
-                    android:id="@+id/method_url"
-                    android:editable="true"
-                    android:linksClickable="false"
-                    android:inputType="text|textNoSuggestions"
-                    android:hint="@string/methodurl_hint"
-                    android:layout_height="wrap_content" android:layout_width="match_parent"/>
+                <pro.anton.averin.networking.testrest.ui.views.TokenizedEditText
+                        android:id="@+id/method_url"
+                        android:singleLine="false"
+                        android:editable="true"
+                        android:linksClickable="false"
+                        android:inputType="text|textNoSuggestions|textMultiLine"
+                        android:hint="@string/methodurl_hint"
+                        android:layout_height="wrap_content" android:layout_width="match_parent"/>
 
-        </LinearLayout>
+                <TextView
+                        style="@style/text_title"
+                        android:id="@+id/add_header_button"
+                        android:text="@string/add_header"
+                        android:focusable="true"
+                        android:clickable="true"
+                        android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+
+                <LinearLayout
+                        android:id="@+id/headers_layout"
+                        android:layout_height="wrap_content" android:layout_width="fill_parent">
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 

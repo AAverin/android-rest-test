@@ -1,10 +1,11 @@
-package pro.anton.averin.networking.testrest;
+package pro.anton.averin.networking.testrest.ui;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import pro.anton.averin.networking.testrest.R;
 
 /**
  * Created by AAverin on 09.11.13.

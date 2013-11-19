@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest.views;
+package pro.anton.averin.networking.testrest.ui.dialogs;
 
 import android.content.Context;
 import android.support.v7.widget.PopupMenu;

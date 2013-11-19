@@ -7,11 +7,13 @@
 
     <LinearLayout
             android:background="@color/valid_green"
-            android:gravity="right"
-            android:layout_height="30dp" android:layout_width="match_parent">
+            android:gravity="center_vertical|right"
+            android:paddingRight="8dp"
+            android:layout_height="40dp" android:layout_width="match_parent">
 
         <ImageButton
                 android:background="@null"
+                android:id="@+id/ok_button"
                 android:src="@drawable/ic_action_done"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"/>
@@ -21,25 +23,27 @@
     <LinearLayout
             android:background="@color/neutral_gray"
             android:padding="8dp"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content" android:layout_width="match_parent">
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
 
         <EditText
+                android:id="@+id/key"
                 android:hint="@string/key"
                 android:paddingRight="8dp"
                 android:layout_weight="8"
-                android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                android:singleLine="true"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
 
-        <TextView
-                android:text="="
-                android:gravity="center"
-                android:layout_weight="1"
-                android:layout_height="wrap_content" android:layout_width="wrap_content"/>
 
         <EditText
+                android:id="@+id/value"
                 android:hint="@string/value"
                 android:layout_weight="8"
-                android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                android:singleLine="true"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
 
     </LinearLayout>
 
