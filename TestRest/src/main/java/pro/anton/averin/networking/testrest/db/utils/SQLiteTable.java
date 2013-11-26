@@ -43,9 +43,6 @@ public final class SQLiteTable {
                 createTable.append(", ");
             }
         }
-        for (Map.Entry<String, String> entry: tableStructure.entrySet()) {
-
-        }
         createTable.append(");");
 
         return createTable.toString();
