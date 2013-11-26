@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -18,7 +19,11 @@ import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.ArgbEvaluator;
 import com.nineoldandroids.animation.ValueAnimator;
 
+import java.util.ArrayList;
+import java.util.zip.Inflater;
+
 import pro.anton.averin.networking.testrest.R;
+import pro.anton.averin.networking.testrest.models.Headers;
 import pro.anton.averin.networking.testrest.models.Request;
 import pro.anton.averin.networking.testrest.ui.dialogs.AddHeaderPopup;
 import pro.anton.averin.networking.testrest.ui.dialogs.AddQueryPopup;
@@ -41,6 +46,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     private RadioGroup methodRadioGroup;
     private EditText baseUrlEditText;
     private LinearLayout headersLayout;
+    private ArrayList<Headers.ViewHeader> headersList = new ArrayList<Headers.ViewHeader>();
 
     private Request request = new Request();
 
@@ -108,7 +114,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
             public void onClick(View view) {
                 AddQueryPopup popup = new AddQueryPopup(getActivity());
                 popup.setQueryPopupListener(queryPopupListener);
-                popup.showAtLocation(mGroupRoot, Gravity.CENTER, 0, 0);
+                popup.showAtLocation(mGroupRoot, Gravity.TOP, 0, (int)(120 * getResources().getDisplayMetrics().density));
             }
         });
 
@@ -118,7 +124,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
             public void onClick(View view) {
                 AddHeaderPopup popup = new AddHeaderPopup(getActivity());
                 popup.setHeaderPopupListener(headerPopupListener);
-                popup.showAtLocation(mGroupRoot, Gravity.CENTER, 0, 0);
+                popup.showAtLocation(mGroupRoot, Gravity.TOP, 0, (int)(120 * getResources().getDisplayMetrics().density));
             }
         });
 
@@ -157,9 +163,29 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     AddHeaderPopup.HeaderPopupListener headerPopupListener = new AddHeaderPopup.HeaderPopupListener() {
         @Override
         public void onOk(String key, String value) {
-
+            addHeader(key, value);
         }
     };
+
+    private void addHeader(String key, String value) {
+        LinearLayout headerView = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.view_header, null);
+        TextView nameTextView = (TextView) headerView.findViewById(R.id.name);
+        TextView valueTextView = (TextView) headerView.findViewById(R.id.value);
+        ImageButton deleteButton = (ImageButton) headerView.findViewById(R.id.delete);
+        deleteButton.setTag(headersList.size()); //will be the index of our new element
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int index = ((Integer)view.getTag()).intValue();
+                headersList.remove(index);
+                headersLayout.removeViewAt(index);
+            }
+        });
+        nameTextView.setText(key);
+        valueTextView.setText(value);
+        headersList.add(new Headers.ViewHeader(key, value));
+        headersLayout.addView(headerView);
+    }
 
     private void highlightQueryButton() {
         ValueAnimator animation = ValueAnimator.ofObject(new ArgbEvaluator(), getResources().getColor(android.R.color.black),

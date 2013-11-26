@@ -14,7 +14,16 @@ import pro.anton.averin.networking.testrest.db.utils.SQLiteTable;
  */
 public class Headers {
 
-    public class Header {
+    public static class ViewHeader {
+        public String name;
+        public String value;
+        public ViewHeader(String name, String value) {
+            this.name = name;
+            this.value = value;
+        }
+    }
+
+    public static class Header {
         public long id;
         public int popularity;
         public String name;
@@ -27,7 +36,6 @@ public class Headers {
 
         public ContentValues asContentValues() {
             ContentValues values = new ContentValues();
-            values.put(SQLITE.COL_ID, id);
             values.put(SQLITE.COL_NAME, name);
             values.put(SQLITE.COL_POPULARITY, popularity);
             return values;
