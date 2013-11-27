@@ -31,7 +31,8 @@
             android:src="@android:drawable/ic_delete"
             android:background="@null"
             android:layout_weight="0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_margin="5dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
 
 </LinearLayout>

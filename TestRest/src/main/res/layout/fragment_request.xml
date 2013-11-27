@@ -58,7 +58,9 @@
 
         </LinearLayout>
 
-        <ScrollView android:layout_height="wrap_content" android:layout_width="match_parent">
+        <ScrollView
+                android:layout_height="wrap_content"
+                    android:layout_width="match_parent">
             <LinearLayout
                     android:layout_marginTop="8dp"
                     android:layout_height="wrap_content"
@@ -90,13 +92,19 @@
                         android:clickable="true"
                         android:layout_height="wrap_content" android:layout_width="wrap_content"/>
 
-                <LinearLayout
-                        android:orientation="vertical"
-                        android:id="@+id/headers_layout"
-                        android:layout_height="wrap_content"
-                        android:layout_width="fill_parent">
+                <!--<ListView-->
+                        <!--android:id="@+id/addedheaders_list"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="200dp">-->
 
-                </LinearLayout>
+                <!--</ListView>-->
+                <pro.anton.averin.networking.testrest.ui.views.AdaptableLinearLayout
+                        android:orientation="vertical"
+                        android:id="@+id/addedheaders_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                </pro.anton.averin.networking.testrest.ui.views.AdaptableLinearLayout>
 
             </LinearLayout>
         </ScrollView>
