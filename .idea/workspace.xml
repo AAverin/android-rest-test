@@ -108,19 +108,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HeadersListAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/adapters/HeadersListAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="79" selection-start="611" selection-end="622" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="816">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fragment_request.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="fragment_request.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TestRest/src/main/res/layout/fragment_request.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="101" column="53" selection-start="4629" selection-end="4629" vertical-scroll-proportion="0.5755396" vertical-offset="1557" max-vertical-offset="2023">
+            <state line="113" column="56" selection-start="5223" selection-end="5223" vertical-scroll-proportion="-6.0" vertical-offset="1621" max-vertical-offset="2159">
               <folding>
                 <element signature="e#635#648#0" expanded="true" />
                 <element signature="e#834#848#0" expanded="true" />
@@ -129,9 +120,9 @@
                 <element signature="e#1637#1654#0" expanded="true" />
                 <element signature="e#2076#2090#0" expanded="true" />
                 <element signature="e#2396#2418#0" expanded="true" />
-                <element signature="e#3085#3104#0" expanded="true" />
-                <element signature="e#3709#3733#0" expanded="true" />
-                <element signature="e#4007#4027#0" expanded="true" />
+                <element signature="e#3333#3352#0" expanded="true" />
+                <element signature="e#3997#4021#0" expanded="true" />
+                <element signature="e#4315#4335#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -140,11 +131,24 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="QuadrantShapeButton.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/views/QuadrantShapeButton.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="27" column="0" selection-start="689" selection-end="689" vertical-scroll-proportion="0.57570714" vertical-offset="113" max-vertical-offset="731">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="AdaptableLinearLayout.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/views/AdaptableLinearLayout.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="6" selection-start="195" selection-end="195" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2040">
-              <folding />
+            <state line="9" column="0" selection-start="291" selection-end="291" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2040">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -534,7 +538,12 @@
         <option value="$PROJECT_DIR$/TestRest/src/main/res/layout/view_header.xml" />
         <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/views/AdaptableLinearLayout.java" />
         <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/RequestFragment.java" />
+        <option value="$PROJECT_DIR$/TestRest/src/main/res/drawable/quadrant_button.xml" />
+        <option value="$PROJECT_DIR$/TestRest/src/main/res/drawable/topright_quadrant_button.xml" />
+        <option value="$PROJECT_DIR$/TestRest/src/main/res/drawable/topleft_quadrant_button.xml" />
         <option value="$PROJECT_DIR$/TestRest/src/main/res/layout/fragment_request.xml" />
+        <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/views/QuadrandShapeButton.java" />
+        <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/views/QuadrantShapeButton.java" />
       </list>
     </option>
   </component>
@@ -769,6 +778,44 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TestRest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TestRest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TestRest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testrest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1105,12 +1152,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1378" height="780" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26179606" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26179606" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44622794" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1120,14 +1167,14 @@
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32744783" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.43540668" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43540668" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2762557" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27583587" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32376397" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1220,9 +1267,9 @@
             <element signature="e#1637#1654#0" expanded="true" />
             <element signature="e#2076#2090#0" expanded="true" />
             <element signature="e#2396#2418#0" expanded="true" />
-            <element signature="e#3085#3104#0" expanded="true" />
-            <element signature="e#3709#3733#0" expanded="true" />
-            <element signature="e#4007#4027#0" expanded="true" />
+            <element signature="e#3333#3352#0" expanded="true" />
+            <element signature="e#3997#4021#0" expanded="true" />
+            <element signature="e#4315#4335#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1289,9 +1336,9 @@
             <element signature="e#1637#1654#0" expanded="true" />
             <element signature="e#2076#2090#0" expanded="true" />
             <element signature="e#2396#2418#0" expanded="true" />
-            <element signature="e#3085#3104#0" expanded="true" />
-            <element signature="e#3709#3733#0" expanded="true" />
-            <element signature="e#4007#4027#0" expanded="true" />
+            <element signature="e#3333#3352#0" expanded="true" />
+            <element signature="e#3997#4021#0" expanded="true" />
+            <element signature="e#4315#4335#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1468,13 +1515,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/adapters/HeadersListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="79" selection-start="611" selection-end="622" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="816">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/adapters/AddedHeadersAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="42" column="0" selection-start="1180" selection-end="1277" vertical-scroll-proportion="0.0" vertical-offset="589" max-vertical-offset="1394">
@@ -1508,13 +1548,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/views/AdaptableLinearLayout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="6" selection-start="195" selection-end="195" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2040">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/RequestFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="113" column="49" selection-start="4177" selection-end="4177" vertical-scroll-proportion="0.0" vertical-offset="2371" max-vertical-offset="3570">
@@ -1528,9 +1561,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/views/AdaptableLinearLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="0" selection-start="291" selection-end="291" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2040">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/adapters/HeadersListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="70" selection-start="611" selection-end="622" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="748">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/TestRest/src/main/res/layout/fragment_request.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="53" selection-start="4629" selection-end="4629" vertical-scroll-proportion="0.5755396" vertical-offset="1557" max-vertical-offset="2023">
+        <state line="113" column="56" selection-start="5223" selection-end="5223" vertical-scroll-proportion="-6.0" vertical-offset="1621" max-vertical-offset="2159">
           <folding>
             <element signature="e#635#648#0" expanded="true" />
             <element signature="e#834#848#0" expanded="true" />
@@ -1539,14 +1588,23 @@
             <element signature="e#1637#1654#0" expanded="true" />
             <element signature="e#2076#2090#0" expanded="true" />
             <element signature="e#2396#2418#0" expanded="true" />
-            <element signature="e#3085#3104#0" expanded="true" />
-            <element signature="e#3709#3733#0" expanded="true" />
-            <element signature="e#4007#4027#0" expanded="true" />
+            <element signature="e#3333#3352#0" expanded="true" />
+            <element signature="e#3997#4021#0" expanded="true" />
+            <element signature="e#4315#4335#0" expanded="true" />
           </folding>
         </state>
       </provider>
       <provider editor-type-id="android-designer">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/views/QuadrantShapeButton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="0" selection-start="689" selection-end="689" vertical-scroll-proportion="0.57570714" vertical-offset="113" max-vertical-offset="731">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>

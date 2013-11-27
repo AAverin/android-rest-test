@@ -58,56 +58,64 @@
 
         </LinearLayout>
 
-        <ScrollView
-                android:layout_height="wrap_content"
-                    android:layout_width="match_parent">
-            <LinearLayout
-                    android:layout_marginTop="8dp"
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+            <ScrollView
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:orientation="vertical">
-
-                <TextView
-                        style="@style/text_title"
-                        android:id="@+id/add_query_button"
-                        android:text="@string/add_query"
-                        android:focusable="true"
-                        android:clickable="true"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"/>
-
-                <pro.anton.averin.networking.testrest.ui.views.TokenizedEditText
-                        android:id="@+id/method_url"
-                        android:singleLine="false"
-                        android:editable="true"
-                        android:linksClickable="false"
-                        android:inputType="text|textNoSuggestions|textMultiLine"
-                        android:hint="@string/methodurl_hint"
-                        android:layout_height="wrap_content" android:layout_width="match_parent"/>
-
-                <TextView
-                        style="@style/text_title"
-                        android:id="@+id/add_header_button"
-                        android:text="@string/add_header"
-                        android:focusable="true"
-                        android:clickable="true"
-                        android:layout_height="wrap_content" android:layout_width="wrap_content"/>
-
-                <!--<ListView-->
-                        <!--android:id="@+id/addedheaders_list"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="200dp">-->
-
-                <!--</ListView>-->
-                <pro.anton.averin.networking.testrest.ui.views.AdaptableLinearLayout
-                        android:orientation="vertical"
-                        android:id="@+id/addedheaders_list"
+                    android:layout_width="match_parent">
+                <LinearLayout
+                        android:layout_marginTop="8dp"
+                        android:layout_height="wrap_content"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:orientation="vertical">
 
-                </pro.anton.averin.networking.testrest.ui.views.AdaptableLinearLayout>
+                    <TextView
+                            style="@style/text_title"
+                            android:id="@+id/add_query_button"
+                            android:text="@string/add_query"
+                            android:focusable="true"
+                            android:clickable="true"
+                            android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+
+                    <pro.anton.averin.networking.testrest.ui.views.TokenizedEditText
+                            android:id="@+id/method_url"
+                            android:singleLine="false"
+                            android:editable="true"
+                            android:linksClickable="false"
+                            android:inputType="text|textNoSuggestions|textMultiLine"
+                            android:hint="@string/methodurl_hint"
+                            android:layout_height="wrap_content" android:layout_width="match_parent"/>
+
+                    <TextView
+                            style="@style/text_title"
+                            android:id="@+id/add_header_button"
+                            android:text="@string/add_header"
+                            android:focusable="true"
+                            android:clickable="true"
+                            android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+
+                    <pro.anton.averin.networking.testrest.ui.views.AdaptableLinearLayout
+                            android:orientation="vertical"
+                            android:id="@+id/addedheaders_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                    </pro.anton.averin.networking.testrest.ui.views.AdaptableLinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
+            <LinearLayout
+                    android:layout_weight="0"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
 
             </LinearLayout>
-        </ScrollView>
+
+        </LinearLayout>
 
     </LinearLayout>
 
