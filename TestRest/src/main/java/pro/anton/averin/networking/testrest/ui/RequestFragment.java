@@ -7,10 +7,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,8 +27,10 @@ import java.util.zip.Inflater;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.models.Headers;
 import pro.anton.averin.networking.testrest.models.Request;
+import pro.anton.averin.networking.testrest.ui.adapters.AddedHeadersAdapter;
 import pro.anton.averin.networking.testrest.ui.dialogs.AddHeaderPopup;
 import pro.anton.averin.networking.testrest.ui.dialogs.AddQueryPopup;
+import pro.anton.averin.networking.testrest.ui.views.AdaptableLinearLayout;
 import pro.anton.averin.networking.testrest.ui.views.ProtocolToggleButton;
 import pro.anton.averin.networking.testrest.ui.dialogs.QueryMenuPopupWindow;
 import pro.anton.averin.networking.testrest.ui.views.TokenizedEditText;
@@ -45,7 +49,8 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
 
     private RadioGroup methodRadioGroup;
     private EditText baseUrlEditText;
-    private LinearLayout headersLayout;
+    private AdaptableLinearLayout addedHeadersList;
+    private AddedHeadersAdapter addedHeadersAdapter;
     private ArrayList<Headers.ViewHeader> headersList = new ArrayList<Headers.ViewHeader>();
 
     private Request request = new Request();
@@ -106,7 +111,9 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         methodRadioGroup = (RadioGroup) mGroupRoot.findViewById(R.id.method_radiogroup);
         baseUrlEditText = (EditText) mGroupRoot.findViewById(R.id.baseurl);
 
-        headersLayout = (LinearLayout) mGroupRoot.findViewById(R.id.headers_layout);
+        addedHeadersList = (AdaptableLinearLayout) mGroupRoot.findViewById(R.id.addedheaders_list);
+        addedHeadersAdapter = new AddedHeadersAdapter(getActivity().getApplicationContext(), headersList);
+        addedHeadersList.setAdapter(addedHeadersAdapter);
 
         addQueryButton = (TextView) mGroupRoot.findViewById(R.id.add_query_button);
         addQueryButton.setOnClickListener(new View.OnClickListener() {
@@ -163,29 +170,10 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     AddHeaderPopup.HeaderPopupListener headerPopupListener = new AddHeaderPopup.HeaderPopupListener() {
         @Override
         public void onOk(String key, String value) {
-            addHeader(key, value);
+            headersList.add(new Headers.ViewHeader(key, value));
+            addedHeadersAdapter.notifyDataSetChanged();
         }
     };
-
-    private void addHeader(String key, String value) {
-        LinearLayout headerView = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.view_header, null);
-        TextView nameTextView = (TextView) headerView.findViewById(R.id.name);
-        TextView valueTextView = (TextView) headerView.findViewById(R.id.value);
-        ImageButton deleteButton = (ImageButton) headerView.findViewById(R.id.delete);
-        deleteButton.setTag(headersList.size()); //will be the index of our new element
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int index = ((Integer)view.getTag()).intValue();
-                headersList.remove(index);
-                headersLayout.removeViewAt(index);
-            }
-        });
-        nameTextView.setText(key);
-        valueTextView.setText(value);
-        headersList.add(new Headers.ViewHeader(key, value));
-        headersLayout.addView(headerView);
-    }
 
     private void highlightQueryButton() {
         ValueAnimator animation = ValueAnimator.ofObject(new ArgbEvaluator(), getResources().getColor(android.R.color.black),
