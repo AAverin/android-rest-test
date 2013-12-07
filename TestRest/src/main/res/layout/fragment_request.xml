@@ -32,16 +32,19 @@
     <LinearLayout
             style="@style/basic_padding"
             android:orientation="vertical"
-            android:layout_height="wrap_content" android:layout_width="match_parent">
+            android:layout_height="fill_parent"
+            android:layout_width="match_parent">
 
         <TextView
                 style="@style/text_title"
                 android:text="@string/baseurl"
-                android:layout_height="wrap_content" android:layout_width="match_parent"/>
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
 
         <LinearLayout
                 android:orientation="horizontal"
-                android:layout_height="wrap_content" android:layout_width="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
 
             <pro.anton.averin.networking.testrest.ui.views.ProtocolToggleButton
                     android:id="@+id/protocol_button"
@@ -60,7 +63,8 @@
 
         <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="fill_parent" android:layout_height="fill_parent">
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
 
             <ScrollView
                     android:layout_weight="1"
@@ -101,7 +105,7 @@
                             android:orientation="vertical"
                             android:id="@+id/addedheaders_list"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="fill_parent">
 
                     </pro.anton.averin.networking.testrest.ui.views.AdaptableLinearLayout>
 
@@ -110,8 +114,15 @@
 
             <LinearLayout
                     android:layout_weight="0"
+                    android:orientation="horizontal"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
+                    android:layout_height="wrap_content">
+
+                <Button
+                        android:id="@+id/btn_send"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/send"/>
 
             </LinearLayout>
 

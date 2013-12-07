@@ -2,6 +2,7 @@ package pro.anton.averin.networking.testrest.models;
 
 import android.provider.BaseColumns;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import pro.anton.averin.networking.testrest.db.utils.SQLiteTable;
@@ -16,7 +17,7 @@ public class Request {
     public String baseUrl;
     public String method;
     public String queryString;
-    public LinkedHashMap<String, String> headers;
+    public ArrayList<Headers.ViewHeader> headers;
 
     public static class SQLITE {
         public final static String TABLE_NAME = "requests";

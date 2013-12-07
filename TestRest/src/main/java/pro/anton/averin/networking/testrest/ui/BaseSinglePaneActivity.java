@@ -23,7 +23,7 @@ public abstract class BaseSinglePaneActivity extends BaseActivity {
             mFragment = onCreatePane();
 
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.root_container, mFragment)
+                    .add(R.id.root_container, mFragment, "MAIN")
                     .commit();
         }
     }

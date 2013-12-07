@@ -1,6 +1,8 @@
 package pro.anton.averin.networking.testrest.ui;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.view.Gravity;
@@ -8,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -38,7 +41,7 @@ import pro.anton.averin.networking.testrest.ui.views.TokenizedEditText;
 /**
  * Created by AAverin on 09.11.13.
  */
-public class RequestFragment extends ViewPagerFragment implements TokenizedEditText.TokenListener {
+public class RequestFragment extends ViewPagerFragment implements TokenizedEditText.TokenListener, View.OnClickListener {
 
     private View mGroupRoot;
 
@@ -46,6 +49,8 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     private TokenizedEditText methodUrlEditText;
     private TextView addQueryButton;
     private TextView addHeadersButton;
+
+    private Button sendButton;
 
     private RadioGroup methodRadioGroup;
     private EditText baseUrlEditText;
@@ -150,6 +155,8 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
                 }
             }
         });
+        sendButton = (Button) mGroupRoot.findViewById(R.id.btn_send);
+        sendButton.setOnClickListener(this);
 
         return mGroupRoot;
     }
@@ -221,12 +228,22 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         return new QuerySpan(chip);
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_send:
+                TestRestFragment p = (TestRestFragment) getActivity().getSupportFragmentManager().findFragmentByTag("MAIN");
+                p.showResponsePage();
+                break;
+        }
+    }
+
     private Request buildRequest() {
         request.baseUrl = baseUrlEditText.getText().toString();
         CheckBox checkedBox = (CheckBox) mGroupRoot.findViewById(methodRadioGroup.getCheckedRadioButtonId());
         request.method = checkedBox.getText().toString();
         request.queryString = methodUrlEditText.getText().toString();
-
+        request.headers = headersList;
         return request;
     }
 }

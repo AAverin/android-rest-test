@@ -1,0 +1,6 @@
+<resources>
+    <declare-styleable name="ExpandableContentRow">
+        <attr name="expandable_row_title" format="string" />
+        <attr name="expandable_row_content" format="reference"/>
+    </declare-styleable>
+</resources>
