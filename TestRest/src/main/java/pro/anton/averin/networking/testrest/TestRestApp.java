@@ -22,6 +22,7 @@ public class TestRestApp extends Application {
 
     public TestRestApp() {
         instance = this;
+        networkManager = CachedNetworkManager.getInstance();
     }
 
     public static Context getContext() {

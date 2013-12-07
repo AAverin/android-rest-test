@@ -8,4 +8,5 @@ import android.support.v4.app.Fragment;
 public abstract class ViewPagerFragment extends Fragment {
 
     protected abstract String getPageTitle();
+    protected abstract void onPageSelected();
 }

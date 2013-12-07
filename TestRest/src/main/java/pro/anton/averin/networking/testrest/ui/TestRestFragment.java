@@ -15,21 +15,24 @@ import pro.anton.averin.networking.testrest.ui.adapters.RestPagerAdapter;
 /**
  * Created by AAverin on 09.11.13.
  */
-public class TestRestFragment extends Fragment {
+public class TestRestFragment extends Fragment implements ViewPager.OnPageChangeListener {
 
     private View mGroupRoot;
 
     private ViewPager mViewPager;
+    private RestPagerAdapter pagerAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mGroupRoot = inflater.inflate(R.layout.fragment_main, null);
 
         mViewPager = (ViewPager) mGroupRoot.findViewById(R.id.pager);
-        mViewPager.setAdapter(new RestPagerAdapter(getChildFragmentManager(), new String[] {
+        pagerAdapter = new RestPagerAdapter(getChildFragmentManager(), new String[] {
                 getString(R.string.requestViewTitle),
                 getString(R.string.responseViewTitle)
-        }));
+        });
+        mViewPager.setAdapter(pagerAdapter);
+        mViewPager.setOnPageChangeListener(this);
 
         return mGroupRoot;
     }
@@ -46,5 +49,20 @@ public class TestRestFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onPageScrolled(int i, float v, int i2) {
+
+    }
+
+    @Override
+    public void onPageSelected(int i) {
+        ((ViewPagerFragment)pagerAdapter.getItem(i)).onPageSelected();
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int i) {
+
     }
 }

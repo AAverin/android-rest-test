@@ -4,42 +4,65 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <android.support.v4.app.FragmentTabHost
-            android:id="@+id/tabhost"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <LinearLayout
+            android:id="@+id/response_layout"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="gone">
 
-        <LinearLayout
-                android:orientation="vertical"
+        <android.support.v4.app.FragmentTabHost
+                android:id="@+id/tabhost"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            <TabWidget
-                    android:id="@+id/tabs"
-                    android:orientation="horizontal"
-                    android:layout_weight="0"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
-            </TabWidget>
-
-            <FrameLayout
-                    android:id="@+id/tabContent"
+            <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0">
+                    android:layout_height="match_parent">
 
-            </FrameLayout>
+                <TabWidget
+                        android:id="@+id/tabs"
+                        android:orientation="horizontal"
+                        android:layout_weight="0"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent">
+                </TabWidget>
 
-        </LinearLayout>
+                <FrameLayout
+                        android:id="@+id/tabContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0">
 
-    </android.support.v4.app.FragmentTabHost>
+                </FrameLayout>
 
-    <FrameLayout
-            android:id="@+id/tabFrameLayout"
+            </LinearLayout>
+
+        </android.support.v4.app.FragmentTabHost>
+
+        <FrameLayout
+                android:id="@+id/tabFrameLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/progressbar_layout"
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1">
+            android:layout_height="fill_parent">
 
-    </FrameLayout>
+        <ProgressBar
+                android:id="@+id/progressbar"
+                android:indeterminate="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
 </LinearLayout>

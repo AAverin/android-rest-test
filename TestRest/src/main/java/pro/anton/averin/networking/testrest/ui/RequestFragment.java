@@ -24,9 +24,11 @@ import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.ArgbEvaluator;
 import com.nineoldandroids.animation.ValueAnimator;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.zip.Inflater;
 
+import aaverin.android.net.NetworkMessage;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.TestRestApp;
 import pro.anton.averin.networking.testrest.models.Headers;
@@ -234,6 +236,11 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     }
 
     @Override
+    protected void onPageSelected() {
+
+    }
+
+    @Override
     public ClickableSpan onCreateTokenSpan(String chip) {
         return new QuerySpan(chip);
     }
@@ -250,6 +257,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     }
 
     private Request buildRequest() {
+        request.protocol = protocolToggleButton.getText().toString();
         request.baseUrl = baseUrlEditText.getText().toString();
         CheckBox checkedBox = (CheckBox) mGroupRoot.findViewById(methodRadioGroup.getCheckedRadioButtonId());
         request.method = checkedBox.getText().toString();
