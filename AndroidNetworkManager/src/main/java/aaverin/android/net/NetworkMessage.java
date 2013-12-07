@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -127,24 +128,27 @@ public class NetworkMessage {
 	 * @return a Apache request that will be then used by NetworkManager internally
 	 */
 	public HttpRequestBase getHttpRequest() {
+        String url = uri.toString() + "/?" + URLEncodedUtils.format(this.parametersList, "UTF-8").replace("%3A", ":");
+
         try {
+
             if (request == null) {
             	if (this.parametersList == null) {
                 	this.parametersList = new ArrayList<NameValuePair>();
                 }
             
                 if (method.equals("PUT")) {
-                    request = new HttpPut(uri);
+                    request = new HttpPut(url);
                 } else if (method.equals("POST")) {
-                	String url = uri.toString() + "/?" + URLEncodedUtils.format(this.parametersList, "UTF-8").replace("%3A", ":");
                     request = new HttpPost(url);
                     if (this.rawPostBody != null) {
                     	((HttpEntityEnclosingRequestBase) request).setEntity(new StringEntity(this.rawPostBody, HTTP.UTF_8));
                     }
 
                 } else if (method.equals("GET")) {
-                	String url = uri.toString() + "/?" + URLEncodedUtils.format(this.parametersList, "UTF-8").replace("%3A", ":");
                     request = new HttpGet(url);
+                } else if (method.equals("DELETE")) {
+                    request = new HttpDelete(url);
                 }
             }
         } catch (UnsupportedEncodingException e) {

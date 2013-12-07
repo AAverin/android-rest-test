@@ -11,7 +11,7 @@ import pro.anton.averin.networking.testrest.R;
 /**
  * Created by AAverin on 07.12.13.
  */
-public class RawResponseFragment extends Fragment {
+public class RawResponseFragment extends ResponseTabFragment {
 
     private View mGroupRoot;
 
@@ -20,4 +20,6 @@ public class RawResponseFragment extends Fragment {
         mGroupRoot = inflater.inflate(R.layout.fragment_raw_response, container, false);
         return mGroupRoot;
     }
+
+    public void update() {}
 }
