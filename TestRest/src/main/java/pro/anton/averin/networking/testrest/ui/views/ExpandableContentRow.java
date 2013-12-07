@@ -20,7 +20,7 @@ public class ExpandableContentRow extends LinearLayout implements View.OnClickLi
     private TextView mTitleView;
     private LinearLayout content;
     private ImageButton expandButton;
-    private boolean expandButtonState = true;
+    private boolean expandButtonState = false;
 
     public ExpandableContentRow(Context context) {
         super(context);
@@ -55,13 +55,15 @@ public class ExpandableContentRow extends LinearLayout implements View.OnClickLi
             try {
                 setTitle(a.getString(R.styleable.ExpandableContentRow_expandable_row_title));
                 int contentId = a.getResourceId(R.styleable.ExpandableContentRow_expandable_row_content, 0);
-                setContent(LayoutInflater.from(context).inflate(contentId, null));
+                if (contentId != 0) {
+                    setContent(LayoutInflater.from(context).inflate(contentId, null));
+                }
             } finally {
                 a.recycle();
             }
-
-
         }
+
+        expand();
     }
 
     public void setTitle(String title) {

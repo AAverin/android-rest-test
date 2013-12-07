@@ -7,17 +7,17 @@
               android:layout_height="match_parent">
 
     <pro.anton.averin.networking.testrest.ui.views.ExpandableContentRow
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             aaverin:expandable_row_title="@string/header"
             aaverin:expandable_row_content="@layout/expandable_content_headers">
 
     </pro.anton.averin.networking.testrest.ui.views.ExpandableContentRow>
 
     <pro.anton.averin.networking.testrest.ui.views.ExpandableContentRow
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            aaverin:title="@string/response">
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            aaverin:expandable_row_title="@string/response">
 
     </pro.anton.averin.networking.testrest.ui.views.ExpandableContentRow>
 

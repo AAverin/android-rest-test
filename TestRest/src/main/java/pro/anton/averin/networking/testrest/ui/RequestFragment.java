@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.zip.Inflater;
 
 import pro.anton.averin.networking.testrest.R;
+import pro.anton.averin.networking.testrest.TestRestApp;
 import pro.anton.averin.networking.testrest.models.Headers;
 import pro.anton.averin.networking.testrest.models.Request;
 import pro.anton.averin.networking.testrest.ui.adapters.AddedHeadersAdapter;
@@ -42,6 +43,8 @@ import pro.anton.averin.networking.testrest.ui.views.TokenizedEditText;
  * Created by AAverin on 09.11.13.
  */
 public class RequestFragment extends ViewPagerFragment implements TokenizedEditText.TokenListener, View.OnClickListener {
+
+    private TestRestApp testRestApp;
 
     private View mGroupRoot;
 
@@ -103,6 +106,13 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         public void updateDrawState(TextPaint ds) {
             ds.setUnderlineText(true);
         }
+    }
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        testRestApp = (TestRestApp)getActivity().getApplicationContext();
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -232,6 +242,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_send:
+                testRestApp.currentRequest = buildRequest();
                 TestRestFragment p = (TestRestFragment) getActivity().getSupportFragmentManager().findFragmentByTag("MAIN");
                 p.showResponsePage();
                 break;

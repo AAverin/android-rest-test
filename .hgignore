@@ -1,2 +1,3 @@
 syntax: glob
 TestRest/build/*
+AndroidNetworkManager/build/*

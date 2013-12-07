@@ -5,10 +5,8 @@
         android:layout_height="wrap_content">
 
     <LinearLayout
-            android:paddingBottom="8dp"
-            android:paddingRight="8dp"
             android:paddingLeft="8dp"
-            android:paddingTop="8dp"
+            android:paddingRight="8dp"
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="30dp"
@@ -16,10 +14,10 @@
             android:gravity="center_vertical">
 
         <TextView
+                android:gravity="center_vertical"
                 android:id="@+id/title"
                 android:layout_weight="1"
                 android:textColor="#FFFFFF"
-                android:text="@string/header"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"/>
 
