@@ -27,6 +27,7 @@
     </LinearLayout>
 
     <ImageButton
+            android:layout_gravity="center_vertical"
             android:id="@+id/delete"
             android:src="@android:drawable/ic_delete"
             android:background="@null"

@@ -2,4 +2,5 @@
 <resources>
     <color name="valid_green">#6FE386</color>
     <color name="neutral_gray">#EBEBEB</color>
+    <color name="dark_gray">#787878</color>
 </resources>
