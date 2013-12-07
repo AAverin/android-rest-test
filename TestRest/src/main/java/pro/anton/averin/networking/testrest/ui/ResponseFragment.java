@@ -23,8 +23,10 @@ public class ResponseFragment extends ViewPagerFragment {
         mTabHost = (FragmentTabHost) mGroupRoot.findViewById(R.id.tabhost);
         mTabHost.setup(getActivity(), getActivity().getSupportFragmentManager(), R.id.tabFrameLayout);
 
-        mTabHost.addTab(mTabHost.newTabSpec("rawResponse").setIndicator(getString(R.string.raw_response)), RawResponseFragment.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec("jsonResponse").setIndicator(getString(R.string.json_response)), JsonResponseFragment.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec("rawResponse")
+                .setIndicator(getString(R.string.raw_response)), RawResponseFragment.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec("jsonResponse")
+                .setIndicator(getString(R.string.json_response)), JsonResponseFragment.class, null);
 
         return mGroupRoot;
     }

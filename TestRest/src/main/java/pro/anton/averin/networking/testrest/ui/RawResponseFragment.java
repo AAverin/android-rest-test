@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import pro.anton.averin.networking.testrest.R;
+
 /**
  * Created by AAverin on 07.12.13.
  */
@@ -15,6 +17,7 @@ public class RawResponseFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        mGroupRoot = inflater.inflate(R.layout.fragment_raw_response, container, false);
+        return mGroupRoot;
     }
 }
