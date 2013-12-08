@@ -41,12 +41,11 @@ public class Request {
     public String asURI() {
         StringBuilder uri = new StringBuilder();
         uri.append(protocol);
-        uri.append(baseUrl);
-        uri.append(queryString);
+        uri.append(baseUrl.trim());
+        uri.append(queryString.trim());
         return uri.toString();
     }
 
     public Request() {
-//        headers.put()
     }
 }

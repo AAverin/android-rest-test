@@ -231,7 +231,6 @@ public class NetworkManager extends AbstractNetworkManager implements OnNetworkS
 
 			} else if (NETWORK_MANAGER_CORE == NetworkManagerCore.HTTPURLCONNECTION) {
 				final HttpURLConnection conn = (HttpURLConnection) request.getHttpURLConnection();
-				;
 				final Timer timer = new Timer();
 				try {
 					if (pDebug.logging) {
