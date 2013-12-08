@@ -1,6 +1,9 @@
 package pro.anton.averin.networking.testrest.ui;
 
+import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.text.TextPaint;
@@ -12,10 +15,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,11 +49,13 @@ import pro.anton.averin.networking.testrest.ui.views.TokenizedEditText;
 /**
  * Created by AAverin on 09.11.13.
  */
-public class RequestFragment extends ViewPagerFragment implements TokenizedEditText.TokenListener, View.OnClickListener {
+public class RequestFragment extends ViewPagerFragment implements TokenizedEditText.TokenListener, View.OnClickListener, RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener {
 
     private TestRestApp testRestApp;
 
     private View mGroupRoot;
+
+    public final static int PICK_FILE_INTENT_ID = 11;
 
     private ProtocolToggleButton protocolToggleButton;
     private TokenizedEditText methodUrlEditText;
@@ -59,6 +66,11 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
 
     private RadioGroup methodRadioGroup;
     private EditText baseUrlEditText;
+    private LinearLayout postLayout;
+    private CheckBox useFileCheckbox;
+    private TextView pickFileButton;
+    private EditText postBody;
+
     private AdaptableLinearLayout addedHeadersList;
     private AddedHeadersAdapter addedHeadersAdapter;
     private ArrayList<Headers.ViewHeader> headersList = new ArrayList<Headers.ViewHeader>();
@@ -126,7 +138,23 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         protocolToggleButton.setOnClickListener(protocolToggleListener);
 
         methodRadioGroup = (RadioGroup) mGroupRoot.findViewById(R.id.method_radiogroup);
+        methodRadioGroup.setOnCheckedChangeListener(this);
+
         baseUrlEditText = (EditText) mGroupRoot.findViewById(R.id.baseurl);
+
+        postLayout = (LinearLayout) mGroupRoot.findViewById(R.id.post_layout);
+        useFileCheckbox = (CheckBox) postLayout.findViewById(R.id.use_file_checkbox);
+        useFileCheckbox.setOnCheckedChangeListener(this);
+        pickFileButton = (TextView) postLayout.findViewById(R.id.pick_file_button);
+        pickFileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent fileChooserIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                fileChooserIntent.setType("*/*");
+                startActivityForResult(Intent.createChooser(fileChooserIntent, "Pick a file"), PICK_FILE_INTENT_ID);
+            }
+        });
+        postBody = (EditText) postLayout.findViewById(R.id.post_body);
 
         addedHeadersList = (AdaptableLinearLayout) mGroupRoot.findViewById(R.id.addedheaders_list);
         addedHeadersAdapter = new AddedHeadersAdapter(getActivity().getApplicationContext(), headersList);
@@ -249,6 +277,12 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_send:
+                if (!validate()) {
+                    Toast.makeText(getActivity(), getString(R.string.error_emptyFields), 3000).show();
+                    baseUrlEditText.requestFocus();
+                    return;
+                }
+                testRestApp.currentResponse = null;
                 testRestApp.currentRequest = buildRequest();
                 TestRestFragment p = (TestRestFragment) getActivity().getSupportFragmentManager().findFragmentByTag("MAIN");
                 p.showResponsePage();
@@ -256,13 +290,53 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         }
     }
 
+    private boolean validate() {
+        return baseUrlEditText.getText().length() > 0;
+    }
+
     private Request buildRequest() {
         request.protocol = protocolToggleButton.getText().toString();
         request.baseUrl = baseUrlEditText.getText().toString();
-        CheckBox checkedBox = (CheckBox) mGroupRoot.findViewById(methodRadioGroup.getCheckedRadioButtonId());
-        request.method = checkedBox.getText().toString();
+        RadioButton radioButton = (RadioButton) mGroupRoot.findViewById(methodRadioGroup.getCheckedRadioButtonId());
+        request.method = radioButton.getText().toString();
         request.queryString = methodUrlEditText.getText().toString();
         request.headers = headersList;
         return request;
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, int checkedButtonId) {
+        switch (checkedButtonId) {
+            case R.id.checkbox_post:
+                postLayout.setVisibility(View.VISIBLE);
+                break;
+            default:
+                postLayout.setVisibility(View.GONE);
+                break;
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        postBody.setText("");
+        if (b) {
+            pickFileButton.setVisibility(View.VISIBLE);
+            postBody.setHint(R.string.post_body_file_hint);
+        } else {
+            pickFileButton.setVisibility(View.GONE);
+            postBody.setHint(R.string.post_body_hint);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == PICK_FILE_INTENT_ID) {
+                String s = data.getDataString();
+                Uri u = data.getData();
+                postBody.setText(data.getDataString());
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

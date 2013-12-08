@@ -8,10 +8,15 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import java.net.URI;
+import java.util.HashMap;
+import java.util.List;
 
+import aaverin.android.net.HttpUrlConnectionResponse;
 import aaverin.android.net.NetworkListener;
+import aaverin.android.net.NetworkManager;
 import aaverin.android.net.NetworkMessage;
 import aaverin.android.net.NetworkResponse;
+import aaverin.android.net.NetworkResponseProcessException;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.TestRestApp;
 import pro.anton.averin.networking.testrest.models.Response;
@@ -28,6 +33,7 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
 
     private LinearLayout responseLayout;
     private LinearLayout progressbarLayout;
+    private LinearLayout noDataLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,7 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
 
         responseLayout = (LinearLayout) mGroupRoot.findViewById(R.id.response_layout);
         progressbarLayout = (LinearLayout) mGroupRoot.findViewById(R.id.progressbar_layout);
+        noDataLayout = (LinearLayout) mGroupRoot.findViewById(R.id.nodata_layout);
 
         mTabHost = (FragmentTabHost) mGroupRoot.findViewById(R.id.tabhost);
         mTabHost.setup(getActivity(), getActivity().getSupportFragmentManager(), R.id.tabFrameLayout);
@@ -62,10 +69,27 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
 
         testRestApp.networkManager.putMessage(message);
         testRestApp.networkManager.releaseQueue();
+
+        noDataLayout.setVisibility(View.GONE);
+        progressbarLayout.setVisibility(View.VISIBLE);
+        responseLayout.setVisibility(View.GONE);
     }
 
-    private Response buildResponse(NetworkResponse responseMessage) {
+    private Response buildResponse(NetworkMessage request, NetworkResponse responseMessage) {
         Response response = new Response();
+        if (NetworkManager.NETWORK_MANAGER_CORE == NetworkManager.NetworkManagerCore.HTTPURLCONNECTION) {
+            HttpUrlConnectionResponse networkResponse = (HttpUrlConnectionResponse)responseMessage;
+            response.method = request.getMethod();
+            response.url = request.getURI().toString();
+            response.status = networkResponse.getStatus();
+            response.headers = networkResponse.getHeaders();
+            try {
+                response.body = networkResponse.getResponseBody();
+            } catch (NetworkResponseProcessException e) {
+                e.printStackTrace();
+            }
+        }
+
         return response;
     }
 
@@ -77,19 +101,26 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
 
     @Override
     protected void onPageSelected() {
-        testRestApp = (TestRestApp)getActivity().getApplicationContext();
-        if (testRestApp.currentResponse != null) {
+        if (testRestApp.currentRequest != null && testRestApp.currentResponse == null) {
             sendMessage();
-        } else {
+        } else if (testRestApp.currentResponse != null) {
             showResponse();
         }
     }
 
     private void showResponse() {
+        noDataLayout.setVisibility(View.GONE);
         progressbarLayout.setVisibility(View.GONE);
         responseLayout.setVisibility(View.VISIBLE);
-        ((ResponseTabFragment)getChildFragmentManager().findFragmentByTag("rawResponse")).update();
-        ((ResponseTabFragment)getChildFragmentManager().findFragmentByTag("jsonResponse")).update();
+        ResponseTabFragment rawResponseFragment = ((ResponseTabFragment)getActivity().getSupportFragmentManager().findFragmentByTag("rawResponse"));
+        if (rawResponseFragment != null) { //may be null if not yet selected
+            rawResponseFragment.update();
+        }
+        ResponseTabFragment jsonResponseFragment = ((ResponseTabFragment)getActivity().getSupportFragmentManager().findFragmentByTag("jsonResponse"));
+        if (jsonResponseFragment != null) {
+            jsonResponseFragment.update();
+        }
+
     }
 
 
@@ -115,13 +146,13 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
 
     @Override
     public void requestSuccess(NetworkMessage message, NetworkResponse response) {
-        testRestApp.currentResponse = buildResponse(response);
+        testRestApp.currentResponse = buildResponse(message, response);
         showResponse();
     }
 
     @Override
     public void requestFail(NetworkMessage message, NetworkResponse response) {
-        testRestApp.currentResponse = buildResponse(response);
+        testRestApp.currentResponse = buildResponse(message, response);
         showResponse();
     }
 

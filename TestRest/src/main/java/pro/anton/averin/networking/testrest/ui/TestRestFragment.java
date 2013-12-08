@@ -1,5 +1,6 @@
 package pro.anton.averin.networking.testrest.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -58,11 +59,17 @@ public class TestRestFragment extends Fragment implements ViewPager.OnPageChange
 
     @Override
     public void onPageSelected(int i) {
-        ((ViewPagerFragment)pagerAdapter.getItem(i)).onPageSelected();
+        ((ViewPagerFragment)pagerAdapter.getRegisteredFragment(i)).onPageSelected();
     }
 
     @Override
     public void onPageScrollStateChanged(int i) {
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ((ViewPagerFragment)pagerAdapter.getRegisteredFragment(mViewPager.getCurrentItem())).onActivityResult(requestCode, resultCode, data);
     }
 }

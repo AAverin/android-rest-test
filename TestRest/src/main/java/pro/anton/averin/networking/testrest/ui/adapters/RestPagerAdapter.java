@@ -3,6 +3,8 @@ package pro.anton.averin.networking.testrest.ui.adapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.SparseArray;
+import android.view.ViewGroup;
 
 import pro.anton.averin.networking.testrest.ui.RequestFragment;
 import pro.anton.averin.networking.testrest.ui.ResponseFragment;
@@ -13,6 +15,7 @@ import pro.anton.averin.networking.testrest.ui.ResponseFragment;
 public class RestPagerAdapter extends FragmentPagerAdapter {
 
     private FragmentManager fragmentManager;
+    private SparseArray<Fragment> registeredFragments = new SparseArray<Fragment>();
 
     private Class[] pagerViews = new Class[] {
         RequestFragment.class,
@@ -39,6 +42,23 @@ public class RestPagerAdapter extends FragmentPagerAdapter {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        Fragment newFragment = (Fragment) super.instantiateItem(container, position);
+        registeredFragments.put(position, newFragment);
+        return newFragment;
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        registeredFragments.remove(position);
+        super.destroyItem(container, position, object);
+    }
+
+    public Fragment getRegisteredFragment(int position) {
+        return registeredFragments.get(position);
     }
 
     @Override
