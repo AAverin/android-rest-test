@@ -19,6 +19,7 @@ import aaverin.android.net.NetworkResponse;
 import aaverin.android.net.NetworkResponseProcessException;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.TestRestApp;
+import pro.anton.averin.networking.testrest.models.Headers;
 import pro.anton.averin.networking.testrest.models.Response;
 
 /**
@@ -66,6 +67,11 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
         message = new NetworkMessage(true);
         message.setURI(URI.create(testRestApp.currentRequest.asURI()));
         message.setMethod(testRestApp.currentRequest.method);
+        HashMap<String, String> headers = new HashMap<String, String>();
+        for (Headers.ViewHeader header : testRestApp.currentRequest.headers) {
+            headers.put(header.name, header.value);
+        }
+        message.setHeaders(headers);
 
         testRestApp.networkManager.putMessage(message);
         testRestApp.networkManager.releaseQueue();

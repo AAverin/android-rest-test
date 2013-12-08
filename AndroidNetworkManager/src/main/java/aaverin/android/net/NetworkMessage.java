@@ -8,15 +8,21 @@
 
 package aaverin.android.net;
 
+import android.webkit.HttpAuthHandler;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.HttpDelete;
@@ -34,6 +40,7 @@ public class NetworkMessage {
 	private String method;
 	private URI uri;
 	private List<NameValuePair> parametersList = null;
+    private HashMap<String, String> headers;
 	private String rawPostBody = null;
 	private boolean isCacheable = true;
 	
@@ -102,6 +109,14 @@ public class NetworkMessage {
 	public URI getURI() {
 	    return this.uri;
 	}
+
+    /**
+     * Sets headers for this request
+     * @param headers
+     */
+    public void setHeaders(HashMap<String, String> headers) {
+        this.headers = headers;
+    }
 	
 	/**
 	 * Sets if this particular NetworkMessage should be cached by HttpCache
@@ -172,7 +187,7 @@ public class NetworkMessage {
 	 * @return URLConnection - HttpUrlConnection built request for internal use by NetworkManager
 	 */
 	public URLConnection getHttpURLConnection() {
-	    URLConnection connection = null;
+	    HttpURLConnection connection = null;
 	    try {
 	    	
 	    	if (this.parametersList == null) {
@@ -180,20 +195,27 @@ public class NetworkMessage {
             }
              
 	        String query = URLEncodedUtils.format(this.parametersList, "UTF-8").replace("%3A", ":");
-	        
-            if (method.equals("GET")) {
-                String url = uri.toString() + "/?" + query;
-                connection = new URL(url).openConnection();;
-                if (!isCacheable()) {
-                	connection.addRequestProperty("Cache-Control", "no-cache");
+
+            String url = uri.toString();
+            if (query.length() > 0) {
+                url += "/?" + query;
+            }
+            connection = (HttpURLConnection) new URL(url).openConnection();
+            if (!isCacheable()) {
+                connection.addRequestProperty("Cache-Control", "no-cache");
+            }
+
+            Iterator<Map.Entry<String,String>> headersIterator = headers.entrySet().iterator();
+            while (headersIterator.hasNext()) {
+                Map.Entry<String, String> header = headersIterator.next();
+                connection.setRequestProperty(header.getKey(), header.getValue());
+            }
+
+            if (!method.equals("GET")) {
+                connection.setDoOutput(true);
+                if (!method.equals("POST")) {
+                    connection.setRequestMethod(method);
                 }
-            } else if (method.equals("POST")) {
-            	String url = uri.toString() + "/?" + query;
-                connection = new URL(url.toString()).openConnection();
-                if (!isCacheable()) {
-                	connection.addRequestProperty("Cache-Control", "no-cache");
-                }
-                connection.setDoOutput(true); // Triggers POST.
                 connection.setRequestProperty("Accept-Charset", "UTF-8");
                 connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=" + "UTF-8");
                 OutputStream output = null;

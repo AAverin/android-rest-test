@@ -79,5 +79,6 @@ public class RawResponseFragment extends ResponseTabFragment {
         } else {
             bodyTextView.setText(testRestApp.currentResponse.body);
         }
+        bodyRow.setContent(bodyTextView);
     }
 }
