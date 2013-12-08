@@ -18,6 +18,11 @@
 
     <string name="baseurl_hint">Enter baseURL</string>
     <string name="baseurl">BaseURL</string>
+    <string name="post_body_file">Use file</string>
+    <string name="post_body">POST Body</string>
+    <string name="pick_post_file">Pick file</string>
+    <string name="post_body_file_hint">POST body file</string>
+    <string name="post_body_hint">Enter POST body content</string>
     <string name="methodurl_hint">Enter REST method url</string>
 
     <string name="http">http://</string>
@@ -31,6 +36,9 @@
 
     <string name="header">Header</string>
     <string name="response">Response</string>
+    <string name="empty_response">Empty response</string>
+
+    <string name="no_data">No data to display</string>
 
     <string name="add_query">Add query parameter</string>
     <string name="key">Key</string>
@@ -39,5 +47,7 @@
 
     <string name="add_header">Add header</string>
     <string name="header_name">Header</string>
+
+    <string name="error_emptyFields">Please provide at least baseUrl</string>
 
 </resources>

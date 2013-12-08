@@ -55,7 +55,8 @@
             android:id="@+id/progressbar_layout"
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:visibility="gone">
 
         <ProgressBar
                 android:id="@+id/progressbar"
@@ -64,5 +65,21 @@
                 android:layout_height="wrap_content"/>
 
     </LinearLayout>
+
+    <LinearLayout
+            android:gravity="center"
+            android:id="@+id/nodata_layout"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+        <TextView
+                android:gravity="center"
+                android:text="@string/no_data"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
 
 </LinearLayout>
