@@ -206,7 +206,11 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         public void onOk(String key, String value) {
             StringBuffer newValue = new StringBuffer();
             newValue.append(methodUrlEditText.getText().toString());
-            newValue.append("&");
+            if (methodUrlEditText.getText().toString().length() > 0) {
+                newValue.append("&");
+            } else {
+                newValue.append("?");
+            }
             newValue.append(key);
             newValue.append("=");
             newValue.append(value);
