@@ -274,17 +274,23 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_send:
-                if (!validate()) {
-                    Toast.makeText(getActivity(), getString(R.string.error_emptyFields), 3000).show();
-                    baseUrlEditText.requestFocus();
-                    return;
+                if (prepareRequest()) {
+                    TestRestFragment p = (TestRestFragment) getActivity().getSupportFragmentManager().findFragmentByTag("MAIN");
+                    p.showResponsePage();
                 }
-                testRestApp.currentResponse = null;
-                testRestApp.currentRequest = buildRequest();
-                TestRestFragment p = (TestRestFragment) getActivity().getSupportFragmentManager().findFragmentByTag("MAIN");
-                p.showResponsePage();
                 break;
         }
+    }
+
+    public boolean prepareRequest() {
+        if (!validate()) {
+            Toast.makeText(getActivity(), getString(R.string.error_emptyFields), 3000).show();
+            baseUrlEditText.requestFocus();
+            return false;
+        }
+        testRestApp.currentResponse = null;
+        testRestApp.currentRequest = buildRequest();
+        return true;
     }
 
     private boolean validate() {

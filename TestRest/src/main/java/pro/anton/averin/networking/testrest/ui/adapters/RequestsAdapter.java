@@ -44,20 +44,20 @@ public class RequestsAdapter extends ArrayAdapter<Request> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder = new ViewHolder();
+        View view = convertView;
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
-            convertView = inflater.inflate(R.layout.detailed_request_list_item, null);
-            viewHolder.requestName = (TextView) convertView.findViewById(R.id.request_name);
-            viewHolder.detailsExpandButton = (TextView) convertView.findViewById(R.id.expand_button);
-            viewHolder.detailsLayout = (LinearLayout) convertView.findViewById(R.id.details_layout);
-            viewHolder.detailsBaseurl = (TextView) convertView.findViewById(R.id.details_baseurl);
-            viewHolder.detailsQuery = (TextView) convertView.findViewById(R.id.details_query);
-            convertView.setTag(viewHolder);
-        } else {
-            //clear viewholder
-            viewHolder = (ViewHolder) convertView.getTag();
+            view = inflater.inflate(R.layout.detailed_request_list_item, null);
+            ViewHolder viewHolder = new ViewHolder();
+            viewHolder.requestName = (TextView) view.findViewById(R.id.request_name);
+            viewHolder.detailsExpandButton = (TextView) view.findViewById(R.id.details_expand_button);
+            viewHolder.detailsLayout = (LinearLayout) view.findViewById(R.id.details_layout);
+            viewHolder.detailsBaseurl = (TextView) view.findViewById(R.id.details_baseurl);
+            viewHolder.detailsQuery = (TextView) view.findViewById(R.id.details_query);
+            view.setTag(viewHolder);
         }
+
+        ViewHolder viewHolder = (ViewHolder) view.getTag();
 
         Request request = getItem(position);
 
@@ -71,7 +71,7 @@ public class RequestsAdapter extends ArrayAdapter<Request> {
         viewHolder.detailsBaseurl.setText(request.protocol + request.baseUrl);
         viewHolder.detailsQuery.setText(request.queryString);
 
-        return convertView;
+        return view;
     }
 
     private View.OnClickListener expandClickListener = new View.OnClickListener() {

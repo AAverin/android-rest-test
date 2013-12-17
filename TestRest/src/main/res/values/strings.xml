@@ -54,8 +54,11 @@
 
     <string name="pick_a_name">Pick a name</string>
     <string name="or_select_from_list">Or select from list to overwrite</string>
-
+    <string name="select_to_load">Click on element to load or swipe it right to delete</string>
     <string name="entrieslist_blankslate">No entries</string>
+
+    <string name="loading">Loading...</string>
+    <string name="please_wait">Please wait</string>
 
     <string name="error_emptyFields">Please provide at least baseUrl</string>
 

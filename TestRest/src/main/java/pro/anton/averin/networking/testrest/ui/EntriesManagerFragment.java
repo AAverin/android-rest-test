@@ -1,6 +1,7 @@
 package pro.anton.averin.networking.testrest.ui;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import pro.anton.averin.networking.testrest.R;
+import pro.anton.averin.networking.testrest.TestRestApp;
 import pro.anton.averin.networking.testrest.models.Request;
 import pro.anton.averin.networking.testrest.ui.adapters.RequestsAdapter;
 import pro.anton.averin.networking.testrest.ui.loaders.SavedRequestsLoader;
@@ -30,6 +32,7 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
     private View mGroupRoot;
     private View mActionBarCustomView;
     ActionBar actionBar;
+    TestRestApp testRestApp;
 
     private LinearLayout pickANameLayout;
     private ListView entriesList;
@@ -40,6 +43,8 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
 
     FrameLayout cancelButton;
     FrameLayout doneButton;
+
+    private ProgressDialog progressDialog;
 
     private final static int LOADER_ID = 1;
 
@@ -64,6 +69,9 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
 
         entriesAdapter = new RequestsAdapter(getActivity());
         entriesList = (ListView) mGroupRoot.findViewById(R.id.entries_list);
+        entriesList.setAdapter(entriesAdapter);
+
+        progressDialog = ProgressDialog.show(getActivity(), getString(R.string.loading), getString(R.string.please_wait), true);
 
         return mGroupRoot;
     }
@@ -71,6 +79,7 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        testRestApp = (TestRestApp) getActivity().getApplicationContext();
         saveMode = getActivity().getIntent().getBooleanExtra("save", false);
         getActivity().getSupportLoaderManager().initLoader(LOADER_ID, null, this);
         updateUI();
@@ -78,6 +87,7 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
 
     private void updateUI() {
         if (saveMode) {
+            ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(getString(R.string.action_save));
             pickANameLayout.setVisibility(View.VISIBLE);
 
             actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM, ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME
@@ -87,6 +97,9 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
 
             doneButton.setOnClickListener(this);
             cancelButton.setOnClickListener(this);
+        } else {
+            ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(getString(R.string.action_load));
+            orSelect.setText(R.string.select_to_load);
         }
     }
 
@@ -94,9 +107,12 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.actionbar_done:
+                testRestApp.currentRequest = testRestApp.restTestDb.addRequest(testRestApp.currentRequest);
+                getLoaderManager().restartLoader(LOADER_ID, null, this);
                 break;
 
             case R.id.actionbar_discard:
+                getActivity().finish();
                 break;
         }
     }
@@ -109,6 +125,21 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
     @Override
     public void onLoadFinished(Loader<List<Request>> listLoader, List<Request> requests) {
         entriesAdapter.setData(requests);
+        entriesAdapter.notifyDataSetChanged();
+        if (requests == null || requests.size() == 0) {
+            if (saveMode) {
+                orSelect.setVisibility(View.GONE);
+                entriesList.setVisibility(View.GONE);
+                blankSlate.setVisibility(View.VISIBLE);
+            }
+        } else {
+            orSelect.setVisibility(View.VISIBLE);
+            entriesList.setVisibility(View.VISIBLE);
+            blankSlate.setVisibility(View.GONE);
+        }
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
     }
 
     @Override
