@@ -13,7 +13,7 @@ import pro.anton.averin.networking.testrest.db.utils.SQLiteTable;
  */
 public class Request {
 
-    public int id;
+    public long id;
 
     public String name;
     public String protocol;

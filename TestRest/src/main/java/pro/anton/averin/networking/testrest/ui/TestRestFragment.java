@@ -7,18 +7,23 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import pro.anton.averin.networking.testrest.R;
+import pro.anton.averin.networking.testrest.TestRestApp;
 import pro.anton.averin.networking.testrest.ui.adapters.RestPagerAdapter;
+import pro.anton.averin.networking.testrest.ui.phone.EntriesManagerActivity;
 
 /**
  * Created by AAverin on 09.11.13.
  */
-public class TestRestFragment extends Fragment implements ViewPager.OnPageChangeListener {
+public class TestRestFragment extends Fragment implements ViewPager.OnPageChangeListener, MenuItem.OnMenuItemClickListener {
 
     private View mGroupRoot;
+
+    private TestRestApp testRestApp;
 
     private ViewPager mViewPager;
     private RestPagerAdapter pagerAdapter;
@@ -35,7 +40,15 @@ public class TestRestFragment extends Fragment implements ViewPager.OnPageChange
         mViewPager.setAdapter(pagerAdapter);
         mViewPager.setOnPageChangeListener(this);
 
+        setHasOptionsMenu(true);
+
         return mGroupRoot;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        testRestApp = (TestRestApp) getActivity().getApplicationContext();
     }
 
     public void showResponsePage() {
@@ -49,6 +62,11 @@ public class TestRestFragment extends Fragment implements ViewPager.OnPageChange
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.test_rest, menu);
+
+        menu.findItem(R.id.action_save).setOnMenuItemClickListener(this);
+        menu.findItem(R.id.action_manager).setOnMenuItemClickListener(this);
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -71,5 +89,34 @@ public class TestRestFragment extends Fragment implements ViewPager.OnPageChange
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         ((ViewPagerFragment)pagerAdapter.getRegisteredFragment(mViewPager.getCurrentItem())).onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        switch(menuItem.getItemId()) {
+            case R.id.action_save:
+                openManagerActivity(true);
+                break;
+
+            case R.id.action_manager:
+                openManagerActivity(false);
+                break;
+        }
+        return true;
+    }
+
+    private void openManagerActivity(boolean save) {
+        boolean invokeActivity = true;
+        if (save) {
+            invokeActivity = ((RequestFragment)pagerAdapter.getRegisteredFragment(0)).prepareRequest();
+        }
+        if (invokeActivity) {
+            Intent managerActivityIntent = new Intent();
+            managerActivityIntent.setClass(getActivity(), EntriesManagerActivity.class);
+            if (save) {
+                managerActivityIntent.putExtra("save", true);
+            }
+            startActivity(managerActivityIntent);
+        }
     }
 }

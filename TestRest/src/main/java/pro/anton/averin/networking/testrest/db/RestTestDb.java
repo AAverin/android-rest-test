@@ -31,13 +31,14 @@ public class RestTestDb {
         helper = HelperManager.getHelper(context);
     }
 
-    public void addRequest(Request request) {
+    public Request addRequest(Request request) {
         SQLiteDatabase db = helper.getWritableDatabase();
 
         long requestId = db.insert(Request.SQLITE.TABLE_NAME, null, request.asContentValues());
         if (requestId == -1) {
             throw new android.database.SQLException("Could not add Request");
         }
+        request.id = requestId;
 
         for (RequestHeader header : request.headers) {
             header.requestId = requestId;
@@ -46,6 +47,8 @@ public class RestTestDb {
                 throw new android.database.SQLException("Could not add RequestHeader");
             }
         }
+
+        return request;
     }
 
     public ArrayList<Request> getRequests() {

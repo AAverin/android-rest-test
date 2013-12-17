@@ -17,10 +17,13 @@
     <list default="true" id="69de53c8-e464-43f0-8b06-5d471ed5ffe0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/EntriesManagerFragment.java" afterPath="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/EntriesManagerFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/models/Request.java" afterPath="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/models/Request.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/RequestFragment.java" afterPath="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/RequestFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/adapters/RequestsAdapter.java" afterPath="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/adapters/RequestsAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/db/RestTestDb.java" afterPath="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/db/RestTestDb.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/phone/TestRestActivity.java" afterPath="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/phone/TestRestActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestRest/src/main/res/layout/fragment_entriesmanager.xml" afterPath="$PROJECT_DIR$/TestRest/src/main/res/layout/fragment_entriesmanager.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/TestRestFragment.java" afterPath="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/TestRestFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestRest/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/TestRest/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="TestRest.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -151,6 +154,51 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/adapters/RequestsAdapter.java" line="79" class="pro.anton.averin.networking.testrest.ui.adapters.RequestsAdapter$1" package="pro.anton.averin.networking.testrest.ui.adapters">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/adapters/RequestsAdapter.java" line="87" class="pro.anton.averin.networking.testrest.ui.adapters.RequestsAdapter$2" package="pro.anton.averin.networking.testrest.ui.adapters">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/adapters/RequestsAdapter.java" line="73" class="pro.anton.averin.networking.testrest.ui.adapters.RequestsAdapter" package="pro.anton.averin.networking.testrest.ui.adapters">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
     </line_breakpoints>
     <breakpoint_rules />
     <ui_properties />
@@ -164,8 +212,13 @@
       <file leaf-file-name="RequestFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/RequestFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="216" column="12" selection-start="8676" selection-end="8676" vertical-scroll-proportion="0.0" vertical-offset="3672" max-vertical-offset="4760">
-              <folding />
+            <state line="279" column="17" selection-start="10587" selection-end="10587" vertical-scroll-proportion="0.0" vertical-offset="4276" max-vertical-offset="4862">
+              <folding>
+                <element signature="e#10024#10060#0" expanded="true" />
+                <element signature="e#10735#10772#0" expanded="true" />
+                <element signature="e#12156#12184#0" expanded="true" />
+                <element signature="e#12286#12309#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -173,49 +226,35 @@
       <file leaf-file-name="ResponseFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/ResponseFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="70" column="51" selection-start="2847" selection-end="2847" vertical-scroll-proportion="0.0" vertical-offset="1190" max-vertical-offset="2975">
+            <state line="70" column="51" selection-start="2847" selection-end="2847" vertical-scroll-proportion="0.0" vertical-offset="1343" max-vertical-offset="2635">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EntriesManagerFragment.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="EntriesManagerFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/EntriesManagerFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="115" column="35" selection-start="4306" selection-end="4306" vertical-scroll-proportion="1.5221843" vertical-offset="1063" max-vertical-offset="2108">
+            <state line="71" column="47" selection-start="2904" selection-end="2904" vertical-scroll-proportion="0.0" vertical-offset="1947" max-vertical-offset="2635">
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2966#2993#0" expanded="true" />
+                <element signature="e#2995#3026#0" expanded="true" />
+                <element signature="e#3594#3625#0" expanded="true" />
+                <element signature="e#4247#4278#0" expanded="true" />
+                <element signature="e#4310#4333#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestRestActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/phone/TestRestActivity.java">
+      <file leaf-file-name="RequestsAdapter.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/adapters/RequestsAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="67" selection-start="1597" selection-end="1597" vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="952">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestRestFragment.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/TestRestFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="60" selection-start="886" selection-end="886" vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="1190">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="detailed_request_list_item.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TestRest/src/main/res/layout/detailed_request_list_item.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="50" selection-start="510" selection-end="510" vertical-scroll-proportion="-9.52" vertical-offset="0" max-vertical-offset="782">
-              <folding />
+            <state line="61" column="44" selection-start="2100" selection-end="2100" vertical-scroll-proportion="0.29048413" vertical-offset="863" max-vertical-offset="1564">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -973,21 +1012,21 @@
         <option value="$PROJECT_DIR$/TestRest/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/TestRest/src/main/res/menu/test_rest.xml" />
         <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/models/Headers.java" />
-        <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/RequestFragment.java" />
         <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/adapters/AddedHeadersAdapter.java" />
         <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/models/RequestHeader.java" />
         <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/ResponseFragment.java" />
-        <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/TestRestFragment.java" />
-        <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/phone/TestRestActivity.java" />
-        <option value="$PROJECT_DIR$/TestRest/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/TestRest/src/main/res/layout/fragment_entriesmanager.xml" />
         <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/loaders/AbstractDataLoader.java" />
-        <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/db/RestTestDb.java" />
-        <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/models/Request.java" />
         <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/loaders/SavedRequestsLoader.java" />
+        <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/phone/TestRestActivity.java" />
+        <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/models/Request.java" />
+        <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/db/RestTestDb.java" />
+        <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/RequestFragment.java" />
+        <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/TestRestFragment.java" />
+        <option value="$PROJECT_DIR$/TestRest/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/EntriesManagerFragment.java" />
         <option value="$PROJECT_DIR$/TestRest/src/main/res/layout/detailed_request_list_item.xml" />
         <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/adapters/RequestsAdapter.java" />
-        <option value="$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/EntriesManagerFragment.java" />
       </list>
     </option>
   </component>
@@ -1259,6 +1298,44 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TestRest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TestRest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TestRest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testrest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phone" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1717,14 +1794,14 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2448" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46411484" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.464" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32744783" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40829346" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32376397" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4352" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5632" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1732,7 +1809,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.306231" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.408" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4464" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1785,11 +1862,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/gradlew">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2890" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TestRestProject.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="586" />
@@ -1995,49 +2067,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestRest/src/main/res/menu/test_rest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="47" selection-start="723" selection-end="723" vertical-scroll-proportion="0.4808652" vertical-offset="0" max-vertical-offset="601">
-          <folding>
-            <element signature="e#700#723#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/adapters/AddedHeadersAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="54" selection-start="583" selection-end="583" vertical-scroll-proportion="-1.2481012" vertical-offset="612" max-vertical-offset="1088">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/models/RequestHeader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="11" selection-start="376" selection-end="376" vertical-scroll-proportion="0.09484193" vertical-offset="198" max-vertical-offset="799">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/ResponseFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="51" selection-start="2847" selection-end="2847" vertical-scroll-proportion="0.0" vertical-offset="314" max-vertical-offset="2635">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/RequestFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="216" column="12" selection-start="8676" selection-end="8676" vertical-scroll-proportion="0.0" vertical-offset="2576" max-vertical-offset="4862">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestRest/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="52" selection-start="2148" selection-end="2148" vertical-scroll-proportion="0.7445743" vertical-offset="523" max-vertical-offset="1156">
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2066,22 +2101,6 @@
         <state line="42" column="44" selection-start="1515" selection-end="1526" vertical-scroll-proportion="0.6149826" vertical-offset="361" max-vertical-offset="1071">
           <folding>
             <element signature="e#1449#1481#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/models/Request.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="20" selection-start="2430" selection-end="2430" vertical-scroll-proportion="1.1419032" vertical-offset="421" max-vertical-offset="1258">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/db/RestTestDb.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="42" selection-start="2153" selection-end="2153" vertical-scroll-proportion="0.721843" vertical-offset="342" max-vertical-offset="2295">
-          <folding>
-            <element signature="e#1978#1987#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2120,33 +2139,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/phone/TestRestActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="67" selection-start="1597" selection-end="1597" vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="952">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/models/Headers.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="112" column="5" selection-start="3556" selection-end="3556" vertical-scroll-proportion="1.0" vertical-offset="1352" max-vertical-offset="1938">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/TestRestFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="60" selection-start="886" selection-end="886" vertical-scroll-proportion="0.0" vertical-offset="163" max-vertical-offset="1190">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestRest/src/main/res/layout/detailed_request_list_item.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="50" selection-start="510" selection-end="510" vertical-scroll-proportion="-9.52" vertical-offset="0" max-vertical-offset="782">
           <folding />
         </state>
       </provider>
@@ -2160,20 +2155,113 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/adapters/RequestsAdapter.java">
+    <entry file="file://$PROJECT_DIR$/TestRest/src/main/res/menu/test_rest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="37" selection-start="1092" selection-end="1092" vertical-scroll-proportion="0.68781304" vertical-offset="251" max-vertical-offset="1615">
+        <state line="10" column="22" selection-start="434" selection-end="434" vertical-scroll-proportion="0.28380635" vertical-offset="0" max-vertical-offset="599">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/phone/TestRestActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="4" selection-start="495" selection-end="495" vertical-scroll-proportion="0.14190318" vertical-offset="0" max-vertical-offset="599">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/models/Request.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="15" selection-start="340" selection-end="340" vertical-scroll-proportion="0.25542572" vertical-offset="0" max-vertical-offset="1258">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/ResponseFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="51" selection-start="2847" selection-end="2847" vertical-scroll-proportion="0.0" vertical-offset="314" max-vertical-offset="2635">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestRest/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="42" selection-start="2137" selection-end="2137" vertical-scroll-proportion="0.57429045" vertical-offset="608" max-vertical-offset="1207">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/db/RestTestDb.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="0" selection-start="2171" selection-end="2171" vertical-scroll-proportion="0.6756757" vertical-offset="616" max-vertical-offset="2346">
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2671#2886#0" expanded="true" />
-            <element signature="e#2879#2880#0" expanded="true" />
+            <element signature="e#2038#2047#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/TestRestFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="77" column="12" selection-start="2386" selection-end="2386" vertical-scroll-proportion="0.8671875" vertical-offset="738" max-vertical-offset="1938">
+          <folding>
+            <element signature="e#1304#1340#0" expanded="true" />
+            <element signature="e#1358#1395#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/adapters/HeadersListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="13" selection-start="454" selection-end="454" vertical-scroll-proportion="-0.050083473" vertical-offset="149" max-vertical-offset="748">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/EntriesManagerFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="35" selection-start="4306" selection-end="4306" vertical-scroll-proportion="1.5221843" vertical-offset="1063" max-vertical-offset="2108">
+        <state line="71" column="47" selection-start="2904" selection-end="2904" vertical-scroll-proportion="0.0" vertical-offset="2049" max-vertical-offset="2635">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2966#2993#0" expanded="true" />
+            <element signature="e#2995#3026#0" expanded="true" />
+            <element signature="e#3594#3625#0" expanded="true" />
+            <element signature="e#4247#4278#0" expanded="true" />
+            <element signature="e#4310#4333#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/adapters/AddedHeadersAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="34" selection-start="1381" selection-end="1440" vertical-scroll-proportion="0.14858097" vertical-offset="489" max-vertical-offset="1088">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/RequestFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="279" column="17" selection-start="10587" selection-end="10587" vertical-scroll-proportion="0.0" vertical-offset="3749" max-vertical-offset="4862">
+          <folding>
+            <element signature="e#10024#10060#0" expanded="true" />
+            <element signature="e#10735#10772#0" expanded="true" />
+            <element signature="e#12156#12184#0" expanded="true" />
+            <element signature="e#12286#12309#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestRest/src/main/res/layout/detailed_request_list_item.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="39" selection-start="441" selection-end="441" vertical-scroll-proportion="0.31881532" vertical-offset="4" max-vertical-offset="782">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestRest/src/main/java/pro/anton/averin/networking/testrest/ui/adapters/RequestsAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="44" selection-start="2100" selection-end="2100" vertical-scroll-proportion="0.29048413" vertical-offset="863" max-vertical-offset="1564">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
