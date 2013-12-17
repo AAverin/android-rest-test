@@ -50,7 +50,7 @@ public class TestRestActivity extends BaseSinglePaneActivity implements MenuItem
 
     private void openManagerActivity(boolean save) {
         Intent managerActivityIntent = new Intent();
-        managerActivityIntent.setClass(this, TestRestActivity.class);
+        managerActivityIntent.setClass(this, EntriesManagerActivity.class);
         if (save) {
             managerActivityIntent.putExtra("save", true);
         }

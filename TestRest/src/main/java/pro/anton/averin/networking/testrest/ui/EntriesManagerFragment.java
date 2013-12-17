@@ -3,6 +3,8 @@ package pro.anton.averin.networking.testrest.ui;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
@@ -11,13 +13,19 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.List;
 
 import pro.anton.averin.networking.testrest.R;
+import pro.anton.averin.networking.testrest.models.Request;
+import pro.anton.averin.networking.testrest.ui.adapters.RequestsAdapter;
+import pro.anton.averin.networking.testrest.ui.loaders.SavedRequestsLoader;
 
 /**
  * Created by AAverin on 17.12.13.
  */
-public class EntriesManagerFragment extends Fragment {
+public class EntriesManagerFragment extends Fragment implements View.OnClickListener, LoaderManager.LoaderCallbacks<List<Request>> {
 
     private View mGroupRoot;
     private View mActionBarCustomView;
@@ -25,9 +33,15 @@ public class EntriesManagerFragment extends Fragment {
 
     private LinearLayout pickANameLayout;
     private ListView entriesList;
+    private RequestsAdapter entriesAdapter;
+    private LinearLayout entriesLayout;
+    private TextView orSelect;
+    private TextView blankSlate;
 
     FrameLayout cancelButton;
     FrameLayout doneButton;
+
+    private final static int LOADER_ID = 1;
 
     private boolean saveMode = false;
 
@@ -44,6 +58,11 @@ public class EntriesManagerFragment extends Fragment {
 
         pickANameLayout = (LinearLayout) mGroupRoot.findViewById(R.id.pickname_layout);
         pickANameLayout.setVisibility(View.GONE);
+        entriesLayout = (LinearLayout) mGroupRoot.findViewById(R.id.entries_layout);
+        orSelect = (TextView) mGroupRoot.findViewById(R.id.or_select);
+        blankSlate = (TextView) mGroupRoot.findViewById(R.id.blank_slate);
+
+        entriesAdapter = new RequestsAdapter(getActivity());
         entriesList = (ListView) mGroupRoot.findViewById(R.id.entries_list);
 
         return mGroupRoot;
@@ -53,6 +72,8 @@ public class EntriesManagerFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         saveMode = getActivity().getIntent().getBooleanExtra("save", false);
+        getActivity().getSupportLoaderManager().initLoader(LOADER_ID, null, this);
+        updateUI();
     }
 
     private void updateUI() {
@@ -63,6 +84,35 @@ public class EntriesManagerFragment extends Fragment {
                     | ActionBar.DISPLAY_SHOW_TITLE);
             actionBar.setCustomView(mActionBarCustomView, new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT));
+
+            doneButton.setOnClickListener(this);
+            cancelButton.setOnClickListener(this);
         }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.actionbar_done:
+                break;
+
+            case R.id.actionbar_discard:
+                break;
+        }
+    }
+
+    @Override
+    public Loader<List<Request>> onCreateLoader(int i, Bundle bundle) {
+        return new SavedRequestsLoader(getActivity().getApplicationContext());
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<Request>> listLoader, List<Request> requests) {
+        entriesAdapter.setData(requests);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<Request>> listLoader) {
+        entriesAdapter.setData(null);
     }
 }

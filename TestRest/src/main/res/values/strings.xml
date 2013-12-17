@@ -55,6 +55,8 @@
     <string name="pick_a_name">Pick a name</string>
     <string name="or_select_from_list">Or select from list to overwrite</string>
 
+    <string name="entrieslist_blankslate">No entries</string>
+
     <string name="error_emptyFields">Please provide at least baseUrl</string>
 
 </resources>

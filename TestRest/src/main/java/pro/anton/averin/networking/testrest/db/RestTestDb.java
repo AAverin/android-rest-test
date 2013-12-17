@@ -46,8 +46,26 @@ public class RestTestDb {
                 throw new android.database.SQLException("Could not add RequestHeader");
             }
         }
+    }
 
+    public ArrayList<Request> getRequests() {
+        SQLiteDatabase db = helper.getReadableDatabase();
 
+        Cursor c = db.query(Request.SQLITE.TABLE_NAME, Request.SQLITE.table.getColumns(), null, null, null, null, null);
+        try {
+            if (c.getCount() > 0) {
+                ArrayList<Request> requests = new ArrayList<Request>(c.getCount());
+                while (c.moveToNext()) {
+                    Request request = new Request().fromCursor(c);
+                    requests.add(request);
+                }
+                return requests;
+            } else {
+                return null;
+            }
+        } finally {
+            c.close();
+        }
     }
 
     public ArrayList<Headers.Header> getSupportedHeaders() {
