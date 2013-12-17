@@ -1,6 +1,7 @@
 package pro.anton.averin.networking.testrest.models;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.provider.BaseColumns;
 
 import java.util.ArrayList;
@@ -58,5 +59,16 @@ public class Request {
         values.put(SQLITE.COL_METHOD, method);
         values.put(SQLITE.COL_QUERY, queryString);
         return values;
+    }
+
+    public Request fromCursor(Cursor cursor) {
+        SQLiteTable.TableCursor c = new SQLiteTable.TableCursor(SQLITE.table, cursor);
+        this.id = c.getInt(SQLITE.COL_ID);
+        this.name = c.getString(SQLITE.COL_NAME);
+        this.protocol = c.getString(SQLITE.COL_PROTOCOL);
+        this.baseUrl = c.getString(SQLITE.COL_BASEURL);
+        this.method = c.getString(SQLITE.COL_METHOD);
+        this.queryString = c.getString(SQLITE.COL_QUERY);
+        return this;
     }
 }
