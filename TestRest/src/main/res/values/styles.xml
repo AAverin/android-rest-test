@@ -5,6 +5,10 @@
         <!-- Customize your theme here. -->
     </style>
 
+<style name="donediscard_text">
+        <item name="android:textSize">15sp</item>
+    </style>
+
     <style name="basic_padding">
         <item name="android:padding">4dp</item>
     </style>

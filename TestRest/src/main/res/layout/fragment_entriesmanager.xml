@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+            android:layout_margin="8dp"
+            android:orientation="vertical"
+            android:id="@+id/pickname_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:layout_marginLeft="8dp"
+                android:text="@string/pick_a_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"/>
+
+        <EditText
+                android:id="@+id/custom_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:layout_marginLeft="8dp"
+                android:text="@string/or_select_from_list"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <ListView
+            android:id="@+id/entries_list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:choiceMode="singleChoice">
+    </ListView>
+
+</LinearLayout>
