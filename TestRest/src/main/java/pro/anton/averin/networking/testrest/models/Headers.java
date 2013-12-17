@@ -14,15 +14,6 @@ import pro.anton.averin.networking.testrest.db.utils.SQLiteTable;
  */
 public class Headers {
 
-    public static class ViewHeader {
-        public String name;
-        public String value;
-        public ViewHeader(String name, String value) {
-            this.name = name;
-            this.value = value;
-        }
-    }
-
     public static class Header {
         public long id;
         public int popularity;

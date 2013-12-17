@@ -1,25 +1,20 @@
 package pro.anton.averin.networking.testrest.ui;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -29,15 +24,13 @@ import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.ArgbEvaluator;
 import com.nineoldandroids.animation.ValueAnimator;
 
-import java.net.URI;
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
-import aaverin.android.net.NetworkMessage;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.TestRestApp;
 import pro.anton.averin.networking.testrest.models.Headers;
 import pro.anton.averin.networking.testrest.models.Request;
+import pro.anton.averin.networking.testrest.models.RequestHeader;
 import pro.anton.averin.networking.testrest.ui.adapters.AddedHeadersAdapter;
 import pro.anton.averin.networking.testrest.ui.dialogs.AddHeaderPopup;
 import pro.anton.averin.networking.testrest.ui.dialogs.AddQueryPopup;
@@ -73,7 +66,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
 
     private AdaptableLinearLayout addedHeadersList;
     private AddedHeadersAdapter addedHeadersAdapter;
-    private ArrayList<Headers.ViewHeader> headersList = new ArrayList<Headers.ViewHeader>();
+    private ArrayList<RequestHeader> headersList = new ArrayList<RequestHeader>();
 
     private Request request = new Request();
 
@@ -221,7 +214,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     AddHeaderPopup.HeaderPopupListener headerPopupListener = new AddHeaderPopup.HeaderPopupListener() {
         @Override
         public void onOk(String key, String value) {
-            headersList.add(new Headers.ViewHeader(key, value));
+            headersList.add(new RequestHeader(key, value));
             addedHeadersAdapter.notifyDataSetChanged();
         }
     };

@@ -14,6 +14,7 @@ import java.util.List;
 
 import pro.anton.averin.networking.testrest.models.Headers;
 import pro.anton.averin.networking.testrest.models.Request;
+import pro.anton.averin.networking.testrest.models.RequestHeader;
 
 /**
  * Created by AAverin on 12.11.13.
@@ -28,6 +29,25 @@ public class RestTestDb {
 
     public RestTestDb(Context context) {
         helper = HelperManager.getHelper(context);
+    }
+
+    public void addRequest(Request request) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        long requestId = db.insert(Request.SQLITE.TABLE_NAME, null, request.asContentValues());
+        if (requestId == -1) {
+            throw new android.database.SQLException("Could not add Request");
+        }
+
+        for (RequestHeader header : request.headers) {
+            header.requestId = requestId;
+            long id = db.insert(RequestHeader.SQLITE.TABLE_NAME, null, header.asContentValues());
+            if (id == -1) {
+                throw new android.database.SQLException("Could not add RequestHeader");
+            }
+        }
+
+
     }
 
     public ArrayList<Headers.Header> getSupportedHeaders() {

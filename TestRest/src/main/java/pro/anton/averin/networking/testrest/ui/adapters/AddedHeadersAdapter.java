@@ -5,20 +5,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.models.Headers;
+import pro.anton.averin.networking.testrest.models.RequestHeader;
 
 /**
  * Created by AAverin on 27.11.13.
  */
-public class AddedHeadersAdapter extends ArrayAdapter<Headers.ViewHeader> {
+public class AddedHeadersAdapter extends ArrayAdapter<RequestHeader> {
 
     public interface OnHeaderChangeListener {
         public void onDelete(int position);
@@ -27,7 +26,7 @@ public class AddedHeadersAdapter extends ArrayAdapter<Headers.ViewHeader> {
     private OnHeaderChangeListener listener = null;
     private Context context;
 
-    public AddedHeadersAdapter(Context context, List<Headers.ViewHeader> headersList) {
+    public AddedHeadersAdapter(Context context, List<RequestHeader> headersList) {
         super(context, 0, 0, headersList);
         this.context = context;
 
@@ -58,7 +57,7 @@ public class AddedHeadersAdapter extends ArrayAdapter<Headers.ViewHeader> {
 
         ViewHolder holder = (ViewHolder) view.getTag();
 
-        Headers.ViewHeader element = getItem(position);
+        RequestHeader element = getItem(position);
         holder.headerName.setText(element.name);
         holder.headerValue.setText(element.value);
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
