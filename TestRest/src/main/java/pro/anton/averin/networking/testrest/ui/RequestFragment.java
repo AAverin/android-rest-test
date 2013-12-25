@@ -185,6 +185,10 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
                     if (edit.getText().length() == edit.getSelectionEnd()) {
                         highlightQueryButton();
                     }
+                    String text = edit.getText().toString();
+                    if (!text.startsWith("?")) {
+                        edit.setText("?" + text);
+                    }
                 }
             }
         });
@@ -198,9 +202,12 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         @Override
         public void onOk(String key, String value) {
             StringBuffer newValue = new StringBuffer();
+            String text = methodUrlEditText.getText().toString();
             newValue.append(methodUrlEditText.getText().toString());
-            if (methodUrlEditText.getText().toString().length() > 0) {
-                newValue.append("&");
+            if (text.length() > 0) {
+                if (!text.equals("?")) {
+                    newValue.append("&");
+                }
             } else {
                 newValue.append("?");
             }
