@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <pro.anton.averin.networking.testrest.ui.views.CheckableLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/item_layout"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+            android:id="@+id/item_layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:descendantFocusability="blocksDescendants"
+            android:background="@drawable/entrieslist_selector">
+
     <LinearLayout
             android:paddingLeft="8dp"
             android:paddingRight="8dp"

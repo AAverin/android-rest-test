@@ -117,6 +117,9 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
     AdapterView.OnItemClickListener entriesListItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            if (nameEditText.hasFocus()) {
+                nameEditText.clearFocus();
+            }
             entriesList.setItemChecked(position, true);
         }
     };
