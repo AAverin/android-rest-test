@@ -11,6 +11,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -35,6 +38,7 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
     TestRestApp testRestApp;
 
     private LinearLayout pickANameLayout;
+    private EditText nameEditText;
     private ListView entriesList;
     private RequestsAdapter entriesAdapter;
     private LinearLayout entriesLayout;
@@ -63,6 +67,7 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
 
         pickANameLayout = (LinearLayout) mGroupRoot.findViewById(R.id.pickname_layout);
         pickANameLayout.setVisibility(View.GONE);
+        nameEditText = (EditText) pickANameLayout.findViewById(R.id.custom_name);
         entriesLayout = (LinearLayout) mGroupRoot.findViewById(R.id.entries_layout);
         orSelect = (TextView) mGroupRoot.findViewById(R.id.or_select);
         blankSlate = (TextView) mGroupRoot.findViewById(R.id.blank_slate);
@@ -97,18 +102,35 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
 
             doneButton.setOnClickListener(this);
             cancelButton.setOnClickListener(this);
+
+            entriesList.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+            entriesList.setOnItemClickListener(entriesListItemClickListener);
         } else {
+            pickANameLayout.setVisibility(View.GONE);
+            entriesList.setOnItemClickListener(null);
+            entriesList.setChoiceMode(AbsListView.CHOICE_MODE_NONE);
             ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(getString(R.string.action_load));
             orSelect.setText(R.string.select_to_load);
         }
     }
 
+    AdapterView.OnItemClickListener entriesListItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            entriesList.setItemChecked(position, true);
+        }
+    };
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.actionbar_done:
+                testRestApp.currentRequest.name = nameEditText.getText().toString();
                 testRestApp.currentRequest = testRestApp.restTestDb.addRequest(testRestApp.currentRequest);
                 getLoaderManager().restartLoader(LOADER_ID, null, this);
+                //TODO: add a fancy animation displaying "Saved"
+                saveMode = false;
+                updateUI();
                 break;
 
             case R.id.actionbar_discard:
@@ -127,11 +149,9 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
         entriesAdapter.setData(requests);
         entriesAdapter.notifyDataSetChanged();
         if (requests == null || requests.size() == 0) {
-            if (saveMode) {
-                orSelect.setVisibility(View.GONE);
-                entriesList.setVisibility(View.GONE);
-                blankSlate.setVisibility(View.VISIBLE);
-            }
+            orSelect.setVisibility(View.GONE);
+            entriesList.setVisibility(View.GONE);
+            blankSlate.setVisibility(View.VISIBLE);
         } else {
             orSelect.setVisibility(View.VISIBLE);
             entriesList.setVisibility(View.VISIBLE);

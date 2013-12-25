@@ -3,4 +3,7 @@
     <color name="valid_green">#6FE386</color>
     <color name="neutral_gray">#EBEBEB</color>
     <color name="dark_gray">#787878</color>
+
+    <color name="entrieslist_unselected">@android:color/transparent</color>
+    <color name="entrieslist_selected">#6FE386</color>
 </resources>
