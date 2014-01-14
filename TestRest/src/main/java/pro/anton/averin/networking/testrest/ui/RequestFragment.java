@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextPaint;
+import android.text.TextWatcher;
 import android.text.style.ClickableSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -137,33 +139,24 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
 
         baseUrlEditText = (EditText) mGroupRoot.findViewById(R.id.baseurl);
 
-        baseUrlEditText.setFilters(new InputFilter[] {
-                new InputFilter() {
-                    @Override
-                    public CharSequence filter(CharSequence source, int start, int end,
-                                               Spanned dest, int dstart, int dend) {
+        baseUrlEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                        if (source instanceof SpannableStringBuilder) {
-                            SpannableStringBuilder sourceAsSpannableBuilder = (SpannableStringBuilder)source;
-                            for (int i = end - 1; i >= start; i--) {
-                                char currentChar = source.charAt(i);
-                                if (Character.isSpaceChar(currentChar)) {
-                                    sourceAsSpannableBuilder.delete(i, i+1);
-                                }
-                            }
-                            return source;
-                        } else {
-                            StringBuilder filteredStringBuilder = new StringBuilder();
-                            for (int i = start; i < end; i++) {
-                                char currentChar = source.charAt(i);
-                                if (!Character.isSpaceChar(currentChar)) {
-                                    filteredStringBuilder.append(currentChar);
-                                }
-                            }
-                            return filteredStringBuilder.toString();
-                        }
-                    }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String result = s.toString().replaceAll(" ", "");
+                if (!s.toString().equals(result)) {
+                    baseUrlEditText.setText(result);
                 }
+            }
         });
 
         postLayout = (LinearLayout) mGroupRoot.findViewById(R.id.post_layout);
