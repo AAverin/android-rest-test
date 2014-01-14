@@ -61,5 +61,6 @@
     <string name="please_wait">Please wait</string>
 
     <string name="error_emptyFields">Please provide at least baseUrl</string>
+    <string name="error_not_unique_name">Please provide a unique name</string>
 
 </resources>

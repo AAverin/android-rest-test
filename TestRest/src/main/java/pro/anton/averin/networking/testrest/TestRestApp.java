@@ -15,7 +15,7 @@ public class TestRestApp extends Application {
     private static TestRestApp instance;
 
     public CachedNetworkManager networkManager;
-    public RestTestDb restTestDb = null;
+    public RestTestDb testRestDb = null;
 
     public Request currentRequest;
     public Response currentResponse;
@@ -32,6 +32,6 @@ public class TestRestApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        restTestDb = new RestTestDb(getContext());
+        testRestDb = new RestTestDb(getContext());
     }
 }

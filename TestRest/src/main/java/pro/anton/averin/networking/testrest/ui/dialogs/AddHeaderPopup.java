@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -48,7 +47,7 @@ public class AddHeaderPopup extends PopupWindow {
         final EditText valueEditText = (EditText) popupView.findViewById(R.id.header_value);
         final Spinner headersSpinner = (Spinner) popupView.findViewById(R.id.header_spinner);
 
-        final HeadersListAdapter adapter = new HeadersListAdapter(context, ((TestRestApp)context.getApplicationContext()).restTestDb
+        final HeadersListAdapter adapter = new HeadersListAdapter(context, ((TestRestApp)context.getApplicationContext()).testRestDb
                 .getSupportedHeaders());
 
         headersSpinner.setAdapter(adapter);
@@ -95,7 +94,7 @@ public class AddHeaderPopup extends PopupWindow {
                         Headers.Header selectedHeader = adapter.getItem(headersSpinner.getSelectedItemPosition());
                         selectedHeader.popularity++;
                         try {
-                            ((TestRestApp)context.getApplicationContext()).restTestDb.updateHeader(selectedHeader);
+                            ((TestRestApp)context.getApplicationContext()).testRestDb.updateHeader(selectedHeader);
                         } catch (SQLException e) {
                             selectedHeader.popularity--;
                             e.printStackTrace();

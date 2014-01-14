@@ -21,6 +21,6 @@ public class SavedRequestsLoader extends AbstractDataLoader<List<Request>> {
 
     @Override
     protected List<Request> buildList() {
-        return testRestApp.restTestDb.getRequests();
+        return testRestApp.testRestDb.getRequests();
     }
 }
