@@ -23,7 +23,7 @@ public class RestTestDb {
 
     private final static String TAG = RestTestDb.class.getName();
     public static final String DATABASE_NAME = "resttest.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private final DatabaseHelper helper;
 
@@ -49,6 +49,35 @@ public class RestTestDb {
         }
 
         return request;
+    }
+
+    public void updateRequest(Request request, long requestId) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        long rows = db.update(Request.SQLITE.TABLE_NAME, request.asContentValues(), Request.SQLITE.COL_ID + "=" + requestId, null);
+        if (rows <= 0) {
+            throw new android.database.SQLException("Could not update Request");
+        }
+
+        //clear old request headers
+        db.delete(RequestHeader.SQLITE.TABLE_NAME, RequestHeader.SQLITE.COL_REQUESTID + "=" + requestId, null);
+
+        if (request.headers != null && request.headers.size() > 0) {
+            for (RequestHeader header : request.headers) {
+                header.requestId = requestId;
+                long id = db.insert(RequestHeader.SQLITE.TABLE_NAME, null, header.asContentValues());
+                if (id == -1) {
+                    throw new android.database.SQLException("Could not add RequestHeader");
+                }
+            }
+        }
+    }
+
+    public boolean isUniqueRequestName(String requestName) {
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        Cursor c = db.query(Request.SQLITE.TABLE_NAME, new String[] {Request.SQLITE.COL_ID}, Request.SQLITE.COL_NAME + " like ?", new String[] {requestName} , null, null, null);
+        return c.getCount() == 0;
     }
 
     public ArrayList<Request> getRequests() {
@@ -131,6 +160,7 @@ public class RestTestDb {
         public void onCreate(SQLiteDatabase db) {
             db.execSQL(Request.SQLITE.table.getCreateSQL());
             db.execSQL(Headers.SQLITE.table.getCreateSQL());
+            db.execSQL(RequestHeader.SQLITE.table.getCreateSQL());
             Headers.SQLITE.prePopulate(db);
         }
 
@@ -139,6 +169,8 @@ public class RestTestDb {
             Log.w(TAG, "Upgrading database from version " + oldVersion + " to " + newVersion
                     + ", which will destroy all old data");
             db.execSQL(Request.SQLITE.table.getDropSQL());
+            db.execSQL(Headers.SQLITE.table.getDropSQL());
+            db.execSQL(RequestHeader.SQLITE.table.getDropSQL());
             onCreate(db);
         }
     }
