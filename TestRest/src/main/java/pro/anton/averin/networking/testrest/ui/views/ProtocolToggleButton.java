@@ -25,6 +25,15 @@ public class ProtocolToggleButton extends Button {
         super(context, attrs, defStyle);
     }
 
+    public void set(int type) {
+        if (type == ProtocolType.HTTP) {
+            isHttpsEnabled = false;
+            setText(R.string.http);
+        } else {
+            isHttpsEnabled = true;
+            setText(R.string.https);
+        }
+    }
 
     public void toggleProtocol() {
         isHttpsEnabled = !isHttpsEnabled;
