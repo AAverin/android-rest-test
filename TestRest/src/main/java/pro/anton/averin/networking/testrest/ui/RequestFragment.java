@@ -5,9 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputFilter;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.TextWatcher;
 import android.text.style.ClickableSpan;
@@ -38,9 +35,9 @@ import pro.anton.averin.networking.testrest.models.RequestHeader;
 import pro.anton.averin.networking.testrest.ui.adapters.AddedHeadersAdapter;
 import pro.anton.averin.networking.testrest.ui.dialogs.AddHeaderPopup;
 import pro.anton.averin.networking.testrest.ui.dialogs.AddQueryPopup;
+import pro.anton.averin.networking.testrest.ui.dialogs.QueryMenuPopupWindow;
 import pro.anton.averin.networking.testrest.ui.views.AdaptableLinearLayout;
 import pro.anton.averin.networking.testrest.ui.views.ProtocolToggleButton;
-import pro.anton.averin.networking.testrest.ui.dialogs.QueryMenuPopupWindow;
 import pro.anton.averin.networking.testrest.ui.views.TokenizedEditText;
 
 /**
@@ -62,6 +59,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     private Button sendButton;
 
     private RadioGroup methodRadioGroup;
+
     private EditText baseUrlEditText;
     private LinearLayout postLayout;
     private CheckBox useFileCheckbox;
@@ -220,6 +218,29 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         sendButton.setOnClickListener(this);
 
         return mGroupRoot;
+    }
+
+    public void init_withRequest(Request request) {
+        methodRadioGroup.check(getMethodRadioButtonId(request.method));
+        protocolToggleButton.set(request.getProtocolType());
+        baseUrlEditText.setText(request.baseUrl);
+        methodUrlEditText.setText(request.queryString);
+        for (RequestHeader header : request.headers) {
+            headersList.add(header);
+        }
+    }
+
+    private int getMethodRadioButtonId(String method) {
+        if (method.toUpperCase().equals("GET")) {
+            return R.id.checkbox_get;
+        } else if (method.toUpperCase().equals("POST")) {
+            return R.id.checkbox_post;
+        } else if (method.toUpperCase().equals("PUT")) {
+            return R.id.checkbox_put;
+        } else if (method.toUpperCase().equals("DELETE")) {
+            return R.id.checkbox_delete;
+        }
+        return -1;
     }
 
     AddQueryPopup.QueryPopupListener queryPopupListener = new AddQueryPopup.QueryPopupListener() {

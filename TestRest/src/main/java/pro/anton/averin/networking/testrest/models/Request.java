@@ -7,6 +7,7 @@ import android.provider.BaseColumns;
 import java.util.ArrayList;
 
 import pro.anton.averin.networking.testrest.db.utils.SQLiteTable;
+import pro.anton.averin.networking.testrest.ui.views.ProtocolType;
 
 /**
  * Created by AAverin on 12.11.13.
@@ -21,6 +22,14 @@ public class Request {
     public String method;
     public String queryString;
     public ArrayList<RequestHeader> headers;
+
+    public int getProtocolType() {
+        if (protocol.toLowerCase().contains("https")) {
+            return ProtocolType.HTTPS;
+        }
+        return ProtocolType.HTTP;
+    }
+
 
     public static class SQLITE {
         public final static String TABLE_NAME = "requests";

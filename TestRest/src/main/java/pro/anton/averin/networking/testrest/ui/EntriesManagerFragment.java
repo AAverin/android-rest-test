@@ -128,7 +128,7 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
             actionBar.setCustomView(null);
 
             pickANameLayout.setVisibility(View.GONE);
-            entriesList.setOnItemClickListener(null);
+            entriesList.setOnItemClickListener(entriesListItemClickListener);
             entriesList.setChoiceMode(AbsListView.CHOICE_MODE_NONE);
             ((ActionBarActivity)activity).getSupportActionBar().setTitle(getString(R.string.action_load));
             orSelect.setText(R.string.select_to_load);
@@ -138,10 +138,15 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
     AdapterView.OnItemClickListener entriesListItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-            if (nameEditText.hasFocus()) {
-                nameEditText.clearFocus();
+            if (saveMode) {
+                if (nameEditText.hasFocus()) {
+                    nameEditText.clearFocus();
+                }
+                entriesList.setItemChecked(position, true);
+            } else {
+
             }
-            entriesList.setItemChecked(position, true);
+
         }
     };
 
