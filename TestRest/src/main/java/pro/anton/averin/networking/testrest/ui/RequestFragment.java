@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.view.Gravity;
@@ -133,6 +136,35 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         methodRadioGroup.setOnCheckedChangeListener(this);
 
         baseUrlEditText = (EditText) mGroupRoot.findViewById(R.id.baseurl);
+
+        baseUrlEditText.setFilters(new InputFilter[] {
+                new InputFilter() {
+                    @Override
+                    public CharSequence filter(CharSequence source, int start, int end,
+                                               Spanned dest, int dstart, int dend) {
+
+                        if (source instanceof SpannableStringBuilder) {
+                            SpannableStringBuilder sourceAsSpannableBuilder = (SpannableStringBuilder)source;
+                            for (int i = end - 1; i >= start; i--) {
+                                char currentChar = source.charAt(i);
+                                if (Character.isSpaceChar(currentChar)) {
+                                    sourceAsSpannableBuilder.delete(i, i+1);
+                                }
+                            }
+                            return source;
+                        } else {
+                            StringBuilder filteredStringBuilder = new StringBuilder();
+                            for (int i = start; i < end; i++) {
+                                char currentChar = source.charAt(i);
+                                if (!Character.isSpaceChar(currentChar)) {
+                                    filteredStringBuilder.append(currentChar);
+                                }
+                            }
+                            return filteredStringBuilder.toString();
+                        }
+                    }
+                }
+        });
 
         postLayout = (LinearLayout) mGroupRoot.findViewById(R.id.post_layout);
         useFileCheckbox = (CheckBox) postLayout.findViewById(R.id.use_file_checkbox);
