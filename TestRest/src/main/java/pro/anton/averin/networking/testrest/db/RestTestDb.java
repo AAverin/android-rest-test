@@ -73,6 +73,12 @@ public class RestTestDb {
         }
     }
 
+    public void deleteRequest(long requestId) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        db.delete(Request.SQLITE.TABLE_NAME, Request.SQLITE.COL_ID + " = " + requestId, null);
+    }
+
     public boolean isUniqueRequestName(String requestName) {
         SQLiteDatabase db = helper.getReadableDatabase();
 

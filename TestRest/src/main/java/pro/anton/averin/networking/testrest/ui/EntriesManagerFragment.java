@@ -29,6 +29,7 @@ import pro.anton.averin.networking.testrest.TestRestApp;
 import pro.anton.averin.networking.testrest.models.Request;
 import pro.anton.averin.networking.testrest.ui.adapters.RequestsAdapter;
 import pro.anton.averin.networking.testrest.ui.loaders.SavedRequestsLoader;
+import pro.anton.averin.networking.testrest.ui.views.opensource.SwipeDismissListViewTouchListener;
 
 /**
  * Created by AAverin on 17.12.13.
@@ -95,9 +96,24 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
         entriesList = (ListView) mGroupRoot.findViewById(R.id.entries_list);
         entriesList.setAdapter(entriesAdapter);
 
+        SwipeDismissListViewTouchListener dismissTouchListener = new SwipeDismissListViewTouchListener(entriesList, new SwipeDismissListViewTouchListener.OnDismissCallback() {
+            @Override
+            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                Request deletedRequest = entriesAdapter.getItem(reverseSortedPositions[0]);
+                testRestApp.testRestDb.deleteRequest(deletedRequest.id);
+                refreshRequestsList();
+            }
+        });
+        entriesList.setOnTouchListener(dismissTouchListener);
+        entriesList.setOnScrollListener(dismissTouchListener.makeScrollListener());
+
         progressDialog = ProgressDialog.show(activity, getString(R.string.loading), getString(R.string.please_wait), true);
 
         return mGroupRoot;
+    }
+
+    private void refreshRequestsList() {
+        ((FragmentActivity) activity).getSupportLoaderManager().restartLoader(LOADER_ID, null, this);
     }
 
     @Override
