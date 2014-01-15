@@ -126,6 +126,7 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
         } else {
             actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME);
             actionBar.setCustomView(null);
+            entriesList.clearChoices();
 
             pickANameLayout.setVisibility(View.GONE);
             entriesList.setOnItemClickListener(entriesListItemClickListener);
@@ -144,7 +145,10 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
                 }
                 entriesList.setItemChecked(position, true);
             } else {
-
+                Request selectedRequest = entriesAdapter.getItem(position);
+                testRestApp.currentRequest = selectedRequest;
+                activity.setResult(Activity.RESULT_OK);
+                activity.finish();
             }
 
         }

@@ -36,6 +36,7 @@ import pro.anton.averin.networking.testrest.ui.adapters.AddedHeadersAdapter;
 import pro.anton.averin.networking.testrest.ui.dialogs.AddHeaderPopup;
 import pro.anton.averin.networking.testrest.ui.dialogs.AddQueryPopup;
 import pro.anton.averin.networking.testrest.ui.dialogs.QueryMenuPopupWindow;
+import pro.anton.averin.networking.testrest.ui.phone.EntriesManagerActivity;
 import pro.anton.averin.networking.testrest.ui.views.AdaptableLinearLayout;
 import pro.anton.averin.networking.testrest.ui.views.ProtocolToggleButton;
 import pro.anton.averin.networking.testrest.ui.views.TokenizedEditText;
@@ -225,8 +226,10 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         protocolToggleButton.set(request.getProtocolType());
         baseUrlEditText.setText(request.baseUrl);
         methodUrlEditText.setText(request.queryString);
-        for (RequestHeader header : request.headers) {
-            headersList.add(header);
+        if (request.headers != null && request.headers.size() > 0) {
+            for (RequestHeader header : request.headers) {
+                headersList.add(header);
+            }
         }
     }
 
@@ -390,6 +393,9 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
                 String s = data.getDataString();
                 Uri u = data.getData();
                 postBody.setText(data.getDataString());
+            }
+            if (requestCode == EntriesManagerActivity.ENTRIESMANAGER_REQUEST_CODE) {
+                init_withRequest(testRestApp.currentRequest);
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
