@@ -68,8 +68,10 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
         message.setURI(URI.create(testRestApp.currentRequest.asURI()));
         message.setMethod(testRestApp.currentRequest.method);
         HashMap<String, String> headers = new HashMap<String, String>();
-        for (RequestHeader header : testRestApp.currentRequest.headers) {
-            headers.put(header.name, header.value);
+        if (testRestApp.currentRequest.headers != null && testRestApp.currentRequest.headers.size() > 0) {
+            for (RequestHeader header : testRestApp.currentRequest.headers) {
+                headers.put(header.name, header.value);
+            }
         }
         message.setHeaders(headers);
 
