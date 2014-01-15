@@ -116,7 +116,7 @@ public class TestRestFragment extends Fragment implements ViewPager.OnPageChange
             if (save) {
                 managerActivityIntent.putExtra("save", true);
             }
-            startActivity(managerActivityIntent);
+            startActivityForResult(managerActivityIntent, EntriesManagerActivity.ENTRIESMANAGER_REQUEST_CODE);
         }
     }
 }
