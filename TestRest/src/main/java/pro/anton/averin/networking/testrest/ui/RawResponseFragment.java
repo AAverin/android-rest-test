@@ -58,16 +58,18 @@ public class RawResponseFragment extends ResponseTabFragment {
         htmlHeaders.append(" ");
         htmlHeaders.append(testRestApp.currentResponse.url);
         htmlHeaders.append("<br/>");
-        for (String key : headers.keySet()) {
-            htmlHeaders.append("<b>");
-            htmlHeaders.append(key);
-            htmlHeaders.append("</b>");
-            List<String> values = headers.get(key);
-            for (String value : values) {
-                htmlHeaders.append(" ");
-                htmlHeaders.append(value);
+        if (headers != null && headers.size() > 0) {
+            for (String key : headers.keySet()) {
+                htmlHeaders.append("<b>");
+                htmlHeaders.append(key);
+                htmlHeaders.append("</b>");
+                List<String> values = headers.get(key);
+                for (String value : values) {
+                    htmlHeaders.append(" ");
+                    htmlHeaders.append(value);
+                }
+                htmlHeaders.append("<br/>");
             }
-            htmlHeaders.append("<br/>");
         }
         TextView headersHtmlTextView = new TextView(getActivity());
         headersHtmlTextView.setText(Html.fromHtml(htmlHeaders.toString()));
