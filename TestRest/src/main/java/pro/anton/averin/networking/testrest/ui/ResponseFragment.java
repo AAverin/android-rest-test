@@ -1,6 +1,8 @@
 package pro.anton.averin.networking.testrest.ui;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,7 @@ import pro.anton.averin.networking.testrest.models.Response;
  */
 public class ResponseFragment extends ViewPagerFragment implements NetworkListener {
 
+    private Activity activity;
     private TestRestApp testRestApp;
     private View mGroupRoot;
     private FragmentTabHost mTabHost;
@@ -37,10 +40,11 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
     private LinearLayout noDataLayout;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        testRestApp = (TestRestApp)getActivity().getApplicationContext();
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = activity;
+        testRestApp = (TestRestApp)activity.getApplicationContext();
         testRestApp.networkManager.subscribe(this);
-        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -53,7 +57,7 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
         noDataLayout = (LinearLayout) mGroupRoot.findViewById(R.id.nodata_layout);
 
         mTabHost = (FragmentTabHost) mGroupRoot.findViewById(R.id.tabhost);
-        mTabHost.setup(getActivity(), getActivity().getSupportFragmentManager(), R.id.tabFrameLayout);
+        mTabHost.setup(activity, ((FragmentActivity)activity).getSupportFragmentManager(), R.id.tabFrameLayout);
 
         mTabHost.addTab(mTabHost.newTabSpec("rawResponse")
                 .setIndicator(getString(R.string.raw_response)), RawResponseFragment.class, null);
@@ -120,11 +124,11 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
         noDataLayout.setVisibility(View.GONE);
         progressbarLayout.setVisibility(View.GONE);
         responseLayout.setVisibility(View.VISIBLE);
-        ResponseTabFragment rawResponseFragment = ((ResponseTabFragment)getActivity().getSupportFragmentManager().findFragmentByTag("rawResponse"));
+        ResponseTabFragment rawResponseFragment = ((ResponseTabFragment)((FragmentActivity)activity).getSupportFragmentManager().findFragmentByTag("rawResponse"));
         if (rawResponseFragment != null) { //may be null if not yet selected
             rawResponseFragment.update();
         }
-        ResponseTabFragment jsonResponseFragment = ((ResponseTabFragment)getActivity().getSupportFragmentManager().findFragmentByTag("jsonResponse"));
+        ResponseTabFragment jsonResponseFragment = ((ResponseTabFragment)((FragmentActivity)activity).getSupportFragmentManager().findFragmentByTag("jsonResponse"));
         if (jsonResponseFragment != null) {
             jsonResponseFragment.update();
         }

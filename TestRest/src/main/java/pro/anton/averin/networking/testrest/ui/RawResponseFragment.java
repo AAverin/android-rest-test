@@ -1,5 +1,6 @@
 package pro.anton.averin.networking.testrest.ui;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import pro.anton.averin.networking.testrest.ui.views.ExpandableContentRow;
 public class RawResponseFragment extends ResponseTabFragment {
 
     private TestRestApp testRestApp;
+    private Activity activity;
 
     private View mGroupRoot;
 
@@ -30,8 +32,14 @@ public class RawResponseFragment extends ResponseTabFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        testRestApp = (TestRestApp)getActivity().getApplicationContext();
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = activity;
+        this.testRestApp = (TestRestApp)activity.getApplicationContext();
     }
 
     @Override
@@ -71,11 +79,11 @@ public class RawResponseFragment extends ResponseTabFragment {
                 htmlHeaders.append("<br/>");
             }
         }
-        TextView headersHtmlTextView = new TextView(getActivity());
+        TextView headersHtmlTextView = new TextView(activity);
         headersHtmlTextView.setText(Html.fromHtml(htmlHeaders.toString()));
         headersRow.setContent(headersHtmlTextView);
 
-        TextView bodyTextView = new TextView(getActivity());
+        TextView bodyTextView = new TextView(activity);
         if (testRestApp.currentResponse.body == null) {
             bodyTextView.setText(getString(R.string.empty_response));
         } else {

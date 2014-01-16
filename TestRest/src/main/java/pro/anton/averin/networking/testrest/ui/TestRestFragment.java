@@ -1,5 +1,6 @@
 package pro.anton.averin.networking.testrest.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,7 @@ import pro.anton.averin.networking.testrest.ui.phone.EntriesManagerActivity;
  */
 public class TestRestFragment extends Fragment implements ViewPager.OnPageChangeListener, MenuItem.OnMenuItemClickListener {
 
+    private Activity activity;
     private View mGroupRoot;
 
     private TestRestApp testRestApp;
@@ -46,9 +48,10 @@ public class TestRestFragment extends Fragment implements ViewPager.OnPageChange
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        testRestApp = (TestRestApp) getActivity().getApplicationContext();
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = activity;
+        this.testRestApp = (TestRestApp)activity.getApplicationContext();
     }
 
     public void showResponsePage() {
@@ -112,7 +115,7 @@ public class TestRestFragment extends Fragment implements ViewPager.OnPageChange
         }
         if (invokeActivity) {
             Intent managerActivityIntent = new Intent();
-            managerActivityIntent.setClass(getActivity(), EntriesManagerActivity.class);
+            managerActivityIntent.setClass(activity, EntriesManagerActivity.class);
             if (save) {
                 managerActivityIntent.putExtra("save", true);
             }

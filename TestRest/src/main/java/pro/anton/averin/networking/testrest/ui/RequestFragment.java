@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextPaint;
 import android.text.TextWatcher;
@@ -46,6 +47,7 @@ import pro.anton.averin.networking.testrest.ui.views.TokenizedEditText;
  */
 public class RequestFragment extends ViewPagerFragment implements TokenizedEditText.TokenListener, View.OnClickListener, RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener {
 
+    private Activity activity;
     private TestRestApp testRestApp;
 
     private View mGroupRoot;
@@ -84,11 +86,18 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
 
         @Override
         public void onChipDeleted(QuerySpan chip) {
-            Toast.makeText(getActivity(), "chip deleted " + chip.chip, 5).show();
+            Toast.makeText(activity, "chip deleted " + chip.chip, 5).show();
         }
     };
 
     public RequestFragment() {
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = activity;
+        this.testRestApp = (TestRestApp)activity.getApplicationContext();
     }
 
     public class QuerySpan extends ClickableSpan {
@@ -107,7 +116,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
 //            String text = textView.getText().toString();
 //            int dx = Math.round(textView.getPaint().measureText(text.substring(0, text.indexOf(chip) + chip.length())));
 
-//            QueryMenuPopupWindow popup = new QueryMenuPopupWindow(getActivity(), this);
+//            QueryMenuPopupWindow popup = new QueryMenuPopupWindow(activity, this);
 //            popup.setChipListener(chipListener);
 //            popup.showAtLocation(view, Gravity.NO_GRAVITY, location[0] + dx, location[1]);
         }
@@ -118,12 +127,6 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         }
     }
 
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        testRestApp = (TestRestApp)getActivity().getApplicationContext();
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -175,14 +178,14 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         postBody = (EditText) postLayout.findViewById(R.id.post_body);
 
         addedHeadersList = (AdaptableLinearLayout) mGroupRoot.findViewById(R.id.addedheaders_list);
-        addedHeadersAdapter = new AddedHeadersAdapter(getActivity().getApplicationContext(), headersList);
+        addedHeadersAdapter = new AddedHeadersAdapter(activity.getApplicationContext(), headersList);
         addedHeadersList.setAdapter(addedHeadersAdapter);
 
         addQueryButton = (TextView) mGroupRoot.findViewById(R.id.add_query_button);
         addQueryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddQueryPopup popup = new AddQueryPopup(getActivity());
+                AddQueryPopup popup = new AddQueryPopup(activity);
                 popup.setQueryPopupListener(queryPopupListener);
                 popup.showAtLocation(mGroupRoot, Gravity.TOP, 0, (int)(120 * getResources().getDisplayMetrics().density));
             }
@@ -192,7 +195,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         addHeadersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddHeaderPopup popup = new AddHeaderPopup(getActivity());
+                AddHeaderPopup popup = new AddHeaderPopup(activity);
                 popup.setHeaderPopupListener(headerPopupListener);
                 popup.showAtLocation(mGroupRoot, Gravity.TOP, 0, (int)(120 * getResources().getDisplayMetrics().density));
             }
@@ -332,7 +335,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         switch (view.getId()) {
             case R.id.btn_send:
                 if (prepareRequest()) {
-                    TestRestFragment p = (TestRestFragment) getActivity().getSupportFragmentManager().findFragmentByTag("MAIN");
+                    TestRestFragment p = (TestRestFragment) ((FragmentActivity)activity).getSupportFragmentManager().findFragmentByTag("MAIN");
                     p.showResponsePage();
                 }
                 break;
@@ -341,7 +344,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
 
     public boolean prepareRequest() {
         if (!validate()) {
-            Toast.makeText(getActivity(), getString(R.string.error_emptyFields), 3000).show();
+            Toast.makeText(activity, getString(R.string.error_emptyFields), 3000).show();
             baseUrlEditText.requestFocus();
             return false;
         }
