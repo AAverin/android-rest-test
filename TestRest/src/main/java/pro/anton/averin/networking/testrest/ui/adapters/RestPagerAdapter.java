@@ -6,6 +6,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.util.SparseArray;
 import android.view.ViewGroup;
 
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import pro.anton.averin.networking.testrest.ui.RequestFragment;
 import pro.anton.averin.networking.testrest.ui.ResponseFragment;
 
@@ -15,18 +22,25 @@ import pro.anton.averin.networking.testrest.ui.ResponseFragment;
 public class RestPagerAdapter extends FragmentPagerAdapter {
 
     private FragmentManager fragmentManager;
-    private SparseArray<Fragment> registeredFragments = new SparseArray<Fragment>();
 
-    private Class[] pagerViews = new Class[] {
-        RequestFragment.class,
-        ResponseFragment.class
+//    private <Class, String> pagerViews = new LinkedHashMap<Class, String>() {{
+//        put(RequestFragment.class, "RequestFragment");
+//        put(ResponseFragment.class, "ResponseFragment");
+//    }};
+
+    ArrayList<Map.Entry<Class, String>> pagerViews = new ArrayList<Map.Entry<Class, String>>() {
+        {
+            add(new AbstractMap.SimpleEntry<Class, String>(RequestFragment.class, "RequestFragment"));
+            add(new AbstractMap.SimpleEntry<Class, String>(ResponseFragment.class, "ResponseFragment"));
+        }
     };
+
     private String[] pageTitles;
 
     public RestPagerAdapter(FragmentManager fm, String[] titles) {
         super(fm);
         this.fragmentManager = fm;
-        if (titles.length != pagerViews.length) {
+        if (titles.length != pagerViews.size()) {
             throw new RuntimeException("illegal number of titles");
         }
         this.pageTitles = titles;
@@ -35,7 +49,7 @@ public class RestPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int i) {
         try {
-            return (Fragment) pagerViews[i].newInstance();
+            return (Fragment) pagerViews.get(i).getKey().newInstance();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -47,18 +61,12 @@ public class RestPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         Fragment newFragment = (Fragment) super.instantiateItem(container, position);
-        registeredFragments.put(position, newFragment);
         return newFragment;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        registeredFragments.remove(position);
         super.destroyItem(container, position, object);
-    }
-
-    public Fragment getRegisteredFragment(int position) {
-        return registeredFragments.get(position);
     }
 
     @Override
@@ -68,6 +76,6 @@ public class RestPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return pagerViews.length;
+        return pagerViews.size();
     }
 }

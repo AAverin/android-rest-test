@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -78,9 +80,14 @@ public class TestRestFragment extends Fragment implements ViewPager.OnPageChange
 
     }
 
+    private static String makeFragmentName(int viewId, int position)
+    {
+        return "android:switcher:" + viewId + ":" + position;
+    }
+
     @Override
     public void onPageSelected(int i) {
-        ViewPagerFragment pagerFragment = ((ViewPagerFragment)pagerAdapter.getRegisteredFragment(i));
+        ViewPagerFragment pagerFragment = (ViewPagerFragment) getChildFragmentManager().findFragmentByTag(makeFragmentName(mViewPager.getId(), i));
         pagerFragment.onPageSelected();
     }
 
@@ -92,7 +99,10 @@ public class TestRestFragment extends Fragment implements ViewPager.OnPageChange
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ((ViewPagerFragment)pagerAdapter.getRegisteredFragment(mViewPager.getCurrentItem())).onActivityResult(requestCode, resultCode, data);
+
+        int position = mViewPager.getCurrentItem();
+        ViewPagerFragment pagerFragment = (ViewPagerFragment) getChildFragmentManager().findFragmentByTag(makeFragmentName(mViewPager.getId(), position));
+        pagerFragment.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -112,7 +122,9 @@ public class TestRestFragment extends Fragment implements ViewPager.OnPageChange
     private void openManagerActivity(boolean save) {
         boolean invokeActivity = true;
         if (save) {
-            invokeActivity = ((RequestFragment)pagerAdapter.getRegisteredFragment(0)).prepareRequest();
+            ViewPagerFragment pagerFragment = (ViewPagerFragment) getChildFragmentManager().findFragmentByTag(makeFragmentName(mViewPager.getId(), 0));
+
+            invokeActivity = ((RequestFragment)pagerFragment).prepareRequest();
         }
         if (invokeActivity) {
             Intent managerActivityIntent = new Intent();

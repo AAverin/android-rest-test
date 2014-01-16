@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
@@ -91,11 +92,23 @@ public class JsonTreeViewer extends ScrollView {
 
         @Override
         protected void onPostExecute(ViewGroup viewGroup) {
-            addView(viewGroup);
-            if (callback != null) {
-                callback.onFinish();
-            }
+            processResult(viewGroup);
         }
+    }
+
+    private void processResult(ViewGroup viewGroup) {
+        final ViewGroup instance = this;
+        ViewTreeObserver vto = instance.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                instance.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                if (callback != null) {
+                    callback.onFinish();
+                }
+            }
+        });
+        addView(viewGroup);
     }
 
     private void processJSONObject(JSONObject jsonObject, NodeView nodeRoot) throws JSONException{
@@ -104,7 +117,6 @@ public class JsonTreeViewer extends ScrollView {
         while (jsonIterator.hasNext()) {
             String key = (String) jsonIterator.next();
             Object value = jsonObject.get(key);
-            Log.d("JsonTreeViewer", key + ":" + value);
             processTreeObject(key, value, nodeRoot);
         }
         nodeRoot.closeBracket("}");
