@@ -52,6 +52,7 @@
     </LinearLayout>
 
     <LinearLayout
+            android:gravity="center"
             android:id="@+id/progressbar_layout"
             android:orientation="vertical"
             android:layout_width="fill_parent"

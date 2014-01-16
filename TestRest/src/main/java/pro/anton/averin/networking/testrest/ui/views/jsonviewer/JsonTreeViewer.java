@@ -4,11 +4,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,6 +23,12 @@ public class JsonTreeViewer extends ScrollView {
     private JSONObject mJsonObject;
 
     private TreeProcessAsyncTask processAsyncTask;
+
+    JsonTreeViewerListener callback = null;
+
+    public interface JsonTreeViewerListener {
+        public void onFinish();
+    }
 
     public JsonTreeViewer(Context context) {
         super(context);
@@ -46,8 +50,6 @@ public class JsonTreeViewer extends ScrollView {
         this.context = context;
 
         setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-
-        showTree();
     }
 
     public void setJSONObject(JSONObject object) {
@@ -59,11 +61,13 @@ public class JsonTreeViewer extends ScrollView {
     }
 
 
-    public void showTree() {
+    public void showTree(JsonTreeViewerListener callback) {
         if (mJsonObject == null) {
             return;
         }
+        this.callback = callback;
 
+        removeAllViews();
         processAsyncTask = new TreeProcessAsyncTask();
 
         processAsyncTask.execute(mJsonObject);
@@ -88,6 +92,9 @@ public class JsonTreeViewer extends ScrollView {
         @Override
         protected void onPostExecute(ViewGroup viewGroup) {
             addView(viewGroup);
+            if (callback != null) {
+                callback.onFinish();
+            }
         }
     }
 
