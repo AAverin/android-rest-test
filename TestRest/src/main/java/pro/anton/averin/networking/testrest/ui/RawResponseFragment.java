@@ -1,6 +1,7 @@
 package pro.anton.averin.networking.testrest.ui;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -31,15 +32,16 @@ public class RawResponseFragment extends ResponseTabFragment {
     private ExpandableContentRow bodyRow;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         this.activity = activity;
         this.testRestApp = (TestRestApp)activity.getApplicationContext();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Override
