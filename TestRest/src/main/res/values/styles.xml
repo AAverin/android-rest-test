@@ -23,4 +23,20 @@
         <item name="android:windowExitAnimation">@anim/dialog_exit_animation</item>
     </style>
 
+    <style name="jsonviewer_entry">
+        <item name="android:typeface">monospace</item>
+    </style>
+
+    <style name="jsonviewer_nodeKey" parent="jsonviewer_entry">
+
+    </style>
+
+    <style name="jsonviewer_leafKey" parent="jsonviewer_entry">
+
+    </style>
+
+    <style name="jsonviewer_leafValue" parent="jsonviewer_entry">
+
+    </style>
+
 </resources>
