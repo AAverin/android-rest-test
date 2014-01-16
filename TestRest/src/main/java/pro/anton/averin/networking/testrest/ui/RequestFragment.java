@@ -152,6 +152,8 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
             @Override
             public void afterTextChanged(Editable s) {
                 String result = s.toString().replaceAll(" ", "");
+                result = result.replace("https://", "");
+                result = result.replace("http://", "");
                 if (!s.toString().equals(result)) {
                     baseUrlEditText.setText(result);
                 }
