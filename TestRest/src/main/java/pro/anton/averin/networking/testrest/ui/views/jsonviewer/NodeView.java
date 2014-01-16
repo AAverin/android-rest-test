@@ -3,6 +3,7 @@ package pro.anton.averin.networking.testrest.ui.views.jsonviewer;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -11,16 +12,28 @@ import pro.anton.averin.networking.testrest.R;
 /**
  * Created by AAverin on 16.01.14.
  */
-public class NodeView extends LinearLayout {
+public class NodeView extends LinearLayout implements View.OnClickListener {
 
     private final static int LEFT_PADDING = 16;
 
     private String key;
 
-    LinearLayout nodeKeyLayout;
-    TextView nodeKey;
+    LinearLayout nodeKeyExpandedLayout;
+    LinearLayout nodeKeyCollapsedLayout;
+    LinearLayout nodeContent;
+    TextView nodeKeyExpanded;
+    TextView nodeKeyCollapsed;
+    ImageView collapseButton;
+
+    TextView ellipsesTextView = null;
+
+    String openBracket = null;
+    String closeBracket = null;
+    boolean wasCollapsed = false;
 
     Context context;
+
+    private boolean isExpanded = true;
 
     private boolean isBracketOpened = false;
 
@@ -42,34 +55,93 @@ public class NodeView extends LinearLayout {
         inflater.inflate(R.layout.jsonviewer_node, this, true);
         setOrientation(VERTICAL);
 
-        nodeKeyLayout = (LinearLayout) findViewById(R.id.jsonviewer_nodeKey_layout);
-        nodeKey = (TextView) findViewById(R.id.jsonviewer_nodeKey);
+        ellipsesTextView = new TextView(context);
+        ellipsesTextView.setText("...");
+
+        nodeContent = (LinearLayout) findViewById(R.id.jsonviewer_nodeContent);
+
+        nodeKeyExpandedLayout = (LinearLayout) findViewById(R.id.jsonviewer_nodeKey_expandedLayout);
+        nodeKeyCollapsedLayout = (LinearLayout) findViewById(R.id.jsonviewer_nodeKey_collapsedLayout);
+        nodeKeyExpanded = (TextView) findViewById(R.id.jsonviewer_nodeKey_expanded);
+        nodeKeyCollapsed = (TextView) findViewById(R.id.jsonviewer_nodeKey_collapsed);
+
+        collapseButton = (ImageView) findViewById(R.id.jsonviewer_node_collapse);
+        collapseButton.setOnClickListener(this);
 
         if (key != null && key.length() > 0) {
-            nodeKey.setText(key + ": ");
+            nodeKeyExpanded.setText(key + ": ");
+            nodeKeyCollapsed.setText(key + ": ");
         } else {
-            nodeKeyLayout.setVisibility(GONE);
+            nodeKeyExpandedLayout.setVisibility(GONE);
         }
     }
 
     @Override
     public void addView(View child) {
-        super.addView(child);
+        nodeContent.addView(child);
         child.setPadding(isBracketOpened ? LEFT_PADDING * 2 : LEFT_PADDING,0, 0, 0);
     }
 
     public void openBracket(String bracket) {
+        openBracket = bracket;
         TextView openBracketView = new TextView(context);
         openBracketView.setText(bracket);
-        nodeKeyLayout.setVisibility(VISIBLE);
-        nodeKeyLayout.addView(openBracketView);
+        nodeKeyExpandedLayout.setVisibility(VISIBLE);
+        nodeKeyExpandedLayout.addView(openBracketView);
         isBracketOpened = true;
     }
 
     public void closeBracket(String bracket) {
+        closeBracket = bracket;
         isBracketOpened = false;
-        TextView openBracketView = new TextView(context);
-        openBracketView.setText(bracket);
-        addView(openBracketView);
+        TextView closeBracketView = new TextView(context);
+        closeBracketView.setText(bracket);
+        addView(closeBracketView);
+    }
+
+    public void toggle() {
+        if (isExpanded) {
+            collapse();
+        } else {
+            expand();
+        }
+    }
+
+    public void expand() {
+        isExpanded = true;
+        collapseButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_collapse));
+        nodeKeyExpandedLayout.setVisibility(VISIBLE);
+        nodeKeyCollapsedLayout.setVisibility(GONE);
+
+        nodeContent.setVisibility(VISIBLE);
+    }
+
+    public void collapse() {
+        isExpanded = false;
+
+        collapseButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_expand));
+
+        nodeKeyExpandedLayout.setVisibility(GONE);
+        nodeKeyCollapsedLayout.setVisibility(VISIBLE);
+
+        if (closeBracket != null && !wasCollapsed) {
+            TextView collapsedOpenBracketView = new TextView(context);
+            collapsedOpenBracketView.setText(openBracket);
+            nodeKeyCollapsedLayout.addView(collapsedOpenBracketView);
+
+            nodeKeyCollapsedLayout.addView(ellipsesTextView);
+
+            TextView collapsedCloseBracketView = new TextView(context);
+            collapsedCloseBracketView.setText(closeBracket);
+            nodeKeyCollapsedLayout.addView(collapsedCloseBracketView);
+            wasCollapsed = true;
+        }
+
+        nodeContent.setVisibility(GONE);
+    }
+
+    @Override
+    public void onClick(View v) {
+        toggle();
     }
 }

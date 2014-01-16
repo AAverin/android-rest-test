@@ -6,18 +6,58 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:id="@+id/jsonviewer_nodeKey_layout"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/jsonviewer_node_collapse"
+            android:clickable="true"
+            android:src="@drawable/ic_action_collapse"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
 
-        <TextView
-            style="@style/jsonviewer_nodeKey"
-            android:id="@+id/jsonviewer_nodeKey"
-            android:layout_weight="1"
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:id="@+id/jsonviewer_nodeKey_expandedLayout"
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/jsonviewer_nodeKey"
+                android:id="@+id/jsonviewer_nodeKey_expanded"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:id="@+id/jsonviewer_nodeKey_collapsedLayout"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <TextView
+                style="@style/jsonviewer_nodeKey"
+                android:id="@+id/jsonviewer_nodeKey_collapsed"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/jsonviewer_nodeContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
     </LinearLayout>
 

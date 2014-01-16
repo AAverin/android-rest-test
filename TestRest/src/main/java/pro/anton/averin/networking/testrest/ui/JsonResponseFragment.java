@@ -5,10 +5,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.TestRestApp;
 import pro.anton.averin.networking.testrest.ui.views.jsonviewer.JsonTreeViewer;
 
@@ -20,6 +23,8 @@ public class JsonResponseFragment extends ResponseTabFragment {
     private Activity activity;
     private TestRestApp testRestApp;
     private JsonTreeViewer jsonTreeViewer;
+    LinearLayout progressBarLayout;
+    TextView blackSlate;
 
     @Override
     public void onAttach(Activity activity) {
@@ -31,31 +36,44 @@ public class JsonResponseFragment extends ResponseTabFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        jsonTreeViewer = new JsonTreeViewer(activity);
+        View mGroupRoot = inflater.inflate(R.layout.fragment_json_response, container, false);
+
+        jsonTreeViewer = (JsonTreeViewer) mGroupRoot.findViewById(R.id.jsonviewer_tree);
+        blackSlate = (TextView) mGroupRoot.findViewById(R.id.jsonResponse_blank_slate);
+        progressBarLayout = (LinearLayout) mGroupRoot.findViewById(R.id.jsonResponse_progressbar_layout);
 
         update();
 
-        return jsonTreeViewer;
+        return mGroupRoot;
     }
 
     public void update() {
 
-        if (testRestApp.currentResponse == null) {
+        if (testRestApp.currentResponse == null || testRestApp.currentResponse.body == null) {
+            blackSlate.setVisibility(View.VISIBLE);
             return;
-        }
+        } else {
+            JSONObject jsonObject = null;
+            try {
+                jsonObject = new JSONObject(testRestApp.currentResponse.body);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-        JSONObject jsonObject = null;
-        try {
-            jsonObject = new JSONObject(testRestApp.currentResponse.body);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+            if (jsonObject != null) {
+                progressBarLayout.setVisibility(View.VISIBLE);
+                jsonTreeViewer.setJSONObject(jsonObject);
+                jsonTreeViewer.showTree(new JsonTreeViewer.JsonTreeViewerListener() {
+                    @Override
+                    public void onFinish() {
+                        progressBarLayout.setVisibility(View.GONE);
+                    }
+                });
+            } else {
+                blackSlate.setVisibility(View.VISIBLE);
+            }
 
-        if (jsonObject != null) {
-            jsonTreeViewer.setJSONObject(jsonObject);
-            jsonTreeViewer.showTree();
         }
-
     }
 
 }

@@ -80,7 +80,8 @@ public class TestRestFragment extends Fragment implements ViewPager.OnPageChange
 
     @Override
     public void onPageSelected(int i) {
-        ((ViewPagerFragment)pagerAdapter.getRegisteredFragment(i)).onPageSelected();
+        ViewPagerFragment pagerFragment = ((ViewPagerFragment)pagerAdapter.getRegisteredFragment(i));
+        pagerFragment.onPageSelected();
     }
 
     @Override
