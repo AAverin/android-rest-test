@@ -28,7 +28,7 @@
                 android:id="@+id/details_expand_button"
                 android:layout_gravity="center"
                 android:background="@null"
-                android:src="@android:drawable/ic_menu_more"
+                android:src="@android:drawable/ic_menu_info_details"
                 android:layout_width="40dp"
                 android:layout_height="40dp"/>
 
@@ -42,7 +42,7 @@
             android:visibility="gone">
 
         <TextView
-                android:textColor="#B3B3B3"
+                android:textColor="@color/dark_gray"
                 android:textSize="12sp"
                 android:id="@+id/details"
                 android:layout_width="fill_parent"
