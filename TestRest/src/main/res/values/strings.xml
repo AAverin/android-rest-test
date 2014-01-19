@@ -19,6 +19,7 @@
     <string name="action_delete">Delete</string>
     <string name="action_load">Load</string>
     <string name="action_manage">Manage</string>
+    <string name="action_clear">Clear fields</string>
 
     <string name="entriesmanager_title">Saved entries manager</string>
 
