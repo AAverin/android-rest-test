@@ -125,9 +125,9 @@ public class ProtocolSwitcher extends LinearLayout {
 
     public String getProtocolText() {
         if (isHttpsEnabled) {
-            return httpButton.getText();
-        } else {
             return httpsButton.getText();
+        } else {
+            return httpButton.getText();
         }
     }
 

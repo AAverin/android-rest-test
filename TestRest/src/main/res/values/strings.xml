@@ -20,6 +20,8 @@
     <string name="action_load">Load</string>
     <string name="action_manage">Manage</string>
 
+    <string name="entriesmanager_title">Saved entries manager</string>
+
     <string name="baseurl_hint">Enter baseURL</string>
     <string name="baseurl">BaseURL</string>
     <string name="post_body_file">Use file</string>
