@@ -16,6 +16,7 @@
     <string name="delete">DELETE</string>
 
     <string name="action_save">Save</string>
+    <string name="action_share">Share</string>
     <string name="action_delete">Delete</string>
     <string name="action_load">Load</string>
     <string name="action_manage">Manage</string>
