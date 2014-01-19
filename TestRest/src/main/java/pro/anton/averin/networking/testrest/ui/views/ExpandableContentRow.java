@@ -81,12 +81,12 @@ public class ExpandableContentRow extends LinearLayout implements View.OnClickLi
     }
 
     public void expand() {
-        expandButton.setImageDrawable(getResources().getDrawable(android.R.drawable.arrow_down_float));
+        expandButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_arrow_down));
         content.setVisibility(View.VISIBLE);
     }
 
     public void shrink() {
-        expandButton.setImageDrawable(getResources().getDrawable(android.R.drawable.arrow_up_float));
+        expandButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_arrow_up));
         content.setVisibility(GONE);
     }
 

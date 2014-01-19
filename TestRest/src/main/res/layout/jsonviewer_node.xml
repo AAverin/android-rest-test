@@ -12,6 +12,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:paddingTop="2dp"
             android:id="@+id/jsonviewer_node_collapse"
             android:clickable="true"
             android:src="@drawable/ic_action_collapse"
