@@ -1,39 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
-              android:layout_width="match_parent"
-              android:layout_height="40dp"
-              android:gravity="center_vertical">
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="20dp"
+    android:gravity="center_vertical"
+    android:layout_gravity="center_vertical">
 
     <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/name"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="4dp"
             android:layout_weight="1"
-            android:gravity="center_vertical">
+            android:textSize="14sp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
 
         <TextView
-                android:id="@+id/name"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"/>
-
-        <TextView
-                android:id="@+id/value"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"/>
+            android:gravity="center_vertical|left"
+            android:id="@+id/value"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
 
     </LinearLayout>
 
     <ImageButton
-            android:layout_gravity="center_vertical"
-            android:id="@+id/delete"
-            android:src="@android:drawable/ic_delete"
-            android:background="@null"
-            android:layout_weight="0"
-            android:layout_margin="5dp"
-            android:layout_width="20dp"
-            android:layout_height="20dp"/>
+        android:layout_gravity="center_vertical"
+        android:id="@+id/delete"
+        android:src="@drawable/ic_action_delete"
+        android:background="@null"
+        android:layout_weight="0"
+        android:layout_marginRight="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
