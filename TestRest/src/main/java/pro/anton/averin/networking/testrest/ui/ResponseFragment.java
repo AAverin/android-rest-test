@@ -1,16 +1,31 @@
 package pro.anton.averin.networking.testrest.ui;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.ShareActionProvider;
+import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import aaverin.android.net.HttpUrlConnectionResponse;
 import aaverin.android.net.NetworkListener;
@@ -39,6 +54,9 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
     private LinearLayout progressbarLayout;
     private LinearLayout noDataLayout;
 
+    ShareActionProvider shareActionProvider;
+    Intent shareIntent;
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -64,7 +82,27 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
         mTabHost.addTab(mTabHost.newTabSpec("jsonResponse")
                 .setIndicator(getString(R.string.json_response)), JsonResponseFragment.class, null);
 
+        setHasOptionsMenu(true);
+
         return mGroupRoot;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.response_screen_menu, menu);
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+
+        MenuItem menuItem = menu.findItem(R.id.action_share);
+        shareActionProvider = (ShareActionProvider)MenuItemCompat.getActionProvider(menuItem);
+        shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/html");
+        shareActionProvider.setShareIntent(shareIntent);
     }
 
     private void sendMessage() {
@@ -121,6 +159,82 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
     }
 
     private void showResponse() {
+        shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/html");
+
+        StringBuilder subject = new StringBuilder();
+        subject.append("Response to ");
+        subject.append(testRestApp.currentResponse.url);
+        subject.append(" via TestRest Android");
+
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject.toString());
+
+        StringBuffer htmlHeaders = new StringBuffer();
+        htmlHeaders.append("<b>");
+        htmlHeaders.append(testRestApp.currentResponse.method);
+        htmlHeaders.append("</b>");
+        htmlHeaders.append(" ");
+        htmlHeaders.append(testRestApp.currentResponse.url);
+        htmlHeaders.append("<br/>");
+        Map<String, List<String>> headers = testRestApp.currentResponse.headers;
+        if (headers != null && headers.size() > 0) {
+            for (String key : headers.keySet()) {
+                htmlHeaders.append("<b>");
+                htmlHeaders.append(key);
+                htmlHeaders.append("</b>");
+                List<String> values = headers.get(key);
+                for (String value : values) {
+                    htmlHeaders.append(" ");
+                    htmlHeaders.append(value);
+                }
+                htmlHeaders.append("<br/>");
+            }
+        }
+
+        StringBuilder body = new StringBuilder();
+        body.append("<h1>Headers</h1>");
+        body.append(htmlHeaders.toString());
+        body.append("<h1>Response body</h1>");
+
+        String state = Environment.getExternalStorageState();
+        File tempFileForBody = null;
+        boolean isBodyLong = body.length() > 500;
+        if (isBodyLong) {
+
+            if (Environment.MEDIA_MOUNTED.equals(state)) {
+                //we can write to external storage
+                String root = activity.getExternalCacheDir().getAbsolutePath();
+                File storageDir = new File(root + File.separator + "TestRest");
+                storageDir.mkdirs();
+                try {
+                    tempFileForBody = File.createTempFile("testrest", testRestApp.currentRequest.name, storageDir);
+                    FileOutputStream fos = new FileOutputStream(tempFileForBody);
+                    fos.write(testRestApp.currentResponse.body.getBytes());
+                    fos.flush();
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Toast.makeText(activity, "Unable to save file to external storage", Toast.LENGTH_LONG).show();
+            }
+
+
+            if (tempFileForBody == null) {
+                body.append(testRestApp.currentResponse.body);
+            } else {
+                body.append("see in attachment");
+                shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(tempFileForBody));
+            }
+        } else {
+            body.append(testRestApp.currentResponse.body);
+        }
+
+        String htmlBody = Html.fromHtml(body.toString()).toString();
+        shareIntent.putExtra(Intent.EXTRA_HTML_TEXT, htmlBody);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, htmlBody);
+        shareActionProvider.setShareIntent(shareIntent);
+
         noDataLayout.setVisibility(View.GONE);
         progressbarLayout.setVisibility(View.GONE);
         responseLayout.setVisibility(View.VISIBLE);

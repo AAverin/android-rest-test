@@ -241,7 +241,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.test_rest, menu);
+        inflater.inflate(R.menu.request_screen_menu, menu);
 
         menu.findItem(R.id.action_save).setOnMenuItemClickListener(this);
         menu.findItem(R.id.action_manager).setOnMenuItemClickListener(this);
@@ -426,6 +426,9 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     }
 
     private Request buildRequest() {
+        if (testRestApp.currentRequest != null) {
+            request.name = testRestApp.currentRequest.name;
+        }
         request.protocol = protocolSwitcher.getProtocolText();
         request.baseUrl = baseUrlEditText.getText().toString();
         RadioButton radioButton = (RadioButton) mGroupRoot.findViewById(methodRadioGroup.getCheckedRadioButtonId());
