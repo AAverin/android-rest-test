@@ -1,8 +1,10 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/testrest_mainfragment"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TestRestActivity$PlaceholderFragment">
+    tools:context=".TestRestActivity$PlaceholderFragment"
+    android:foreground="@drawable/popupwindow_dim_shape">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
@@ -24,4 +26,4 @@
 
     </android.support.v4.view.ViewPager>
 
-</RelativeLayout>
+</FrameLayout>
