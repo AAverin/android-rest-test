@@ -238,11 +238,15 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         protocolSwitcher.set(request.getProtocolType());
         baseUrlEditText.setText(request.baseUrl);
         methodUrlEditText.setText(request.queryString);
+
+
+        headersList.clear();
         if (request.headers != null && request.headers.size() > 0) {
             for (RequestHeader header : request.headers) {
                 headersList.add(header);
             }
         }
+        addedHeadersAdapter.notifyDataSetChanged();
     }
 
     private void dimBackground() {

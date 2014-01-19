@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.preference.PreferenceActivity;
 import android.util.Log;
 
+import com.integralblue.httpresponsecache.compat.libcore.net.http.RequestHeaders;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +75,27 @@ public class RestTestDb {
         }
     }
 
+    public ArrayList<RequestHeader> getHeaders(Request request) {
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        Cursor c = db.query(RequestHeader.SQLITE.TABLE_NAME, RequestHeader.SQLITE.table.getColumns(), RequestHeader.SQLITE.COL_REQUESTID + "=" + request.id, null, null, null, null);
+
+        try {
+            if (c.getCount() > 0) {
+                ArrayList<RequestHeader> requestHeaders = new ArrayList<RequestHeader>(c.getCount());
+                while (c.moveToNext()) {
+                    RequestHeader header = new RequestHeader().fromCursor(c);
+                    requestHeaders.add(header);
+                }
+                return requestHeaders;
+            } else {
+                return null;
+            }
+        } finally {
+            c.close();
+        }
+    }
+
     public void deleteRequest(long requestId) {
         SQLiteDatabase db = helper.getWritableDatabase();
 
@@ -95,6 +118,7 @@ public class RestTestDb {
                 ArrayList<Request> requests = new ArrayList<Request>(c.getCount());
                 while (c.moveToNext()) {
                     Request request = new Request().fromCursor(c);
+                    request.headers = getHeaders(request);
                     requests.add(request);
                 }
                 return requests;
