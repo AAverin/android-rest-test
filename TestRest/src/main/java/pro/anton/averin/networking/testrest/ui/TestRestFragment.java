@@ -23,7 +23,7 @@ import pro.anton.averin.networking.testrest.ui.phone.EntriesManagerActivity;
 /**
  * Created by AAverin on 09.11.13.
  */
-public class TestRestFragment extends Fragment implements ViewPager.OnPageChangeListener, MenuItem.OnMenuItemClickListener {
+public class TestRestFragment extends Fragment implements ViewPager.OnPageChangeListener {
 
     private Activity activity;
     private View mGroupRoot;
@@ -42,17 +42,12 @@ public class TestRestFragment extends Fragment implements ViewPager.OnPageChange
         ((FrameLayout)mGroupRoot).getForeground().setAlpha(0);
 
         mViewPager = (ViewPager) mGroupRoot.findViewById(R.id.pager);
-//        mViewPager.setPageMargin(-50);
-//        mViewPager.setHorizontalFadingEdgeEnabled(true);
-//        mViewPager.setFadingEdgeLength(100);
         pagerAdapter = new RestPagerAdapter(getChildFragmentManager(), new String[] {
                 getString(R.string.requestViewTitle),
                 getString(R.string.responseViewTitle)
         });
         mViewPager.setAdapter(pagerAdapter);
         mViewPager.setOnPageChangeListener(this);
-
-        setHasOptionsMenu(true);
 
         return mGroupRoot;
     }
@@ -70,17 +65,6 @@ public class TestRestFragment extends Fragment implements ViewPager.OnPageChange
 
     public void showRequestPage() {
         mViewPager.setCurrentItem(0);
-    }
-
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.test_rest, menu);
-
-        menu.findItem(R.id.action_save).setOnMenuItemClickListener(this);
-        menu.findItem(R.id.action_manager).setOnMenuItemClickListener(this);
-
-        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -113,21 +97,7 @@ public class TestRestFragment extends Fragment implements ViewPager.OnPageChange
         pagerFragment.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    public boolean onMenuItemClick(MenuItem menuItem) {
-        switch(menuItem.getItemId()) {
-            case R.id.action_save:
-                openManagerActivity(true);
-                break;
-
-            case R.id.action_manager:
-                openManagerActivity(false);
-                break;
-        }
-        return true;
-    }
-
-    private void openManagerActivity(boolean save) {
+    public void openManagerActivity(boolean save) {
         boolean invokeActivity = true;
         if (save) {
             ViewPagerFragment pagerFragment = (ViewPagerFragment) getChildFragmentManager().findFragmentByTag(makeFragmentName(mViewPager.getId(), 0));

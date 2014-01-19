@@ -11,6 +11,9 @@ import android.text.TextWatcher;
 import android.text.style.ClickableSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -41,12 +44,13 @@ import pro.anton.averin.networking.testrest.ui.dialogs.QueryMenuPopupWindow;
 import pro.anton.averin.networking.testrest.ui.phone.EntriesManagerActivity;
 import pro.anton.averin.networking.testrest.ui.views.AdaptableLinearLayout;
 import pro.anton.averin.networking.testrest.ui.views.ProtocolSwitcher;
+import pro.anton.averin.networking.testrest.ui.views.ProtocolType;
 import pro.anton.averin.networking.testrest.ui.views.TokenizedEditText;
 
 /**
  * Created by AAverin on 09.11.13.
  */
-public class RequestFragment extends ViewPagerFragment implements TokenizedEditText.TokenListener, View.OnClickListener, RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener {
+public class RequestFragment extends ViewPagerFragment implements TokenizedEditText.TokenListener, View.OnClickListener, RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener, MenuItem.OnMenuItemClickListener {
 
     private Activity activity;
     private TestRestApp testRestApp;
@@ -230,7 +234,39 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         sendButton = (Button) mGroupRoot.findViewById(R.id.btn_send);
         sendButton.setOnClickListener(this);
 
+        setHasOptionsMenu(true);
+
         return mGroupRoot;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.test_rest, menu);
+
+        menu.findItem(R.id.action_save).setOnMenuItemClickListener(this);
+        menu.findItem(R.id.action_manager).setOnMenuItemClickListener(this);
+        menu.findItem(R.id.action_clear).setOnMenuItemClickListener(this);
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        TestRestFragment p = (TestRestFragment) ((FragmentActivity)activity).getSupportFragmentManager().findFragmentByTag("MAIN");
+        switch(menuItem.getItemId()) {
+            case R.id.action_save:
+                p.openManagerActivity(true);
+                break;
+
+            case R.id.action_manager:
+                p.openManagerActivity(false);
+                break;
+
+            case R.id.action_clear:
+                clearFields();
+                break;
+        }
+        return true;
     }
 
     public void init_withRequest(Request request) {
@@ -246,6 +282,15 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
                 headersList.add(header);
             }
         }
+        addedHeadersAdapter.notifyDataSetChanged();
+    }
+
+    public void clearFields() {
+        methodRadioGroup.check(getMethodRadioButtonId("GET"));
+        protocolSwitcher.set(ProtocolType.HTTP);
+        baseUrlEditText.setText("");
+        methodUrlEditText.setText("");
+        headersList.clear();
         addedHeadersAdapter.notifyDataSetChanged();
     }
 
