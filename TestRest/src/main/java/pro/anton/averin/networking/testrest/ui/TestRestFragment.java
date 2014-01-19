@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.TestRestApp;
@@ -32,9 +33,13 @@ public class TestRestFragment extends Fragment implements ViewPager.OnPageChange
     private ViewPager mViewPager;
     private RestPagerAdapter pagerAdapter;
 
+    private boolean isDimmed = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mGroupRoot = inflater.inflate(R.layout.fragment_main, null);
+
+        ((FrameLayout)mGroupRoot).getForeground().setAlpha(0);
 
         mViewPager = (ViewPager) mGroupRoot.findViewById(R.id.pager);
 //        mViewPager.setPageMargin(-50);
@@ -136,6 +141,22 @@ public class TestRestFragment extends Fragment implements ViewPager.OnPageChange
                 managerActivityIntent.putExtra("save", true);
             }
             startActivityForResult(managerActivityIntent, EntriesManagerActivity.ENTRIESMANAGER_REQUEST_CODE);
+        }
+    }
+
+    public void dim() {
+        ((FrameLayout)mGroupRoot).getForeground().setAlpha(100);
+    }
+
+    public void unDim() {
+        ((FrameLayout)mGroupRoot).getForeground().setAlpha(0);
+    }
+
+    public void toggleDim() {
+        if (isDimmed) {
+            unDim();
+        } else {
+            dim();
         }
     }
 }

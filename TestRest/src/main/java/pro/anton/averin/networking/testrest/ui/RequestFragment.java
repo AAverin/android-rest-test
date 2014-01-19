@@ -18,6 +18,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -187,7 +188,14 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
             public void onClick(View view) {
                 AddQueryPopup popup = new AddQueryPopup(activity);
                 popup.setQueryPopupListener(queryPopupListener);
+                popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        unDimBackground();
+                    }
+                });
                 popup.showAtLocation(mGroupRoot, Gravity.TOP, 0, (int)(120 * getResources().getDisplayMetrics().density));
+                dimBackground();
             }
         });
 
@@ -197,7 +205,14 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
             public void onClick(View view) {
                 AddHeaderPopup popup = new AddHeaderPopup(activity);
                 popup.setHeaderPopupListener(headerPopupListener);
+                popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        unDimBackground();
+                    }
+                });
                 popup.showAtLocation(mGroupRoot, Gravity.TOP, 0, (int)(120 * getResources().getDisplayMetrics().density));
+                dimBackground();
             }
         });
 
@@ -238,6 +253,16 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         }
     }
 
+    private void dimBackground() {
+        TestRestFragment p = (TestRestFragment) ((FragmentActivity)activity).getSupportFragmentManager().findFragmentByTag("MAIN");
+        p.dim();
+    }
+
+    private void unDimBackground() {
+        TestRestFragment p = (TestRestFragment) ((FragmentActivity)activity).getSupportFragmentManager().findFragmentByTag("MAIN");
+        p.unDim();
+    }
+
     private int getMethodRadioButtonId(String method) {
         if (method.toUpperCase().equals("GET")) {
             return R.id.checkbox_get;
@@ -268,6 +293,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
             newValue.append("=");
             newValue.append(value);
             methodUrlEditText.setText(newValue.toString());
+            unDimBackground();
         }
     };
 
@@ -276,6 +302,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         public void onOk(String key, String value) {
             headersList.add(new RequestHeader(key, value));
             addedHeadersAdapter.notifyDataSetChanged();
+            unDimBackground();
         }
     };
 
