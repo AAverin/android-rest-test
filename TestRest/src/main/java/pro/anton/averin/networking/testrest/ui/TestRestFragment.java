@@ -37,6 +37,9 @@ public class TestRestFragment extends Fragment implements ViewPager.OnPageChange
         mGroupRoot = inflater.inflate(R.layout.fragment_main, null);
 
         mViewPager = (ViewPager) mGroupRoot.findViewById(R.id.pager);
+//        mViewPager.setPageMargin(-50);
+//        mViewPager.setHorizontalFadingEdgeEnabled(true);
+//        mViewPager.setFadingEdgeLength(100);
         pagerAdapter = new RestPagerAdapter(getChildFragmentManager(), new String[] {
                 getString(R.string.requestViewTitle),
                 getString(R.string.responseViewTitle)

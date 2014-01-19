@@ -39,7 +39,7 @@ import pro.anton.averin.networking.testrest.ui.dialogs.AddQueryPopup;
 import pro.anton.averin.networking.testrest.ui.dialogs.QueryMenuPopupWindow;
 import pro.anton.averin.networking.testrest.ui.phone.EntriesManagerActivity;
 import pro.anton.averin.networking.testrest.ui.views.AdaptableLinearLayout;
-import pro.anton.averin.networking.testrest.ui.views.ProtocolToggleButton;
+import pro.anton.averin.networking.testrest.ui.views.ProtocolSwitcher;
 import pro.anton.averin.networking.testrest.ui.views.TokenizedEditText;
 
 /**
@@ -54,7 +54,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
 
     public final static int PICK_FILE_INTENT_ID = 11;
 
-    private ProtocolToggleButton protocolToggleButton;
+    private ProtocolSwitcher protocolSwitcher;
     private TokenizedEditText methodUrlEditText;
     private TextView addQueryButton;
     private TextView addHeadersButton;
@@ -78,7 +78,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     View.OnClickListener protocolToggleListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            protocolToggleButton.toggleProtocol();
+            protocolSwitcher.toggleProtocol();
         }
     };
 
@@ -133,8 +133,8 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
 
         mGroupRoot = inflater.inflate(R.layout.fragment_request, null);
 
-        protocolToggleButton = (ProtocolToggleButton) mGroupRoot.findViewById(R.id.protocol_button);
-        protocolToggleButton.setOnClickListener(protocolToggleListener);
+        protocolSwitcher = (ProtocolSwitcher) mGroupRoot.findViewById(R.id.protocol_button);
+        protocolSwitcher.setOnClickListener(protocolToggleListener);
 
         methodRadioGroup = (RadioGroup) mGroupRoot.findViewById(R.id.method_radiogroup);
         methodRadioGroup.setOnCheckedChangeListener(this);
@@ -228,7 +228,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
 
     public void init_withRequest(Request request) {
         methodRadioGroup.check(getMethodRadioButtonId(request.method));
-        protocolToggleButton.set(request.getProtocolType());
+        protocolSwitcher.set(request.getProtocolType());
         baseUrlEditText.setText(request.baseUrl);
         methodUrlEditText.setText(request.queryString);
         if (request.headers != null && request.headers.size() > 0) {
@@ -358,7 +358,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     }
 
     private Request buildRequest() {
-        request.protocol = protocolToggleButton.getText().toString();
+        request.protocol = protocolSwitcher.getProtocolText();
         request.baseUrl = baseUrlEditText.getText().toString();
         RadioButton radioButton = (RadioButton) mGroupRoot.findViewById(methodRadioGroup.getCheckedRadioButtonId());
         request.method = radioButton.getText().toString();
