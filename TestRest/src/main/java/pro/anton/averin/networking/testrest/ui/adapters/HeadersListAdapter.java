@@ -21,17 +21,17 @@ public class HeadersListAdapter extends ArrayAdapter<Headers.Header> {
     private Context context;
 
     public HeadersListAdapter(Context context, List<Headers.Header> headersList) {
-        super(context, android.R.layout.simple_spinner_item, 0, headersList);
+        super(context, android.R.layout.simple_spinner_item, headersList);
         this.context = context;
 
-        setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View itemView = convertView;
         if (convertView == null) {
-            itemView = LayoutInflater.from(context).inflate(android.R.layout.simple_spinner_item, null);
+            itemView = LayoutInflater.from(context).inflate(android.R.layout.simple_spinner_item, parent, false);
         }
         ((TextView)itemView).setText(getItem(position).name);
         return itemView;
@@ -41,7 +41,7 @@ public class HeadersListAdapter extends ArrayAdapter<Headers.Header> {
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         View itemView = convertView;
         if (convertView == null) {
-            itemView = LayoutInflater.from(context).inflate(android.R.layout.simple_spinner_dropdown_item, null);
+            itemView = LayoutInflater.from(context).inflate(android.R.layout.simple_spinner_dropdown_item, parent, false);
         }
         ((TextView)itemView).setText(getItem(position).name);
         return itemView;
