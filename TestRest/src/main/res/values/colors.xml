@@ -4,6 +4,14 @@
     <color name="neutral_gray">#EBEBEB</color>
     <color name="dark_gray">#787878</color>
 
+    <color name="white">#FFFFFFFF</color>
+    <color name="almost_white">#f6f6f6</color>
+    <color name="light_gray">#f0f0f0</color>
+    <color name="ebebeb">#ebebeb</color>
+    <color name="text_gray">#999999</color>
+    <color name="dark_blue">#07315c</color>
+    <color name="light_blue">#33b5e5</color>
+
     <color name="entrieslist_unselected">@android:color/transparent</color>
     <color name="entrieslist_selected">#6FE386</color>
 </resources>

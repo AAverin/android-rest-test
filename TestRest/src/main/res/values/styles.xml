@@ -1,16 +1,26 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/TestRest.Styled.ActionBar</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/TestRest.Styled.ActionBar</item>
+        <item name="actionMenuTextColor">@color/white</item>
     </style>
 
-<style name="donediscard_text">
+    <style name="TestRest.Styled.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="background">@color/dark_blue</item>
+        <item name="android:background">@color/dark_blue</item>
+    </style>
+
+    <style name="donediscard_text">
         <item name="android:textSize">15sp</item>
     </style>
 
     <style name="basic_padding">
-        <item name="android:padding">4dp</item>
+        <item name="android:padding">8dp</item>
     </style>
 
     <style name="text_title">
