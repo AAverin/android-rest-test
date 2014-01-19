@@ -51,6 +51,7 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
     private LinearLayout entriesLayout;
     private TextView orSelect;
     private TextView blankSlate;
+    SwipeDismissListViewTouchListener dismissTouchListener;
 
     FrameLayout cancelButton;
     FrameLayout doneButton;
@@ -96,7 +97,7 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
         entriesList = (ListView) mGroupRoot.findViewById(R.id.entries_list);
         entriesList.setAdapter(entriesAdapter);
 
-        SwipeDismissListViewTouchListener dismissTouchListener = new SwipeDismissListViewTouchListener(entriesList, new SwipeDismissListViewTouchListener.OnDismissCallback() {
+        dismissTouchListener = new SwipeDismissListViewTouchListener(entriesList, new SwipeDismissListViewTouchListener.OnDismissCallback() {
             @Override
             public void onDismiss(ListView listView, int[] reverseSortedPositions) {
                 Request deletedRequest = entriesAdapter.getItem(reverseSortedPositions[0]);
@@ -104,8 +105,6 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
                 refreshRequestsList();
             }
         });
-        entriesList.setOnTouchListener(dismissTouchListener);
-        entriesList.setOnScrollListener(dismissTouchListener.makeScrollListener());
 
         progressDialog = ProgressDialog.show(activity, getString(R.string.loading), getString(R.string.please_wait), true);
 
@@ -149,6 +148,8 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
             pickANameLayout.setVisibility(View.GONE);
             entriesList.setOnItemClickListener(entriesListItemClickListener);
             entriesList.setChoiceMode(AbsListView.CHOICE_MODE_NONE);
+            entriesList.setOnTouchListener(dismissTouchListener);
+            entriesList.setOnScrollListener(dismissTouchListener.makeScrollListener());
             orSelect.setText(R.string.select_to_load);
         }
     }
