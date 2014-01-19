@@ -20,7 +20,7 @@
     </style>
 
     <style name="basic_padding">
-        <item name="android:padding">8dp</item>
+        <item name="android:padding">12dp</item>
     </style>
 
     <style name="text_title">

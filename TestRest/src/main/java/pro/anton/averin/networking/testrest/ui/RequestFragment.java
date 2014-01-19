@@ -76,13 +76,6 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
 
     private Request request = new Request();
 
-    View.OnClickListener protocolToggleListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            protocolSwitcher.toggleProtocol();
-        }
-    };
-
     QueryMenuPopupWindow.ChipListener chipListener = new QueryMenuPopupWindow.ChipListener() {
 
         @Override
@@ -135,7 +128,6 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         mGroupRoot = inflater.inflate(R.layout.fragment_request, null);
 
         protocolSwitcher = (ProtocolSwitcher) mGroupRoot.findViewById(R.id.protocol_button);
-        protocolSwitcher.setOnClickListener(protocolToggleListener);
 
         methodRadioGroup = (RadioGroup) mGroupRoot.findViewById(R.id.method_radiogroup);
         methodRadioGroup.setOnCheckedChangeListener(this);

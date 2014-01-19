@@ -126,7 +126,7 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
 
     private void updateUI() {
         if (saveMode) {
-            ((ActionBarActivity)activity).getSupportActionBar().setTitle(getString(R.string.action_save));
+            actionBar.setTitle(getString(R.string.action_save));
             pickANameLayout.setVisibility(View.VISIBLE);
 
             actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM, ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME
@@ -140,14 +140,15 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
             entriesList.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
             entriesList.setOnItemClickListener(entriesListItemClickListener);
         } else {
-            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME);
+            actionBar.setTitle(getString(R.string.entriesmanager_title));
+            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
+            actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setCustomView(null);
             entriesList.clearChoices();
 
             pickANameLayout.setVisibility(View.GONE);
             entriesList.setOnItemClickListener(entriesListItemClickListener);
             entriesList.setChoiceMode(AbsListView.CHOICE_MODE_NONE);
-            ((ActionBarActivity)activity).getSupportActionBar().setTitle(getString(R.string.action_load));
             orSelect.setText(R.string.select_to_load);
         }
     }
