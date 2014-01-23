@@ -39,16 +39,20 @@ public class NodeView extends LinearLayout implements View.OnClickListener {
 
     public NodeView(Context context) {
         super(context);
-        init(context);
+        init(context, true);
     }
 
     public NodeView(Context context, String key) {
-        super(context);
-        this.key = key;
-        init(context);
+        this(context, key, true);
     }
 
-    private void init(Context context) {
+    public NodeView(Context context, String key, boolean canExpand) {
+        super(context);
+        this.key = key;
+        init(context, canExpand);
+    }
+
+    private void init(Context context, boolean canExpand) {
         this.context = context;
 
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -61,14 +65,21 @@ public class NodeView extends LinearLayout implements View.OnClickListener {
         nodeContent = (LinearLayout) findViewById(R.id.jsonviewer_nodeContent);
 
         nodeKeyExpandedLayout = (LinearLayout) findViewById(R.id.jsonviewer_nodeKey_expandedLayout);
+
+
         nodeKeyCollapsedLayout = (LinearLayout) findViewById(R.id.jsonviewer_nodeKey_collapsedLayout);
         nodeKeyExpanded = (TextView) findViewById(R.id.jsonviewer_nodeKey_expanded);
         nodeKeyCollapsed = (TextView) findViewById(R.id.jsonviewer_nodeKey_collapsed);
 
         collapseButton = (ImageView) findViewById(R.id.jsonviewer_node_collapse);
-        collapseButton.setOnClickListener(this);
+        if (canExpand) {
+            collapseButton.setOnClickListener(this);
+        } else {
+            collapseButton.setVisibility(GONE);
+        }
 
-        if (key != null && key.length() > 0) {
+
+        if (canExpand && key != null && key.length() > 0) {
             nodeKeyExpanded.setText(key + ": ");
             nodeKeyCollapsed.setText(key + ": ");
         } else {
