@@ -15,6 +15,8 @@ import org.json.JSONObject;
 
 import java.util.Iterator;
 
+import pro.anton.averin.networking.testrest.Config;
+
 /**
  * Created by AAverin on 16.01.14.
  */
@@ -24,6 +26,8 @@ public class JsonTreeViewer extends ScrollView {
     private JSONObject mJsonObject;
 
     private TreeProcessAsyncTask processAsyncTask;
+
+    private int jsonDepthLevel = 0;
 
     JsonTreeViewerListener callback = null;
 
@@ -112,6 +116,7 @@ public class JsonTreeViewer extends ScrollView {
     }
 
     private void processJSONObject(JSONObject jsonObject, NodeView nodeRoot) throws JSONException{
+        jsonDepthLevel++;
         Iterator<?> jsonIterator = jsonObject.keys();
         nodeRoot.openBracket("{");
         while (jsonIterator.hasNext()) {
@@ -120,6 +125,7 @@ public class JsonTreeViewer extends ScrollView {
             processTreeObject(key, value, nodeRoot);
         }
         nodeRoot.closeBracket("}");
+        jsonDepthLevel--;
     }
 
     private void processJSONArray(JSONArray jsonArray, NodeView nodeRoot) throws JSONException {
@@ -133,11 +139,11 @@ public class JsonTreeViewer extends ScrollView {
 
     private void processTreeObject(String key, Object value, NodeView nodeRoot) throws JSONException {
         if (value instanceof JSONObject) {
-            NodeView node = new NodeView(context, key);
+            NodeView node = new NodeView(context, key, jsonDepthLevel <= Config.MAX_JSON_COLLAPSE_LEVEL);
             nodeRoot.addView(node);
             processJSONObject((JSONObject) value, node);
         } else if (value instanceof JSONArray) {
-            NodeView node = new NodeView(context, key);
+            NodeView node = new NodeView(context, key, jsonDepthLevel <= Config.MAX_JSON_COLLAPSE_LEVEL);
             nodeRoot.addView(node);
             processJSONArray((JSONArray) value, node);
         } else {
