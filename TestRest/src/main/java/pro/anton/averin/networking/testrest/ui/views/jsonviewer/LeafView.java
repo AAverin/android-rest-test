@@ -29,7 +29,9 @@ public class LeafView extends LinearLayout {
         leafKey = (TextView) findViewById(R.id.jsonviewer_leafKey);
         leafValue = (TextView) findViewById(R.id.jsonviewer_leafValue);
 
-        leafKey.setText(key + ": ");
+        if (key != null) {
+            leafKey.setText(key + ": ");
+        }
         leafValue.setText(String.valueOf(value));
     }
 

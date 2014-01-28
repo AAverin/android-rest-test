@@ -24,7 +24,7 @@ public class JsonResponseFragment extends ResponseTabFragment {
     private TestRestApp testRestApp;
     private JsonTreeViewer jsonTreeViewer;
     LinearLayout progressBarLayout;
-    TextView blackSlate;
+    TextView blankSlate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class JsonResponseFragment extends ResponseTabFragment {
         View mGroupRoot = inflater.inflate(R.layout.fragment_json_response, container, false);
 
         jsonTreeViewer = (JsonTreeViewer) mGroupRoot.findViewById(R.id.jsonviewer_tree);
-        blackSlate = (TextView) mGroupRoot.findViewById(R.id.jsonResponse_blank_slate);
+        blankSlate = (TextView) mGroupRoot.findViewById(R.id.jsonResponse_blank_slate);
         progressBarLayout = (LinearLayout) mGroupRoot.findViewById(R.id.jsonResponse_progressbar_layout);
 
         update();
@@ -53,10 +53,16 @@ public class JsonResponseFragment extends ResponseTabFragment {
         return mGroupRoot;
     }
 
+    public void cancel() {
+        if (jsonTreeViewer != null) {
+            jsonTreeViewer.cancel();
+        }
+    }
+
     public void update() {
 
         if (testRestApp.currentResponse == null || testRestApp.currentResponse.body == null) {
-            blackSlate.setVisibility(View.VISIBLE);
+            blankSlate.setVisibility(View.VISIBLE);
             return;
         } else {
             JSONObject jsonObject = null;
@@ -76,7 +82,7 @@ public class JsonResponseFragment extends ResponseTabFragment {
                     }
                 });
             } else {
-                blackSlate.setVisibility(View.VISIBLE);
+                blankSlate.setVisibility(View.VISIBLE);
             }
 
         }

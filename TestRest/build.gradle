@@ -3,13 +3,16 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.6.+'
+        classpath 'com.android.tools.build:gradle:0.7.+'
     }
 }
 apply plugin: 'android'
 
 repositories {
     mavenCentral()
+    maven {
+        url "http://www.bugsense.com/gradle/"
+    }
 }
 
 android {
@@ -23,9 +26,10 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.0.0'
-    compile 'com.android.support:gridlayout-v7:19.0.0'
-    compile 'com.android.support:appcompat-v7:19.0.0'
+    compile 'com.android.support:support-v4:19.0.1'
+    compile 'com.android.support:gridlayout-v7:19.0.1'
+    compile 'com.android.support:appcompat-v7:19.0.1'
     compile 'com.nineoldandroids:library:2.4.0'
+    compile "com.bugsense.trace:bugsense:3.5"
     compile project(':AndroidNetworkManager')
 }

@@ -17,7 +17,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TabHost;
 import android.widget.Toast;
+
+import com.bugsense.trace.BugSenseHandler;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -81,6 +84,15 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
                 .setIndicator(getString(R.string.raw_response)), RawResponseFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec("jsonResponse")
                 .setIndicator(getString(R.string.json_response)), JsonResponseFragment.class, null);
+        mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                JsonResponseFragment jsonResponseFragment = ((JsonResponseFragment)((FragmentActivity)activity).getSupportFragmentManager().findFragmentByTag("jsonResponse"));
+                if (jsonResponseFragment != null) {
+                    jsonResponseFragment.cancel();
+                }
+            }
+        });
 
         setHasOptionsMenu(true);
 
@@ -229,6 +241,9 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
         } else {
             body.append(testRestApp.currentResponse.body);
         }
+
+        BugSenseHandler.removeCrashExtraData("responseBodyLength");
+        BugSenseHandler.addCrashExtraData("responseBodyLength", String.valueOf(testRestApp.currentResponse.body.length()));
 
         String htmlBody = Html.fromHtml(body.toString()).toString();
         shareIntent.putExtra(Intent.EXTRA_HTML_TEXT, htmlBody);

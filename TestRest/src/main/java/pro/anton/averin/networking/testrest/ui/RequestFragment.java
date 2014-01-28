@@ -27,6 +27,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bugsense.trace.BugSenseHandler;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.ArgbEvaluator;
 import com.nineoldandroids.animation.ValueAnimator;
@@ -435,6 +436,15 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         request.method = radioButton.getText().toString();
         request.queryString = methodUrlEditText.getText().toString();
         request.headers = headersList;
+        BugSenseHandler.addCrashExtraData("request.protocol", request.protocol);
+        BugSenseHandler.addCrashExtraData("request.baseUrl", request.baseUrl);
+        BugSenseHandler.addCrashExtraData("request.method", request.method);
+        BugSenseHandler.addCrashExtraData("request.queryString", request.queryString);
+        StringBuilder headers = new StringBuilder();
+        for (RequestHeader header : headersList) {
+            headers.append(header.toString());
+        }
+        BugSenseHandler.addCrashExtraData("request.headers", headers.toString());
         return request;
     }
 
