@@ -23,6 +23,23 @@ public class Request {
     public String queryString;
     public ArrayList<RequestHeader> headers;
 
+    @Override
+    public String toString() {
+        StringBuilder toString = new StringBuilder();
+        toString.append("name:");
+        toString.append(name);
+        toString.append("protocol");
+        toString.append(protocol);
+        toString.append("baseUrl:");
+        toString.append(baseUrl);
+        toString.append("method:");
+        toString.append(method);
+        toString.append("query:");
+        toString.append(queryString);
+
+        return toString.toString();
+    }
+
     public int getProtocolType() {
         if (protocol.toLowerCase().contains("https")) {
             return ProtocolType.HTTPS;

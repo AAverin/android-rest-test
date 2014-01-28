@@ -19,6 +19,11 @@ public class RequestHeader {
         this.value = value;
     }
 
+    @Override
+    public String toString() {
+        return "RequestHeader :: " + name + " : " + value + ";";
+    }
+
     public static class SQLITE {
         public final static String TABLE_NAME = "request_headers";
         public final static String COL_ID = BaseColumns._ID;

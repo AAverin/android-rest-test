@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.view.ViewConfiguration;
 
+import com.bugsense.trace.BugSenseHandler;
+
 import java.lang.reflect.Field;
 
 import aaverin.android.net.CachedNetworkManager;
@@ -35,6 +37,7 @@ public class TestRestApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        BugSenseHandler.initAndStartSession(this, Config.BUGSENSE_APIKEY);
         testRestDb = new RestTestDb(getContext());
 
         //attempt to force overflow menu

@@ -6,4 +6,6 @@ package pro.anton.averin.networking.testrest;
 public class Config {
 
     public static int MAX_JSON_COLLAPSE_LEVEL = 3;
+
+    public static String BUGSENSE_APIKEY = "996917bc";
 }
