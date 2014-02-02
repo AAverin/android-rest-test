@@ -2,6 +2,7 @@ package pro.anton.averin.networking.testrest.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -58,12 +59,15 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
     private LinearLayout noDataLayout;
 
     ShareActionProvider shareActionProvider;
-    Intent shareIntent;
+    Intent shareIntent = null;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         this.activity = activity;
+
+        ((FragmentActivity)activity).supportInvalidateOptionsMenu();
+
         testRestApp = (TestRestApp)activity.getApplicationContext();
         testRestApp.networkManager.subscribe(this);
     }
@@ -102,7 +106,6 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.response_screen_menu, menu);
-
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -112,8 +115,10 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
 
         MenuItem menuItem = menu.findItem(R.id.action_share);
         shareActionProvider = (ShareActionProvider)MenuItemCompat.getActionProvider(menuItem);
-        shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/html");
+        if (shareIntent == null) {
+            shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/html");
+        }
         shareActionProvider.setShareIntent(shareIntent);
     }
 
@@ -250,7 +255,9 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
         String htmlBody = Html.fromHtml(body.toString()).toString();
         shareIntent.putExtra(Intent.EXTRA_HTML_TEXT, htmlBody);
         shareIntent.putExtra(Intent.EXTRA_TEXT, htmlBody);
-        shareActionProvider.setShareIntent(shareIntent);
+        if (shareActionProvider != null) { //may be null if we not yet fully restored after configuration change
+            shareActionProvider.setShareIntent(shareIntent);
+        }
 
         noDataLayout.setVisibility(View.GONE);
         progressbarLayout.setVisibility(View.GONE);
