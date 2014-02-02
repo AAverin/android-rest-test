@@ -1,5 +1,6 @@
 package pro.anton.averin.networking.testrest.ui.phone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -31,7 +32,12 @@ public class EntriesManagerActivity extends BaseSinglePaneActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                setResult(RESULT_CANCELED);
+                Intent homeIntent = new Intent();
+                homeIntent.setClass(this, TestRestActivity.class);
+                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                NavUtils.navigateUpTo(this, homeIntent);
+//                NavUtils.navigateUpFromSameTask(this);
                 return true;
         }
         return super.onOptionsItemSelected(item);
