@@ -253,6 +253,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
 
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
+        buildRequest();
         TestRestFragment p = (TestRestFragment) ((FragmentActivity)activity).getSupportFragmentManager().findFragmentByTag("MAIN");
         switch(menuItem.getItemId()) {
             case R.id.action_save:

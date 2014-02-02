@@ -242,8 +242,10 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
             body.append(testRestApp.currentResponse.body);
         }
 
-        BugSenseHandler.removeCrashExtraData("responseBodyLength");
-        BugSenseHandler.addCrashExtraData("responseBodyLength", String.valueOf(testRestApp.currentResponse.body.length()));
+        if (testRestApp.currentResponse != null && testRestApp.currentResponse.body != null) {
+            BugSenseHandler.removeCrashExtraData("responseBodyLength");
+            BugSenseHandler.addCrashExtraData("responseBodyLength", String.valueOf(testRestApp.currentResponse.body.length()));
+        }
 
         String htmlBody = Html.fromHtml(body.toString()).toString();
         shareIntent.putExtra(Intent.EXTRA_HTML_TEXT, htmlBody);
