@@ -2,11 +2,11 @@ package pro.anton.averin.networking.testrest.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
@@ -37,9 +37,9 @@ import aaverin.android.net.NetworkManager;
 import aaverin.android.net.NetworkMessage;
 import aaverin.android.net.NetworkResponse;
 import aaverin.android.net.NetworkResponseProcessException;
+import pro.anton.averin.networking.testrest.Config;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.TestRestApp;
-import pro.anton.averin.networking.testrest.models.Headers;
 import pro.anton.averin.networking.testrest.models.RequestHeader;
 import pro.anton.averin.networking.testrest.models.Response;
 
@@ -50,9 +50,10 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
 
     private Activity activity;
     private TestRestApp testRestApp;
-    private View mGroupRoot;
     private FragmentTabHost mTabHost;
     private NetworkMessage message;
+
+    private FragmentManager fragmentManager;
 
     private LinearLayout responseLayout;
     private LinearLayout progressbarLayout;
@@ -61,27 +62,39 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
     ShareActionProvider shareActionProvider;
     Intent shareIntent = null;
 
+    private View mGroupRoot;
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        this.activity = activity;
+    public View getView() {
+        return mGroupRoot;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        this.activity = getActivity();
 
         ((FragmentActivity)activity).supportInvalidateOptionsMenu();
+        fragmentManager = ((FragmentActivity)activity).getSupportFragmentManager();
 
         testRestApp = (TestRestApp)activity.getApplicationContext();
         testRestApp.networkManager.subscribe(this);
+
+        init();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        mGroupRoot = inflater.inflate(R.layout.fragment_response, null);
+        mGroupRoot =  inflater.inflate(R.layout.fragment_response, null);
+        return mGroupRoot;
+    }
 
-        responseLayout = (LinearLayout) mGroupRoot.findViewById(R.id.response_layout);
-        progressbarLayout = (LinearLayout) mGroupRoot.findViewById(R.id.progressbar_layout);
-        noDataLayout = (LinearLayout) mGroupRoot.findViewById(R.id.nodata_layout);
+    public void init() {
+        responseLayout = (LinearLayout) getView().findViewById(R.id.response_layout);
+        progressbarLayout = (LinearLayout) getView().findViewById(R.id.progressbar_layout);
+        noDataLayout = (LinearLayout) getView().findViewById(R.id.nodata_layout);
 
-        mTabHost = (FragmentTabHost) mGroupRoot.findViewById(R.id.tabhost);
+        mTabHost = (FragmentTabHost) getView().findViewById(R.id.tabhost);
         mTabHost.setup(activity, ((FragmentActivity)activity).getSupportFragmentManager(), R.id.tabFrameLayout);
 
         mTabHost.addTab(mTabHost.newTabSpec("rawResponse")
@@ -99,8 +112,6 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
         });
 
         setHasOptionsMenu(true);
-
-        return mGroupRoot;
     }
 
     @Override
@@ -168,11 +179,46 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
 
     @Override
     protected void onPageSelected() {
+        if (Config.adsEnabled) {
+            displayAds();
+        }
         if (testRestApp.currentRequest != null && testRestApp.currentResponse == null) {
             sendMessage();
         } else if (testRestApp.currentResponse != null) {
             showResponse();
         }
+    }
+
+    private void displayAds() {
+//        FragmentTransaction transaction = fragmentManager.beginTransaction();
+//        Fragment oldDialog = fragmentManager.findFragmentByTag(AdsDialog.FRAGMENT_TAG);
+//        if (oldDialog != null) {
+//            transaction.remove(oldDialog);
+//        }
+//        transaction.addToBackStack(null);
+//
+//        DialogFragment dialog = new AdsDialog();
+//
+//        dialog.show(fragmentManager, AdsDialog.FRAGMENT_TAG);
+
+//        String android_id = Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.ANDROID_ID);
+//        String deviceId = TestRestApp.md5(android_id).toUpperCase();
+//
+//        final InterstitialAd interstitialAd = new InterstitialAd(activity);
+//        AdRequest adRequest = new AdRequest.Builder()
+//                .addTestDevice("8FA8176CAE5DE5E252B7055C4D5BB0A7")
+//                .build();
+//
+//        interstitialAd.setAdUnitId("ca-app-pub-8295594407653786/4276744952");
+//
+//        interstitialAd.setAdListener(new AdListener() {
+//            @Override
+//            public void onAdLoaded() {
+//                interstitialAd.show();
+//            }
+//        });
+//
+//        interstitialAd.loadAd(adRequest);
     }
 
     private void showResponse() {
@@ -247,7 +293,7 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
             body.append(testRestApp.currentResponse.body);
         }
 
-        if (testRestApp.currentResponse != null && testRestApp.currentResponse.body != null) {
+        if (testRestApp.currentResponse != null && testRestApp.currentResponse.body != null && Config.isBugsenseEnabled) {
             BugSenseHandler.removeCrashExtraData("responseBodyLength");
             BugSenseHandler.addCrashExtraData("responseBodyLength", String.valueOf(testRestApp.currentResponse.body.length()));
         }

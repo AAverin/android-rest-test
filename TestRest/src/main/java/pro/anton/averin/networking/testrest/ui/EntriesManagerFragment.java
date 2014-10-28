@@ -1,7 +1,6 @@
 package pro.anton.averin.networking.testrest.ui;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -37,9 +36,7 @@ import pro.anton.averin.networking.testrest.ui.views.opensource.SwipeDismissList
 public class EntriesManagerFragment extends Fragment implements View.OnClickListener, LoaderManager.LoaderCallbacks<List<Request>> {
 
     private Activity activity;
-    private FragmentManager fragmentManager;
 
-    private View mGroupRoot;
     private View mActionBarCustomView;
     ActionBar actionBar;
     TestRestApp testRestApp;
@@ -62,17 +59,34 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
 
     private boolean saveMode = false;
 
+    private View mGroupRoot;
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        this.activity = activity;
-        this.testRestApp = (TestRestApp)activity.getApplicationContext();
+    public View getView() {
+        return mGroupRoot;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mGroupRoot = inflater.inflate(R.layout.fragment_entriesmanager, container, false);
+        return mGroupRoot;
+    }
 
+    private void refreshRequestsList() {
+        ((FragmentActivity) activity).getSupportLoaderManager().restartLoader(LOADER_ID, null, this);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        this.activity = getActivity();
+        this.testRestApp = (TestRestApp)activity.getApplicationContext();
+        saveMode = activity.getIntent().getBooleanExtra("save", false);
+        ((FragmentActivity) activity).getSupportLoaderManager().initLoader(LOADER_ID, null, this);
+        init();
+        updateUI();
+    }
+
+    private void init() {
         actionBar = ((ActionBarActivity)activity).getSupportActionBar();
         LayoutInflater abInflater = (LayoutInflater) actionBar.getThemedContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         mActionBarCustomView = abInflater.inflate(R.layout.actionbar_custom_view_done_discard, null);
@@ -80,7 +94,7 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
         doneButton = (FrameLayout) mActionBarCustomView.findViewById(R.id.actionbar_done);
         cancelButton = (FrameLayout) mActionBarCustomView.findViewById(R.id.actionbar_discard);
 
-        pickANameLayout = (LinearLayout) mGroupRoot.findViewById(R.id.pickname_layout);
+        pickANameLayout = (LinearLayout) getView().findViewById(R.id.pickname_layout);
         pickANameLayout.setVisibility(View.GONE);
         nameEditText = (EditText) pickANameLayout.findViewById(R.id.custom_name);
         nameEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -89,12 +103,12 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
                 entriesList.clearChoices();
             }
         });
-        entriesLayout = (LinearLayout) mGroupRoot.findViewById(R.id.entries_layout);
-        orSelect = (TextView) mGroupRoot.findViewById(R.id.or_select);
-        blankSlate = (TextView) mGroupRoot.findViewById(R.id.blank_slate);
+        entriesLayout = (LinearLayout) getView().findViewById(R.id.entries_layout);
+        orSelect = (TextView) getView().findViewById(R.id.or_select);
+        blankSlate = (TextView) getView().findViewById(R.id.blank_slate);
 
         entriesAdapter = new RequestsAdapter(activity);
-        entriesList = (ListView) mGroupRoot.findViewById(R.id.entries_list);
+        entriesList = (ListView) getView().findViewById(R.id.entries_list);
         entriesList.setAdapter(entriesAdapter);
 
         dismissTouchListener = new SwipeDismissListViewTouchListener(entriesList, new SwipeDismissListViewTouchListener.OnDismissCallback() {
@@ -107,20 +121,6 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
         });
 
         progressDialog = ProgressDialog.show(activity, getString(R.string.loading), getString(R.string.please_wait), true);
-
-        return mGroupRoot;
-    }
-
-    private void refreshRequestsList() {
-        ((FragmentActivity) activity).getSupportLoaderManager().restartLoader(LOADER_ID, null, this);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        saveMode = activity.getIntent().getBooleanExtra("save", false);
-        ((FragmentActivity) activity).getSupportLoaderManager().initLoader(LOADER_ID, null, this);
-        updateUI();
     }
 
     private void updateUI() {

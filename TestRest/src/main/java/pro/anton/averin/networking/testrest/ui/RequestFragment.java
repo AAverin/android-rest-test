@@ -34,6 +34,7 @@ import com.nineoldandroids.animation.ValueAnimator;
 
 import java.util.ArrayList;
 
+import pro.anton.averin.networking.testrest.Config;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.TestRestApp;
 import pro.anton.averin.networking.testrest.models.Request;
@@ -55,8 +56,6 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
 
     private Activity activity;
     private TestRestApp testRestApp;
-
-    private View mGroupRoot;
 
     public final static int PICK_FILE_INTENT_ID = 11;
 
@@ -92,10 +91,16 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     public RequestFragment() {
     }
 
+    private View mGroupRoot;
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        this.activity = activity;
+    public View getView() {
+        return mGroupRoot;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        this.activity = getActivity();
         this.testRestApp = (TestRestApp)activity.getApplicationContext();
     }
 
@@ -130,14 +135,17 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        mGroupRoot = inflater.inflate(R.layout.fragment_request, null);
+        mGroupRoot =  inflater.inflate(R.layout.fragment_request, null);
+        return mGroupRoot;
+    }
 
-        protocolSwitcher = (ProtocolSwitcher) mGroupRoot.findViewById(R.id.protocol_button);
+    private void init() {
+        protocolSwitcher = (ProtocolSwitcher) getView().findViewById(R.id.protocol_button);
 
-        methodRadioGroup = (RadioGroup) mGroupRoot.findViewById(R.id.method_radiogroup);
+        methodRadioGroup = (RadioGroup) getView().findViewById(R.id.method_radiogroup);
         methodRadioGroup.setOnCheckedChangeListener(this);
 
-        baseUrlEditText = (EditText) mGroupRoot.findViewById(R.id.baseurl);
+        baseUrlEditText = (EditText) getView().findViewById(R.id.baseurl);
 
         baseUrlEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -161,7 +169,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
             }
         });
 
-        postLayout = (LinearLayout) mGroupRoot.findViewById(R.id.post_layout);
+        postLayout = (LinearLayout) getView().findViewById(R.id.post_layout);
         useFileCheckbox = (CheckBox) postLayout.findViewById(R.id.use_file_checkbox);
         useFileCheckbox.setOnCheckedChangeListener(this);
         pickFileButton = (TextView) postLayout.findViewById(R.id.pick_file_button);
@@ -175,11 +183,11 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         });
         postBody = (EditText) postLayout.findViewById(R.id.post_body);
 
-        addedHeadersList = (AdaptableLinearLayout) mGroupRoot.findViewById(R.id.addedheaders_list);
+        addedHeadersList = (AdaptableLinearLayout) getView().findViewById(R.id.addedheaders_list);
         addedHeadersAdapter = new AddedHeadersAdapter(activity.getApplicationContext(), headersList);
         addedHeadersList.setAdapter(addedHeadersAdapter);
 
-        addQueryButton = (TextView) mGroupRoot.findViewById(R.id.add_query_button);
+        addQueryButton = (TextView) getView().findViewById(R.id.add_query_button);
         addQueryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -191,12 +199,12 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
                         unDimBackground();
                     }
                 });
-                popup.showAtLocation(mGroupRoot, Gravity.TOP, 0, (int)(120 * getResources().getDisplayMetrics().density));
+                popup.showAtLocation(getView(), Gravity.TOP, 0, (int)(120 * getResources().getDisplayMetrics().density));
                 dimBackground();
             }
         });
 
-        addHeadersButton = (TextView) mGroupRoot.findViewById(R.id.add_header_button);
+        addHeadersButton = (TextView) getView().findViewById(R.id.add_header_button);
         addHeadersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -208,12 +216,12 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
                         unDimBackground();
                     }
                 });
-                popup.showAtLocation(mGroupRoot, Gravity.TOP, 0, (int)(120 * getResources().getDisplayMetrics().density));
+                popup.showAtLocation(getView(), Gravity.TOP, 0, (int)(120 * getResources().getDisplayMetrics().density));
                 dimBackground();
             }
         });
 
-        methodUrlEditText = (TokenizedEditText) mGroupRoot.findViewById(R.id.method_url);
+        methodUrlEditText = (TokenizedEditText) getView().findViewById(R.id.method_url);
         methodUrlEditText.setTokenRegexp("[\\?&]([^&?]+=[^&?]+)");
         methodUrlEditText.setTokenListener(this);
 
@@ -232,12 +240,10 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
                 }
             }
         });
-        sendButton = (Button) mGroupRoot.findViewById(R.id.btn_send);
+        sendButton = (Button) getView().findViewById(R.id.btn_send);
         sendButton.setOnClickListener(this);
 
         setHasOptionsMenu(true);
-
-        return mGroupRoot;
     }
 
     @Override
@@ -433,19 +439,22 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         }
         request.protocol = protocolSwitcher.getProtocolText();
         request.baseUrl = baseUrlEditText.getText().toString();
-        RadioButton radioButton = (RadioButton) mGroupRoot.findViewById(methodRadioGroup.getCheckedRadioButtonId());
+        RadioButton radioButton = (RadioButton) getView().findViewById(methodRadioGroup.getCheckedRadioButtonId());
         request.method = radioButton.getText().toString();
         request.queryString = methodUrlEditText.getText().toString();
         request.headers = headersList;
-        BugSenseHandler.addCrashExtraData("request.protocol", request.protocol);
-        BugSenseHandler.addCrashExtraData("request.baseUrl", request.baseUrl);
-        BugSenseHandler.addCrashExtraData("request.method", request.method);
-        BugSenseHandler.addCrashExtraData("request.queryString", request.queryString);
-        StringBuilder headers = new StringBuilder();
-        for (RequestHeader header : headersList) {
-            headers.append(header.toString());
-        }
-        BugSenseHandler.addCrashExtraData("request.headers", headers.toString());
+        if (Config.isBugsenseEnabled) {
+            BugSenseHandler.addCrashExtraData("request.protocol", request.protocol);
+            BugSenseHandler.addCrashExtraData("request.baseUrl", request.baseUrl);
+            BugSenseHandler.addCrashExtraData("request.method", request.method);
+            BugSenseHandler.addCrashExtraData("request.queryString", request.queryString);
+            StringBuilder headers = new StringBuilder();
+            for (RequestHeader header : headersList) {
+                headers.append(header.toString());
+            }
+            BugSenseHandler.addCrashExtraData("request.headers", headers.toString());
+         }
+
         return request;
     }
 

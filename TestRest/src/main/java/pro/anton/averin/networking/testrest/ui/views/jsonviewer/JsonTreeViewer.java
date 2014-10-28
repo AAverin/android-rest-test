@@ -62,7 +62,9 @@ public class JsonTreeViewer extends ScrollView {
     }
 
     public void cancel() {
-        processAsyncTask.cancel(true);
+        if (processAsyncTask != null) {
+            processAsyncTask.cancel(true);
+        }
     }
 
 

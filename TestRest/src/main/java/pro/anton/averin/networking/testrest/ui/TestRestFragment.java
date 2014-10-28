@@ -4,13 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -26,37 +21,45 @@ import pro.anton.averin.networking.testrest.ui.phone.EntriesManagerActivity;
 public class TestRestFragment extends Fragment implements ViewPager.OnPageChangeListener {
 
     private Activity activity;
-    private View mGroupRoot;
-
     private TestRestApp testRestApp;
+
+
 
     private ViewPager mViewPager;
     private RestPagerAdapter pagerAdapter;
 
     private boolean isDimmed = false;
 
+    private View mGroupRoot;
+    @Override
+    public View getView() {
+        return mGroupRoot;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mGroupRoot = inflater.inflate(R.layout.fragment_main, null);
+        return mGroupRoot;
+    }
 
-        ((FrameLayout)mGroupRoot).getForeground().setAlpha(0);
+    private void init() {
+        ((FrameLayout)getView()).getForeground().setAlpha(0);
 
-        mViewPager = (ViewPager) mGroupRoot.findViewById(R.id.pager);
+        mViewPager = (ViewPager) getView().findViewById(R.id.pager);
         pagerAdapter = new RestPagerAdapter(getChildFragmentManager(), new String[] {
                 getString(R.string.requestViewTitle),
                 getString(R.string.responseViewTitle)
         });
         mViewPager.setAdapter(pagerAdapter);
         mViewPager.setOnPageChangeListener(this);
-
-        return mGroupRoot;
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        this.activity = activity;
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        this.activity = getActivity();
         this.testRestApp = (TestRestApp)activity.getApplicationContext();
+        init();
     }
 
     public void showResponsePage() {
@@ -115,11 +118,11 @@ public class TestRestFragment extends Fragment implements ViewPager.OnPageChange
     }
 
     public void dim() {
-        ((FrameLayout)mGroupRoot).getForeground().setAlpha(100);
+        ((FrameLayout)getView()).getForeground().setAlpha(100);
     }
 
     public void unDim() {
-        ((FrameLayout)mGroupRoot).getForeground().setAlpha(0);
+        ((FrameLayout)getView()).getForeground().setAlpha(0);
     }
 
     public void toggleDim() {

@@ -1,7 +1,6 @@
 package pro.anton.averin.networking.testrest.ui;
 
 import android.app.Activity;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -9,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,16 +23,13 @@ public class RawResponseFragment extends ResponseTabFragment {
     private TestRestApp testRestApp;
     private Activity activity;
 
-    private View mGroupRoot;
-
     private ExpandableContentRow headersRow;
     private ExpandableContentRow bodyRow;
 
+    private View mGroupRoot;
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        this.activity = activity;
-        this.testRestApp = (TestRestApp)activity.getApplicationContext();
+    public View getView() {
+        return mGroupRoot;
     }
 
     @Override
@@ -45,15 +39,24 @@ public class RawResponseFragment extends ResponseTabFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mGroupRoot = inflater.inflate(R.layout.fragment_raw_response, container, false);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        this.activity = getActivity();
+        this.testRestApp = (TestRestApp)activity.getApplicationContext();
+        init();
+    }
 
-        headersRow = (ExpandableContentRow) mGroupRoot.findViewById(R.id.headers_row);
-        bodyRow = (ExpandableContentRow) mGroupRoot.findViewById(R.id.body_row);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mGroupRoot =  inflater.inflate(R.layout.fragment_raw_response, container, false);
+        return mGroupRoot;
+    }
+
+    private void init() {
+        headersRow = (ExpandableContentRow) getView().findViewById(R.id.headers_row);
+        bodyRow = (ExpandableContentRow) getView().findViewById(R.id.body_row);
 
         update();
-
-        return mGroupRoot;
     }
 
     public void update() {
