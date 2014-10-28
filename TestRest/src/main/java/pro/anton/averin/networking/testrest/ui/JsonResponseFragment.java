@@ -26,6 +26,12 @@ public class JsonResponseFragment extends ResponseTabFragment {
     LinearLayout progressBarLayout;
     TextView blankSlate;
 
+    private View mGroupRoot;
+    @Override
+    public View getView() {
+        return mGroupRoot;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,24 +39,26 @@ public class JsonResponseFragment extends ResponseTabFragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        this.activity = activity;
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        this.activity = getActivity();
         testRestApp = (TestRestApp) activity.getApplicationContext();
+        init();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View mGroupRoot = inflater.inflate(R.layout.fragment_json_response, container, false);
+        mGroupRoot =  inflater.inflate(R.layout.fragment_json_response, container, false);
+        return mGroupRoot;
+    }
 
-        jsonTreeViewer = (JsonTreeViewer) mGroupRoot.findViewById(R.id.jsonviewer_tree);
-        blankSlate = (TextView) mGroupRoot.findViewById(R.id.jsonResponse_blank_slate);
-        progressBarLayout = (LinearLayout) mGroupRoot.findViewById(R.id.jsonResponse_progressbar_layout);
+    private void init() {
+        jsonTreeViewer = (JsonTreeViewer) getView().findViewById(R.id.jsonviewer_tree);
+        blankSlate = (TextView) getView().findViewById(R.id.jsonResponse_blank_slate);
+        progressBarLayout = (LinearLayout) getView().findViewById(R.id.jsonResponse_progressbar_layout);
 
         update();
-
-        return mGroupRoot;
     }
 
     public void cancel() {

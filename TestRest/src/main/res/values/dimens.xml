@@ -7,4 +7,7 @@
     <dimen name="protocol_button_width">100dp</dimen>
     <dimen name="protocol_button_textSize">7sp</dimen>
 
+    <dimen name="ads_popup_width">300dp</dimen>
+    <dimen name="ads_popup_height">200dp</dimen>
+
     </resources>

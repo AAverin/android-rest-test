@@ -7,6 +7,8 @@ import android.view.ViewConfiguration;
 import com.bugsense.trace.BugSenseHandler;
 
 import java.lang.reflect.Field;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import aaverin.android.net.CachedNetworkManager;
 import pro.anton.averin.networking.testrest.db.RestTestDb;
@@ -37,7 +39,8 @@ public class TestRestApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        BugSenseHandler.initAndStartSession(this, Config.BUGSENSE_APIKEY);
+        if (Config.isBugsenseEnabled)
+            BugSenseHandler.initAndStartSession(this, Config.BUGSENSE_APIKEY);
         testRestDb = new RestTestDb(getContext());
 
         //attempt to force overflow menu
@@ -51,5 +54,28 @@ public class TestRestApp extends Application {
         } catch (Exception ex) {
             // Ignore
         }
+    }
+
+    public static final String md5(final String s) {
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest
+                    .getInstance("MD5");
+            digest.update(s.getBytes());
+            byte messageDigest[] = digest.digest();
+
+            // Create Hex String
+            StringBuffer hexString = new StringBuffer();
+            for (int i = 0; i < messageDigest.length; i++) {
+                String h = Integer.toHexString(0xFF & messageDigest[i]);
+                while (h.length() < 2)
+                    h = "0" + h;
+                hexString.append(h);
+            }
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+        }
+        return "";
     }
 }
