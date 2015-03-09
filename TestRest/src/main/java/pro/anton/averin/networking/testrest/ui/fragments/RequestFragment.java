@@ -202,7 +202,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
                         highlightQueryButton();
                     }
                     String text = edit.getText().toString();
-                    if (!text.startsWith("?")) {
+                    if (!text.startsWith("?") && !baseUrlEditText.getText().toString().contains("?")) {
                         edit.setText("?" + text);
                     }
                 }

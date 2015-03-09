@@ -277,7 +277,8 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
                 try {
                     tempFileForBody = File.createTempFile("testrest", baseContext.currentRequest.name, storageDir);
                     FileOutputStream fos = new FileOutputStream(tempFileForBody);
-                    fos.write(baseContext.currentResponse.body.getBytes());
+                    if (baseContext.currentResponse.body != null)
+                        fos.write(baseContext.currentResponse.body.getBytes());
                     fos.flush();
                     fos.close();
                 } catch (IOException e) {
