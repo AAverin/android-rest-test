@@ -3,18 +3,14 @@ package pro.anton.averin.networking.testrest.ui.adapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.SparseArray;
 import android.view.ViewGroup;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
-import pro.anton.averin.networking.testrest.ui.RequestFragment;
-import pro.anton.averin.networking.testrest.ui.ResponseFragment;
+import pro.anton.averin.networking.testrest.ui.fragments.RequestFragment;
+import pro.anton.averin.networking.testrest.ui.fragments.ResponseFragment;
 
 /**
  * Created by AAverin on 09.11.13.

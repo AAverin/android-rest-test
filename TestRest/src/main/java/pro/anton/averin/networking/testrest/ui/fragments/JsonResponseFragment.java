@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest.ui;
+package pro.anton.averin.networking.testrest.ui.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;

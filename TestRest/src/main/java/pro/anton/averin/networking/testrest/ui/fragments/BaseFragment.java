@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.ViewGroup;
 
 import pro.anton.averin.networking.testrest.BaseContext;
-import pro.anton.averin.networking.testrest.ui.BaseActivity;
+import pro.anton.averin.networking.testrest.ui.activities.BaseActivity;
 
 /**
  * Created by AAverin on 29.06.2014.

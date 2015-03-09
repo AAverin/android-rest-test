@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest.ui;
+package pro.anton.averin.networking.testrest.ui.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,7 +12,6 @@ import android.widget.FrameLayout;
 import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.ui.adapters.RestPagerAdapter;
-import pro.anton.averin.networking.testrest.ui.fragments.BaseFragment;
 import pro.anton.averin.networking.testrest.ui.phone.EntriesManagerActivity;
 
 /**

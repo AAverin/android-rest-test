@@ -6,8 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 
-import pro.anton.averin.networking.testrest.ui.BaseSinglePaneActivity;
-import pro.anton.averin.networking.testrest.ui.EntriesManagerFragment;
+import pro.anton.averin.networking.testrest.ui.activities.BaseSinglePaneActivity;
+import pro.anton.averin.networking.testrest.ui.fragments.EntriesManagerFragment;
 
 /**
  * Created by AAverin on 17.12.13.

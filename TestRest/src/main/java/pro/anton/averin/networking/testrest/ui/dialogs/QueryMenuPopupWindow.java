@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import pro.anton.averin.networking.testrest.R;
-import pro.anton.averin.networking.testrest.ui.RequestFragment;
+import pro.anton.averin.networking.testrest.ui.fragments.RequestFragment;
 
 /**
  * Created by AAverin on 10.11.13.
