@@ -4,7 +4,7 @@ import android.content.Context;
 
 import java.util.List;
 
-import pro.anton.averin.networking.testrest.TestRestApp;
+import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.models.Request;
 
 /**
@@ -12,15 +12,15 @@ import pro.anton.averin.networking.testrest.models.Request;
  */
 public class SavedRequestsLoader extends AbstractDataLoader<List<Request>> {
 
-    private TestRestApp testRestApp;
+    private BaseContext baseContext;
 
     public SavedRequestsLoader(Context context) {
         super(context);
-        testRestApp = (TestRestApp) context;
+        baseContext = (BaseContext) context;
     }
 
     @Override
     protected List<Request> buildList() {
-        return testRestApp.testRestDb.getRequests();
+        return baseContext.testRestDb.getRequests();
     }
 }

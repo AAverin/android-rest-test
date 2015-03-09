@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
@@ -21,7 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.Toast;
 
-import com.bugsense.trace.BugSenseHandler;
+import com.crashlytics.android.Crashlytics;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -39,7 +40,7 @@ import aaverin.android.net.NetworkResponse;
 import aaverin.android.net.NetworkResponseProcessException;
 import pro.anton.averin.networking.testrest.Config;
 import pro.anton.averin.networking.testrest.R;
-import pro.anton.averin.networking.testrest.TestRestApp;
+import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.models.RequestHeader;
 import pro.anton.averin.networking.testrest.models.Response;
 
@@ -49,7 +50,7 @@ import pro.anton.averin.networking.testrest.models.Response;
 public class ResponseFragment extends ViewPagerFragment implements NetworkListener {
 
     private Activity activity;
-    private TestRestApp testRestApp;
+    private BaseContext baseContext;
     private FragmentTabHost mTabHost;
     private NetworkMessage message;
 
@@ -62,12 +63,6 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
     ShareActionProvider shareActionProvider;
     Intent shareIntent = null;
 
-    private View mGroupRoot;
-    @Override
-    public View getView() {
-        return mGroupRoot;
-    }
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -76,8 +71,8 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
         ((FragmentActivity)activity).supportInvalidateOptionsMenu();
         fragmentManager = ((FragmentActivity)activity).getSupportFragmentManager();
 
-        testRestApp = (TestRestApp)activity.getApplicationContext();
-        testRestApp.networkManager.subscribe(this);
+        baseContext = (BaseContext)activity.getApplicationContext();
+        baseContext.networkManager.subscribe(this);
 
         init();
     }
@@ -85,31 +80,41 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        mGroupRoot =  inflater.inflate(R.layout.fragment_response, null);
-        return mGroupRoot;
+        contentView = (ViewGroup) inflater.inflate(R.layout.fragment_response, null);
+
+        activity = getActivity();
+        if (activity != null) {
+            mTabHost = (FragmentTabHost) contentView.findViewById(R.id.tabhost);
+            mTabHost.setup(activity, ((FragmentActivity)activity).getSupportFragmentManager(), R.id.tabFrameLayout);
+
+            mTabHost.addTab(mTabHost.newTabSpec("rawResponse")
+                    .setIndicator(getString(R.string.raw_response)), RawResponseFragment.class, null);
+            mTabHost.addTab(mTabHost.newTabSpec("jsonResponse")
+                    .setIndicator(getString(R.string.json_response)), JsonResponseFragment.class, null);
+            mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+                @Override
+                public void onTabChanged(String tabId) {
+                    JsonResponseFragment jsonResponseFragment = ((JsonResponseFragment)((FragmentActivity)activity).getSupportFragmentManager().findFragmentByTag("jsonResponse"));
+                    if (jsonResponseFragment != null) {
+                        jsonResponseFragment.cancel();
+                    }
+                }
+            });
+        }
+        return contentView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     public void init() {
-        responseLayout = (LinearLayout) getView().findViewById(R.id.response_layout);
-        progressbarLayout = (LinearLayout) getView().findViewById(R.id.progressbar_layout);
-        noDataLayout = (LinearLayout) getView().findViewById(R.id.nodata_layout);
+        responseLayout = (LinearLayout) contentView.findViewById(R.id.response_layout);
+        progressbarLayout = (LinearLayout) contentView.findViewById(R.id.progressbar_layout);
+        noDataLayout = (LinearLayout) contentView.findViewById(R.id.nodata_layout);
 
-        mTabHost = (FragmentTabHost) getView().findViewById(R.id.tabhost);
-        mTabHost.setup(activity, ((FragmentActivity)activity).getSupportFragmentManager(), R.id.tabFrameLayout);
 
-        mTabHost.addTab(mTabHost.newTabSpec("rawResponse")
-                .setIndicator(getString(R.string.raw_response)), RawResponseFragment.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec("jsonResponse")
-                .setIndicator(getString(R.string.json_response)), JsonResponseFragment.class, null);
-        mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-            @Override
-            public void onTabChanged(String tabId) {
-                JsonResponseFragment jsonResponseFragment = ((JsonResponseFragment)((FragmentActivity)activity).getSupportFragmentManager().findFragmentByTag("jsonResponse"));
-                if (jsonResponseFragment != null) {
-                    jsonResponseFragment.cancel();
-                }
-            }
-        });
 
         setHasOptionsMenu(true);
     }
@@ -135,18 +140,18 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
 
     private void sendMessage() {
         message = new NetworkMessage(true);
-        message.setURI(URI.create(testRestApp.currentRequest.asURI()));
-        message.setMethod(testRestApp.currentRequest.method);
+        message.setURI(URI.create(baseContext.currentRequest.asURI()));
+        message.setMethod(baseContext.currentRequest.method);
         HashMap<String, String> headers = new HashMap<String, String>();
-        if (testRestApp.currentRequest.headers != null && testRestApp.currentRequest.headers.size() > 0) {
-            for (RequestHeader header : testRestApp.currentRequest.headers) {
+        if (baseContext.currentRequest.headers != null && baseContext.currentRequest.headers.size() > 0) {
+            for (RequestHeader header : baseContext.currentRequest.headers) {
                 headers.put(header.name, header.value);
             }
         }
         message.setHeaders(headers);
 
-        testRestApp.networkManager.putMessage(message);
-        testRestApp.networkManager.releaseQueue();
+        baseContext.networkManager.putMessage(message);
+        baseContext.networkManager.releaseQueue();
 
         noDataLayout.setVisibility(View.GONE);
         progressbarLayout.setVisibility(View.VISIBLE);
@@ -182,9 +187,9 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
         if (Config.adsEnabled) {
             displayAds();
         }
-        if (testRestApp.currentRequest != null && testRestApp.currentResponse == null) {
+        if (baseContext.currentRequest != null && baseContext.currentResponse == null) {
             sendMessage();
-        } else if (testRestApp.currentResponse != null) {
+        } else if (baseContext.currentResponse != null) {
             showResponse();
         }
     }
@@ -227,19 +232,19 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
 
         StringBuilder subject = new StringBuilder();
         subject.append("Response to ");
-        subject.append(testRestApp.currentResponse.url);
+        subject.append(baseContext.currentResponse.url);
         subject.append(" via TestRest Android");
 
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject.toString());
 
         StringBuffer htmlHeaders = new StringBuffer();
         htmlHeaders.append("<b>");
-        htmlHeaders.append(testRestApp.currentResponse.method);
+        htmlHeaders.append(baseContext.currentResponse.method);
         htmlHeaders.append("</b>");
         htmlHeaders.append(" ");
-        htmlHeaders.append(testRestApp.currentResponse.url);
+        htmlHeaders.append(baseContext.currentResponse.url);
         htmlHeaders.append("<br/>");
-        Map<String, List<String>> headers = testRestApp.currentResponse.headers;
+        Map<String, List<String>> headers = baseContext.currentResponse.headers;
         if (headers != null && headers.size() > 0) {
             for (String key : headers.keySet()) {
                 htmlHeaders.append("<b>");
@@ -270,9 +275,9 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
                 File storageDir = new File(root + File.separator + "TestRest");
                 storageDir.mkdirs();
                 try {
-                    tempFileForBody = File.createTempFile("testrest", testRestApp.currentRequest.name, storageDir);
+                    tempFileForBody = File.createTempFile("testrest", baseContext.currentRequest.name, storageDir);
                     FileOutputStream fos = new FileOutputStream(tempFileForBody);
-                    fos.write(testRestApp.currentResponse.body.getBytes());
+                    fos.write(baseContext.currentResponse.body.getBytes());
                     fos.flush();
                     fos.close();
                 } catch (IOException e) {
@@ -284,18 +289,17 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
 
 
             if (tempFileForBody == null) {
-                body.append(testRestApp.currentResponse.body);
+                body.append(baseContext.currentResponse.body);
             } else {
                 body.append("see in attachment");
                 shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(tempFileForBody));
             }
         } else {
-            body.append(testRestApp.currentResponse.body);
+            body.append(baseContext.currentResponse.body);
         }
 
-        if (testRestApp.currentResponse != null && testRestApp.currentResponse.body != null && Config.isBugsenseEnabled) {
-            BugSenseHandler.removeCrashExtraData("responseBodyLength");
-            BugSenseHandler.addCrashExtraData("responseBodyLength", String.valueOf(testRestApp.currentResponse.body.length()));
+        if (baseContext.currentResponse != null && baseContext.currentResponse.body != null && Config.isCrashlyticsEnabled) {
+            Crashlytics.setString("responseBodyLength", String.valueOf(baseContext.currentResponse.body.length()));
         }
 
         String htmlBody = Html.fromHtml(body.toString()).toString();
@@ -342,13 +346,13 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
 
     @Override
     public void requestSuccess(NetworkMessage message, NetworkResponse response) {
-        testRestApp.currentResponse = buildResponse(message, response);
+        baseContext.currentResponse = buildResponse(message, response);
         showResponse();
     }
 
     @Override
     public void requestFail(NetworkMessage message, NetworkResponse response) {
-        testRestApp.currentResponse = buildResponse(message, response);
+        baseContext.currentResponse = buildResponse(message, response);
         showResponse();
     }
 

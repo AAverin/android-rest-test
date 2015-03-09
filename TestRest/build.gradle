@@ -1,23 +1,27 @@
 buildscript {
     repositories {
         mavenCentral()
+        maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
+        classpath 'com.android.tools.build:gradle:1.0.+'
+        classpath 'io.fabric.tools:gradle:1.+'
     }
 }
-apply plugin: 'android'
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 
 repositories {
     mavenCentral()
     maven {
         url "http://www.bugsense.com/gradle/"
     }
+    maven { url 'https://maven.fabric.io/public' }
 }
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion '19.0.3'
+    compileSdkVersion 21
+    buildToolsVersion '19.1'
 
     final Console console = System.console();
     if (console != null) {
@@ -25,7 +29,7 @@ android {
         // Building from console
         signingConfigs {
             release {
-                storeFile file("C:\\Work\\Projects\\a_TestRest\\Release\\sign\\keysore.jks")
+                storeFile file("C:\\Work\\Projects\\!Archive\\a_TestRest\\Release\\sign\\keysore.jks")
                 storePassword console.readLine("Enter keystore password: ")
                 keyAlias console.readLine("Enter alias key: ")
                 keyPassword console.readLine("Enter key password: ")
@@ -50,17 +54,19 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 9
-        targetSdkVersion 19
+        minSdkVersion 11
+        targetSdkVersion 21
     }
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.+'
-    compile 'com.android.support:gridlayout-v7:19.+'
-    compile 'com.android.support:appcompat-v7:19.+'
-    compile 'com.google.android.gms:play-services:4.3.+'
+    compile 'com.android.support:support-v4:21.0.3'
+//    compile 'com.android.support:gridlayout-v7:19'
+    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.google.android.gms:play-services:6.5.87'
     compile 'com.nineoldandroids:library:2.4.0'
-    compile "com.bugsense.trace:bugsense:3.5"
     compile project(':AndroidNetworkManager')
+    compile('com.crashlytics.sdk.android:crashlytics:2.2.2@aar') {
+        transitive = true;
+    }
 }

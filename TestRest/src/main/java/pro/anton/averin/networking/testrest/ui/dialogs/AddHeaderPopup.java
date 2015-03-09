@@ -11,7 +11,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -23,7 +22,7 @@ import android.widget.Toast;
 import java.sql.SQLException;
 
 import pro.anton.averin.networking.testrest.R;
-import pro.anton.averin.networking.testrest.TestRestApp;
+import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.models.Headers;
 import pro.anton.averin.networking.testrest.ui.adapters.HeadersListAdapter;
 
@@ -48,7 +47,7 @@ public class AddHeaderPopup extends PopupWindow {
         final EditText valueEditText = (EditText) popupView.findViewById(R.id.header_value);
         final Spinner headersSpinner = (Spinner) popupView.findViewById(R.id.header_spinner);
 
-        final HeadersListAdapter adapter = new HeadersListAdapter(context, ((TestRestApp)context.getApplicationContext()).testRestDb
+        final HeadersListAdapter adapter = new HeadersListAdapter(context, ((BaseContext)context.getApplicationContext()).testRestDb
                 .getSupportedHeaders());
 
         headersSpinner.setAdapter(adapter);
@@ -95,7 +94,7 @@ public class AddHeaderPopup extends PopupWindow {
                         Headers.Header selectedHeader = adapter.getItem(headersSpinner.getSelectedItemPosition());
                         selectedHeader.popularity++;
                         try {
-                            ((TestRestApp)context.getApplicationContext()).testRestDb.updateHeader(selectedHeader);
+                            ((BaseContext)context.getApplicationContext()).testRestDb.updateHeader(selectedHeader);
                         } catch (SQLException e) {
                             selectedHeader.popularity--;
                             e.printStackTrace();

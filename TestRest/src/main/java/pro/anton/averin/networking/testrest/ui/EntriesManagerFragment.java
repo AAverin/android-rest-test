@@ -3,7 +3,6 @@ package pro.anton.averin.networking.testrest.ui;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -23,23 +22,24 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.R;
-import pro.anton.averin.networking.testrest.TestRestApp;
 import pro.anton.averin.networking.testrest.models.Request;
 import pro.anton.averin.networking.testrest.ui.adapters.RequestsAdapter;
+import pro.anton.averin.networking.testrest.ui.fragments.BaseFragment;
 import pro.anton.averin.networking.testrest.ui.loaders.SavedRequestsLoader;
 import pro.anton.averin.networking.testrest.ui.views.opensource.SwipeDismissListViewTouchListener;
 
 /**
  * Created by AAverin on 17.12.13.
  */
-public class EntriesManagerFragment extends Fragment implements View.OnClickListener, LoaderManager.LoaderCallbacks<List<Request>> {
+public class EntriesManagerFragment extends BaseFragment implements View.OnClickListener, LoaderManager.LoaderCallbacks<List<Request>> {
 
     private Activity activity;
 
     private View mActionBarCustomView;
     ActionBar actionBar;
-    TestRestApp testRestApp;
+    BaseContext baseContext;
 
     private LinearLayout pickANameLayout;
     private EditText nameEditText;
@@ -59,16 +59,10 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
 
     private boolean saveMode = false;
 
-    private View mGroupRoot;
-    @Override
-    public View getView() {
-        return mGroupRoot;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mGroupRoot = inflater.inflate(R.layout.fragment_entriesmanager, container, false);
-        return mGroupRoot;
+        contentView = (ViewGroup) inflater.inflate(R.layout.fragment_entriesmanager, container, false);
+        return contentView;
     }
 
     private void refreshRequestsList() {
@@ -79,7 +73,7 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.activity = getActivity();
-        this.testRestApp = (TestRestApp)activity.getApplicationContext();
+        this.baseContext = (BaseContext)activity.getApplicationContext();
         saveMode = activity.getIntent().getBooleanExtra("save", false);
         ((FragmentActivity) activity).getSupportLoaderManager().initLoader(LOADER_ID, null, this);
         init();
@@ -94,7 +88,7 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
         doneButton = (FrameLayout) mActionBarCustomView.findViewById(R.id.actionbar_done);
         cancelButton = (FrameLayout) mActionBarCustomView.findViewById(R.id.actionbar_discard);
 
-        pickANameLayout = (LinearLayout) getView().findViewById(R.id.pickname_layout);
+        pickANameLayout = (LinearLayout) contentView.findViewById(R.id.pickname_layout);
         pickANameLayout.setVisibility(View.GONE);
         nameEditText = (EditText) pickANameLayout.findViewById(R.id.custom_name);
         nameEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -103,19 +97,19 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
                 entriesList.clearChoices();
             }
         });
-        entriesLayout = (LinearLayout) getView().findViewById(R.id.entries_layout);
-        orSelect = (TextView) getView().findViewById(R.id.or_select);
-        blankSlate = (TextView) getView().findViewById(R.id.blank_slate);
+        entriesLayout = (LinearLayout) contentView.findViewById(R.id.entries_layout);
+        orSelect = (TextView) contentView.findViewById(R.id.or_select);
+        blankSlate = (TextView) contentView.findViewById(R.id.blank_slate);
 
         entriesAdapter = new RequestsAdapter(activity);
-        entriesList = (ListView) getView().findViewById(R.id.entries_list);
+        entriesList = (ListView) contentView.findViewById(R.id.entries_list);
         entriesList.setAdapter(entriesAdapter);
 
         dismissTouchListener = new SwipeDismissListViewTouchListener(entriesList, new SwipeDismissListViewTouchListener.OnDismissCallback() {
             @Override
             public void onDismiss(ListView listView, int[] reverseSortedPositions) {
                 Request deletedRequest = entriesAdapter.getItem(reverseSortedPositions[0]);
-                testRestApp.testRestDb.deleteRequest(deletedRequest.id);
+                baseContext.testRestDb.deleteRequest(deletedRequest.id);
                 refreshRequestsList();
             }
         });
@@ -164,7 +158,7 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
                 entriesList.setItemChecked(position, true);
             } else {
                 Request selectedRequest = entriesAdapter.getItem(position);
-                testRestApp.currentRequest = selectedRequest;
+                baseContext.currentRequest = selectedRequest;
                 activity.setResult(Activity.RESULT_OK);
                 activity.finish();
             }
@@ -179,13 +173,13 @@ public class EntriesManagerFragment extends Fragment implements View.OnClickList
                 int selectedItemPosition = entriesList.getCheckedItemPosition();
                 if (selectedItemPosition >= 0) {
                     Request requestToUpdate = entriesAdapter.getItem(selectedItemPosition);
-                    testRestApp.currentRequest.name = requestToUpdate.name;
-                    testRestApp.testRestDb.updateRequest(testRestApp.currentRequest, requestToUpdate.id);
+                    baseContext.currentRequest.name = requestToUpdate.name;
+                    baseContext.testRestDb.updateRequest(baseContext.currentRequest, requestToUpdate.id);
                 } else {
                     String requestName = nameEditText.getText().toString();
-                    if (testRestApp.testRestDb.isUniqueRequestName(requestName)) {
-                        testRestApp.currentRequest.name = requestName;
-                        testRestApp.currentRequest = testRestApp.testRestDb.addRequest(testRestApp.currentRequest);
+                    if (baseContext.testRestDb.isUniqueRequestName(requestName)) {
+                        baseContext.currentRequest.name = requestName;
+                        baseContext.currentRequest = baseContext.testRestDb.addRequest(baseContext.currentRequest);
                     } else {
                         Toast.makeText(activity, R.string.error_not_unique_name, Toast.LENGTH_LONG).show();
                         return;

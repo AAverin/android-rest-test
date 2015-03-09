@@ -12,7 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import pro.anton.averin.networking.testrest.R;
-import pro.anton.averin.networking.testrest.TestRestApp;
+import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.ui.views.jsonviewer.JsonTreeViewer;
 
 /**
@@ -21,16 +21,10 @@ import pro.anton.averin.networking.testrest.ui.views.jsonviewer.JsonTreeViewer;
 public class JsonResponseFragment extends ResponseTabFragment {
 
     private Activity activity;
-    private TestRestApp testRestApp;
+    private BaseContext baseContext;
     private JsonTreeViewer jsonTreeViewer;
     LinearLayout progressBarLayout;
     TextView blankSlate;
-
-    private View mGroupRoot;
-    @Override
-    public View getView() {
-        return mGroupRoot;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,21 +36,20 @@ public class JsonResponseFragment extends ResponseTabFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.activity = getActivity();
-        testRestApp = (TestRestApp) activity.getApplicationContext();
+        baseContext = (BaseContext) activity.getApplicationContext();
         init();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        mGroupRoot =  inflater.inflate(R.layout.fragment_json_response, container, false);
-        return mGroupRoot;
+        contentView = (ViewGroup) inflater.inflate(R.layout.fragment_json_response, container, false);
+        return contentView;
     }
 
     private void init() {
-        jsonTreeViewer = (JsonTreeViewer) getView().findViewById(R.id.jsonviewer_tree);
-        blankSlate = (TextView) getView().findViewById(R.id.jsonResponse_blank_slate);
-        progressBarLayout = (LinearLayout) getView().findViewById(R.id.jsonResponse_progressbar_layout);
+        jsonTreeViewer = (JsonTreeViewer) contentView.findViewById(R.id.jsonviewer_tree);
+        blankSlate = (TextView) contentView.findViewById(R.id.jsonResponse_blank_slate);
+        progressBarLayout = (LinearLayout) contentView.findViewById(R.id.jsonResponse_progressbar_layout);
 
         update();
     }
@@ -69,13 +62,13 @@ public class JsonResponseFragment extends ResponseTabFragment {
 
     public void update() {
 
-        if (testRestApp.currentResponse == null || testRestApp.currentResponse.body == null) {
+        if (baseContext.currentResponse == null || baseContext.currentResponse.body == null) {
             blankSlate.setVisibility(View.VISIBLE);
             return;
         } else {
             JSONObject jsonObject = null;
             try {
-                jsonObject = new JSONObject(testRestApp.currentResponse.body);
+                jsonObject = new JSONObject(baseContext.currentResponse.body);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

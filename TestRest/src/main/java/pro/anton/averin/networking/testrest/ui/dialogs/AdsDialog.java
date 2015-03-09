@@ -2,18 +2,14 @@ package pro.anton.averin.networking.testrest.ui.dialogs;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
 import pro.anton.averin.networking.testrest.R;
-import pro.anton.averin.networking.testrest.TestRestApp;
 
 /**
  * Created by AAverin on 02.02.14.

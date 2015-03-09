@@ -27,16 +27,16 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bugsense.trace.BugSenseHandler;
+import com.crashlytics.android.Crashlytics;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.ArgbEvaluator;
 import com.nineoldandroids.animation.ValueAnimator;
 
 import java.util.ArrayList;
 
+import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.Config;
 import pro.anton.averin.networking.testrest.R;
-import pro.anton.averin.networking.testrest.TestRestApp;
 import pro.anton.averin.networking.testrest.models.Request;
 import pro.anton.averin.networking.testrest.models.RequestHeader;
 import pro.anton.averin.networking.testrest.ui.adapters.AddedHeadersAdapter;
@@ -55,7 +55,7 @@ import pro.anton.averin.networking.testrest.ui.views.TokenizedEditText;
 public class RequestFragment extends ViewPagerFragment implements TokenizedEditText.TokenListener, View.OnClickListener, RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener, MenuItem.OnMenuItemClickListener {
 
     private Activity activity;
-    private TestRestApp testRestApp;
+    private BaseContext baseContext;
 
     public final static int PICK_FILE_INTENT_ID = 11;
 
@@ -91,17 +91,11 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     public RequestFragment() {
     }
 
-    private View mGroupRoot;
-    @Override
-    public View getView() {
-        return mGroupRoot;
-    }
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.activity = getActivity();
-        this.testRestApp = (TestRestApp)activity.getApplicationContext();
+        this.baseContext = (BaseContext)activity.getApplicationContext();
     }
 
     public class QuerySpan extends ClickableSpan {
@@ -135,17 +129,17 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        mGroupRoot =  inflater.inflate(R.layout.fragment_request, null);
-        return mGroupRoot;
+        contentView = (ViewGroup) inflater.inflate(R.layout.fragment_request, container, false);
+        return contentView;
     }
 
     private void init() {
-        protocolSwitcher = (ProtocolSwitcher) getView().findViewById(R.id.protocol_button);
+        protocolSwitcher = (ProtocolSwitcher) contentView.findViewById(R.id.protocol_button);
 
-        methodRadioGroup = (RadioGroup) getView().findViewById(R.id.method_radiogroup);
+        methodRadioGroup = (RadioGroup) contentView.findViewById(R.id.method_radiogroup);
         methodRadioGroup.setOnCheckedChangeListener(this);
 
-        baseUrlEditText = (EditText) getView().findViewById(R.id.baseurl);
+        baseUrlEditText = (EditText) contentView.findViewById(R.id.baseurl);
 
         baseUrlEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -169,7 +163,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
             }
         });
 
-        postLayout = (LinearLayout) getView().findViewById(R.id.post_layout);
+        postLayout = (LinearLayout) contentView.findViewById(R.id.post_layout);
         useFileCheckbox = (CheckBox) postLayout.findViewById(R.id.use_file_checkbox);
         useFileCheckbox.setOnCheckedChangeListener(this);
         pickFileButton = (TextView) postLayout.findViewById(R.id.pick_file_button);
@@ -183,11 +177,11 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         });
         postBody = (EditText) postLayout.findViewById(R.id.post_body);
 
-        addedHeadersList = (AdaptableLinearLayout) getView().findViewById(R.id.addedheaders_list);
+        addedHeadersList = (AdaptableLinearLayout) contentView.findViewById(R.id.addedheaders_list);
         addedHeadersAdapter = new AddedHeadersAdapter(activity.getApplicationContext(), headersList);
         addedHeadersList.setAdapter(addedHeadersAdapter);
 
-        addQueryButton = (TextView) getView().findViewById(R.id.add_query_button);
+        addQueryButton = (TextView) contentView.findViewById(R.id.add_query_button);
         addQueryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -204,7 +198,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
             }
         });
 
-        addHeadersButton = (TextView) getView().findViewById(R.id.add_header_button);
+        addHeadersButton = (TextView) contentView.findViewById(R.id.add_header_button);
         addHeadersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -221,7 +215,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
             }
         });
 
-        methodUrlEditText = (TokenizedEditText) getView().findViewById(R.id.method_url);
+        methodUrlEditText = (TokenizedEditText) contentView.findViewById(R.id.method_url);
         methodUrlEditText.setTokenRegexp("[\\?&]([^&?]+=[^&?]+)");
         methodUrlEditText.setTokenListener(this);
 
@@ -240,7 +234,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
                 }
             }
         });
-        sendButton = (Button) getView().findViewById(R.id.btn_send);
+        sendButton = (Button) contentView.findViewById(R.id.btn_send);
         sendButton.setOnClickListener(this);
 
         setHasOptionsMenu(true);
@@ -424,8 +418,8 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
             baseUrlEditText.requestFocus();
             return false;
         }
-        testRestApp.currentResponse = null;
-        testRestApp.currentRequest = buildRequest();
+        baseContext.currentResponse = null;
+        baseContext.currentRequest = buildRequest();
         return true;
     }
 
@@ -434,25 +428,25 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     }
 
     private Request buildRequest() {
-        if (testRestApp.currentRequest != null) {
-            request.name = testRestApp.currentRequest.name;
+        if (baseContext.currentRequest != null) {
+            request.name = baseContext.currentRequest.name;
         }
         request.protocol = protocolSwitcher.getProtocolText();
         request.baseUrl = baseUrlEditText.getText().toString();
-        RadioButton radioButton = (RadioButton) getView().findViewById(methodRadioGroup.getCheckedRadioButtonId());
+        RadioButton radioButton = (RadioButton) contentView.findViewById(methodRadioGroup.getCheckedRadioButtonId());
         request.method = radioButton.getText().toString();
         request.queryString = methodUrlEditText.getText().toString();
         request.headers = headersList;
-        if (Config.isBugsenseEnabled) {
-            BugSenseHandler.addCrashExtraData("request.protocol", request.protocol);
-            BugSenseHandler.addCrashExtraData("request.baseUrl", request.baseUrl);
-            BugSenseHandler.addCrashExtraData("request.method", request.method);
-            BugSenseHandler.addCrashExtraData("request.queryString", request.queryString);
+        if (Config.isCrashlyticsEnabled) {
+            Crashlytics.setString("request.protocol", request.protocol);
+            Crashlytics.setString("request.baseUrl", request.baseUrl);
+            Crashlytics.setString("request.method", request.method);
+            Crashlytics.setString("request.queryString", request.queryString);
             StringBuilder headers = new StringBuilder();
             for (RequestHeader header : headersList) {
                 headers.append(header.toString());
             }
-            BugSenseHandler.addCrashExtraData("request.headers", headers.toString());
+            Crashlytics.setString("request.headers", headers.toString());
          }
 
         return request;
@@ -491,7 +485,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
                 postBody.setText(data.getDataString());
             }
             if (requestCode == EntriesManagerActivity.ENTRIESMANAGER_REQUEST_CODE) {
-                init_withRequest(testRestApp.currentRequest);
+                init_withRequest(baseContext.currentRequest);
             }
         }
         super.onActivityResult(requestCode, resultCode, data);

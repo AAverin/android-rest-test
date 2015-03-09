@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import pro.anton.averin.networking.testrest.R;
-import pro.anton.averin.networking.testrest.TestRestApp;
+import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.ui.views.ExpandableContentRow;
 
 /**
@@ -20,17 +20,11 @@ import pro.anton.averin.networking.testrest.ui.views.ExpandableContentRow;
  */
 public class RawResponseFragment extends ResponseTabFragment {
 
-    private TestRestApp testRestApp;
+    private BaseContext baseContext;
     private Activity activity;
 
     private ExpandableContentRow headersRow;
     private ExpandableContentRow bodyRow;
-
-    private View mGroupRoot;
-    @Override
-    public View getView() {
-        return mGroupRoot;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,34 +36,34 @@ public class RawResponseFragment extends ResponseTabFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.activity = getActivity();
-        this.testRestApp = (TestRestApp)activity.getApplicationContext();
+        this.baseContext = (BaseContext)activity.getApplicationContext();
         init();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mGroupRoot =  inflater.inflate(R.layout.fragment_raw_response, container, false);
-        return mGroupRoot;
+        contentView = (ViewGroup) inflater.inflate(R.layout.fragment_raw_response, container, false);
+        return contentView;
     }
 
     private void init() {
-        headersRow = (ExpandableContentRow) getView().findViewById(R.id.headers_row);
-        bodyRow = (ExpandableContentRow) getView().findViewById(R.id.body_row);
+        headersRow = (ExpandableContentRow) contentView.findViewById(R.id.headers_row);
+        bodyRow = (ExpandableContentRow) contentView.findViewById(R.id.body_row);
 
         update();
     }
 
     public void update() {
-        if (testRestApp.currentResponse == null) {
+        if (baseContext.currentResponse == null) {
             return;
         }
-        Map<String, List<String>> headers = testRestApp.currentResponse.headers;
+        Map<String, List<String>> headers = baseContext.currentResponse.headers;
         StringBuffer htmlHeaders = new StringBuffer();
         htmlHeaders.append("<b>");
-        htmlHeaders.append(testRestApp.currentResponse.method);
+        htmlHeaders.append(baseContext.currentResponse.method);
         htmlHeaders.append("</b>");
         htmlHeaders.append(" ");
-        htmlHeaders.append(testRestApp.currentResponse.url);
+        htmlHeaders.append(baseContext.currentResponse.url);
         htmlHeaders.append("<br/>");
         if (headers != null && headers.size() > 0) {
             for (String key : headers.keySet()) {
@@ -89,10 +83,10 @@ public class RawResponseFragment extends ResponseTabFragment {
         headersRow.setContent(headersHtmlTextView);
 
         TextView bodyTextView = new TextView(activity);
-        if (testRestApp.currentResponse.body == null) {
+        if (baseContext.currentResponse.body == null) {
             bodyTextView.setText(getString(R.string.empty_response));
         } else {
-            bodyTextView.setText(testRestApp.currentResponse.body);
+            bodyTextView.setText(baseContext.currentResponse.body);
         }
         bodyRow.setContent(bodyTextView);
     }

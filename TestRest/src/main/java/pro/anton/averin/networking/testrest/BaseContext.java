@@ -4,13 +4,12 @@ import android.app.Application;
 import android.content.Context;
 import android.view.ViewConfiguration;
 
-import com.bugsense.trace.BugSenseHandler;
+import com.crashlytics.android.Crashlytics;
 
 import java.lang.reflect.Field;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import aaverin.android.net.CachedNetworkManager;
+import io.fabric.sdk.android.Fabric;
 import pro.anton.averin.networking.testrest.db.RestTestDb;
 import pro.anton.averin.networking.testrest.models.Request;
 import pro.anton.averin.networking.testrest.models.Response;
@@ -18,8 +17,8 @@ import pro.anton.averin.networking.testrest.models.Response;
 /**
  * Created by AAverin on 13.11.13.
  */
-public class TestRestApp extends Application {
-    private static TestRestApp instance;
+public class BaseContext extends Application {
+    private static BaseContext instance;
 
     public CachedNetworkManager networkManager;
     public RestTestDb testRestDb = null;
@@ -27,7 +26,7 @@ public class TestRestApp extends Application {
     public Request currentRequest;
     public Response currentResponse;
 
-    public TestRestApp() {
+    public BaseContext() {
         instance = this;
         networkManager = CachedNetworkManager.getInstance();
     }
@@ -39,8 +38,8 @@ public class TestRestApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        if (Config.isBugsenseEnabled)
-            BugSenseHandler.initAndStartSession(this, Config.BUGSENSE_APIKEY);
+        if (Config.isCrashlyticsEnabled)
+            Fabric.with(this, new Crashlytics());
         testRestDb = new RestTestDb(getContext());
 
         //attempt to force overflow menu
@@ -54,28 +53,5 @@ public class TestRestApp extends Application {
         } catch (Exception ex) {
             // Ignore
         }
-    }
-
-    public static final String md5(final String s) {
-        try {
-            // Create MD5 Hash
-            MessageDigest digest = java.security.MessageDigest
-                    .getInstance("MD5");
-            digest.update(s.getBytes());
-            byte messageDigest[] = digest.digest();
-
-            // Create Hex String
-            StringBuffer hexString = new StringBuffer();
-            for (int i = 0; i < messageDigest.length; i++) {
-                String h = Integer.toHexString(0xFF & messageDigest[i]);
-                while (h.length() < 2)
-                    h = "0" + h;
-                hexString.append(h);
-            }
-            return hexString.toString();
-
-        } catch (NoSuchAlgorithmException e) {
-        }
-        return "";
     }
 }
