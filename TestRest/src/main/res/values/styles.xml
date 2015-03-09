@@ -1,18 +1,22 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:actionBarStyle">@style/TestRest.Styled.ActionBar</item>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:actionMenuTextColor">@color/white</item>
 
         <!-- Support library compatibility -->
-        <item name="actionBarStyle">@style/TestRest.Styled.ActionBar</item>
         <item name="actionMenuTextColor">@color/white</item>
+	
+        <item name="actionBarSize">@dimen/actionbar_height</item>
+
+        <item name="colorPrimary">@color/blue_700</item>
+        <item name="colorPrimaryDark">@color/blue_900</item>
+        <item name="android:textColorPrimary">#607d8b</item>
+	
     </style>
 
-    <style name="TestRest.Styled.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="background">@color/dark_blue</item>
-        <item name="android:background">@color/dark_blue</item>
+    <style name="Toolbar" parent="Base.ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColorPrimary">#fff</item>
     </style>
 
     <style name="BaseDialogTheme" parent="android:Theme.Holo.Light.Panel">

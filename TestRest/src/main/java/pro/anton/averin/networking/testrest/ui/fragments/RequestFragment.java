@@ -43,7 +43,7 @@ import pro.anton.averin.networking.testrest.ui.adapters.AddedHeadersAdapter;
 import pro.anton.averin.networking.testrest.ui.dialogs.AddHeaderPopup;
 import pro.anton.averin.networking.testrest.ui.dialogs.AddQueryPopup;
 import pro.anton.averin.networking.testrest.ui.dialogs.QueryMenuPopupWindow;
-import pro.anton.averin.networking.testrest.ui.phone.EntriesManagerActivity;
+import pro.anton.averin.networking.testrest.ui.activities.phone.EntriesManagerActivity;
 import pro.anton.averin.networking.testrest.ui.views.AdaptableLinearLayout;
 import pro.anton.averin.networking.testrest.ui.views.ProtocolSwitcher;
 import pro.anton.averin.networking.testrest.ui.views.ProtocolType;

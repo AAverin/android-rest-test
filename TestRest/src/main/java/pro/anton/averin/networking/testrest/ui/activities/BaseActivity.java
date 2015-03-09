@@ -7,7 +7,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import java.util.HashMap;
 
@@ -20,7 +22,7 @@ import pro.anton.averin.networking.testrest.utils.Logger;
 /**
  * Created by AAverin on 09.11.13.
  */
-public abstract class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends ActionBarActivity {
 
     public final static String MAIN_FRAGMENT_TAG = "MAIN";
 
@@ -35,6 +37,7 @@ public abstract class BaseActivity extends FragmentActivity {
     protected BaseContext baseContext;
     public Handler uiHandler;
 
+    public Toolbar toolbar = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +92,21 @@ public abstract class BaseActivity extends FragmentActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    public void setupToolbar(Toolbar toolbar) {
+        this.toolbar = toolbar;
+        if (toolbar != null) {
+            this.toolbar.setVisibility(View.VISIBLE);
+            setSupportActionBar(toolbar);
+
+//            toolbar.setLogo(R.drawable.ic_launcher);
+
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+
+//            toolbar.setNavigationIcon(R.drawable.ic_drawer);
+        }
     }
 
     @Override

@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest.ui.phone;
+package pro.anton.averin.networking.testrest.ui.activities.phone;
 
 import android.content.Intent;
 import android.os.Bundle;

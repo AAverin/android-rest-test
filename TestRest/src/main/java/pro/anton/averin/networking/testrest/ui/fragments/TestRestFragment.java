@@ -11,8 +11,8 @@ import android.widget.FrameLayout;
 
 import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.R;
+import pro.anton.averin.networking.testrest.ui.activities.phone.EntriesManagerActivity;
 import pro.anton.averin.networking.testrest.ui.adapters.RestPagerAdapter;
-import pro.anton.averin.networking.testrest.ui.phone.EntriesManagerActivity;
 
 /**
  * Created by AAverin on 09.11.13.
@@ -37,6 +37,8 @@ public class TestRestFragment extends BaseFragment implements ViewPager.OnPageCh
 
     private void init() {
         ((FrameLayout)contentView).getForeground().setAlpha(0);
+
+        initToolbar();
 
         mViewPager = (ViewPager) contentView.findViewById(R.id.pager);
         pagerAdapter = new RestPagerAdapter(getChildFragmentManager(), new String[] {

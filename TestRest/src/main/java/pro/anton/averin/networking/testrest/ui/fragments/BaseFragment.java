@@ -2,9 +2,11 @@ package pro.anton.averin.networking.testrest.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.View;
 import android.view.ViewGroup;
 
 import pro.anton.averin.networking.testrest.BaseContext;
+import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.ui.activities.BaseActivity;
 
 /**
@@ -67,5 +69,14 @@ public abstract class BaseFragment extends Fragment {
 
     public boolean handleBackPress() {
         return false;
+    }
+
+    protected void initToolbar() {
+        BaseActivity activity = getBaseActivity();
+
+        if (activity.toolbar != null) {
+            activity.toolbar.setVisibility(View.GONE);
+        }
+        activity.setupToolbar((android.support.v7.widget.Toolbar) contentView.findViewById(R.id.action_bar_main));
     }
 }

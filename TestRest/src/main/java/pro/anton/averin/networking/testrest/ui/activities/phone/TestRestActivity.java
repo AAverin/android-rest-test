@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest.ui.phone;
+package pro.anton.averin.networking.testrest.ui.activities.phone;
 
 import android.support.v4.app.Fragment;
 import android.view.Menu;

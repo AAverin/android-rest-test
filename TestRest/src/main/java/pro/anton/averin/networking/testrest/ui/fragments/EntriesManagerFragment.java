@@ -26,7 +26,6 @@ import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.models.Request;
 import pro.anton.averin.networking.testrest.ui.adapters.RequestsAdapter;
-import pro.anton.averin.networking.testrest.ui.fragments.BaseFragment;
 import pro.anton.averin.networking.testrest.ui.loaders.SavedRequestsLoader;
 import pro.anton.averin.networking.testrest.ui.views.opensource.SwipeDismissListViewTouchListener;
 
@@ -74,6 +73,9 @@ public class EntriesManagerFragment extends BaseFragment implements View.OnClick
         super.onActivityCreated(savedInstanceState);
         this.activity = getActivity();
         this.baseContext = (BaseContext)activity.getApplicationContext();
+
+        initToolbar();
+
         saveMode = activity.getIntent().getBooleanExtra("save", false);
         ((FragmentActivity) activity).getSupportLoaderManager().initLoader(LOADER_ID, null, this);
         init();
