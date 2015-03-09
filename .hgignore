@@ -3,3 +3,4 @@ TestRest/build/*
 AndroidNetworkManager/build/*
 .gradle/*
 .idea/*
+build/intermediates/*
