@@ -102,8 +102,8 @@ public abstract class BaseActivity extends ActionBarActivity {
 
 //            toolbar.setLogo(R.drawable.ic_launcher);
 
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeButtonEnabled(true);
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//            getSupportActionBar().setHomeButtonEnabled(true);
 
 //            toolbar.setNavigationIcon(R.drawable.ic_drawer);
         }

@@ -9,7 +9,6 @@ import android.text.Editable;
 import android.text.TextPaint;
 import android.text.TextWatcher;
 import android.text.style.ClickableSpan;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,7 +20,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -39,11 +37,10 @@ import pro.anton.averin.networking.testrest.Config;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.models.Request;
 import pro.anton.averin.networking.testrest.models.RequestHeader;
-import pro.anton.averin.networking.testrest.ui.adapters.AddedHeadersAdapter;
-import pro.anton.averin.networking.testrest.ui.dialogs.AddHeaderPopup;
-import pro.anton.averin.networking.testrest.ui.dialogs.AddQueryPopup;
-import pro.anton.averin.networking.testrest.ui.dialogs.QueryMenuPopupWindow;
 import pro.anton.averin.networking.testrest.ui.activities.phone.EntriesManagerActivity;
+import pro.anton.averin.networking.testrest.ui.adapters.AddedHeadersAdapter;
+import pro.anton.averin.networking.testrest.ui.dialogs.AddHeaderDialog;
+import pro.anton.averin.networking.testrest.ui.dialogs.AddQueryDialog;
 import pro.anton.averin.networking.testrest.ui.views.AdaptableLinearLayout;
 import pro.anton.averin.networking.testrest.ui.views.ProtocolSwitcher;
 import pro.anton.averin.networking.testrest.ui.views.ProtocolType;
@@ -80,14 +77,6 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
 
     private Request request = new Request();
 
-    QueryMenuPopupWindow.ChipListener chipListener = new QueryMenuPopupWindow.ChipListener() {
-
-        @Override
-        public void onChipDeleted(QuerySpan chip) {
-            Toast.makeText(activity, "chip deleted " + chip.chip, 5).show();
-        }
-    };
-
     public RequestFragment() {
     }
 
@@ -96,6 +85,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         super.onActivityCreated(savedInstanceState);
         this.activity = getActivity();
         this.baseContext = (BaseContext)activity.getApplicationContext();
+        init();
     }
 
     public class QuerySpan extends ClickableSpan {
@@ -185,16 +175,8 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         addQueryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddQueryPopup popup = new AddQueryPopup(activity);
-                popup.setQueryPopupListener(queryPopupListener);
-                popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                    @Override
-                    public void onDismiss() {
-                        unDimBackground();
-                    }
-                });
-                popup.showAtLocation(getView(), Gravity.TOP, 0, (int)(120 * getResources().getDisplayMetrics().density));
-                dimBackground();
+                AddQueryDialog dialog = AddQueryDialog.getInstance(queryPopupListener);
+                dialog.displayDialog(getBaseActivity(), "ADD_HEADER");
             }
         });
 
@@ -202,16 +184,8 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         addHeadersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddHeaderPopup popup = new AddHeaderPopup(activity);
-                popup.setHeaderPopupListener(headerPopupListener);
-                popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                    @Override
-                    public void onDismiss() {
-                        unDimBackground();
-                    }
-                });
-                popup.showAtLocation(getView(), Gravity.TOP, 0, (int)(120 * getResources().getDisplayMetrics().density));
-                dimBackground();
+                AddHeaderDialog dialog = AddHeaderDialog.getInstance(headerPopupListener);
+                dialog.displayDialog(getBaseActivity(), "ADD_HEADER");
             }
         });
 
@@ -296,16 +270,6 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         addedHeadersAdapter.notifyDataSetChanged();
     }
 
-    private void dimBackground() {
-        TestRestFragment p = (TestRestFragment) ((FragmentActivity)activity).getSupportFragmentManager().findFragmentByTag("MAIN");
-        p.dim();
-    }
-
-    private void unDimBackground() {
-        TestRestFragment p = (TestRestFragment) ((FragmentActivity)activity).getSupportFragmentManager().findFragmentByTag("MAIN");
-        p.unDim();
-    }
-
     private int getMethodRadioButtonId(String method) {
         if (method.toUpperCase().equals("GET")) {
             return R.id.checkbox_get;
@@ -319,7 +283,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         return -1;
     }
 
-    AddQueryPopup.QueryPopupListener queryPopupListener = new AddQueryPopup.QueryPopupListener() {
+    AddQueryDialog.QueryPopupListener queryPopupListener = new AddQueryDialog.QueryPopupListener() {
         @Override
         public void onOk(String key, String value) {
             StringBuffer newValue = new StringBuffer();
@@ -336,16 +300,14 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
             newValue.append("=");
             newValue.append(value);
             methodUrlEditText.setText(newValue.toString());
-            unDimBackground();
         }
     };
 
-    AddHeaderPopup.HeaderPopupListener headerPopupListener = new AddHeaderPopup.HeaderPopupListener() {
+    AddHeaderDialog.HeaderPopupListener headerPopupListener = new AddHeaderDialog.HeaderPopupListener() {
         @Override
         public void onOk(String key, String value) {
             headersList.add(new RequestHeader(key, value));
             addedHeadersAdapter.notifyDataSetChanged();
-            unDimBackground();
         }
     };
 

@@ -111,20 +111,4 @@ public class TestRestFragment extends BaseFragment implements ViewPager.OnPageCh
             startActivityForResult(managerActivityIntent, EntriesManagerActivity.ENTRIESMANAGER_REQUEST_CODE);
         }
     }
-
-    public void dim() {
-        ((FrameLayout)getView()).getForeground().setAlpha(100);
-    }
-
-    public void unDim() {
-        ((FrameLayout)getView()).getForeground().setAlpha(0);
-    }
-
-    public void toggleDim() {
-        if (isDimmed) {
-            unDim();
-        } else {
-            dim();
-        }
-    }
 }

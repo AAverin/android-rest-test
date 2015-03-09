@@ -19,7 +19,6 @@ public class EntriesManagerActivity extends BaseSinglePaneActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

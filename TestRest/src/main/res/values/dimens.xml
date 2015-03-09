@@ -12,4 +12,6 @@
     <dimen name="ads_popup_width">300dp</dimen>
     <dimen name="ads_popup_height">200dp</dimen>
 
-    </resources>
+    <dimen name="popup_dialog_max_width">300dp</dimen>
+
+</resources>

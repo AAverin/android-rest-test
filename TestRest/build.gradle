@@ -53,6 +53,9 @@ android {
         }
     }
 
+    sourceSets.release.setRoot('src/release')
+    sourceSets.debug.setRoot('src/debug')
+
     defaultConfig {
         minSdkVersion 11
         targetSdkVersion 21

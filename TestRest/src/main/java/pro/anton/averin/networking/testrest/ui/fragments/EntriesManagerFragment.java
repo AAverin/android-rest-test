@@ -3,11 +3,11 @@ package pro.anton.averin.networking.testrest.ui.fragments;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +25,7 @@ import java.util.List;
 import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.models.Request;
+import pro.anton.averin.networking.testrest.ui.activities.BaseActivity;
 import pro.anton.averin.networking.testrest.ui.adapters.RequestsAdapter;
 import pro.anton.averin.networking.testrest.ui.loaders.SavedRequestsLoader;
 import pro.anton.averin.networking.testrest.ui.views.opensource.SwipeDismissListViewTouchListener;
@@ -34,7 +35,7 @@ import pro.anton.averin.networking.testrest.ui.views.opensource.SwipeDismissList
  */
 public class EntriesManagerFragment extends BaseFragment implements View.OnClickListener, LoaderManager.LoaderCallbacks<List<Request>> {
 
-    private Activity activity;
+    private BaseActivity activity;
 
     private View mActionBarCustomView;
     ActionBar actionBar;
@@ -65,25 +66,26 @@ public class EntriesManagerFragment extends BaseFragment implements View.OnClick
     }
 
     private void refreshRequestsList() {
-        ((FragmentActivity) activity).getSupportLoaderManager().restartLoader(LOADER_ID, null, this);
+        activity.getSupportLoaderManager().restartLoader(LOADER_ID, null, this);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.activity = getActivity();
+        this.activity = (BaseActivity) getActivity();
         this.baseContext = (BaseContext)activity.getApplicationContext();
 
         initToolbar();
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         saveMode = activity.getIntent().getBooleanExtra("save", false);
-        ((FragmentActivity) activity).getSupportLoaderManager().initLoader(LOADER_ID, null, this);
+        activity.getSupportLoaderManager().initLoader(LOADER_ID, null, this);
         init();
         updateUI();
     }
 
     private void init() {
-        actionBar = ((ActionBarActivity)activity).getSupportActionBar();
+        actionBar = activity.getSupportActionBar();
         LayoutInflater abInflater = (LayoutInflater) actionBar.getThemedContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         mActionBarCustomView = abInflater.inflate(R.layout.actionbar_custom_view_done_discard, null);
 
@@ -126,8 +128,12 @@ public class EntriesManagerFragment extends BaseFragment implements View.OnClick
 
             actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM, ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME
                     | ActionBar.DISPLAY_SHOW_TITLE);
-            actionBar.setCustomView(mActionBarCustomView, new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+            actionBar.setDisplayHomeAsUpEnabled(false);
+
+            activity.toolbar.addView(mActionBarCustomView, new Toolbar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT));
+
+//            actionBar.setCustomView(mActionBarCustomView, new ActionBar.LayoutParams());
 
             doneButton.setOnClickListener(this);
             cancelButton.setOnClickListener(this);
@@ -135,10 +141,12 @@ public class EntriesManagerFragment extends BaseFragment implements View.OnClick
             entriesList.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
             entriesList.setOnItemClickListener(entriesListItemClickListener);
         } else {
-            actionBar.setTitle(getString(R.string.entriesmanager_title));
-            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
+            activity.toolbar.removeAllViews();
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setCustomView(null);
+            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
+            actionBar.setTitle(getString(R.string.entriesmanager_title));
+            actionBar.setDisplayHomeAsUpEnabled(true);
+//            actionBar.setCustomView(null);
             entriesList.clearChoices();
 
             pickANameLayout.setVisibility(View.GONE);
@@ -179,7 +187,7 @@ public class EntriesManagerFragment extends BaseFragment implements View.OnClick
                     baseContext.testRestDb.updateRequest(baseContext.currentRequest, requestToUpdate.id);
                 } else {
                     String requestName = nameEditText.getText().toString();
-                    if (baseContext.testRestDb.isUniqueRequestName(requestName)) {
+                    if (!TextUtils.isEmpty(requestName) && baseContext.testRestDb.isUniqueRequestName(requestName)) {
                         baseContext.currentRequest.name = requestName;
                         baseContext.currentRequest = baseContext.testRestDb.addRequest(baseContext.currentRequest);
                     } else {
