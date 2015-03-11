@@ -7,12 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.Toast;
-
 
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.ui.fragments.BaseDialogFragment;

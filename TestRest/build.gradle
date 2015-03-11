@@ -19,9 +19,38 @@ repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
+dependencies {
+    compile 'com.android.support:support-v4:21.0.3'
+//    compile 'com.android.support:gridlayout-v7:19'
+    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.google.android.gms:play-services:6.5.87'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile project(':AndroidNetworkManager')
+    compile('com.crashlytics.sdk.android:crashlytics:2.2.2@aar') {
+        transitive = true;
+    }
 android {
     compileSdkVersion 21
-    buildToolsVersion '19.1'
+    buildToolsVersion "21.1.2"
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+
+    defaultConfig {
+        versionCode 1004
+        versionName "1.004"
+
+        minSdkVersion 14
+        targetSdkVersion 21
+    }
+
 
     final Console console = System.console();
     if (console != null) {
@@ -55,21 +84,7 @@ android {
 
     sourceSets.release.setRoot('src/release')
     sourceSets.debug.setRoot('src/debug')
-
-    defaultConfig {
-        minSdkVersion 11
-        targetSdkVersion 21
-    }
 }
 
-dependencies {
-    compile 'com.android.support:support-v4:21.0.3'
-//    compile 'com.android.support:gridlayout-v7:19'
-    compile 'com.android.support:appcompat-v7:21.0.3'
-    compile 'com.google.android.gms:play-services:6.5.87'
-    compile 'com.nineoldandroids:library:2.4.0'
-    compile project(':AndroidNetworkManager')
-    compile('com.crashlytics.sdk.android:crashlytics:2.2.2@aar') {
-        transitive = true;
-    }
+
 }

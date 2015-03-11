@@ -75,6 +75,9 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     private AddedHeadersAdapter addedHeadersAdapter;
     private ArrayList<RequestHeader> headersList = new ArrayList<RequestHeader>();
 
+    AddQueryDialog addQueryDialog = null;
+    AddHeaderDialog addHeaderDialog = null;
+
     private Request request = new Request();
 
     public RequestFragment() {
@@ -175,8 +178,8 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         addQueryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddQueryDialog dialog = AddQueryDialog.getInstance(queryPopupListener);
-                dialog.displayDialog(getBaseActivity(), "ADD_HEADER");
+                addQueryDialog = AddQueryDialog.getInstance(queryPopupListener);
+                addQueryDialog.displayDialog(getBaseActivity(), "ADD_HEADER");
             }
         });
 
@@ -184,8 +187,8 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         addHeadersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddHeaderDialog dialog = AddHeaderDialog.getInstance(headerPopupListener);
-                dialog.displayDialog(getBaseActivity(), "ADD_HEADER");
+                addHeaderDialog = AddHeaderDialog.getInstance(headerPopupListener);
+                addHeaderDialog.displayDialog(getBaseActivity(), "ADD_HEADER");
             }
         });
 
@@ -243,6 +246,20 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if (addQueryDialog != null && addQueryDialog.getDialog() != null && addQueryDialog.getDialog().isShowing()) {
+            addQueryDialog.dismiss();
+        }
+        addQueryDialog = null;
+        if (addHeaderDialog != null && addHeaderDialog.getDialog() != null && addHeaderDialog.getDialog().isShowing()) {
+            addHeaderDialog.dismiss();
+        }
+        addHeaderDialog = null;
     }
 
     public void init_withRequest(Request request) {
