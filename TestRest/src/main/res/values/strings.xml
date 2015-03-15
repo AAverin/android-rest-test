@@ -66,6 +66,7 @@
 
     <string name="error_emptyFields">Please provide at least baseUrl</string>
     <string name="error_not_unique_name">Please provide a unique name</string>
+    <string name="error_request_generic">Something\'s wrong with request, please check syntax</string>
 
     <string name="label_critical_error">Critical Error</string>
     <string name="label_critical_error_message">Sorry, something went wrong, application will be restarted.\n\nSupport have been notified about the problem.</string>

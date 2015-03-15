@@ -1,6 +1,5 @@
 package pro.anton.averin.networking.testrest.ui.fragments;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +10,9 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.BaseContext;
+import pro.anton.averin.networking.testrest.R;
+import pro.anton.averin.networking.testrest.ui.activities.BaseActivity;
 import pro.anton.averin.networking.testrest.ui.views.jsonviewer.JsonTreeViewer;
 
 /**
@@ -20,7 +20,7 @@ import pro.anton.averin.networking.testrest.ui.views.jsonviewer.JsonTreeViewer;
  */
 public class JsonResponseFragment extends ResponseTabFragment {
 
-    private Activity activity;
+    private BaseActivity activity;
     private BaseContext baseContext;
     private JsonTreeViewer jsonTreeViewer;
     LinearLayout progressBarLayout;
@@ -35,7 +35,7 @@ public class JsonResponseFragment extends ResponseTabFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.activity = getActivity();
+        this.activity = (BaseActivity) getActivity();
         baseContext = (BaseContext) activity.getApplicationContext();
         init();
     }
@@ -61,6 +61,8 @@ public class JsonResponseFragment extends ResponseTabFragment {
     }
 
     public void update() {
+        if (activity == null || activity.isActive())
+            return;
 
         if (baseContext.currentResponse == null || baseContext.currentResponse.body == null) {
             blankSlate.setVisibility(View.VISIBLE);

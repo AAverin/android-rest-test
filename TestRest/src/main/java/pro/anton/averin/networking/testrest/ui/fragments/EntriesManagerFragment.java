@@ -112,7 +112,7 @@ public class EntriesManagerFragment extends BaseFragment implements View.OnClick
         dismissTouchListener = new SwipeDismissListViewTouchListener(entriesList, new SwipeDismissListViewTouchListener.OnDismissCallback() {
             @Override
             public void onDismiss(ListView listView, int[] reverseSortedPositions) {
-                if (reverseSortedPositions.length != 0) {
+                if (reverseSortedPositions.length > 0 && entriesAdapter.getCount() > 0) {
                     Request deletedRequest = entriesAdapter.getItem(reverseSortedPositions[0]);
                     baseContext.testRestDb.deleteRequest(deletedRequest.id);
                     refreshRequestsList();

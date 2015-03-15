@@ -30,6 +30,7 @@ import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.ArgbEvaluator;
 import com.nineoldandroids.animation.ValueAnimator;
 
+import java.net.URI;
 import java.util.ArrayList;
 
 import pro.anton.averin.networking.testrest.BaseContext;
@@ -87,13 +88,14 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.activity = getActivity();
-        this.baseContext = (BaseContext)activity.getApplicationContext();
+        this.baseContext = (BaseContext) activity.getApplicationContext();
         init();
     }
 
     public class QuerySpan extends ClickableSpan {
 
         public String chip;
+
         public QuerySpan(String chip) {
             this.chip = chip;
         }
@@ -200,7 +202,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if (hasFocus) {
-                    TokenizedEditText edit = ((TokenizedEditText)view);
+                    TokenizedEditText edit = ((TokenizedEditText) view);
                     if (edit.getText().length() == edit.getSelectionEnd()) {
                         highlightQueryButton();
                     }
@@ -231,8 +233,8 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
         buildRequest();
-        TestRestFragment p = (TestRestFragment) ((FragmentActivity)activity).getSupportFragmentManager().findFragmentByTag("MAIN");
-        switch(menuItem.getItemId()) {
+        TestRestFragment p = (TestRestFragment) ((FragmentActivity) activity).getSupportFragmentManager().findFragmentByTag("MAIN");
+        switch (menuItem.getItemId()) {
             case R.id.action_save:
                 p.openManagerActivity(true);
                 break;
@@ -384,7 +386,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         switch (view.getId()) {
             case R.id.btn_send:
                 if (prepareRequest()) {
-                    TestRestFragment p = (TestRestFragment) ((FragmentActivity)activity).getSupportFragmentManager().findFragmentByTag("MAIN");
+                    TestRestFragment p = (TestRestFragment) ((FragmentActivity) activity).getSupportFragmentManager().findFragmentByTag("MAIN");
                     p.showResponsePage();
                 }
                 break;
@@ -393,12 +395,15 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
 
     public boolean prepareRequest() {
         if (!validate()) {
-            Toast.makeText(activity, getString(R.string.error_emptyFields), 3000).show();
+            Toast.makeText(activity, getString(R.string.error_emptyFields), Toast.LENGTH_LONG).show();
             baseUrlEditText.requestFocus();
             return false;
         }
         baseContext.currentResponse = null;
         baseContext.currentRequest = buildRequest();
+        if (baseContext.currentRequest == null) {
+            Toast.makeText(activity, getString(R.string.error_request_generic), Toast.LENGTH_LONG).show();
+        }
         return true;
     }
 
@@ -426,7 +431,14 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
                 headers.append(header.toString());
             }
             Crashlytics.setString("request.headers", headers.toString());
-         }
+        }
+
+        try {
+            URI.create(baseContext.currentRequest.asURI());
+        } catch (Throwable e) {
+            e.printStackTrace();
+            return null;
+        }
 
         return request;
     }
