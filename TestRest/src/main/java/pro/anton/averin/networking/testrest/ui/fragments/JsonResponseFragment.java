@@ -61,7 +61,7 @@ public class JsonResponseFragment extends ResponseTabFragment {
     }
 
     public void update() {
-        if (activity == null || activity.isActive())
+        if (activity == null || !activity.isActive())
             return;
 
         if (baseContext.currentResponse == null || baseContext.currentResponse.body == null) {

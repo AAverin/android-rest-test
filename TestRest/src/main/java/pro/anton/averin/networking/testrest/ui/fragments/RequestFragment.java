@@ -434,7 +434,7 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         }
 
         try {
-            URI.create(baseContext.currentRequest.asURI());
+            URI.create(request.asURI());
         } catch (Throwable e) {
             e.printStackTrace();
             return null;
