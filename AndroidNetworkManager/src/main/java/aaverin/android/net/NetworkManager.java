@@ -234,34 +234,39 @@ public class NetworkManager extends AbstractNetworkManager implements OnNetworkS
 
     public void onNetworkSendStart(NetworkMessage message) {
         for (NetworkListener networkListsner : listeners) {
-            networkListsner.requestStart(message);
+            if (networkListsner != null)
+                networkListsner.requestStart(message);
         }
     }
 
     public void onNetworkSendProgress(NetworkMessage message) {
         for (NetworkListener networkListsner : listeners) {
-            networkListsner.requestProgress(message);
+            if (networkListsner != null)
+                networkListsner.requestProgress(message);
         }
     }
 
     public void onQueueStart() {
         queueProcessingStarted = true;
         for (NetworkListener networkListsner : listeners) {
-            networkListsner.queueStart();
+            if (networkListsner != null)
+                networkListsner.queueStart();
         }
     }
 
     public void onQueueFinished() {
         queueProcessingStarted = false;
         for (NetworkListener networkListsner : listeners) {
-            networkListsner.queueFinish();
+            if (networkListsner != null)
+                networkListsner.queueFinish();
         }
     }
 
     public void onQueueFailed() {
         queueProcessingStarted = false;
         for (NetworkListener networkListsner : listeners) {
-            networkListsner.queueFailed();
+            if (networkListsner != null)
+                networkListsner.queueFailed();
         }
     }
 
