@@ -4,3 +4,4 @@ AndroidNetworkManager/build/*
 .gradle/*
 .idea/*
 build/intermediates/*
+*.iml
