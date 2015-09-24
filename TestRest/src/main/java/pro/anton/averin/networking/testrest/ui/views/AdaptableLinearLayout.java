@@ -10,107 +10,107 @@ import android.widget.LinearLayout;
 
 public class AdaptableLinearLayout extends LinearLayout {
 
-	private BaseAdapter mAdapter;
+    private BaseAdapter mAdapter;
 
-	private int mItemCount = 0;
+    private int mItemCount = 0;
 
-	private boolean mDisableChildrenWhenDisabled = false;
+    private boolean mDisableChildrenWhenDisabled = false;
 
-	private int mWidthMeasureSpec;
-	private int mHeightMeasureSpec;
-	
+    private int mWidthMeasureSpec;
+    private int mHeightMeasureSpec;
 
-	public AdaptableLinearLayout(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		// TODO Auto-generated constructor stub
-	}
 
-	public BaseAdapter getAdapter() {
-		return mAdapter;
-	}
+    public AdaptableLinearLayout(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        // TODO Auto-generated constructor stub
+    }
 
-	public void setAdapter(BaseAdapter adapter) {
-		mAdapter = adapter;
-		adapter.registerDataSetObserver(new DataSetObserver() {
-			@Override
-			public void onChanged() {
-				updateLayout();
-				super.onChanged();
-			}
-			
-			@Override
-			public void onInvalidated() {
-				updateLayout();
-				super.onInvalidated();
-			}
-		});
-		updateLayout();
-	}
-	
-	private void updateLayout() {
-		mItemCount = mAdapter.getCount();
-		requestLayout();
-		invalidate();
-	}
+    public BaseAdapter getAdapter() {
+        return mAdapter;
+    }
 
-	/**
-	 * set size for the current View
-	 */
-	@Override
-	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-		mWidthMeasureSpec = widthMeasureSpec;
-		mHeightMeasureSpec = heightMeasureSpec;
-		
-		removeAllViewsInLayout();
-		for (int i = 0; i < mItemCount; i++) {
-			makeAndAddView(i);
-		}
-	}
+    public void setAdapter(BaseAdapter adapter) {
+        mAdapter = adapter;
+        adapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                updateLayout();
+                super.onChanged();
+            }
 
-	private View makeAndAddView(int position) {
-		View child;
+            @Override
+            public void onInvalidated() {
+                updateLayout();
+                super.onInvalidated();
+            }
+        });
+        updateLayout();
+    }
 
-		// Nothing found in the recycler -- ask the adapter for a view
-		child = mAdapter.getView(position, null, this);
+    private void updateLayout() {
+        mItemCount = mAdapter.getCount();
+        requestLayout();
+        invalidate();
+    }
 
-		// Position the view
-		setUpChild(child, position);
+    /**
+     * set size for the current View
+     */
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        mWidthMeasureSpec = widthMeasureSpec;
+        mHeightMeasureSpec = heightMeasureSpec;
 
-		return child;
+        removeAllViewsInLayout();
+        for (int i = 0; i < mItemCount; i++) {
+            makeAndAddView(i);
+        }
+    }
 
-	}
+    private View makeAndAddView(int position) {
+        View child;
 
-	private void setUpChild(View child, int position) {
-		
-		ViewGroup.LayoutParams lp = child.getLayoutParams();
-		if (lp == null) {
-			lp = generateDefaultLayoutParams();
-		}
-		addViewInLayout(child, position, lp);
+        // Nothing found in the recycler -- ask the adapter for a view
+        child = mAdapter.getView(position, null, this);
 
-		// Get measure specs
-		int childHeightSpec = ViewGroup.getChildMeasureSpec(mHeightMeasureSpec, getPaddingTop() + getPaddingBottom(), lp.height);
-		int childWidthSpec = ViewGroup.getChildMeasureSpec(mWidthMeasureSpec, getPaddingLeft() + getPaddingRight(), lp.width);
+        // Position the view
+        setUpChild(child, position);
 
-		// Measure child
-		child.measure(childWidthSpec, childHeightSpec);
+        return child;
 
-		int childLeft;
-		int childRight;
+    }
 
-		// Position vertically based on gravity setting
-		int childTop = getPaddingTop() + ((getMeasuredHeight() - getPaddingBottom() - getPaddingTop() - child.getMeasuredHeight()) / 2);
-		int childBottom = childTop + child.getMeasuredHeight();
+    private void setUpChild(View child, int position) {
 
-		int width = child.getMeasuredWidth();
-		childLeft = 0;
-		childRight = childLeft + width;
+        ViewGroup.LayoutParams lp = child.getLayoutParams();
+        if (lp == null) {
+            lp = generateDefaultLayoutParams();
+        }
+        addViewInLayout(child, position, lp);
 
-		child.layout(childLeft, childTop, childRight, childBottom);
+        // Get measure specs
+        int childHeightSpec = ViewGroup.getChildMeasureSpec(mHeightMeasureSpec, getPaddingTop() + getPaddingBottom(), lp.height);
+        int childWidthSpec = ViewGroup.getChildMeasureSpec(mWidthMeasureSpec, getPaddingLeft() + getPaddingRight(), lp.width);
 
-		if (mDisableChildrenWhenDisabled) {
-			child.setEnabled(isEnabled());
-		}
-	}
+        // Measure child
+        child.measure(childWidthSpec, childHeightSpec);
+
+        int childLeft;
+        int childRight;
+
+        // Position vertically based on gravity setting
+        int childTop = getPaddingTop() + ((getMeasuredHeight() - getPaddingBottom() - getPaddingTop() - child.getMeasuredHeight()) / 2);
+        int childBottom = childTop + child.getMeasuredHeight();
+
+        int width = child.getMeasuredWidth();
+        childLeft = 0;
+        childRight = childLeft + width;
+
+        child.layout(childLeft, childTop, childRight, childBottom);
+
+        if (mDisableChildrenWhenDisabled) {
+            child.setEnabled(isEnabled());
+        }
+    }
 }

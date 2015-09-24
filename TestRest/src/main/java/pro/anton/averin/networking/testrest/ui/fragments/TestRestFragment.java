@@ -23,11 +23,14 @@ public class TestRestFragment extends BaseFragment implements ViewPager.OnPageCh
     private BaseContext baseContext;
 
 
-
     private ViewPager mViewPager;
     private RestPagerAdapter pagerAdapter;
 
     private boolean isDimmed = false;
+
+    private static String makeFragmentName(int viewId, int position) {
+        return "android:switcher:" + viewId + ":" + position;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,12 +39,12 @@ public class TestRestFragment extends BaseFragment implements ViewPager.OnPageCh
     }
 
     private void init() {
-        ((FrameLayout)contentView).getForeground().setAlpha(0);
+        ((FrameLayout) contentView).getForeground().setAlpha(0);
 
         initToolbar();
 
         mViewPager = (ViewPager) contentView.findViewById(R.id.pager);
-        pagerAdapter = new RestPagerAdapter(getChildFragmentManager(), new String[] {
+        pagerAdapter = new RestPagerAdapter(getChildFragmentManager(), new String[]{
                 getString(R.string.requestViewTitle),
                 getString(R.string.responseViewTitle)
         });
@@ -53,7 +56,7 @@ public class TestRestFragment extends BaseFragment implements ViewPager.OnPageCh
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.activity = getActivity();
-        this.baseContext = (BaseContext)activity.getApplicationContext();
+        this.baseContext = (BaseContext) activity.getApplicationContext();
         init();
     }
 
@@ -68,11 +71,6 @@ public class TestRestFragment extends BaseFragment implements ViewPager.OnPageCh
     @Override
     public void onPageScrolled(int i, float v, int i2) {
 
-    }
-
-    private static String makeFragmentName(int viewId, int position)
-    {
-        return "android:switcher:" + viewId + ":" + position;
     }
 
     @Override
@@ -100,7 +98,7 @@ public class TestRestFragment extends BaseFragment implements ViewPager.OnPageCh
         if (save) {
             ViewPagerFragment pagerFragment = (ViewPagerFragment) getChildFragmentManager().findFragmentByTag(makeFragmentName(mViewPager.getId(), 0));
 
-            invokeActivity = ((RequestFragment)pagerFragment).prepareRequest();
+            invokeActivity = ((RequestFragment) pagerFragment).prepareRequest();
         }
         if (invokeActivity) {
             Intent managerActivityIntent = new Intent();

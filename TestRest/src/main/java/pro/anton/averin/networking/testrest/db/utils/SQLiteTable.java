@@ -20,9 +20,9 @@ import java.util.Map;
  */
 public final class SQLiteTable {
 
+    private final String tableName;
     ArrayList<String> tableIndex = new ArrayList<String>();
     HashMap<String, String> tableStructure = new HashMap<String, String>();
-    private final String tableName;
 
     protected SQLiteTable(String tableName) {
         this.tableName = tableName;
@@ -34,7 +34,7 @@ public final class SQLiteTable {
         createTable.append(tableName);
         createTable.append("(");
         Iterator<Map.Entry<String, String>> iterator = tableStructure.entrySet().iterator();
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             Map.Entry<String, String> entry = iterator.next();
             createTable.append(entry.getKey());
             createTable.append(" ");
@@ -79,6 +79,7 @@ public final class SQLiteTable {
         public Builder addIntegerColumn(String key) {
             return addIntegerColumn(key, "");
         }
+
         public Builder addIntegerColumn(String key, String additionalOptions) {
             sqLiteTable.addEntry(key, "INTEGER " + additionalOptions);
             return this;
@@ -87,6 +88,7 @@ public final class SQLiteTable {
         public Builder addRealColumn(String key) {
             return addRealColumn(key, "");
         }
+
         public Builder addRealColumn(String key, String additionalOptions) {
             sqLiteTable.addEntry(key, "REAL " + additionalOptions);
             return this;
@@ -95,6 +97,7 @@ public final class SQLiteTable {
         public Builder addTextColumn(String key) {
             return addTextColumn(key, "");
         }
+
         public Builder addTextColumn(String key, String additionalOptions) {
             sqLiteTable.addEntry(key, "TEXT " + additionalOptions);
             return this;
@@ -108,6 +111,7 @@ public final class SQLiteTable {
     public static class TableCursor implements Cursor {
         private Cursor baseCursor;
         private SQLiteTable table;
+
         public TableCursor(SQLiteTable table, Cursor cursor) {
             this.table = table;
             baseCursor = cursor;
@@ -127,6 +131,7 @@ public final class SQLiteTable {
         public boolean move(int i) {
             return baseCursor.move(i);
         }
+
         public boolean move(String key) {
             return move(table.indexOf(key));
         }
@@ -135,6 +140,7 @@ public final class SQLiteTable {
         public boolean moveToPosition(int i) {
             return baseCursor.moveToPosition(i);
         }
+
         public boolean moveToPosition(String key) {
             return moveToPosition(table.indexOf(key));
         }
@@ -193,6 +199,7 @@ public final class SQLiteTable {
         public String getColumnName(int i) {
             return baseCursor.getColumnName(i);
         }
+
         public String getColumnName(String key) {
             return getColumnName(table.indexOf(key));
         }
@@ -211,6 +218,7 @@ public final class SQLiteTable {
         public byte[] getBlob(int i) {
             return baseCursor.getBlob(i);
         }
+
         public byte[] getBlob(String key) {
             return getBlob(table.indexOf(key));
         }
@@ -219,6 +227,7 @@ public final class SQLiteTable {
         public String getString(int i) {
             return baseCursor.getString(i);
         }
+
         public String getString(String key) {
             return getString(table.indexOf(key));
         }
@@ -232,6 +241,7 @@ public final class SQLiteTable {
         public short getShort(int i) {
             return baseCursor.getShort(i);
         }
+
         public short getShort(String key) {
             return getShort(table.indexOf(key));
         }
@@ -240,6 +250,7 @@ public final class SQLiteTable {
         public int getInt(int i) {
             return baseCursor.getInt(i);
         }
+
         public int getInt(String key) {
             return getInt(table.indexOf(key));
         }
@@ -248,6 +259,7 @@ public final class SQLiteTable {
         public long getLong(int i) {
             return baseCursor.getLong(i);
         }
+
         public long getLong(String key) {
             return getLong(table.indexOf(key));
         }
@@ -256,6 +268,7 @@ public final class SQLiteTable {
         public float getFloat(int i) {
             return baseCursor.getFloat(i);
         }
+
         public float getFloat(String key) {
             return getFloat(table.indexOf(key));
         }
@@ -264,6 +277,7 @@ public final class SQLiteTable {
         public double getDouble(int i) {
             return baseCursor.getDouble(i);
         }
+
         public double getDouble(String key) {
             return getDouble(table.indexOf(key));
         }
@@ -273,6 +287,7 @@ public final class SQLiteTable {
         public int getType(int i) {
             return baseCursor.getType(i);
         }
+
         public int getType(String key) {
             return getType(table.indexOf(key));
         }
@@ -281,6 +296,7 @@ public final class SQLiteTable {
         public boolean isNull(int i) {
             return baseCursor.isNull(i);
         }
+
         public boolean isNull(String key) {
             return isNull(table.indexOf(key));
         }

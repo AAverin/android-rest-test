@@ -15,11 +15,12 @@ import android.widget.TextView;
 public class ClickableArrowKeyMovementMethod extends ArrowKeyMovementMethod {
 
     private static ClickableArrowKeyMovementMethod instance = null;
+
     public static ClickableArrowKeyMovementMethod getInstance() {
         if (instance == null) {
             instance = new ClickableArrowKeyMovementMethod();
         }
-        return  instance;
+        return instance;
     }
 
     @Override
@@ -49,8 +50,8 @@ public class ClickableArrowKeyMovementMethod extends ArrowKeyMovementMethod {
         int action = event.getAction();
 
         if (action == MotionEvent.ACTION_UP) {
-            int x = (int)event.getX();
-            int y = (int)event.getY();
+            int x = (int) event.getX();
+            int y = (int) event.getY();
 
             x -= widget.getTotalPaddingLeft();
             y -= widget.getTotalPaddingTop();

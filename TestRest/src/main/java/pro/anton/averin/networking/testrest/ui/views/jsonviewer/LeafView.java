@@ -12,11 +12,10 @@ import pro.anton.averin.networking.testrest.R;
  */
 public class LeafView extends LinearLayout {
 
-    private String key;
-    private Object value;
-
     TextView leafKey;
     TextView leafValue;
+    private String key;
+    private Object value;
 
     public LeafView(Context context, String key, Object value) {
         super(context);

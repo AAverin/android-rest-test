@@ -25,27 +25,6 @@ public class TokenizedEditText extends EditText {
     private TokenListener tokenListener;
 
     private SpannableStringBuilder spannableStringBuilder = null;
-    private boolean inTokenizer = false;
-
-    public interface TokenListener {
-        public ClickableSpan onCreateTokenSpan(String chip);
-    }
-
-    public TokenizedEditText(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        init(context);
-    }
-
-    public TokenizedEditText(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(context);
-    }
-
-    public TokenizedEditText(Context context) {
-        super(context);
-        init(context);
-    }
-
     OnFocusChangeListener focusChangeListener = new OnFocusChangeListener() {
         @Override
         public void onFocusChange(View view, boolean b) {
@@ -54,22 +33,7 @@ public class TokenizedEditText extends EditText {
             }
         }
     };
-
-    private void init(Context context) {
-        addTextChangedListener(tokenizer);
-        this.context = context;
-        setMovementMethod(ClickableArrowKeyMovementMethod.getInstance());
-    }
-
-    public void setTokenRegexp(String regexp) {
-        tokenRegexp = Pattern.compile(regexp);
-        tokenStringContainsRegexp = Pattern.compile(".*" + regexp + ".*");
-    }
-
-    public void setTokenListener(TokenListener listener) {
-        this.tokenListener = listener;
-    }
-
+    private boolean inTokenizer = false;
     TextWatcher tokenizer = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
@@ -88,6 +52,36 @@ public class TokenizedEditText extends EditText {
 
         }
     };
+
+    public TokenizedEditText(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        init(context);
+    }
+
+    public TokenizedEditText(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init(context);
+    }
+
+    public TokenizedEditText(Context context) {
+        super(context);
+        init(context);
+    }
+
+    private void init(Context context) {
+        addTextChangedListener(tokenizer);
+        this.context = context;
+        setMovementMethod(ClickableArrowKeyMovementMethod.getInstance());
+    }
+
+    public void setTokenRegexp(String regexp) {
+        tokenRegexp = Pattern.compile(regexp);
+        tokenStringContainsRegexp = Pattern.compile(".*" + regexp + ".*");
+    }
+
+    public void setTokenListener(TokenListener listener) {
+        this.tokenListener = listener;
+    }
 
     private void applyTokens() {
         if (spannableStringBuilder != null) {
@@ -113,5 +107,9 @@ public class TokenizedEditText extends EditText {
         }
         applyTokens();
         inTokenizer = false;
+    }
+
+    public interface TokenListener {
+        public ClickableSpan onCreateTokenSpan(String chip);
     }
 }

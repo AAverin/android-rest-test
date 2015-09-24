@@ -1,67 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <include layout="@layout/toolbar_actionbar"/>
-
-    <LinearLayout
-        android:focusable="true" android:focusableInTouchMode="true"
-        android:layout_width="0px" android:layout_height="0px"/>
+    <include layout="@layout/toolbar_actionbar" />
 
     <LinearLayout
-            android:layout_margin="8dp"
-            android:orientation="vertical"
-            android:id="@+id/pickname_layout"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+
+    <LinearLayout
+        android:id="@+id/pickname_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="vertical">
 
         <TextView
-                android:layout_marginLeft="8dp"
-                android:text="@string/pick_a_name"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="@string/pick_a_name" />
 
         <EditText
-                android:id="@+id/custom_name"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-            android:nextFocusUp="@id/custom_name" android:nextFocusLeft="@id/custom_name"/>
+            android:id="@+id/custom_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusLeft="@id/custom_name"
+            android:nextFocusUp="@id/custom_name" />
 
     </LinearLayout>
 
     <LinearLayout
-            android:id="@+id/entries_layout"
-            android:orientation="vertical"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+        android:id="@+id/entries_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/or_select"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/or_select_from_list" />
 
         <TextView
-                android:gravity="center_horizontal"
-                android:id="@+id/or_select"
-                android:text="@string/or_select_from_list"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-
-        <TextView
-                android:text="@string/entrieslist_blankslate"
-                android:id="@+id/blank_slate"
-                android:gravity="center"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:visibility="gone"/>
+            android:id="@+id/blank_slate"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="@string/entrieslist_blankslate"
+            android:visibility="gone" />
 
         <ListView
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:id="@+id/entries_list"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-                <!--android:choiceMode="singleChoice"-->
+            android:id="@+id/entries_list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp">
+            <!--android:choiceMode="singleChoice"-->
 
         </ListView>
 

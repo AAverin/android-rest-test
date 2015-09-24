@@ -14,14 +14,36 @@ public class RequestHeader {
     public long requestId;
     public String name;
     public String value;
+
     public RequestHeader(String name, String value) {
         this.name = name;
         this.value = value;
     }
 
+    public RequestHeader() {
+
+    }
+
     @Override
     public String toString() {
         return "RequestHeader :: " + name + " : " + value + ";";
+    }
+
+    public ContentValues asContentValues() {
+        ContentValues values = new ContentValues();
+        values.put(SQLITE.COL_REQUESTID, requestId);
+        values.put(SQLITE.COL_NAME, name);
+        values.put(SQLITE.COL_VALUE, value);
+        return values;
+    }
+
+    public RequestHeader fromCursor(Cursor cursor) {
+        SQLiteTable.TableCursor c = new SQLiteTable.TableCursor(SQLITE.table, cursor);
+        this.id = c.getInt(SQLITE.COL_ID);
+        this.name = c.getString(SQLITE.COL_NAME);
+        this.requestId = c.getInt(SQLITE.COL_REQUESTID);
+        this.value = c.getString(SQLITE.COL_VALUE);
+        return this;
     }
 
     public static class SQLITE {
@@ -36,26 +58,5 @@ public class RequestHeader {
                 .addIntegerColumn(COL_REQUESTID)
                 .addTextColumn(COL_NAME)
                 .addTextColumn(COL_VALUE).build();
-    }
-
-    public ContentValues asContentValues() {
-        ContentValues values = new ContentValues();
-        values.put(SQLITE.COL_REQUESTID, requestId);
-        values.put(SQLITE.COL_NAME, name);
-        values.put(SQLITE.COL_VALUE, value);
-        return values;
-    }
-
-    public RequestHeader() {
-
-    }
-
-    public RequestHeader fromCursor(Cursor cursor) {
-        SQLiteTable.TableCursor c = new SQLiteTable.TableCursor(SQLITE.table, cursor);
-        this.id = c.getInt(SQLITE.COL_ID);
-        this.name = c.getString(SQLITE.COL_NAME);
-        this.requestId = c.getInt(SQLITE.COL_REQUESTID);
-        this.value = c.getString(SQLITE.COL_VALUE);
-        return this;
     }
 }

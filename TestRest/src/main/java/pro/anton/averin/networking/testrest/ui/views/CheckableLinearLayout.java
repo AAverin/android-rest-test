@@ -18,30 +18,30 @@ public class CheckableLinearLayout extends LinearLayout implements Checkable {
         super(context);
     }
 
-	public CheckableLinearLayout(Context context, AttributeSet attrs) {
-		super(context, attrs);
-	}
+    public CheckableLinearLayout(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public CheckableLinearLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
-	@Override
-	public boolean isChecked() {
-		return isChecked;
-	}
+    @Override
+    public boolean isChecked() {
+        return isChecked;
+    }
 
-	@Override
-	public void setChecked(boolean checked) {
+    @Override
+    public void setChecked(boolean checked) {
         isChecked = checked;
         refreshDrawableState();
-	}
+    }
 
-	@Override
-	public void toggle() {
+    @Override
+    public void toggle() {
         setChecked(!isChecked);
-	}
+    }
 
     //respect drawable states
     @Override
@@ -60,42 +60,6 @@ public class CheckableLinearLayout extends LinearLayout implements Checkable {
         return drawableState;
     }
 
-    static class SavedState extends BaseSavedState {
-        boolean checked;
-
-        SavedState(Parcelable superState) {
-            super(superState);
-        }
-
-        private SavedState(Parcel in) {
-            super(in);
-            checked = (Boolean)in.readValue(null);
-        }
-
-        @Override
-        public void writeToParcel(Parcel out, int flags) {
-            super.writeToParcel(out, flags);
-            out.writeValue(checked);
-        }
-
-        @Override
-        public String toString() {
-            return "CheckableLinearLayout.SavedState{"
-                    + Integer.toHexString(System.identityHashCode(this))
-                    + " checked=" + checked + "}";
-        }
-
-        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
-            public SavedState createFromParcel(Parcel in) {
-                return new SavedState(in);
-            }
-
-            public SavedState[] newArray(int size) {
-                return new SavedState[size];
-            }
-        };
-    }
-
     @Override
     public Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
@@ -112,5 +76,40 @@ public class CheckableLinearLayout extends LinearLayout implements Checkable {
         super.onRestoreInstanceState(ss.getSuperState());
         setChecked(ss.checked);
         requestLayout();
+    }
+
+    static class SavedState extends BaseSavedState {
+        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
+
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
+        boolean checked;
+
+        SavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        private SavedState(Parcel in) {
+            super(in);
+            checked = (Boolean) in.readValue(null);
+        }
+
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            out.writeValue(checked);
+        }
+
+        @Override
+        public String toString() {
+            return "CheckableLinearLayout.SavedState{"
+                    + Integer.toHexString(System.identityHashCode(this))
+                    + " checked=" + checked + "}";
+        }
     }
 }

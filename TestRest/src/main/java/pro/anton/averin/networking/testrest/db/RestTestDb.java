@@ -5,14 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.preference.PreferenceActivity;
 import android.util.Log;
-
-import com.integralblue.httpresponsecache.compat.libcore.net.http.RequestHeaders;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import pro.anton.averin.networking.testrest.models.Headers;
 import pro.anton.averin.networking.testrest.models.Request;
@@ -23,8 +19,8 @@ import pro.anton.averin.networking.testrest.models.RequestHeader;
  */
 public class RestTestDb {
 
-    private final static String TAG = RestTestDb.class.getName();
     public static final String DATABASE_NAME = "resttest.db";
+    private final static String TAG = RestTestDb.class.getName();
     private static final int DATABASE_VERSION = 2;
 
     private final DatabaseHelper helper;
@@ -105,7 +101,7 @@ public class RestTestDb {
     public boolean isUniqueRequestName(String requestName) {
         SQLiteDatabase db = helper.getReadableDatabase();
 
-        Cursor c = db.query(Request.SQLITE.TABLE_NAME, new String[] {Request.SQLITE.COL_ID}, Request.SQLITE.COL_NAME + " like ?", new String[] {requestName} , null, null, null);
+        Cursor c = db.query(Request.SQLITE.TABLE_NAME, new String[]{Request.SQLITE.COL_ID}, Request.SQLITE.COL_NAME + " like ?", new String[]{requestName}, null, null, null);
         return c.getCount() == 0;
     }
 
@@ -148,7 +144,7 @@ public class RestTestDb {
         ContentValues values = header.asContentValues();
         SQLiteDatabase db = helper.getWritableDatabase();
         String whereClause = Headers.SQLITE.COL_ID + "=?";
-        String[] whereArgs = { String.valueOf(header.id) };
+        String[] whereArgs = {String.valueOf(header.id)};
         int rows = db.update(Headers.SQLITE.TABLE_NAME, values, whereClause, whereArgs);
         if (rows != 1)
             throw new SQLException("Couldn't update header " + header);

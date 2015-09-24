@@ -5,10 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import pro.anton.averin.networking.testrest.models.Headers;
@@ -31,7 +29,7 @@ public class HeadersListAdapter extends ArrayAdapter<Headers.Header> {
         if (convertView == null) {
             itemView = LayoutInflater.from(context).inflate(android.R.layout.simple_spinner_item, parent, false);
         }
-        ((TextView)itemView).setText(getItem(position).name);
+        ((TextView) itemView).setText(getItem(position).name);
         return itemView;
     }
 
@@ -39,9 +37,9 @@ public class HeadersListAdapter extends ArrayAdapter<Headers.Header> {
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         View itemView = convertView;
         if (convertView == null) {
-            itemView = LayoutInflater.from(context).inflate(android.R.layout.simple_spinner_dropdown_item, parent, false    );
+            itemView = LayoutInflater.from(context).inflate(android.R.layout.simple_spinner_dropdown_item, parent, false);
         }
-        ((TextView)itemView).setText(getItem(position).name);
+        ((TextView) itemView).setText(getItem(position).name);
         return itemView;
     }
 }

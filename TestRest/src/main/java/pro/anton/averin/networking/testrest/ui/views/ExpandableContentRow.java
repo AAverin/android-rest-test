@@ -41,7 +41,7 @@ public class ExpandableContentRow extends LinearLayout implements View.OnClickLi
         LayoutInflater inflater = LayoutInflater.from(context);
         inflater.inflate(R.layout.expandable_content_row, this, true);
         content = (LinearLayout) findViewById(R.id.content);
-        expandButton = (ImageButton)findViewById(R.id.expand_button);
+        expandButton = (ImageButton) findViewById(R.id.expand_button);
         expandButton.setOnClickListener(this);
         mTitleView = (TextView) findViewById(R.id.title);
 

@@ -38,9 +38,9 @@ import aaverin.android.net.NetworkManager;
 import aaverin.android.net.NetworkMessage;
 import aaverin.android.net.NetworkResponse;
 import aaverin.android.net.NetworkResponseProcessException;
+import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.Config;
 import pro.anton.averin.networking.testrest.R;
-import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.models.RequestHeader;
 import pro.anton.averin.networking.testrest.models.Response;
 
@@ -49,29 +49,26 @@ import pro.anton.averin.networking.testrest.models.Response;
  */
 public class ResponseFragment extends ViewPagerFragment implements NetworkListener {
 
+    ShareActionProvider shareActionProvider;
+    Intent shareIntent = null;
     private Activity activity;
     private BaseContext baseContext;
     private FragmentTabHost mTabHost;
     private NetworkMessage message;
-
     private FragmentManager fragmentManager;
-
     private LinearLayout responseLayout;
     private LinearLayout progressbarLayout;
     private LinearLayout noDataLayout;
-
-    ShareActionProvider shareActionProvider;
-    Intent shareIntent = null;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.activity = getActivity();
 
-        ((FragmentActivity)activity).supportInvalidateOptionsMenu();
-        fragmentManager = ((FragmentActivity)activity).getSupportFragmentManager();
+        ((FragmentActivity) activity).supportInvalidateOptionsMenu();
+        fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
 
-        baseContext = (BaseContext)activity.getApplicationContext();
+        baseContext = (BaseContext) activity.getApplicationContext();
         baseContext.networkManager.subscribe(this);
 
         init();
@@ -85,7 +82,7 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
         activity = getActivity();
         if (activity != null) {
             mTabHost = (FragmentTabHost) contentView.findViewById(R.id.tabhost);
-            mTabHost.setup(activity, ((FragmentActivity)activity).getSupportFragmentManager(), R.id.tabFrameLayout);
+            mTabHost.setup(activity, ((FragmentActivity) activity).getSupportFragmentManager(), R.id.tabFrameLayout);
 
             mTabHost.addTab(mTabHost.newTabSpec("rawResponse")
                     .setIndicator(getString(R.string.raw_response)), RawResponseFragment.class, null);
@@ -94,7 +91,7 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
             mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
                 @Override
                 public void onTabChanged(String tabId) {
-                    JsonResponseFragment jsonResponseFragment = ((JsonResponseFragment)((FragmentActivity)activity).getSupportFragmentManager().findFragmentByTag("jsonResponse"));
+                    JsonResponseFragment jsonResponseFragment = ((JsonResponseFragment) ((FragmentActivity) activity).getSupportFragmentManager().findFragmentByTag("jsonResponse"));
                     if (jsonResponseFragment != null) {
                         jsonResponseFragment.cancel();
                     }
@@ -115,7 +112,6 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
         noDataLayout = (LinearLayout) contentView.findViewById(R.id.nodata_layout);
 
 
-
         setHasOptionsMenu(true);
     }
 
@@ -130,7 +126,7 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
         super.onPrepareOptionsMenu(menu);
 
         MenuItem menuItem = menu.findItem(R.id.action_share);
-        shareActionProvider = (ShareActionProvider)MenuItemCompat.getActionProvider(menuItem);
+        shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
         if (shareIntent == null) {
             shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/html");
@@ -161,7 +157,7 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
     private Response buildResponse(NetworkMessage request, NetworkResponse responseMessage) {
         Response response = new Response();
         if (NetworkManager.NETWORK_MANAGER_CORE == NetworkManager.NetworkManagerCore.HTTPURLCONNECTION) {
-            HttpUrlConnectionResponse networkResponse = (HttpUrlConnectionResponse)responseMessage;
+            HttpUrlConnectionResponse networkResponse = (HttpUrlConnectionResponse) responseMessage;
             response.method = request.getMethod();
             response.url = request.getURI().toString();
             response.status = networkResponse.getStatus();
@@ -313,11 +309,11 @@ public class ResponseFragment extends ViewPagerFragment implements NetworkListen
         noDataLayout.setVisibility(View.GONE);
         progressbarLayout.setVisibility(View.GONE);
         responseLayout.setVisibility(View.VISIBLE);
-        ResponseTabFragment rawResponseFragment = ((ResponseTabFragment)((FragmentActivity)activity).getSupportFragmentManager().findFragmentByTag("rawResponse"));
+        ResponseTabFragment rawResponseFragment = ((ResponseTabFragment) ((FragmentActivity) activity).getSupportFragmentManager().findFragmentByTag("rawResponse"));
         if (rawResponseFragment != null) { //may be null if not yet selected
             rawResponseFragment.update();
         }
-        ResponseTabFragment jsonResponseFragment = ((ResponseTabFragment)((FragmentActivity)activity).getSupportFragmentManager().findFragmentByTag("jsonResponse"));
+        ResponseTabFragment jsonResponseFragment = ((ResponseTabFragment) ((FragmentActivity) activity).getSupportFragmentManager().findFragmentByTag("jsonResponse"));
         if (jsonResponseFragment != null) {
             jsonResponseFragment.update();
         }

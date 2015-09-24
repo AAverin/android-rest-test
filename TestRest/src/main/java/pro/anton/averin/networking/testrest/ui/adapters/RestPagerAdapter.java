@@ -17,13 +17,6 @@ import pro.anton.averin.networking.testrest.ui.fragments.ResponseFragment;
  */
 public class RestPagerAdapter extends FragmentPagerAdapter {
 
-    private FragmentManager fragmentManager;
-
-//    private <Class, String> pagerViews = new LinkedHashMap<Class, String>() {{
-//        put(RequestFragment.class, "RequestFragment");
-//        put(ResponseFragment.class, "ResponseFragment");
-//    }};
-
     ArrayList<Map.Entry<Class, String>> pagerViews = new ArrayList<Map.Entry<Class, String>>() {
         {
             add(new AbstractMap.SimpleEntry<Class, String>(RequestFragment.class, "RequestFragment"));
@@ -31,6 +24,11 @@ public class RestPagerAdapter extends FragmentPagerAdapter {
         }
     };
 
+//    private <Class, String> pagerViews = new LinkedHashMap<Class, String>() {{
+//        put(RequestFragment.class, "RequestFragment");
+//        put(ResponseFragment.class, "ResponseFragment");
+//    }};
+    private FragmentManager fragmentManager;
     private String[] pageTitles;
 
     public RestPagerAdapter(FragmentManager fm, String[] titles) {

@@ -20,17 +20,32 @@ import pro.anton.averin.networking.testrest.models.Request;
 public class RequestsAdapter extends ArrayAdapter<Request> {
 
     private Context context;
+    private View.OnClickListener collapseClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            LinearLayout layout = (LinearLayout) view.getTag();
+            layout.setVisibility(View.GONE);
+            view.setOnClickListener(expandClickListener);
+        }
+    };
+    private View.OnClickListener expandClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            LinearLayout layout = (LinearLayout) view.getTag();
+            layout.setVisibility(View.VISIBLE);
+            view.setOnClickListener(collapseClickListener);
+        }
+    };
+    private View.OnClickListener layoutCollapseClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            view.setVisibility(View.GONE);
+        }
+    };
 
     public RequestsAdapter(Context context) {
         super(context, R.layout.detailed_request_list_item);
         this.context = context;
-    }
-
-    class ViewHolder {
-        TextView requestName;
-        ImageButton detailsExpandButton;
-        LinearLayout detailsLayout;
-        TextView details;
     }
 
     public void setData(List<Request> requests) {
@@ -74,29 +89,11 @@ public class RequestsAdapter extends ArrayAdapter<Request> {
         return view;
     }
 
-    private View.OnClickListener expandClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            LinearLayout layout = (LinearLayout) view.getTag();
-            layout.setVisibility(View.VISIBLE);
-            view.setOnClickListener(collapseClickListener);
-        }
-    };
-
-    private View.OnClickListener collapseClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            LinearLayout layout = (LinearLayout) view.getTag();
-            layout.setVisibility(View.GONE);
-            view.setOnClickListener(expandClickListener);
-        }
-    };
-
-    private View.OnClickListener layoutCollapseClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            view.setVisibility(View.GONE);
-        }
-    };
+    class ViewHolder {
+        TextView requestName;
+        ImageButton detailsExpandButton;
+        LinearLayout detailsLayout;
+        TextView details;
+    }
 
 }

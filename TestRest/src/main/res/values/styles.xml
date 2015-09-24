@@ -6,13 +6,13 @@
 
         <!-- Support library compatibility -->
         <item name="actionMenuTextColor">@color/white</item>
-	
+
         <item name="actionBarSize">@dimen/actionbar_height</item>
 
         <item name="colorPrimary">@color/dark_blue</item>
         <item name="colorPrimaryDark">@color/dark_blue</item>
         <item name="android:textColorPrimary">#607d8b</item>
-	
+
     </style>
 
     <style name="Toolbar" parent="Base.ThemeOverlay.AppCompat.ActionBar">
@@ -45,7 +45,7 @@
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingBottom">4dp</item>
     </style>
-    
+
     <style name="QueryPopupAnimation">
         <item name="android:windowEnterAnimation">@anim/dialog_enter_animation</item>
         <item name="android:windowExitAnimation">@anim/dialog_exit_animation</item>

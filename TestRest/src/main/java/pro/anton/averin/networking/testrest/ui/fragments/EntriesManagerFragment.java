@@ -35,12 +35,14 @@ import pro.anton.averin.networking.testrest.ui.views.opensource.SwipeDismissList
  */
 public class EntriesManagerFragment extends BaseFragment implements View.OnClickListener, LoaderManager.LoaderCallbacks<List<Request>> {
 
-    private BaseActivity activity;
-
-    private View mActionBarCustomView;
+    private final static int LOADER_ID = 1;
     ActionBar actionBar;
     BaseContext baseContext;
-
+    SwipeDismissListViewTouchListener dismissTouchListener;
+    FrameLayout cancelButton;
+    FrameLayout doneButton;
+    private BaseActivity activity;
+    private View mActionBarCustomView;
     private LinearLayout pickANameLayout;
     private EditText nameEditText;
     private ListView entriesList;
@@ -48,16 +50,25 @@ public class EntriesManagerFragment extends BaseFragment implements View.OnClick
     private LinearLayout entriesLayout;
     private TextView orSelect;
     private TextView blankSlate;
-    SwipeDismissListViewTouchListener dismissTouchListener;
-
-    FrameLayout cancelButton;
-    FrameLayout doneButton;
-
     private ProgressDialog progressDialog;
-
-    private final static int LOADER_ID = 1;
-
     private boolean saveMode = false;
+    AdapterView.OnItemClickListener entriesListItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            if (saveMode) {
+                if (nameEditText.hasFocus()) {
+                    nameEditText.clearFocus();
+                }
+                entriesList.setItemChecked(position, true);
+            } else {
+                Request selectedRequest = entriesAdapter.getItem(position);
+                baseContext.currentRequest = selectedRequest;
+                activity.setResult(Activity.RESULT_OK);
+                activity.finish();
+            }
+
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -73,7 +84,7 @@ public class EntriesManagerFragment extends BaseFragment implements View.OnClick
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.activity = (BaseActivity) getActivity();
-        this.baseContext = (BaseContext)activity.getApplicationContext();
+        this.baseContext = (BaseContext) activity.getApplicationContext();
 
         initToolbar();
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -159,24 +170,6 @@ public class EntriesManagerFragment extends BaseFragment implements View.OnClick
             orSelect.setText(R.string.select_to_load);
         }
     }
-
-    AdapterView.OnItemClickListener entriesListItemClickListener = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-            if (saveMode) {
-                if (nameEditText.hasFocus()) {
-                    nameEditText.clearFocus();
-                }
-                entriesList.setItemChecked(position, true);
-            } else {
-                Request selectedRequest = entriesAdapter.getItem(position);
-                baseContext.currentRequest = selectedRequest;
-                activity.setResult(Activity.RESULT_OK);
-                activity.finish();
-            }
-
-        }
-    };
 
     @Override
     public void onClick(View view) {

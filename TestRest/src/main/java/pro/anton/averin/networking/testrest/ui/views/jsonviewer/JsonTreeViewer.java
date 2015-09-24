@@ -3,7 +3,6 @@ package pro.anton.averin.networking.testrest.ui.views.jsonviewer;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
@@ -22,18 +21,11 @@ import pro.anton.averin.networking.testrest.Config;
  */
 public class JsonTreeViewer extends ScrollView {
 
+    JsonTreeViewerListener callback = null;
     private Context context;
     private JSONObject mJsonObject;
-
     private TreeProcessAsyncTask processAsyncTask;
-
     private int jsonDepthLevel = 0;
-
-    JsonTreeViewerListener callback = null;
-
-    public interface JsonTreeViewerListener {
-        public void onFinish();
-    }
 
     public JsonTreeViewer(Context context) {
         super(context);
@@ -67,7 +59,6 @@ public class JsonTreeViewer extends ScrollView {
         }
     }
 
-
     public void showTree(JsonTreeViewerListener callback) {
         if (mJsonObject == null) {
             return;
@@ -78,28 +69,6 @@ public class JsonTreeViewer extends ScrollView {
         processAsyncTask = new TreeProcessAsyncTask();
 
         processAsyncTask.execute(mJsonObject);
-    }
-
-    private class TreeProcessAsyncTask extends AsyncTask<JSONObject, Void, ViewGroup> {
-
-        @Override
-        protected ViewGroup doInBackground(JSONObject... params) {
-            NodeView resultView = new NodeView(context);
-            resultView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            resultView.setOrientation(LinearLayout.VERTICAL);
-            try {
-                processJSONObject(mJsonObject, resultView);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            return resultView;
-        }
-
-        @Override
-        protected void onPostExecute(ViewGroup viewGroup) {
-            processResult(viewGroup);
-        }
     }
 
     private void processResult(ViewGroup viewGroup) {
@@ -117,7 +86,7 @@ public class JsonTreeViewer extends ScrollView {
         addView(viewGroup);
     }
 
-    private void processJSONObject(JSONObject jsonObject, NodeView nodeRoot) throws JSONException{
+    private void processJSONObject(JSONObject jsonObject, NodeView nodeRoot) throws JSONException {
         jsonDepthLevel++;
         Iterator<?> jsonIterator = jsonObject.keys();
         nodeRoot.openBracket("{");
@@ -150,6 +119,32 @@ public class JsonTreeViewer extends ScrollView {
             processJSONArray((JSONArray) value, node);
         } else {
             nodeRoot.addView(new LeafView(context, key, value));
+        }
+    }
+
+    public interface JsonTreeViewerListener {
+        public void onFinish();
+    }
+
+    private class TreeProcessAsyncTask extends AsyncTask<JSONObject, Void, ViewGroup> {
+
+        @Override
+        protected ViewGroup doInBackground(JSONObject... params) {
+            NodeView resultView = new NodeView(context);
+            resultView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            resultView.setOrientation(LinearLayout.VERTICAL);
+            try {
+                processJSONObject(mJsonObject, resultView);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return resultView;
+        }
+
+        @Override
+        protected void onPostExecute(ViewGroup viewGroup) {
+            processResult(viewGroup);
         }
     }
 

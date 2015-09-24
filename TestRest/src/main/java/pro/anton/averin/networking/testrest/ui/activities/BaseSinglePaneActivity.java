@@ -34,5 +34,6 @@ public abstract class BaseSinglePaneActivity extends BaseActivity {
     }
 
     protected abstract Fragment onCreatePane();
+
     protected abstract void onDestroyPane();
 }

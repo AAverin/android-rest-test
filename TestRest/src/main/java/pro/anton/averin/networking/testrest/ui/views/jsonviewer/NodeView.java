@@ -15,24 +15,18 @@ import pro.anton.averin.networking.testrest.R;
 public class NodeView extends LinearLayout implements View.OnClickListener {
 
     private final static int LEFT_PADDING = 16;
-
-    private String key;
-
     LinearLayout nodeKeyExpandedLayout;
     LinearLayout nodeKeyCollapsedLayout;
     LinearLayout nodeContent;
     TextView nodeKeyExpanded;
     TextView nodeKeyCollapsed;
     ImageView collapseButton;
-
     TextView ellipsesTextView = null;
-
     String openBracket = null;
     String closeBracket = null;
     boolean wasCollapsed = false;
-
     Context context;
-
+    private String key;
     private boolean isExpanded = true;
 
     private boolean isBracketOpened = false;
@@ -90,7 +84,7 @@ public class NodeView extends LinearLayout implements View.OnClickListener {
     @Override
     public void addView(View child) {
         nodeContent.addView(child);
-        child.setPadding(isBracketOpened ? LEFT_PADDING * 2 : LEFT_PADDING,0, 0, 0);
+        child.setPadding(isBracketOpened ? LEFT_PADDING * 2 : LEFT_PADDING, 0, 0, 0);
     }
 
     public void openBracket(String bracket) {

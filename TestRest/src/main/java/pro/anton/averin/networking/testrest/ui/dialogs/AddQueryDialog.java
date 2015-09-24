@@ -18,23 +18,21 @@ import pro.anton.averin.networking.testrest.ui.fragments.BaseDialogFragment;
  * Created by AAverin on 9-3-2015.
  */
 public class AddQueryDialog extends BaseDialogFragment {
-    @Override
-    public String getFragmentName() {
-        return null;
-    }
-
-    public interface QueryPopupListener {
-        public void onOk(String key, String value);
-    }
     private QueryPopupListener queryPopupListener = null;
-    public void setQueryPopupListener(QueryPopupListener listener) {
-        this.queryPopupListener = listener;
-    }
 
     public static AddQueryDialog getInstance(QueryPopupListener listener) {
         AddQueryDialog dialog = new AddQueryDialog();
         dialog.setQueryPopupListener(listener);
         return dialog;
+    }
+
+    @Override
+    public String getFragmentName() {
+        return null;
+    }
+
+    public void setQueryPopupListener(QueryPopupListener listener) {
+        this.queryPopupListener = listener;
     }
 
     @Override
@@ -73,7 +71,7 @@ public class AddQueryDialog extends BaseDialogFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        final EditText keyEditText  = (EditText) contentView.findViewById(R.id.key);
+        final EditText keyEditText = (EditText) contentView.findViewById(R.id.key);
         final EditText valueEditText = (EditText) contentView.findViewById(R.id.value);
 
         ImageButton okButton = (ImageButton) contentView.findViewById(R.id.ok_button);
@@ -92,5 +90,9 @@ public class AddQueryDialog extends BaseDialogFragment {
                 dismiss();
             }
         });
+    }
+
+    public interface QueryPopupListener {
+        public void onOk(String key, String value);
     }
 }

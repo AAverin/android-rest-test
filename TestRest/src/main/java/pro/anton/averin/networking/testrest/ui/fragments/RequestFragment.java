@@ -52,33 +52,51 @@ import pro.anton.averin.networking.testrest.ui.views.TokenizedEditText;
  */
 public class RequestFragment extends ViewPagerFragment implements TokenizedEditText.TokenListener, View.OnClickListener, RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener, MenuItem.OnMenuItemClickListener {
 
+    public final static int PICK_FILE_INTENT_ID = 11;
+    AddQueryDialog addQueryDialog = null;
+    AddHeaderDialog addHeaderDialog = null;
     private Activity activity;
     private BaseContext baseContext;
-
-    public final static int PICK_FILE_INTENT_ID = 11;
-
     private ProtocolSwitcher protocolSwitcher;
     private TokenizedEditText methodUrlEditText;
+    AddQueryDialog.QueryPopupListener queryPopupListener = new AddQueryDialog.QueryPopupListener() {
+        @Override
+        public void onOk(String key, String value) {
+            StringBuffer newValue = new StringBuffer();
+            String text = methodUrlEditText.getText().toString();
+            newValue.append(methodUrlEditText.getText().toString());
+            if (text.length() > 0) {
+                if (!text.equals("?")) {
+                    newValue.append("&");
+                }
+            } else {
+                newValue.append("?");
+            }
+            newValue.append(key);
+            newValue.append("=");
+            newValue.append(value);
+            methodUrlEditText.setText(newValue.toString());
+        }
+    };
     private TextView addQueryButton;
     private TextView addHeadersButton;
-
     private Button sendButton;
-
     private RadioGroup methodRadioGroup;
-
     private EditText baseUrlEditText;
     private LinearLayout postLayout;
     private CheckBox useFileCheckbox;
     private TextView pickFileButton;
     private EditText postBody;
-
     private AdaptableLinearLayout addedHeadersList;
     private AddedHeadersAdapter addedHeadersAdapter;
     private ArrayList<RequestHeader> headersList = new ArrayList<RequestHeader>();
-
-    AddQueryDialog addQueryDialog = null;
-    AddHeaderDialog addHeaderDialog = null;
-
+    AddHeaderDialog.HeaderPopupListener headerPopupListener = new AddHeaderDialog.HeaderPopupListener() {
+        @Override
+        public void onOk(String key, String value) {
+            headersList.add(new RequestHeader(key, value));
+            addedHeadersAdapter.notifyDataSetChanged();
+        }
+    };
     private Request request = new Request();
 
     public RequestFragment() {
@@ -91,35 +109,6 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         this.baseContext = (BaseContext) activity.getApplicationContext();
         init();
     }
-
-    public class QuerySpan extends ClickableSpan {
-
-        public String chip;
-
-        public QuerySpan(String chip) {
-            this.chip = chip;
-        }
-
-        @Override
-        public void onClick(View view) {
-//            int[] location = new int[2];
-//            view.getLocationOnScreen(location);
-//
-//            TokenizedEditText textView = (TokenizedEditText)view;
-//            String text = textView.getText().toString();
-//            int dx = Math.round(textView.getPaint().measureText(text.substring(0, text.indexOf(chip) + chip.length())));
-
-//            QueryMenuPopupWindow popup = new QueryMenuPopupWindow(activity, this);
-//            popup.setChipListener(chipListener);
-//            popup.showAtLocation(view, Gravity.NO_GRAVITY, location[0] + dx, location[1]);
-        }
-
-        @Override
-        public void updateDrawState(TextPaint ds) {
-            ds.setUnderlineText(true);
-        }
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -302,34 +291,6 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
         return -1;
     }
 
-    AddQueryDialog.QueryPopupListener queryPopupListener = new AddQueryDialog.QueryPopupListener() {
-        @Override
-        public void onOk(String key, String value) {
-            StringBuffer newValue = new StringBuffer();
-            String text = methodUrlEditText.getText().toString();
-            newValue.append(methodUrlEditText.getText().toString());
-            if (text.length() > 0) {
-                if (!text.equals("?")) {
-                    newValue.append("&");
-                }
-            } else {
-                newValue.append("?");
-            }
-            newValue.append(key);
-            newValue.append("=");
-            newValue.append(value);
-            methodUrlEditText.setText(newValue.toString());
-        }
-    };
-
-    AddHeaderDialog.HeaderPopupListener headerPopupListener = new AddHeaderDialog.HeaderPopupListener() {
-        @Override
-        public void onOk(String key, String value) {
-            headersList.add(new RequestHeader(key, value));
-            addedHeadersAdapter.notifyDataSetChanged();
-        }
-    };
-
     private void highlightQueryButton() {
         ValueAnimator animation = ValueAnimator.ofObject(new ArgbEvaluator(), getResources().getColor(android.R.color.black),
                 getResources().getColor(R.color.valid_green));
@@ -480,5 +441,33 @@ public class RequestFragment extends ViewPagerFragment implements TokenizedEditT
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public class QuerySpan extends ClickableSpan {
+
+        public String chip;
+
+        public QuerySpan(String chip) {
+            this.chip = chip;
+        }
+
+        @Override
+        public void onClick(View view) {
+//            int[] location = new int[2];
+//            view.getLocationOnScreen(location);
+//
+//            TokenizedEditText textView = (TokenizedEditText)view;
+//            String text = textView.getText().toString();
+//            int dx = Math.round(textView.getPaint().measureText(text.substring(0, text.indexOf(chip) + chip.length())));
+
+//            QueryMenuPopupWindow popup = new QueryMenuPopupWindow(activity, this);
+//            popup.setChipListener(chipListener);
+//            popup.showAtLocation(view, Gravity.NO_GRAVITY, location[0] + dx, location[1]);
+        }
+
+        @Override
+        public void updateDrawState(TextPaint ds) {
+            ds.setUnderlineText(true);
+        }
     }
 }

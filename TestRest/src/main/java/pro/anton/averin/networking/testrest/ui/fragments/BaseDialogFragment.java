@@ -36,7 +36,6 @@ public abstract class BaseDialogFragment extends DialogFragment {
     }
 
 
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

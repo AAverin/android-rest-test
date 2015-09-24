@@ -6,14 +6,14 @@
     android:layout_weight="1">
 
     <TextView
-        android:id="@+id/donediscard_cancel_button_textview"  
+        android:id="@+id/donediscard_cancel_button_textview"
         style="@style/donediscard_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:paddingRight="20dp"
         android:drawableLeft="@drawable/ic_action_discard"
         android:drawablePadding="8dp"
         android:gravity="center_vertical"
+        android:paddingRight="20dp"
         android:text="@string/AB_Cancel" />
 </FrameLayout>

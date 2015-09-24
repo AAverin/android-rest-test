@@ -1,34 +1,34 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/testrest_mainfragment"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/testrest_mainfragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TestRestActivity$PlaceholderFragment"
-    android:foreground="@drawable/popupwindow_dim_shape">
+    android:foreground="@drawable/popupwindow_dim_shape"
+    tools:context=".TestRestActivity$PlaceholderFragment">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <include layout="@layout/toolbar_actionbar"/>
+        <include layout="@layout/toolbar_actionbar" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <android.support.v4.view.PagerTitleStrip
                 android:id="@+id/pager_title_strip"
-                android:fadingEdge="horizontal"
-                android:fadingEdgeLength="50dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
                 android:background="@color/light_blue"
-                android:textColor="@color/white"
+                android:fadingEdge="horizontal"
+                android:fadingEdgeLength="50dp"
+                android:paddingBottom="4dp"
                 android:paddingTop="4dp"
-                android:paddingBottom="4dp" />
+                android:textColor="@color/white" />
 
         </android.support.v4.view.ViewPager>
 

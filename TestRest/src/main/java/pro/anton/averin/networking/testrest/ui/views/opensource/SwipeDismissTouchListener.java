@@ -23,6 +23,7 @@ import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.nineoldandroids.animation.ValueAnimator;
@@ -34,15 +35,15 @@ import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
 /**
  * A {@link android.view.View.OnTouchListener} that makes any {@link View} dismissable when the
  * user swipes (drags her finger) horizontally across the view.
- *
+ * <p/>
  * <p><em>For {@link android.widget.ListView} list items that don't manage their own touch events
  * (i.e. you're using
  * {@link android.widget.ListView#setOnItemClickListener(android.widget.AdapterView.OnItemClickListener)}
  * or an equivalent listener on {@link android.app.ListActivity} or
  * {@link android.app.ListFragment}, use {@link SwipeDismissListViewTouchListener} instead.</em></p>
- *
+ * <p/>
  * <p>Example usage:</p>
- *
+ * <p/>
  * <pre>
  * view.setOnTouchListener(new SwipeDismissTouchListener(
  *         view,
@@ -53,7 +54,7 @@ import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
  *             }
  *         }));
  * </pre>
- *
+ * <p/>
  * <p>This class Requires API level 12 or later due to use of {@link
  * android.view.ViewPropertyAnimator}.</p>
  *
@@ -77,20 +78,6 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
     private Object mToken;
     private VelocityTracker mVelocityTracker;
     private float mTranslationX;
-
-    /**
-     * The callback interface used by {@link SwipeDismissTouchListener} to inform its client
-     * about a successful dismissal of the view for which it was created.
-     */
-    public interface OnDismissCallback {
-        /**
-         * Called when the user has indicated they she would like to dismiss the view.
-         *
-         * @param view  The originating {@link View} to be dismissed.
-         * @param token The optional token passed to this object's constructor.
-         */
-        void onDismiss(View view, Object token);
-    }
 
     /**
      * Constructs a new swipe-to-dismiss touch listener for the given view.
@@ -241,5 +228,19 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
         });
 
         animator.start();
+    }
+
+    /**
+     * The callback interface used by {@link SwipeDismissTouchListener} to inform its client
+     * about a successful dismissal of the view for which it was created.
+     */
+    public interface OnDismissCallback {
+        /**
+         * Called when the user has indicated they she would like to dismiss the view.
+         *
+         * @param view  The originating {@link View} to be dismissed.
+         * @param token The optional token passed to this object's constructor.
+         */
+        void onDismiss(View view, Object token);
     }
 }

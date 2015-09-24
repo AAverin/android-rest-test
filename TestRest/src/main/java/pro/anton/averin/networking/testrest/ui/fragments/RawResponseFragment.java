@@ -11,8 +11,8 @@ import android.widget.TextView;
 import java.util.List;
 import java.util.Map;
 
-import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.BaseContext;
+import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.ui.views.ExpandableContentRow;
 
 /**
@@ -36,7 +36,7 @@ public class RawResponseFragment extends ResponseTabFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.activity = getActivity();
-        this.baseContext = (BaseContext)activity.getApplicationContext();
+        this.baseContext = (BaseContext) activity.getApplicationContext();
         init();
     }
 

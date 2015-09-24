@@ -24,25 +24,22 @@ import pro.anton.averin.networking.testrest.ui.fragments.BaseDialogFragment;
  * Created by AAverin on 9-3-2015.
  */
 public class AddHeaderDialog extends BaseDialogFragment {
-    @Override
-    public String getFragmentName() {
-        return null;
-    }
-
     private boolean isCustomHeader = false;
-
-    public interface HeaderPopupListener {
-        public void onOk(String key, String value);
-    }
     private HeaderPopupListener addPopupListener = null;
-    public void setHeaderPopupListener(HeaderPopupListener listener) {
-        this.addPopupListener = listener;
-    }
 
     public static AddHeaderDialog getInstance(HeaderPopupListener listener) {
         AddHeaderDialog dialog = new AddHeaderDialog();
         dialog.setHeaderPopupListener(listener);
         return dialog;
+    }
+
+    @Override
+    public String getFragmentName() {
+        return null;
+    }
+
+    public void setHeaderPopupListener(HeaderPopupListener listener) {
+        this.addPopupListener = listener;
     }
 
     @Override
@@ -81,7 +78,7 @@ public class AddHeaderDialog extends BaseDialogFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        final EditText keyEditText  = (EditText) contentView.findViewById(R.id.header_name);
+        final EditText keyEditText = (EditText) contentView.findViewById(R.id.header_name);
         final EditText valueEditText = (EditText) contentView.findViewById(R.id.header_value);
         final Spinner headersSpinner = (Spinner) contentView.findViewById(R.id.header_spinner);
 
@@ -141,11 +138,13 @@ public class AddHeaderDialog extends BaseDialogFragment {
                 }
 
 
-
-
                 addPopupListener = null;
                 dismiss();
             }
         });
+    }
+
+    public interface HeaderPopupListener {
+        public void onOk(String key, String value);
     }
 }

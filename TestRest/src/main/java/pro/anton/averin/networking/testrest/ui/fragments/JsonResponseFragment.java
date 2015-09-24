@@ -20,11 +20,11 @@ import pro.anton.averin.networking.testrest.ui.views.jsonviewer.JsonTreeViewer;
  */
 public class JsonResponseFragment extends ResponseTabFragment {
 
+    LinearLayout progressBarLayout;
+    TextView blankSlate;
     private BaseActivity activity;
     private BaseContext baseContext;
     private JsonTreeViewer jsonTreeViewer;
-    LinearLayout progressBarLayout;
-    TextView blankSlate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -269,7 +269,8 @@
     <color name="brown_900">#3e2723</color>
 
     <!-- GREY -->
-    <color name="grey_0">#ffffff</color> <!-- Grey 1000 (White) -->
+    <color name="grey_0">#ffffff</color>
+    <!-- Grey 1000 (White) -->
     <color name="grey_50">#fafafa</color>
     <color name="grey_100">#f5f5f5</color>
     <color name="grey_200">#eeeeee</color>
@@ -280,7 +281,8 @@
     <color name="grey_700">#616161</color>
     <color name="grey_800">#424242</color>
     <color name="grey_900">#212121</color>
-    <color name="grey_1000">#ffffff</color> <!-- Grey 1000 (Black) -->
+    <color name="grey_1000">#ffffff</color>
+    <!-- Grey 1000 (Black) -->
 
     <!-- BLUE GREY -->
     <color name="blue_grey_50">#eceff1</color>

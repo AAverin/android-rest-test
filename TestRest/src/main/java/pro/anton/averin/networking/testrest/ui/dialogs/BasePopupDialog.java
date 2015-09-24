@@ -28,30 +28,28 @@ import pro.anton.averin.networking.testrest.ui.activities.BaseActivity;
  */
 public abstract class BasePopupDialog extends DialogFragment implements View.OnClickListener {
 
+    public final static String FRAGMENT_TAG = "PopupDialog";
+    public OnDialogDismissListener dialogDismissCallback = null;
     protected BaseContext baseContext;
     protected ViewGroup contentView;
-
-    public final static String FRAGMENT_TAG = "PopupDialog";
-
-    private String title;
+    protected boolean isDirty = false;
     ViewGroup basePopupView;
-
     LinearLayout titleLayout;
     TextView titleView;
     ImageButton okButton;
-
-    protected boolean isDirty = false;
-
-    public OnDialogDismissListener dialogDismissCallback = null;
-
+    private String title;
     private boolean isOutsideDismissable = true;
-
-    public interface OnDialogDismissListener {
-        public void onDismiss(DialogInterface dialog, boolean isDirty);
-    }
 
     public BasePopupDialog() {
 
+    }
+
+    public BasePopupDialog(OnDialogDismissListener callback) {
+        this.dialogDismissCallback = callback;
+    }
+
+    public BasePopupDialog(String title, Drawable titleDrawable) {
+        init(title, titleDrawable);
     }
 
     public BaseActivity getBaseActivity() {
@@ -127,10 +125,6 @@ public abstract class BasePopupDialog extends DialogFragment implements View.OnC
 
     abstract protected ViewGroup getPopupContentView();
 
-    public BasePopupDialog(OnDialogDismissListener callback) {
-        this.dialogDismissCallback = callback;
-    }
-
     protected void setTitle(String title) {
         this.title = title;
         if (title != null) {
@@ -143,10 +137,6 @@ public abstract class BasePopupDialog extends DialogFragment implements View.OnC
 
     public void setOnDialogDismissListener(OnDialogDismissListener callback) {
         this.dialogDismissCallback = callback;
-    }
-
-    public BasePopupDialog(String title, Drawable titleDrawable) {
-        init(title, titleDrawable);
     }
 
     protected void init(String title, Drawable titleDrawable) {
@@ -215,6 +205,10 @@ public abstract class BasePopupDialog extends DialogFragment implements View.OnC
         }
         FragmentTransaction ft = fragmentManager.beginTransaction();
         this.show(ft, BasePopupDialog.FRAGMENT_TAG);
+    }
+
+    public interface OnDialogDismissListener {
+        public void onDismiss(DialogInterface dialog, boolean isDirty);
     }
 }
 

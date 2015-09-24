@@ -25,19 +25,34 @@ import pro.anton.averin.networking.testrest.utils.Logger;
 public abstract class BaseActivity extends ActionBarActivity {
 
     public final static String MAIN_FRAGMENT_TAG = "MAIN";
-
-    public enum ActivityState {
-        created,
-        paused,
-        stopped,
-        resumed
-    }
     public ActivityState activityState;
-
-    protected BaseContext baseContext;
     public Handler uiHandler;
-
     public Toolbar toolbar = null;
+    protected BaseContext baseContext;
+    boolean haveCached = false;
+    boolean isTabletCache = false;
+//    public abstract String getScreenName();
+
+    public static void restart(BaseContext baseContext) {
+        restart(baseContext, 0);
+    }
+
+    public static void restart(BaseContext baseContext, int delay) {
+        if (delay == 0) {
+            delay = 1;
+        }
+
+        Logger.log_e("", "restarting app");
+        Intent restartIntent = baseContext.getPackageManager()
+                .getLaunchIntentForPackage(baseContext.getPackageName());
+        PendingIntent intent = PendingIntent.getActivity(
+                baseContext, 0,
+                restartIntent, Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        AlarmManager manager = (AlarmManager) baseContext.getSystemService(Context.ALARM_SERVICE);
+        manager.set(AlarmManager.RTC, System.currentTimeMillis() + delay, intent);
+        System.exit(2);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +69,6 @@ public abstract class BaseActivity extends ActionBarActivity {
 //        actionBar.setDisplayShowTitleEnabled(false);
 //        actionBar.setDisplayShowCustomEnabled(true);
     }
-//    public abstract String getScreenName();
-
 
     public boolean isActive() {
         return activityState != BaseActivity.ActivityState.paused && activityState != BaseActivity.ActivityState.stopped && !isFinishing();
@@ -124,25 +137,6 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
     }
 
-    public static void restart(BaseContext baseContext) {
-        restart(baseContext, 0);
-    }
-    public static void restart(BaseContext baseContext, int delay) {
-        if (delay == 0) {
-            delay = 1;
-        }
-
-        Logger.log_e("", "restarting app");
-        Intent restartIntent = baseContext.getPackageManager()
-                .getLaunchIntentForPackage(baseContext.getPackageName());
-        PendingIntent intent = PendingIntent.getActivity(
-                baseContext, 0,
-                restartIntent, Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        AlarmManager manager = (AlarmManager) baseContext.getSystemService(Context.ALARM_SERVICE);
-        manager.set(AlarmManager.RTC, System.currentTimeMillis() + delay, intent);
-        System.exit(2);
-    }
-
     public void handleGenericErrorRestart(int delay) {
         handleGenericError();
         uiHandler.postDelayed(new Runnable() {
@@ -162,15 +156,12 @@ public abstract class BaseActivity extends ActionBarActivity {
         dialog.show();
     }
 
-    boolean haveCached = false;
-    boolean isTabletCache = false;
     public boolean isTablet() {
         if (!haveCached) {
             isTabletCache = getResources().getBoolean(R.bool.isTablet);
         }
         return isTabletCache;
     }
-
 
     private void debugLogEvent(String type, String eventName, HashMap<String, String> parameters) {
         StringBuilder debugLogMessage = new StringBuilder();
@@ -192,6 +183,14 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
 
         Logger.log("BaseActivity", debugLogMessage.toString());
+    }
+
+
+    public enum ActivityState {
+        created,
+        paused,
+        stopped,
+        resumed
     }
 
 }

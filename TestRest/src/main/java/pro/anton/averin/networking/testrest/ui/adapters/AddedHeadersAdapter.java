@@ -11,7 +11,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import pro.anton.averin.networking.testrest.R;
-import pro.anton.averin.networking.testrest.models.Headers;
 import pro.anton.averin.networking.testrest.models.RequestHeader;
 
 /**
@@ -19,24 +18,13 @@ import pro.anton.averin.networking.testrest.models.RequestHeader;
  */
 public class AddedHeadersAdapter extends ArrayAdapter<RequestHeader> {
 
-    public interface OnHeaderChangeListener {
-        public void onDelete(int position);
-    }
-
     private OnHeaderChangeListener listener = null;
     private Context context;
-
     public AddedHeadersAdapter(Context context, List<RequestHeader> headersList) {
         super(context, 0, 0, headersList);
         this.context = context;
 
         setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    }
-
-    private class ViewHolder {
-        public TextView headerName;
-        public TextView headerValue;
-        public ImageButton deleteButton;
     }
 
     public void setOnHeaderChangeListener(OnHeaderChangeListener l) {
@@ -71,5 +59,15 @@ public class AddedHeadersAdapter extends ArrayAdapter<RequestHeader> {
         });
 
         return view;
+    }
+
+    public interface OnHeaderChangeListener {
+        public void onDelete(int position);
+    }
+
+    private class ViewHolder {
+        public TextView headerName;
+        public TextView headerValue;
+        public ImageButton deleteButton;
     }
 }

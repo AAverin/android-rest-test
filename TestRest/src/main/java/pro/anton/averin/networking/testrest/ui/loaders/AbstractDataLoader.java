@@ -11,10 +11,13 @@ import java.util.List;
 public abstract class AbstractDataLoader<E extends List<?>> extends AsyncTaskLoader {
 
     protected E mLastDataList = null;
-    protected abstract E buildList();
+
     public AbstractDataLoader(Context context) {
         super(context);
     }
+
+    protected abstract E buildList();
+
     /**
      * Runs on a worker thread, loading in our data. Delegates the real work to
      * concrete subclass' buildList() method.
@@ -44,12 +47,13 @@ public abstract class AbstractDataLoader<E extends List<?>> extends AsyncTaskLoa
             emptyDataList(oldDataList);
         }
     }
+
     /**
      * Starts an asynchronous load of the list data. When the result is ready
      * the callbacks will be called on the UI thread. If a previous load has
      * been completed and is still valid the result may be passed to the
      * callbacks immediately.
-     *
+     * <p/>
      * Must be called from the UI thread.
      */
     @Override
@@ -62,6 +66,7 @@ public abstract class AbstractDataLoader<E extends List<?>> extends AsyncTaskLoa
             forceLoad();
         }
     }
+
     /**
      * Must be called from the UI thread, triggered by a call to stopLoading().
      */
@@ -70,6 +75,7 @@ public abstract class AbstractDataLoader<E extends List<?>> extends AsyncTaskLoa
         // Attempt to cancel the current load task if possible.
         cancelLoad();
     }
+
     /**
      * Must be called from the UI thread, triggered by a call to cancel(). Here,
      * we make sure our Cursor is closed, if it still exists and is not already
@@ -80,6 +86,7 @@ public abstract class AbstractDataLoader<E extends List<?>> extends AsyncTaskLoa
             emptyDataList(dataList);
         }
     }
+
     /**
      * Must be called from the UI thread, triggered by a call to reset(). Here,
      * we make sure our Cursor is closed, if it still exists and is not already
@@ -95,6 +102,7 @@ public abstract class AbstractDataLoader<E extends List<?>> extends AsyncTaskLoa
         }
         mLastDataList = null;
     }
+
     protected void emptyDataList(E dataList) {
         if (dataList != null && dataList.size() > 0) {
             for (int i = 0; i < dataList.size(); i++) {

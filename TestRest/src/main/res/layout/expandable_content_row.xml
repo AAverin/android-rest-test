@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <LinearLayout
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:background="@color/cdcdcd"
-            android:gravity="center_vertical">
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:background="@color/cdcdcd"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
 
         <TextView
-                android:gravity="center_vertical"
-                android:id="@+id/title"
-                android:layout_weight="1"
-                android:textColor="@color/dark_gray"
-                android:textSize="20sp"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
+            android:id="@+id/title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textColor="@color/dark_gray"
+            android:textSize="20sp" />
 
         <ImageButton
-                android:id="@+id/expand_button"
-                android:src="@drawable/ic_action_arrow_down"
-                android:background="@null"
-                android:layout_width="30dp"
-                android:layout_height="30dp"/>
+            android:id="@+id/expand_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@null"
+            android:src="@drawable/ic_action_arrow_down" />
 
 
     </LinearLayout>
 
     <LinearLayout
-            android:padding="16dp"
-            android:id="@+id/content"
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+        android:id="@+id/content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
 
     </LinearLayout>
 
