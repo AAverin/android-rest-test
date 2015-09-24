@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -22,7 +23,7 @@ import pro.anton.averin.networking.testrest.utils.Logger;
 /**
  * Created by AAverin on 09.11.13.
  */
-public abstract class BaseActivity extends ActionBarActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     public final static String MAIN_FRAGMENT_TAG = "MAIN";
     public ActivityState activityState;
@@ -61,13 +62,6 @@ public abstract class BaseActivity extends ActionBarActivity {
         uiHandler = new Handler();
 
         baseContext = (BaseContext) getApplicationContext();
-
-//        Mint.initAndStartSession(this, Config.BUGSENSE_API_KEY);
-//        Mint.addExtraData("activity", this.getClass().getName());
-
-//        ActionBar actionBar = getActionBar();
-//        actionBar.setDisplayShowTitleEnabled(false);
-//        actionBar.setDisplayShowCustomEnabled(true);
     }
 
     public boolean isActive() {
