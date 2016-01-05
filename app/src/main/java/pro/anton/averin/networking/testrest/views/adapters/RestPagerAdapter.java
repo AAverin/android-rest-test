@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest.legacy.adapters;
+package pro.anton.averin.networking.testrest.views.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,8 +9,8 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Map;
 
-import pro.anton.averin.networking.testrest.legacy.fragments.RequestFragment;
-import pro.anton.averin.networking.testrest.legacy.fragments.ResponseFragment;
+import pro.anton.averin.networking.testrest.views.fragments.RequestFragment;
+import pro.anton.averin.networking.testrest.views.fragments.ResponseFragment;
 
 /**
  * Created by AAverin on 09.11.13.
@@ -24,10 +24,6 @@ public class RestPagerAdapter extends FragmentPagerAdapter {
         }
     };
 
-//    private <Class, String> pagerViews = new LinkedHashMap<Class, String>() {{
-//        put(RequestFragment.class, "RequestFragment");
-//        put(ResponseFragment.class, "ResponseFragment");
-//    }};
     private FragmentManager fragmentManager;
     private String[] pageTitles;
 

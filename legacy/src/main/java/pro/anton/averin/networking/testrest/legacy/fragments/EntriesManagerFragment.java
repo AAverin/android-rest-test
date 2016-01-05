@@ -26,9 +26,9 @@ import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.data.models.Request;
 import pro.anton.averin.networking.testrest.legacy.activities.BaseActivity;
-import pro.anton.averin.networking.testrest.legacy.adapters.RequestsAdapter;
 import pro.anton.averin.networking.testrest.legacy.loaders.SavedRequestsLoader;
 import pro.anton.averin.networking.testrest.legacy.views.opensource.SwipeDismissListViewTouchListener;
+import pro.anton.averin.networking.testrest.views.adapters.RequestsAdapter;
 
 /**
  * Created by AAverin on 17.12.13.

@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import pro.anton.averin.networking.testrest.TestRestApp;
-import pro.anton.averin.networking.testrest.legacy.adapters.RestPagerAdapter;
 import pro.anton.averin.networking.testrest.legacy.phone.EntriesManagerActivity;
+import pro.anton.averin.networking.testrest.views.adapters.RestPagerAdapter;
 
 /**
  * Created by AAverin on 09.11.13.

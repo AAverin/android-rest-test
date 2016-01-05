@@ -39,7 +39,6 @@ import pro.anton.averin.networking.testrest.TestRestApp;
 import pro.anton.averin.networking.testrest.data.ProtocolType;
 import pro.anton.averin.networking.testrest.data.models.Request;
 import pro.anton.averin.networking.testrest.data.models.RequestHeader;
-import pro.anton.averin.networking.testrest.legacy.adapters.AddedHeadersAdapter;
 import pro.anton.averin.networking.testrest.legacy.dialogs.AddHeaderPopup;
 import pro.anton.averin.networking.testrest.legacy.dialogs.AddQueryPopup;
 import pro.anton.averin.networking.testrest.legacy.dialogs.QueryMenuPopupWindow;
@@ -47,6 +46,7 @@ import pro.anton.averin.networking.testrest.legacy.phone.EntriesManagerActivity;
 import pro.anton.averin.networking.testrest.legacy.views.AdaptableLinearLayout;
 import pro.anton.averin.networking.testrest.legacy.views.ProtocolSwitcher;
 import pro.anton.averin.networking.testrest.legacy.views.TokenizedEditText;
+import pro.anton.averin.networking.testrest.views.adapters.AddedHeadersAdapter;
 
 /**
  * Created by AAverin on 09.11.13.

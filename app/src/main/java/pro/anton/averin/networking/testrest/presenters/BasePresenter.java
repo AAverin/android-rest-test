@@ -11,4 +11,8 @@ public interface BasePresenter<B extends BaseView> {
     void onPause();
 
     void onDestroy();
+
+    void onVisible();
+
+    void onHidden();
 }

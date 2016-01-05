@@ -40,4 +40,14 @@ public class BasePresenterImpl<B extends BaseView> implements BasePresenter<B> {
     public void onDestroy() {
         //to add behaviour on onDestroy, override this method
     }
+
+    @Override
+    public void onVisible() {
+        //to add behaviour on onVisible, override this method
+    }
+
+    @Override
+    public void onHidden() {
+        //to add behaviour on onHidden, override this method
+    }
 }

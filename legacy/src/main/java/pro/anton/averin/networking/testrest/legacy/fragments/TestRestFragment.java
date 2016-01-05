@@ -12,7 +12,7 @@ import android.widget.FrameLayout;
 import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.legacy.activities.phone.EntriesManagerActivity;
-import pro.anton.averin.networking.testrest.legacy.adapters.RestPagerAdapter;
+import pro.anton.averin.networking.testrest.views.adapters.RestPagerAdapter;
 
 /**
  * Created by AAverin on 09.11.13.

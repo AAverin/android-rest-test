@@ -24,7 +24,7 @@ import java.sql.SQLException;
 import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.data.models.Headers;
-import pro.anton.averin.networking.testrest.legacy.adapters.HeadersListAdapter;
+import pro.anton.averin.networking.testrest.views.adapters.HeadersListAdapter;
 
 /**
  * Created by AAverin on 10.11.13.

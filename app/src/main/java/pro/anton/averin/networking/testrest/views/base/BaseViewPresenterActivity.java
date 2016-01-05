@@ -6,29 +6,32 @@ import pro.anton.averin.networking.testrest.presenters.BaseView;
 
 public class BaseViewPresenterActivity<P extends BasePresenterImpl> extends BaseActivity implements BaseView {
 
-    private P presenter;
+    PresenterViewLinker<P> linker;
 
     protected void initializePresenter(P presenter, BaseView baseView) {
-        this.presenter = presenter;
-        presenter.setView(baseView);
-        presenter.onCreate();
+        linker = new PresenterViewLinker<>(presenter, baseView);
+        linker.onCreate();
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
-        presenter.onResume();
+        linker.onResume();
+        linker.onVisible();
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
-        presenter.onPause();
+        linker.onPause();
+        linker.onHidden();
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
-        presenter.onDestroy();
+        if (linker != null) {
+            linker.onDestroy();
+        }
     }
 }
