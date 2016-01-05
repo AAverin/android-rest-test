@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.data.ProtocolType;
 import pro.anton.averin.networking.testrest.data.models.RequestHeader;
@@ -190,6 +191,7 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         contentView = inflater.inflate(R.layout.fragment_request, container, false);
+        ButterKnife.bind(this, contentView);
         return contentView;
     }
 

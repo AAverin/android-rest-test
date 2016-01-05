@@ -19,9 +19,6 @@ import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.sql.SQLException;
-
-import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.data.models.Headers;
 import pro.anton.averin.networking.testrest.views.adapters.HeadersListAdapter;
@@ -42,8 +39,10 @@ public class AddHeaderPopup extends PopupWindow {
         final EditText valueEditText = (EditText) popupView.findViewById(R.id.header_value);
         final Spinner headersSpinner = (Spinner) popupView.findViewById(R.id.header_spinner);
 
-        final HeadersListAdapter adapter = new HeadersListAdapter(context, ((BaseContext) context.getApplicationContext()).testRestDb
-                .getSupportedHeaders());
+        final HeadersListAdapter adapter = new HeadersListAdapter(context,
+//                ((BaseContext) context.getApplicationContext()).testRestDb.getSupportedHeaders()
+                null
+        );
 
         headersSpinner.setAdapter(adapter);
         headersSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -88,12 +87,13 @@ public class AddHeaderPopup extends PopupWindow {
                     if (addPopupListener != null) {
                         Headers.Header selectedHeader = adapter.getItem(headersSpinner.getSelectedItemPosition());
                         selectedHeader.popularity++;
-                        try {
-                            ((TestRestApp)context.getApplicationContext()).testRestDb.updateHeader(selectedHeader);
-                        } catch (SQLException e) {
-                            selectedHeader.popularity--;
-                            e.printStackTrace();
-                        }
+                        //TODO: Fix popularity
+//                        try {
+//                            ((TestRestApp)context.getApplicationContext()).testRestDb.updateHeader(selectedHeader);
+//                        } catch (SQLException e) {
+//                            selectedHeader.popularity--;
+//                            e.printStackTrace();
+//                        }
                         addPopupListener.onOk(selectedHeader.name, valueEditText.getText().toString());
                     }
                 }
@@ -126,7 +126,7 @@ public class AddHeaderPopup extends PopupWindow {
     }
 
     public interface HeaderPopupListener {
-        public void onOk(String key, String value);
+        void onOk(String key, String value);
     }
 }
 

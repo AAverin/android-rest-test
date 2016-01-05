@@ -81,7 +81,10 @@ public class TokenizedEditText extends EditText {
 
     private void initAttrs(AttributeSet attrs) {
         TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.TokenizedEditText, 0, 0);
-        setTokenRegexp(a.getString(R.styleable.TokenizedEditText_regexp));
+        String regexp = a.getString(R.styleable.TokenizedEditText_regexp);
+        if (regexp != null && regexp.length() > 0) {
+            setTokenRegexp(regexp);
+        }
         a.recycle();
     }
 
@@ -121,6 +124,6 @@ public class TokenizedEditText extends EditText {
     }
 
     public interface TokenListener {
-        public ClickableSpan onCreateTokenSpan(String chip);
+        ClickableSpan onCreateTokenSpan(String chip);
     }
 }
