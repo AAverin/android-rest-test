@@ -3,8 +3,17 @@ package pro.anton.averin.networking.testrest.presenters;
 import javax.inject.Inject;
 
 import pro.anton.averin.networking.testrest.BaseContext;
+import pro.anton.averin.networking.testrest.navigation.Navigator;
+import pro.anton.averin.networking.testrest.rx.RxBus;
+import pro.anton.averin.networking.testrest.rx.events.DimBackgroundEvent;
+import pro.anton.averin.networking.testrest.rx.events.UndimBackgroundEvent;
 
 public class RequestPresenter extends BasePresenterImpl<RequestView> {
+
+    @Inject
+    RxBus rxBus;
+    @Inject
+    Navigator navigator;
 
     @Inject
     public RequestPresenter(BaseContext baseContext) {
@@ -36,16 +45,16 @@ public class RequestPresenter extends BasePresenterImpl<RequestView> {
 
     public void onSendClicked() {
         if (prepareRequest()) {
-            view.showResponseScreen();
+            navigator.navigateToResponseScreen();
         }
     }
 
     public void onSaveItemClicked() {
-        view.showManagerScreenForSave();
+        navigator.navigateToManagerScreenForSave();
     }
 
     public void onManagerItemClicked() {
-        view.showManagerScreen();
+        navigator.navigateToManagerScreen();
     }
 
     public void onClearItemClicked() {
@@ -73,6 +82,14 @@ public class RequestPresenter extends BasePresenterImpl<RequestView> {
     }
 
     public void addQueryPopupDismissed() {
-        view.unDimBackground();
+        requestUnDimBackground();
+    }
+
+    public void requestUnDimBackground() {
+        rxBus.send(new UndimBackgroundEvent());
+    }
+
+    public void requestDimBackground() {
+        rxBus.send(new DimBackgroundEvent());
     }
 }

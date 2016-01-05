@@ -21,15 +21,5 @@ public interface RequestView extends BaseView {
 
     void hidePostLayout();
 
-    void showResponseScreen();
-
-    void unDimBackground();
-
-    void dimBackground();
-
     void clearFields();
-
-    void showManagerScreen();
-
-    void showManagerScreenForSave();
 }

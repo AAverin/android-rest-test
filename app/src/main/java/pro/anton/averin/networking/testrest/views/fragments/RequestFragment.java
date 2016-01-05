@@ -80,7 +80,7 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
 
     AddedHeadersAdapter addedHeadersAdapter;
 
-    private ArrayList<RequestHeader> headersList = new ArrayList<RequestHeader>();
+    private ArrayList<RequestHeader> headersList = new ArrayList<>();
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -312,7 +312,7 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
                 newValue.append("=");
                 newValue.append(value);
                 methodUrlEditText.setText(newValue.toString());
-                unDimBackground();
+                presenter.requestUnDimBackground();
             }
         });
         popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
@@ -322,7 +322,7 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
             }
         });
         popup.showAtLocation(getView(), Gravity.TOP, 0, (int) (120 * getResources().getDisplayMetrics().density));
-        dimBackground();
+        presenter.requestDimBackground();
     }
 
     @Override
@@ -333,17 +333,17 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
             public void onOk(String key, String value) {
                 headersList.add(new RequestHeader(key, value));
                 addedHeadersAdapter.notifyDataSetChanged();
-                unDimBackground();
+                presenter.requestUnDimBackground();
             }
         });
         popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                unDimBackground();
+                presenter.requestUnDimBackground();
             }
         });
         popup.showAtLocation(getView(), Gravity.TOP, 0, (int) (120 * getResources().getDisplayMetrics().density));
-        dimBackground();
+        presenter.requestDimBackground();
     }
 
     @Override
@@ -357,21 +357,6 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
     }
 
     @Override
-    public void showResponseScreen() {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public void unDimBackground() {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public void dimBackground() {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
     public void clearFields() {
         methodRadioGroup.check(getMethodRadioButtonId("GET"));
         protocolSwitcher.set(ProtocolType.HTTP);
@@ -379,16 +364,6 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
         methodUrlEditText.setText("");
         headersList.clear();
         addedHeadersAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void showManagerScreen() {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public void showManagerScreenForSave() {
-        throw new RuntimeException("not implemented");
     }
 
     private int getMethodRadioButtonId(String method) {
