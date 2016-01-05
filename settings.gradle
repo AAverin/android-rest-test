@@ -1,1 +1,1 @@
-include ':TestRest', ':AndroidNetworkManager'
+include ':app'

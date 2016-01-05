@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/method_radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checkedButton="@+id/checkbox_get"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="16dp">
+
+        <RadioButton
+            android:id="@+id/checkbox_get"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/get" />
+
+        <RadioButton
+            android:id="@+id/checkbox_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/post" />
+
+        <RadioButton
+            android:id="@+id/checkbox_put"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/put" />
+
+        <RadioButton
+            android:id="@+id/checkbox_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete" />
+    </RadioGroup>
+
+    <LinearLayout
+        style="@style/basic_padding"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/text_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/baseurl" />
+
+                    <pro.anton.averin.networking.testrest.ui.views.ProtocolSwitcher
+                        android:id="@+id/protocol_button"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="8dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/almost_white"
+                        android:orientation="horizontal"
+                        android:paddingBottom="8dp"
+                        android:paddingTop="8dp">
+
+                        <EditText
+                            android:id="@+id/baseurl"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:editable="true"
+                            android:hint="@string/baseurl_hint"
+                            android:linksClickable="false" />
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/add_query_button"
+                        style="@style/text_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingTop="8dp"
+                        android:text="@string/add_query"
+                        android:textColor="@color/light_blue" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/almost_white"
+                        android:paddingBottom="8dp">
+
+                        <pro.anton.averin.networking.testrest.ui.views.TokenizedEditText
+                            android:id="@+id/method_url"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:editable="true"
+                            android:hint="@string/methodurl_hint"
+                            android:inputType="text|textNoSuggestions|textMultiLine"
+                            android:linksClickable="false"
+                            android:singleLine="false" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/post_layout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            style="@style/text_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/post_body" />
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/use_file_checkbox"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/post_body_file" />
+
+                            <TextView
+                                android:id="@+id/pick_file_button"
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40dp"
+                                android:clickable="true"
+                                android:text="@string/pick_post_file"
+                                android:visibility="gone" />
+
+                        </LinearLayout>
+
+
+                        <EditText
+                            android:id="@+id/post_body"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:editable="true"
+                            android:hint="@string/post_body_hint"
+                            android:linksClickable="false" />
+
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/add_header_button"
+                        style="@style/text_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingTop="8dp"
+                        android:text="@string/add_header"
+                        android:textColor="@color/light_blue" />
+
+                    <pro.anton.averin.networking.testrest.ui.views.AdaptableLinearLayout
+                        android:id="@+id/addedheaders_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent"
+                        android:minHeight="40dp"
+                        android:orientation="vertical">
+
+                    </pro.anton.averin.networking.testrest.ui.views.AdaptableLinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_send"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/dark_blue"
+                    android:text="@string/send"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

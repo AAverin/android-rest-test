@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<pro.anton.averin.networking.testrest.ui.views.CheckableLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/entrieslist_selector"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/text_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
+
+        <CheckedTextView
+            android:id="@+id/request_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left|center_vertical"
+            android:minHeight="40dp"
+            android:textSize="22sp" />
+
+        <ImageButton
+            android:id="@+id/details_expand_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:src="@android:drawable/ic_menu_info_details" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/details_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/details"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_gray"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+</pro.anton.averin.networking.testrest.ui.views.CheckableLinearLayout>
