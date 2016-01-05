@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package pro.anton.averin.networking.testrest.legacy.views.opensource;
+package pro.anton.averin.networking.testrest.views.androidviews.opensource;
 
 import android.graphics.Rect;
 import android.view.MotionEvent;

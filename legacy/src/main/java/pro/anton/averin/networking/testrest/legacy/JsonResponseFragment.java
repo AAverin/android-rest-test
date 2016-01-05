@@ -12,7 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import pro.anton.averin.networking.testrest.TestRestApp;
-import pro.anton.averin.networking.testrest.legacy.views.jsonviewer.JsonTreeViewer;
+import pro.anton.averin.networking.testrest.views.androidviews.jsonviewer.JsonTreeViewer;
 
 /**
  * Created by AAverin on 07.12.13.

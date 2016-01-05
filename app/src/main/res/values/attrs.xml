@@ -3,4 +3,8 @@
         <attr name="expandable_row_title" format="string" />
         <attr name="expandable_row_content" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="TokenizedEditText">
+        <attr name="regexp" format="string" />
+    </declare-styleable>
 </resources>

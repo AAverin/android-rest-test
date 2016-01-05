@@ -12,4 +12,8 @@ public class TestRestPresenter extends BasePresenterImpl<TestRestView> {
     public TestRestPresenter(BaseContext baseContext) {
         super(baseContext);
     }
+
+    public void undim() {
+        view.undim();
+    }
 }

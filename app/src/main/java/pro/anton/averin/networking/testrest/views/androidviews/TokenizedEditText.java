@@ -1,6 +1,7 @@
-package pro.anton.averin.networking.testrest.legacy.views;
+package pro.anton.averin.networking.testrest.views.androidviews;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.text.Editable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -13,6 +14,8 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import pro.anton.averin.networking.testrest.R;
 
 /**
  * Created by AAverin on 09.11.13.
@@ -56,11 +59,13 @@ public class TokenizedEditText extends EditText {
     public TokenizedEditText(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(context);
+        initAttrs(attrs);
     }
 
     public TokenizedEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
+        initAttrs(attrs);
     }
 
     public TokenizedEditText(Context context) {
@@ -72,6 +77,12 @@ public class TokenizedEditText extends EditText {
         addTextChangedListener(tokenizer);
         this.context = context;
         setMovementMethod(ClickableArrowKeyMovementMethod.getInstance());
+    }
+
+    private void initAttrs(AttributeSet attrs) {
+        TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.TokenizedEditText, 0, 0);
+        setTokenRegexp(a.getString(R.styleable.TokenizedEditText_regexp));
+        a.recycle();
     }
 
     public void setTokenRegexp(String regexp) {

@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest.legacy.dialogs;
+package pro.anton.averin.networking.testrest.views.androidviews;
 
 /**
  * Created by AAverin on 13.11.13.

@@ -68,7 +68,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/baseurl" />
 
-                    <pro.anton.averin.networking.testrest.legacy.views.ProtocolSwitcher
+                    <pro.anton.averin.networking.testrest.views.androidviews.ProtocolSwitcher
                         android:id="@+id/protocol_button"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
                         android:background="@color/almost_white"
                         android:paddingBottom="8dp">
 
-                        <pro.anton.averin.networking.testrest.legacy.views.TokenizedEditText
+                        <pro.anton.averin.networking.testrest.views.androidviews.TokenizedEditText
                             android:id="@+id/method_url"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -182,14 +182,14 @@
                         android:text="@string/add_header"
                         android:textColor="@color/light_blue" />
 
-                    <pro.anton.averin.networking.testrest.legacy.views.AdaptableLinearLayout
+                    <pro.anton.averin.networking.testrest.views.androidviews.AdaptableLinearLayout
                         android:id="@+id/addedheaders_list"
                         android:layout_width="match_parent"
                         android:layout_height="fill_parent"
                         android:minHeight="40dp"
                         android:orientation="vertical">
 
-                    </pro.anton.averin.networking.testrest.legacy.views.AdaptableLinearLayout>
+                    </pro.anton.averin.networking.testrest.views.androidviews.AdaptableLinearLayout>
 
                 </LinearLayout>
             </ScrollView>

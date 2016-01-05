@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest.legacy.dialogs;
+package pro.anton.averin.networking.testrest.views.androidviews;
 
 import android.app.Activity;
 import android.content.Context;

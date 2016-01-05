@@ -2,6 +2,7 @@ package pro.anton.averin.networking.testrest.views.activities;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.widget.FrameLayout;
 
 import javax.inject.Inject;
 
@@ -20,6 +21,8 @@ public class TestRestActivity extends BaseViewPresenterActivity<TestRestPresente
 
     @Bind(R.id.pager)
     ViewPager viewPager;
+    @Bind(R.id.root)
+    FrameLayout root;
 
     RestPagerAdapter pagerAdapter;
 
@@ -33,11 +36,20 @@ public class TestRestActivity extends BaseViewPresenterActivity<TestRestPresente
         setContentView(R.layout.fragment_main);
         ButterKnife.bind(this);
 
+        presenter.undim();
+
         pagerAdapter = new RestPagerAdapter(getSupportFragmentManager(), new String[]{
                 getString(R.string.requestViewTitle),
                 getString(R.string.responseViewTitle)
         });
 
         viewPager.setAdapter(pagerAdapter);
+
+
+    }
+
+    @Override
+    public void undim() {
+        root.getForeground().setAlpha(0);
     }
 }

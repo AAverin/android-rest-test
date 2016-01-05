@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest.legacy.views;
+package pro.anton.averin.networking.testrest.views.androidviews;
 
 import android.annotation.TargetApi;
 import android.content.Context;

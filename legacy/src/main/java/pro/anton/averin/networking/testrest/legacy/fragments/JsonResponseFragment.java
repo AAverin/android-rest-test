@@ -13,7 +13,7 @@ import org.json.JSONObject;
 import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.legacy.activities.BaseActivity;
-import pro.anton.averin.networking.testrest.legacy.views.jsonviewer.JsonTreeViewer;
+import pro.anton.averin.networking.testrest.views.androidviews.jsonviewer.JsonTreeViewer;
 
 /**
  * Created by AAverin on 07.12.13.

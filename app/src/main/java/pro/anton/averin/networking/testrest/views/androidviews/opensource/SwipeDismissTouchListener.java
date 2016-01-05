@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package pro.anton.averin.networking.testrest.legacy.views.opensource;
+package pro.anton.averin.networking.testrest.views.androidviews.opensource;
 
 import android.view.MotionEvent;
 import android.view.VelocityTracker;

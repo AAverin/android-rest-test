@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest.legacy.views.jsonviewer;
+package pro.anton.averin.networking.testrest.views.androidviews.jsonviewer;
 
 import android.content.Context;
 import android.view.LayoutInflater;
