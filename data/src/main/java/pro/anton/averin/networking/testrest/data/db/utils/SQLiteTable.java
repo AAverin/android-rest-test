@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest.db.utils;
+package pro.anton.averin.networking.testrest.data.db.utils;
 
 import android.annotation.TargetApi;
 import android.content.ContentResolver;

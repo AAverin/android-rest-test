@@ -16,7 +16,7 @@ import android.widget.Toast;
 import java.sql.SQLException;
 
 import pro.anton.averin.networking.testrest.R;
-import pro.anton.averin.networking.testrest.models.Headers;
+import pro.anton.averin.networking.testrest.data.models.Headers;
 import pro.anton.averin.networking.testrest.ui.adapters.HeadersListAdapter;
 import pro.anton.averin.networking.testrest.ui.fragments.BaseDialogFragment;
 

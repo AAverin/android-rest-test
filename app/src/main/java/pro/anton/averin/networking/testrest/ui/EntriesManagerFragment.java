@@ -25,7 +25,7 @@ import java.util.List;
 
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.TestRestApp;
-import pro.anton.averin.networking.testrest.models.Request;
+import pro.anton.averin.networking.testrest.data.models.Request;
 import pro.anton.averin.networking.testrest.ui.adapters.RequestsAdapter;
 import pro.anton.averin.networking.testrest.ui.loaders.SavedRequestsLoader;
 import pro.anton.averin.networking.testrest.ui.views.opensource.SwipeDismissListViewTouchListener;

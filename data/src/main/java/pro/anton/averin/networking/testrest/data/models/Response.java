@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest.models;
+package pro.anton.averin.networking.testrest.data.models;
 
 import java.util.List;
 import java.util.Map;

@@ -5,7 +5,7 @@ import android.content.Context;
 import java.util.List;
 
 import pro.anton.averin.networking.testrest.BaseContext;
-import pro.anton.averin.networking.testrest.models.Request;
+import pro.anton.averin.networking.testrest.data.models.Request;
 
 /**
  * Created by AAverin on 17.12.13.

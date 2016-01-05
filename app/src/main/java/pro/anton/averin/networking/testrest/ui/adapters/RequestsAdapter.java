@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import pro.anton.averin.networking.testrest.R;
-import pro.anton.averin.networking.testrest.models.Request;
+import pro.anton.averin.networking.testrest.data.models.Request;
 
 /**
  * Created by AAverin on 17.12.13.
@@ -20,20 +20,20 @@ import pro.anton.averin.networking.testrest.models.Request;
 public class RequestsAdapter extends ArrayAdapter<Request> {
 
     private Context context;
-    private View.OnClickListener expandClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            LinearLayout layout = (LinearLayout) view.getTag();
-            layout.setVisibility(View.VISIBLE);
-            view.setOnClickListener(collapseClickListener);
-        }
-    };
     private View.OnClickListener collapseClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             LinearLayout layout = (LinearLayout) view.getTag();
             layout.setVisibility(View.GONE);
             view.setOnClickListener(expandClickListener);
+        }
+    };
+    private View.OnClickListener expandClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            LinearLayout layout = (LinearLayout) view.getTag();
+            layout.setVisibility(View.VISIBLE);
+            view.setOnClickListener(collapseClickListener);
         }
     };
     private View.OnClickListener layoutCollapseClickListener = new View.OnClickListener() {

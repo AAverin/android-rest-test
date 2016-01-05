@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import pro.anton.averin.networking.testrest.R;
-import pro.anton.averin.networking.testrest.models.RequestHeader;
+import pro.anton.averin.networking.testrest.data.models.RequestHeader;
 
 /**
  * Created by AAverin on 27.11.13.

@@ -1,10 +1,10 @@
-package pro.anton.averin.networking.testrest.models;
+package pro.anton.averin.networking.testrest.data.models;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.provider.BaseColumns;
 
-import pro.anton.averin.networking.testrest.db.utils.SQLiteTable;
+import pro.anton.averin.networking.testrest.data.db.utils.SQLiteTable;
 
 /**
  * Created by AAverin on 17.12.13.

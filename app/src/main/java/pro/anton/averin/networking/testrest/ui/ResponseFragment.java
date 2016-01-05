@@ -40,8 +40,8 @@ import aaverin.android.net.NetworkResponseProcessException;
 import pro.anton.averin.networking.testrest.Config;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.TestRestApp;
-import pro.anton.averin.networking.testrest.models.RequestHeader;
-import pro.anton.averin.networking.testrest.models.Response;
+import pro.anton.averin.networking.testrest.data.models.RequestHeader;
+import pro.anton.averin.networking.testrest.data.models.Response;
 
 /**
  * Created by AAverin on 09.11.13.

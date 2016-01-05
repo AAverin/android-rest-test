@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import pro.anton.averin.networking.testrest.models.Headers;
+import pro.anton.averin.networking.testrest.data.models.Headers;
 
 /**
  * Created by AAverin on 19.11.13.

@@ -24,7 +24,7 @@ import java.util.List;
 
 import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.R;
-import pro.anton.averin.networking.testrest.models.Request;
+import pro.anton.averin.networking.testrest.data.models.Request;
 import pro.anton.averin.networking.testrest.ui.activities.BaseActivity;
 import pro.anton.averin.networking.testrest.ui.adapters.RequestsAdapter;
 import pro.anton.averin.networking.testrest.ui.loaders.SavedRequestsLoader;

@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest.db;
+package pro.anton.averin.networking.testrest.data.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,9 +10,9 @@ import android.util.Log;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import pro.anton.averin.networking.testrest.models.Headers;
-import pro.anton.averin.networking.testrest.models.Request;
-import pro.anton.averin.networking.testrest.models.RequestHeader;
+import pro.anton.averin.networking.testrest.data.models.Headers;
+import pro.anton.averin.networking.testrest.data.models.Request;
+import pro.anton.averin.networking.testrest.data.models.RequestHeader;
 
 /**
  * Created by AAverin on 12.11.13.
