@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.activities.phone.TestRestActivity"
+            android:name=".legacy.activities.phone.TestRestActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
@@ -24,12 +24,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activities.phone.EntriesManagerActivity"
-            android:parentActivityName=".ui.activities.phone.TestRestActivity">
+            android:name=".legacy.activities.phone.EntriesManagerActivity"
+            android:parentActivityName=".legacy.activities.phone.TestRestActivity">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activities.phone.TestRestActivity" />
+                android:value=".legacy.activities.phone.TestRestActivity" />
         </activity>
 
         <!--<meta-data-->

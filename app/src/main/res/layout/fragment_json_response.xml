@@ -29,11 +29,11 @@
         android:text="@string/entrieslist_blankslate"
         android:visibility="gone" />
 
-    <pro.anton.averin.networking.testrest.ui.views.jsonviewer.JsonTreeViewer
+    <pro.anton.averin.networking.testrest.legacy.views.jsonviewer.JsonTreeViewer
         android:id="@+id/jsonviewer_tree"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-    </pro.anton.averin.networking.testrest.ui.views.jsonviewer.JsonTreeViewer>
+    </pro.anton.averin.networking.testrest.legacy.views.jsonviewer.JsonTreeViewer>
 
 </LinearLayout>
