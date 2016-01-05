@@ -1,3 +1,5 @@
 .gradle
 /local.properties
 .DS_Store
+/.idea
+**/*.iml
