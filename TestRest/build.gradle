@@ -53,12 +53,25 @@ android {
         minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
         targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
 
-        versionCode 1006
-        versionName "1.006"
+        versionCode 1007
+        versionName "1.007"
 
         //applicationId is set in productFlavors
 
         testInstrumentationRunner globalConfiguration.getAt("testInstrumentationRunner")
+    }
+
+    applicationVariants.all { variant ->
+
+//        variant.mergedFlavor.versionName = versionProcessor.calculateVersionName()
+
+        def filename = "TestRest-" + variant.baseName + "-${variant.versionName}.apk"
+
+        variant.outputs.each { output ->
+            output.outputFile = new File(
+                    output.outputFile.parent,
+                    filename)
+        }
     }
 
     final Console console = System.console();
@@ -67,7 +80,7 @@ android {
         // Building from console
         signingConfigs {
             release {
-                storeFile file("/Users/antonaverin/projects/personal/!Archive/a_TestRest/Release/sign")
+                storeFile file("/Users/antonaverin/projects/personal/!Archive/a_TestRest/Release/sign/keysore.jks")
                 storePassword console.readLine("Enter keystore password: ")
                 keyAlias console.readLine("Enter alias key: ")
                 keyPassword console.readLine("Enter key password: ")

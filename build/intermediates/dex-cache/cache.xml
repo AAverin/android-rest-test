@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/exploded-aar/TestRest_Git/AndroidNetworkManager/unspecified/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="9b94384d8113b1e509013c252d7a9aee85dd8468">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/pre-dexed/release/classes-7f0d6004c8c5812a5d1c63e767eeda82ea701721.jar" />
+    </item>
+    <item
+        jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/exploded-aar/com.crashlytics.sdk.android/crashlytics/2.2.2/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1014d409d1af641616ca7a2b3fda549cf559d605">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/pre-dexed/debug/classes-e9d13102e2e78c158d7cea889fb00bdc473b0e29.jar" />
+    </item>
+    <item
+        jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-537bf8296eadc5a2c5536f64eaa79e9bf1d6e0c2.jar" />
+    </item>
+    <item
+        jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/exploded-aar/TestRest_Git/AndroidNetworkManager/unspecified/jars/libs/httpresponsecache-1.3.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="17131c96f542def285ba76edba82fd49b354b08d">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/pre-dexed/debug/httpresponsecache-1.3-72a29924cd32f371e3720e10b97c178109c745c9.jar" />
+    </item>
+    <item
+        jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/exploded-aar/com.crashlytics.sdk.android/answers/1.1.2/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="158555fbeff80e5a85464a818eadda8a448a1051">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/pre-dexed/debug/classes-e8b6446cc893b3f5f2cd9ee27feff5375a7c7ea3.jar" />
+    </item>
+    <item
+        jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/pre-dexed/debug/classes-5317ba322dd90976158dc69850ecb042737c9244.jar" />
+    </item>
+    <item
+        jar="/Users/antonaverin/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/pre-dexed/debug/support-annotations-22.2.1-f33f3c9f247a934b0b9d89e80b2f8f06e87cfc45.jar" />
+    </item>
+    <item
+        jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/exploded-aar/TestRest_Git/AndroidNetworkManager/unspecified/jars/libs/disklrucache-1.3.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="7d14a74fb87b3e0a7df770036db5f8454b475a07">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/pre-dexed/debug/disklrucache-1.3.1-f003a08f6cf4a314dfc9394a59fd793635fe1a7d.jar" />
+    </item>
+    <item
+        jar="/Users/antonaverin/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/pre-dexed/debug/library-2.4.0-3036888c4ea7ff4b78cc21b237336ad124e0f1cc.jar" />
+    </item>
+    <item
+        jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/pre-dexed/debug/classes-fea0e07638a5ae4c2193b60f0e05e2c789f0cf82.jar" />
+    </item>
+    <item
+        jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/exploded-aar/io.fabric.sdk.android/fabric/1.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="0a4af6a85230b990eb8690b696d2db9247338611">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/pre-dexed/debug/classes-2a8542964d66f3a6999ea4524c824a54928b2e9f.jar" />
+    </item>
+    <item
+        jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/exploded-aar/com.crashlytics.sdk.android/beta/1.1.2/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="0d6546c1c73cb64a6907f694e6c4bf4b50fefa70">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/TestRest/build/intermediates/pre-dexed/debug/classes-fa43741469a179bcf249a8c8dea7e26ee9725aa2.jar" />
+    </item>
+
+</items>
