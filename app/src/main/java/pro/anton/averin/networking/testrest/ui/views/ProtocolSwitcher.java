@@ -10,6 +10,7 @@ import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
 
 import pro.anton.averin.networking.testrest.R;
+import pro.anton.averin.networking.testrest.data.ProtocolType;
 
 /**
  * Created by AAverin on 09.11.13.

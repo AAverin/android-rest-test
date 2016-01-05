@@ -363,6 +363,11 @@ public final class SQLiteTable {
         }
 
         @Override
+        public void setExtras(Bundle extras) {
+            baseCursor.setExtras(extras);
+        }
+
+        @Override
         public Bundle respond(Bundle bundle) {
             return baseCursor.respond(bundle);
         }

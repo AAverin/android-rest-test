@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest.ui.views;
+package pro.anton.averin.networking.testrest.data;
 
 /**
  * Created by Jitsu on 14.01.14.

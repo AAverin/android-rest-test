@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.Config;
 import pro.anton.averin.networking.testrest.R;
+import pro.anton.averin.networking.testrest.data.ProtocolType;
 import pro.anton.averin.networking.testrest.data.models.Request;
 import pro.anton.averin.networking.testrest.data.models.RequestHeader;
 import pro.anton.averin.networking.testrest.ui.activities.phone.EntriesManagerActivity;
@@ -44,7 +45,6 @@ import pro.anton.averin.networking.testrest.ui.dialogs.AddHeaderDialog;
 import pro.anton.averin.networking.testrest.ui.dialogs.AddQueryDialog;
 import pro.anton.averin.networking.testrest.ui.views.AdaptableLinearLayout;
 import pro.anton.averin.networking.testrest.ui.views.ProtocolSwitcher;
-import pro.anton.averin.networking.testrest.ui.views.ProtocolType;
 import pro.anton.averin.networking.testrest.ui.views.TokenizedEditText;
 
 /**

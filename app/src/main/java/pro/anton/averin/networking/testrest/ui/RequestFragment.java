@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import pro.anton.averin.networking.testrest.Config;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.TestRestApp;
+import pro.anton.averin.networking.testrest.data.ProtocolType;
 import pro.anton.averin.networking.testrest.data.models.Request;
 import pro.anton.averin.networking.testrest.data.models.RequestHeader;
 import pro.anton.averin.networking.testrest.ui.adapters.AddedHeadersAdapter;
@@ -46,7 +47,6 @@ import pro.anton.averin.networking.testrest.ui.dialogs.QueryMenuPopupWindow;
 import pro.anton.averin.networking.testrest.ui.phone.EntriesManagerActivity;
 import pro.anton.averin.networking.testrest.ui.views.AdaptableLinearLayout;
 import pro.anton.averin.networking.testrest.ui.views.ProtocolSwitcher;
-import pro.anton.averin.networking.testrest.ui.views.ProtocolType;
 import pro.anton.averin.networking.testrest.ui.views.TokenizedEditText;
 
 /**

@@ -6,8 +6,8 @@ import android.provider.BaseColumns;
 
 import java.util.ArrayList;
 
+import pro.anton.averin.networking.testrest.data.ProtocolType;
 import pro.anton.averin.networking.testrest.data.db.utils.SQLiteTable;
-import pro.anton.averin.networking.testrest.ui.views.ProtocolType;
 
 /**
  * Created by AAverin on 12.11.13.
