@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 
 import pro.anton.averin.networking.testrest.Config;
-import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.data.models.RequestHeader;
 import pro.anton.averin.networking.testrest.data.models.Response;
 

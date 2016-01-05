@@ -23,7 +23,6 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.TestRestApp;
 import pro.anton.averin.networking.testrest.data.models.Request;
 import pro.anton.averin.networking.testrest.legacy.adapters.RequestsAdapter;

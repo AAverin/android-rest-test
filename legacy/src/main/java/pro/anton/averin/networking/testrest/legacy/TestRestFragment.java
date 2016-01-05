@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.TestRestApp;
 import pro.anton.averin.networking.testrest.legacy.adapters.RestPagerAdapter;
 import pro.anton.averin.networking.testrest.legacy.phone.EntriesManagerActivity;

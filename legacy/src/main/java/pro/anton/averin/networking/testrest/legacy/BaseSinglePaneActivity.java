@@ -3,8 +3,6 @@ package pro.anton.averin.networking.testrest.legacy;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import pro.anton.averin.networking.testrest.R;
-
 /**
  * Created by AAverin on 09.11.13.
  */

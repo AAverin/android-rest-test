@@ -20,20 +20,20 @@ import pro.anton.averin.networking.testrest.data.models.Request;
 public class RequestsAdapter extends ArrayAdapter<Request> {
 
     private Context context;
-    private View.OnClickListener expandClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            LinearLayout layout = (LinearLayout) view.getTag();
-            layout.setVisibility(View.VISIBLE);
-            view.setOnClickListener(collapseClickListener);
-        }
-    };
     private View.OnClickListener collapseClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             LinearLayout layout = (LinearLayout) view.getTag();
             layout.setVisibility(View.GONE);
             view.setOnClickListener(expandClickListener);
+        }
+    };
+    private View.OnClickListener expandClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            LinearLayout layout = (LinearLayout) view.getTag();
+            layout.setVisibility(View.VISIBLE);
+            view.setOnClickListener(collapseClickListener);
         }
     };
     private View.OnClickListener layoutCollapseClickListener = new View.OnClickListener() {

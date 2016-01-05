@@ -11,7 +11,6 @@ import android.widget.TextView;
 import java.util.List;
 import java.util.Map;
 
-import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.TestRestApp;
 import pro.anton.averin.networking.testrest.legacy.views.ExpandableContentRow;
 

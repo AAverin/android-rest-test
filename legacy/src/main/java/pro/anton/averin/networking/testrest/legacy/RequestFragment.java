@@ -35,7 +35,6 @@ import com.nineoldandroids.animation.ValueAnimator;
 import java.util.ArrayList;
 
 import pro.anton.averin.networking.testrest.Config;
-import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.TestRestApp;
 import pro.anton.averin.networking.testrest.data.ProtocolType;
 import pro.anton.averin.networking.testrest.data.models.Request;
