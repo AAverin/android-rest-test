@@ -1,11 +1,6 @@
 package pro.anton.averin.networking.testrest.views.androidviews;
 
-/**
- * Created by AAverin on 13.11.13.
- */
 
-import android.app.Activity;
-import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
@@ -19,29 +14,44 @@ import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.data.models.Headers;
+import pro.anton.averin.networking.testrest.presenters.AddHeaderPopupPresenter;
+import pro.anton.averin.networking.testrest.presenters.AddHeaderPopupView;
 import pro.anton.averin.networking.testrest.views.adapters.HeadersListAdapter;
+import pro.anton.averin.networking.testrest.views.base.BaseActivity;
 
-/**
- * Created by AAverin on 10.11.13.
- */
-public class AddHeaderPopup extends PopupWindow {
+public class AddHeaderPopup extends PopupWindow implements AddHeaderPopupView {
+
+    @Bind(R.id.header_name)
+    EditText keyEditText;
+    @Bind(R.id.header_value)
+    EditText valueEditText;
+    @Bind(R.id.header_spinner)
+    Spinner headersSpinner;
+
+    @Inject
+    AddHeaderPopupPresenter presenter;
 
     private boolean isCustomHeader = false;
     private HeaderPopupListener addPopupListener = null;
 
-    public AddHeaderPopup(final Context context) {
-        super(context);
-        View popupView = LayoutInflater.from(context).inflate(R.layout.addheader_popup, null);
+    public AddHeaderPopup(final BaseActivity activity) {
+        super(activity);
 
-        final EditText keyEditText  = (EditText) popupView.findViewById(R.id.header_name);
-        final EditText valueEditText = (EditText) popupView.findViewById(R.id.header_value);
-        final Spinner headersSpinner = (Spinner) popupView.findViewById(R.id.header_spinner);
+        activity.getComponent().injectTo(this);
+        presenter.onCreate();
 
-        final HeadersListAdapter adapter = new HeadersListAdapter(context,
-//                ((BaseContext) context.getApplicationContext()).testRestDb.getSupportedHeaders()
-                null
+        View popupView = LayoutInflater.from(activity).inflate(R.layout.addheader_popup, null);
+
+        ButterKnife.bind(this, popupView);
+
+        final HeadersListAdapter adapter = new HeadersListAdapter(activity,
+                presenter.getSupportedHeaders()
         );
 
         headersSpinner.setAdapter(adapter);
@@ -69,7 +79,7 @@ public class AddHeaderPopup extends PopupWindow {
             public void onClick(View view) {
                 if (isCustomHeader) {
                     if ((keyEditText.getText().length() == 0) || (valueEditText.getText().length() == 0)) {
-                        Toast.makeText(context, context.getString(R.string.error_keyValue), 3000).show();
+                        Toast.makeText(activity, activity.getString(R.string.error_keyValue), 3000).show();
                         return;
                     }
 
@@ -80,20 +90,16 @@ public class AddHeaderPopup extends PopupWindow {
 
                 } else {
                     if (valueEditText.getText().length() == 0) {
-                        Toast.makeText(context, context.getString(R.string.error_keyValue), 3000).show();
+                        Toast.makeText(activity, activity.getString(R.string.error_keyValue), 3000).show();
                         return;
                     }
 
                     if (addPopupListener != null) {
                         Headers.Header selectedHeader = adapter.getItem(headersSpinner.getSelectedItemPosition());
                         selectedHeader.popularity++;
-                        //TODO: Fix popularity
-//                        try {
-//                            ((TestRestApp)context.getApplicationContext()).testRestDb.updateHeader(selectedHeader);
-//                        } catch (SQLException e) {
-//                            selectedHeader.popularity--;
-//                            e.printStackTrace();
-//                        }
+                        if (!presenter.updateHeader(selectedHeader)) {
+                            selectedHeader.popularity--;
+                        }
                         addPopupListener.onOk(selectedHeader.name, valueEditText.getText().toString());
                     }
                 }
@@ -108,7 +114,7 @@ public class AddHeaderPopup extends PopupWindow {
 
         // retrieve display dimensions
         Rect displayRectangle = new Rect();
-        Window window = ((Activity)context).getWindow();
+        Window window = activity.getWindow();
         window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
         popupView.setMinimumWidth((int)(displayRectangle.width() * 0.7f));
 
