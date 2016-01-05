@@ -11,6 +11,7 @@ buildscript {
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 apply plugin: 'android-command'
+apply plugin: 'com.neenbedankt.android-apt'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
@@ -18,7 +19,7 @@ repositories {
     jcenter()
 }
 
-apply plugin: 'com.neenbedankt.android-apt'
+
 
 android {
     dexOptions {
@@ -62,9 +63,6 @@ android {
     }
 
     applicationVariants.all { variant ->
-
-//        variant.mergedFlavor.versionName = versionProcessor.calculateVersionName()
-
         def filename = "TestRest-" + variant.baseName + "-${variant.versionName}.apk"
 
         variant.outputs.each { output ->
@@ -111,12 +109,11 @@ android {
 
 
 dependencies {
-    compile 'com.android.support:support-v4:22.2.1'
-//    compile 'com.android.support:gridlayout-v7:19'
-    compile 'com.android.support:appcompat-v7:22.2.1'
-//    compile 'com.google.android.gms:play-services:7.8.0'
+    compile project(':data')
+
+    compile 'com.android.support:support-v4:23.1.1'
+    compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.nineoldandroids:library:2.4.0'
-    compile project(':AndroidNetworkManager')
     compile('com.crashlytics.sdk.android:crashlytics:2.2.2@aar') {
         transitive = true;
     }
