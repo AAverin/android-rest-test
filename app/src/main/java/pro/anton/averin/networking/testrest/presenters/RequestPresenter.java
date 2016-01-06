@@ -2,6 +2,7 @@ package pro.anton.averin.networking.testrest.presenters;
 
 import javax.inject.Inject;
 
+import okhttp3.Response;
 import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.data.Repository;
 import pro.anton.averin.networking.testrest.data.models.Request;
@@ -53,10 +54,10 @@ public class RequestPresenter extends BasePresenterImpl<RequestView> {
 
     public void onSendClicked(Request request) {
         if (request.isValid()) {
-            repository.sendRequest(request).subscribeOn(schedulers.androidMainThread()).subscribe(new Subscriber<String>() {
+            repository.sendRequest(request).subscribeOn(schedulers.androidMainThread()).subscribe(new Subscriber<Response>() {
                 @Override
                 public void onCompleted() {
-
+                    navigator.navigateToResponseScreen();
                 }
 
                 @Override
@@ -65,7 +66,7 @@ public class RequestPresenter extends BasePresenterImpl<RequestView> {
                 }
 
                 @Override
-                public void onNext(String s) {
+                public void onNext(Response s) {
 
                 }
             });

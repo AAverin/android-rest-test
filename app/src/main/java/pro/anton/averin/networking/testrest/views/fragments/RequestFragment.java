@@ -3,6 +3,7 @@ package pro.anton.averin.networking.testrest.views.fragments;
 import android.animation.Animator;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -375,6 +376,19 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
         baseUrlEditText.requestFocus();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == PICK_FILE_INTENT_ID) {
+                postBody.setText(data.getDataString());
+            }
+//            if (requestCode == EntriesManagerActivity.ENTRIESMANAGER_REQUEST_CODE) {
+//                init_withRequest(testRestApp.currentRequest);
+//            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     private int getMethodRadioButtonId(String method) {
         if (method.toUpperCase().equals("GET")) {
             return R.id.checkbox_get;
@@ -396,6 +410,7 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
         request.method = radioButton.getText().toString();
         request.queryString = methodUrlEditText.getText().toString();
         request.headers = headersList;
+        request.body = postBody.getText().toString();
 
         return request;
     }
