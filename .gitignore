@@ -3,3 +3,7 @@
 .DS_Store
 /.idea
 **/*.iml
+/build/*
+/app/build/*
+/data/build/*
+/legacy/build/*
