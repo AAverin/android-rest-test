@@ -3,10 +3,14 @@ package pro.anton.averin.networking.testrest.presenters;
 import javax.inject.Inject;
 
 import pro.anton.averin.networking.testrest.BaseContext;
+import pro.anton.averin.networking.testrest.data.Repository;
+import pro.anton.averin.networking.testrest.data.models.Request;
 import pro.anton.averin.networking.testrest.navigation.Navigator;
 import pro.anton.averin.networking.testrest.rx.RxBus;
+import pro.anton.averin.networking.testrest.rx.RxSchedulers;
 import pro.anton.averin.networking.testrest.rx.events.DimBackgroundEvent;
 import pro.anton.averin.networking.testrest.rx.events.UndimBackgroundEvent;
+import rx.Subscriber;
 
 public class RequestPresenter extends BasePresenterImpl<RequestView> {
 
@@ -14,6 +18,10 @@ public class RequestPresenter extends BasePresenterImpl<RequestView> {
     RxBus rxBus;
     @Inject
     Navigator navigator;
+    @Inject
+    Repository repository;
+    @Inject
+    RxSchedulers schedulers;
 
     @Inject
     public RequestPresenter(BaseContext baseContext) {
@@ -43,9 +51,26 @@ public class RequestPresenter extends BasePresenterImpl<RequestView> {
         view.showAddHeaderPopup();
     }
 
-    public void onSendClicked() {
-        if (prepareRequest()) {
-            navigator.navigateToResponseScreen();
+    public void onSendClicked(Request request) {
+        if (request.isValid()) {
+            repository.sendRequest(request).subscribeOn(schedulers.androidMainThread()).subscribe(new Subscriber<String>() {
+                @Override
+                public void onCompleted() {
+
+                }
+
+                @Override
+                public void onError(Throwable e) {
+
+                }
+
+                @Override
+                public void onNext(String s) {
+
+                }
+            });
+        } else {
+            view.focusBaseUrl();
         }
     }
 
@@ -67,18 +92,6 @@ public class RequestPresenter extends BasePresenterImpl<RequestView> {
 
     public void onPostMethodUnselected() {
         view.hidePostLayout();
-    }
-
-
-    private boolean prepareRequest() {
-//        if (!validate()) {
-//            Toast.makeText(activity, getString(R.string.error_emptyFields), 3000).show();
-//            baseUrlEditText.requestFocus();
-//            return false;
-//        }
-//        testRestApp.currentResponse = null;
-//        testRestApp.currentRequest = buildRequest();
-        return false;
     }
 
     public void addQueryPopupDismissed() {

@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.OkHttpClient;
 import pro.anton.averin.networking.testrest.ApplicationContext;
 import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.data.Repository;
@@ -28,5 +29,11 @@ public class ApplicationModule {
     @Singleton
     Repository repository(RepositoryImpl repository) {
         return repository;
+    }
+
+    @Provides
+    @Singleton
+    OkHttpClient okHttpClient() {
+        return new OkHttpClient();
     }
 }

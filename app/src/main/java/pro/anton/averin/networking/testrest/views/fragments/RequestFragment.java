@@ -22,8 +22,10 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -33,6 +35,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.data.ProtocolType;
+import pro.anton.averin.networking.testrest.data.models.Request;
 import pro.anton.averin.networking.testrest.data.models.RequestHeader;
 import pro.anton.averin.networking.testrest.presenters.RequestPresenter;
 import pro.anton.averin.networking.testrest.presenters.RequestView;
@@ -180,7 +183,7 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.onSendClicked();
+                presenter.onSendClicked(buildRequest());
             }
         });
 
@@ -366,6 +369,12 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
         addedHeadersAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void focusBaseUrl() {
+        Toast.makeText(getBaseActivity(), getString(R.string.error_emptyFields), Toast.LENGTH_LONG).show();
+        baseUrlEditText.requestFocus();
+    }
+
     private int getMethodRadioButtonId(String method) {
         if (method.toUpperCase().equals("GET")) {
             return R.id.checkbox_get;
@@ -377,5 +386,17 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
             return R.id.checkbox_delete;
         }
         return -1;
+    }
+
+    private Request buildRequest() {
+        Request request = new Request();
+        request.protocol = protocolSwitcher.getProtocolText();
+        request.baseUrl = baseUrlEditText.getText().toString();
+        RadioButton radioButton = (RadioButton) contentView.findViewById(methodRadioGroup.getCheckedRadioButtonId());
+        request.method = radioButton.getText().toString();
+        request.queryString = methodUrlEditText.getText().toString();
+        request.headers = headersList;
+
+        return request;
     }
 }

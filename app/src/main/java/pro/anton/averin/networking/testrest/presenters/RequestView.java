@@ -22,4 +22,6 @@ public interface RequestView extends BaseView {
     void hidePostLayout();
 
     void clearFields();
+
+    void focusBaseUrl();
 }

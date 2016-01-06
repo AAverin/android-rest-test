@@ -79,6 +79,10 @@ public class Request {
         return this;
     }
 
+    public boolean isValid() {
+        return baseUrl != null && baseUrl.length() > 0;
+    }
+
     public static class SQLITE {
         public final static String TABLE_NAME = "requests";
         public final static String COL_ID = BaseColumns._ID;
