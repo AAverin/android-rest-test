@@ -2,27 +2,6 @@
 <items version="2" >
 
     <item
-        jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/crashlytics/2.2.2/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="1014d409d1af641616ca7a2b3fda549cf559d605">
-        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/com.crashlytics.sdk.android-crashlytics-2.2.2_f3bcf5ffc22ae42d5a7630e8e8bf0aafa921713f.jar" />
-    </item>
-    <item
-        jar="/Users/antonaverin/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.0.0-beta-4584/96b200cb46deae0cbfc005a2b949e4c3b43e7cf1/kotlin-stdlib-1.0.0-beta-4584.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="96b200cb46deae0cbfc005a2b949e4c3b43e7cf1">
-        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/kotlin-stdlib-1.0.0-beta-4584_182b1d1d391cdc1fec874fdce9e1a3bb7f906397.jar" />
-    </item>
-    <item
-        jar="/Users/antonaverin/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="6975da39a7040257bd51d21a231b76c915872d38">
-        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/javax.inject-1_088c8c9443406447142a9941be6fbd3a8669f0aa.jar" />
-    </item>
-    <item
         jar="/Users/antonaverin/.gradle/caches/modules-2/files-2.1/io.reactivex/rxandroid/0.25.0/866b539d3ae58abbd47880f243c02f914fec5cda/rxandroid-0.25.0.jar"
         jumboMode="false"
         revision="23.0.1"
@@ -30,25 +9,67 @@
         <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/rxandroid-0.25.0_4b34191879f66f0e90cd331d7b0056ba02f9bf97.jar" />
     </item>
     <item
-        jar="/Users/antonaverin/.gradle/caches/modules-2/files-2.1/com.google.dagger/dagger/2.0/da7ba0ee1d30edd955da276cdf01d3d7cb24aedc/dagger-2.0.jar"
+        jar="/Users/antonaverin/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="da7ba0ee1d30edd955da276cdf01d3d7cb24aedc">
-        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/dagger-2.0_a7ab63eb3783721fb34d8b6f07ba79e6d659e338.jar" />
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.1_ed74fc722eb64f4da07ad237a4ce9f2c4ded6835.jar" />
     </item>
     <item
         jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/exploded-aar/TestRest_Git/data/unspecified/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="cc3e70247396cdb4f00d9a41edd6e38ab4c3484a">
+        sha1="261d90744fbbb263db495ed9ccf53d7d1aff013a">
         <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/TestRest_Git-data-unspecified_7f1037a2ca87a4803d2ed9988fc99199680f44dc.jar" />
     </item>
     <item
-        jar="/Users/antonaverin/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife/7.0.1/d5d13ea991eab0252e3710e5df3d6a9d4b21d461/butterknife-7.0.1.jar"
+        jar="/Users/antonaverin/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.6.0/98476622f10715998eacf9240d6b479f12c66143/okio-1.6.0.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
-        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/butterknife-7.0.1_c6a6e259ba1a7ca14d8aef57bb1fd7d384f7cfa2.jar" />
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/okio-1.6.0_6772299274131a5169e62b5a561701fd7f32afb1.jar" />
+    </item>
+    <item
+        jar="/Users/antonaverin/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-runtime/1.0.0-beta-4584/1dfc3d47ade4c45dc6db8ee6f5bf65771fab3dce/kotlin-runtime-1.0.0-beta-4584.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1dfc3d47ade4c45dc6db8ee6f5bf65771fab3dce">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/kotlin-runtime-1.0.0-beta-4584_76544caa1a151f339adc826b3e496ef7a3bf2bd7.jar" />
+    </item>
+    <item
+        jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/beta/1.1.2/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="0d6546c1c73cb64a6907f694e6c4bf4b50fefa70">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/com.crashlytics.sdk.android-beta-1.1.2_3dbf8f116590e13f95134a2cebd40629dea48b13.jar" />
+    </item>
+    <item
+        jar="/Users/antonaverin/.gradle/caches/modules-2/files-2.1/io.reactivex/rxjava/1.0.14/898f9ab61e2a23afd615f0b0389478bec86f49f9/rxjava-1.0.14.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="898f9ab61e2a23afd615f0b0389478bec86f49f9">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/rxjava-1.0.14_4ad05d71294eaedf4719b3759aae0ba226ef6b0a.jar" />
+    </item>
+    <item
+        jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/exploded-aar/io.fabric.sdk.android/fabric/1.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="0a4af6a85230b990eb8690b696d2db9247338611">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/io.fabric.sdk.android-fabric-1.2.0_85a575073a9292442db3f1971401e179b7b6b253.jar" />
+    </item>
+    <item
+        jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1_22cd480656db8deae8ef86b42f7fbeb16ad9d39a.jar" />
+    </item>
+    <item
+        jar="/Users/antonaverin/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/javax.inject-1_088c8c9443406447142a9941be6fbd3a8669f0aa.jar" />
     </item>
     <item
         jar="/Users/antonaverin/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
@@ -65,6 +86,13 @@
         <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/logging-interceptor-3.0.0-RC1_589bef22b5583581b8adbbc807f54b0575a122de.jar" />
     </item>
     <item
+        jar="/Users/antonaverin/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.0.0-RC1/be7e96331952019f16dc52dce09ab25df29353d7/okhttp-3.0.0-RC1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="be7e96331952019f16dc52dce09ab25df29353d7">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/okhttp-3.0.0-RC1_3fdd3d4178db1a81b082f977fd3c3d45943956bb.jar" />
+    </item>
+    <item
         jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/answers/1.1.2/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
@@ -72,46 +100,11 @@
         <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/com.crashlytics.sdk.android-answers-1.1.2_d6d61ebe594b3b425d6bcd92311ab2beb3d1a066.jar" />
     </item>
     <item
-        jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/exploded-aar/io.fabric.sdk.android/fabric/1.2.0/jars/classes.jar"
+        jar="/Users/antonaverin/.gradle/caches/modules-2/files-2.1/com.google.dagger/dagger/2.0/da7ba0ee1d30edd955da276cdf01d3d7cb24aedc/dagger-2.0.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="0a4af6a85230b990eb8690b696d2db9247338611">
-        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/io.fabric.sdk.android-fabric-1.2.0_85a575073a9292442db3f1971401e179b7b6b253.jar" />
-    </item>
-    <item
-        jar="/Users/antonaverin/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-runtime/1.0.0-beta-4584/1dfc3d47ade4c45dc6db8ee6f5bf65771fab3dce/kotlin-runtime-1.0.0-beta-4584.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="1dfc3d47ade4c45dc6db8ee6f5bf65771fab3dce">
-        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/kotlin-runtime-1.0.0-beta-4584_76544caa1a151f339adc826b3e496ef7a3bf2bd7.jar" />
-    </item>
-    <item
-        jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
-        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1_22cd480656db8deae8ef86b42f7fbeb16ad9d39a.jar" />
-    </item>
-    <item
-        jar="/Users/antonaverin/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
-        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.1_ed74fc722eb64f4da07ad237a4ce9f2c4ded6835.jar" />
-    </item>
-    <item
-        jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
-        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.1.1_e579c1f6304d3dbe30c35eb719a451c0a33d2f3d.jar" />
-    </item>
-    <item
-        jar="/Users/antonaverin/.gradle/caches/modules-2/files-2.1/io.reactivex/rxjava/1.0.14/898f9ab61e2a23afd615f0b0389478bec86f49f9/rxjava-1.0.14.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="898f9ab61e2a23afd615f0b0389478bec86f49f9">
-        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/rxjava-1.0.14_4ad05d71294eaedf4719b3759aae0ba226ef6b0a.jar" />
+        sha1="da7ba0ee1d30edd955da276cdf01d3d7cb24aedc">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/dagger-2.0_a7ab63eb3783721fb34d8b6f07ba79e6d659e338.jar" />
     </item>
     <item
         jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
@@ -121,25 +114,32 @@
         <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.1.1_985ecc5ad60b5eee1b0c09ee3053ad792137d48f.jar" />
     </item>
     <item
-        jar="/Users/antonaverin/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.6.0/98476622f10715998eacf9240d6b479f12c66143/okio-1.6.0.jar"
+        jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="98476622f10715998eacf9240d6b479f12c66143">
-        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/okio-1.6.0_6772299274131a5169e62b5a561701fd7f32afb1.jar" />
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.1.1_e579c1f6304d3dbe30c35eb719a451c0a33d2f3d.jar" />
     </item>
     <item
-        jar="/Users/antonaverin/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.0.0-RC1/be7e96331952019f16dc52dce09ab25df29353d7/okhttp-3.0.0-RC1.jar"
+        jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/crashlytics/2.2.2/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="be7e96331952019f16dc52dce09ab25df29353d7">
-        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/okhttp-3.0.0-RC1_3fdd3d4178db1a81b082f977fd3c3d45943956bb.jar" />
+        sha1="1014d409d1af641616ca7a2b3fda549cf559d605">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/com.crashlytics.sdk.android-crashlytics-2.2.2_f3bcf5ffc22ae42d5a7630e8e8bf0aafa921713f.jar" />
     </item>
     <item
-        jar="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/beta/1.1.2/jars/classes.jar"
+        jar="/Users/antonaverin/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.0.0-beta-4584/96b200cb46deae0cbfc005a2b949e4c3b43e7cf1/kotlin-stdlib-1.0.0-beta-4584.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="0d6546c1c73cb64a6907f694e6c4bf4b50fefa70">
-        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/com.crashlytics.sdk.android-beta-1.1.2_3dbf8f116590e13f95134a2cebd40629dea48b13.jar" />
+        sha1="96b200cb46deae0cbfc005a2b949e4c3b43e7cf1">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/kotlin-stdlib-1.0.0-beta-4584_182b1d1d391cdc1fec874fdce9e1a3bb7f906397.jar" />
+    </item>
+    <item
+        jar="/Users/antonaverin/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife/7.0.1/d5d13ea991eab0252e3710e5df3d6a9d4b21d461/butterknife-7.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
+        <dex dex="/Users/antonaverin/projects/personal/!Archive/a_TestRest/TestRest_Git/app/build/intermediates/pre-dexed/debug/butterknife-7.0.1_c6a6e259ba1a7ca14d8aef57bb1fd7d384f7cfa2.jar" />
     </item>
 
 </items>

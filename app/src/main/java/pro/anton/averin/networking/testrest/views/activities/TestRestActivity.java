@@ -52,4 +52,9 @@ public class TestRestActivity extends BaseViewPresenterActivity<TestRestPresente
     public void undim() {
         root.getForeground().setAlpha(0);
     }
+
+    @Override
+    public void naviResponseScreen() {
+        viewPager.setCurrentItem(1);
+    }
 }

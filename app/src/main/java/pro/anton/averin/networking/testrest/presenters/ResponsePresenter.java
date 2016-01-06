@@ -17,8 +17,8 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
     }
 
     @Override
-    public void onHidden() {
-        super.onHidden();
+    public void onVisible() {
+        super.onVisible();
 
         if (storage.getCurrentRequest() != null && storage.getCurrentResponse() == null) {
             //send request again

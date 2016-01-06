@@ -187,7 +187,9 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
         String htmlBody = Html.fromHtml(body.toString()).toString();
         shareIntent.putExtra(Intent.EXTRA_HTML_TEXT, htmlBody);
         shareIntent.putExtra(Intent.EXTRA_TEXT, htmlBody);
-        shareActionProvider.setShareIntent(shareIntent);
+        if (shareActionProvider != null) {
+            shareActionProvider.setShareIntent(shareIntent);
+        }
     }
 
     @Override
