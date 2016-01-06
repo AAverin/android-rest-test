@@ -57,7 +57,7 @@ public class RequestPresenter extends BasePresenterImpl<RequestView> {
 
     public void onSendClicked(Request request) {
         if (request.isValid()) {
-            repository.sendRequest(request).subscribeOn(schedulers.androidMainThread()).subscribe(new LogSubscriber<Response>(llogger) {
+            repository.sendRequest(request).observeOn(schedulers.androidMainThread()).subscribe(new LogSubscriber<Response>(llogger) {
                 @Override
                 public void onCompleted() {
                     navigator.navigateToResponseScreen();

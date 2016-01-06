@@ -4,6 +4,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import rx.Observable
+import rx.schedulers.Schedulers
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -24,13 +25,8 @@ class Network @Inject constructor() {
             } catch (e: Throwable) {
                 subscriber.onError(e)
             }
-        }
-
-
-
+        }.subscribeOn(Schedulers.io())
     }
-
-
 }
 
 

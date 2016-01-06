@@ -19,6 +19,7 @@ class RepositoryImpl @Inject constructor() : Repository {
     lateinit var dataConverter: DataConverter
 
     override fun sendRequest(request: Request): Observable<Response> {
+        storage.currentRequest = request
         return network.sendRequest(dataConverter.toOkhttp(request)).map { okHttpResponse ->
             storage.currentResponse = dataConverter.fromOkHttp(okHttpResponse)
             okHttpResponse
