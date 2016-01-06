@@ -10,21 +10,31 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import pro.anton.averin.networking.testrest.BaseContext;
+import javax.inject.Inject;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import pro.anton.averin.networking.testrest.R;
-import pro.anton.averin.networking.testrest.legacy.activities.BaseActivity;
+import pro.anton.averin.networking.testrest.data.models.Response;
+import pro.anton.averin.networking.testrest.presenters.JsonResponsePresenter;
+import pro.anton.averin.networking.testrest.presenters.JsonResponseView;
 import pro.anton.averin.networking.testrest.views.androidviews.jsonviewer.JsonTreeViewer;
+import pro.anton.averin.networking.testrest.views.base.BaseViewPresenterViewpagerFragment;
 
 /**
  * Created by AAverin on 07.12.13.
  */
-public class JsonResponseFragment extends ResponseTabFragment {
+public class JsonResponseFragment extends BaseViewPresenterViewpagerFragment<JsonResponsePresenter> implements JsonResponseView {
 
+    @Inject
+    JsonResponsePresenter presenter;
+
+    @Bind(R.id.jsonResponse_progressbar_layout)
     LinearLayout progressBarLayout;
+    @Bind(R.id.jsonResponse_blank_slate)
     TextView blankSlate;
-    private BaseActivity activity;
-    private BaseContext baseContext;
-    private JsonTreeViewer jsonTreeViewer;
+    @Bind(R.id.jsonviewer_tree)
+    JsonTreeViewer jsonTreeViewer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,23 +45,17 @@ public class JsonResponseFragment extends ResponseTabFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.activity = (BaseActivity) getActivity();
-        baseContext = (BaseContext) activity.getApplicationContext();
-        init();
+
+        getBaseActivity().getComponent().injectTo(this);
+
+        initializePresenter(presenter, this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        contentView = (ViewGroup) inflater.inflate(R.layout.fragment_json_response, container, false);
+        contentView = inflater.inflate(R.layout.fragment_json_response, container, false);
+        ButterKnife.bind(this, contentView);
         return contentView;
-    }
-
-    private void init() {
-        jsonTreeViewer = (JsonTreeViewer) contentView.findViewById(R.id.jsonviewer_tree);
-        blankSlate = (TextView) contentView.findViewById(R.id.jsonResponse_blank_slate);
-        progressBarLayout = (LinearLayout) contentView.findViewById(R.id.jsonResponse_progressbar_layout);
-
-        update();
     }
 
     public void cancel() {
@@ -60,17 +64,16 @@ public class JsonResponseFragment extends ResponseTabFragment {
         }
     }
 
-    public void update() {
-        if (activity == null || !activity.isActive())
-            return;
 
-        if (baseContext.currentResponse == null || baseContext.currentResponse.body == null) {
+    @Override
+    public void update(Response currentResponse) {
+        if (currentResponse == null || currentResponse.body == null) {
             blankSlate.setVisibility(View.VISIBLE);
             return;
         } else {
             JSONObject jsonObject = null;
             try {
-                jsonObject = new JSONObject(baseContext.currentResponse.body);
+                jsonObject = new JSONObject(currentResponse.body);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -90,5 +93,4 @@ public class JsonResponseFragment extends ResponseTabFragment {
 
         }
     }
-
 }

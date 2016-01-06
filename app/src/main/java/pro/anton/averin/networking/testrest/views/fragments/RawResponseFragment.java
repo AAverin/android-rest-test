@@ -11,20 +11,26 @@ import android.widget.TextView;
 import java.util.List;
 import java.util.Map;
 
-import pro.anton.averin.networking.testrest.BaseContext;
+import javax.inject.Inject;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import pro.anton.averin.networking.testrest.R;
+import pro.anton.averin.networking.testrest.data.models.Response;
+import pro.anton.averin.networking.testrest.presenters.RawResponsePresenter;
+import pro.anton.averin.networking.testrest.presenters.RawResponseView;
 import pro.anton.averin.networking.testrest.views.androidviews.ExpandableContentRow;
+import pro.anton.averin.networking.testrest.views.base.BaseViewPresenterViewpagerFragment;
 
-/**
- * Created by AAverin on 07.12.13.
- */
-public class RawResponseFragment extends ResponseTabFragment {
+public class RawResponseFragment extends BaseViewPresenterViewpagerFragment<RawResponsePresenter> implements RawResponseView {
 
-    private BaseContext baseContext;
-    private Activity activity;
+    @Inject
+    RawResponsePresenter presenter;
 
-    private ExpandableContentRow headersRow;
-    private ExpandableContentRow bodyRow;
+    @Bind(R.id.headers_row)
+    ExpandableContentRow headersRow;
+    @Bind(R.id.body_row)
+    ExpandableContentRow bodyRow;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,35 +41,30 @@ public class RawResponseFragment extends ResponseTabFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.activity = getActivity();
-        this.baseContext = (BaseContext) activity.getApplicationContext();
-        init();
+
+        getBaseActivity().getComponent().injectTo(this);
+
+        initializePresenter(presenter, this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        contentView = (ViewGroup) inflater.inflate(R.layout.fragment_raw_response, container, false);
+        contentView = inflater.inflate(R.layout.fragment_raw_response, container, false);
+        ButterKnife.bind(this, contentView);
         return contentView;
     }
 
-    private void init() {
-        headersRow = (ExpandableContentRow) contentView.findViewById(R.id.headers_row);
-        bodyRow = (ExpandableContentRow) contentView.findViewById(R.id.body_row);
+    @Override
+    public void update(Response currentResponse) {
+        Activity activity = getBaseActivity();
 
-        update();
-    }
-
-    public void update() {
-        if (baseContext.currentResponse == null) {
-            return;
-        }
-        Map<String, List<String>> headers = baseContext.currentResponse.headers;
+        Map<String, List<String>> headers = currentResponse.headers;
         StringBuffer htmlHeaders = new StringBuffer();
         htmlHeaders.append("<b>");
-        htmlHeaders.append(baseContext.currentResponse.method);
+        htmlHeaders.append(currentResponse.method);
         htmlHeaders.append("</b>");
         htmlHeaders.append(" ");
-        htmlHeaders.append(baseContext.currentResponse.url);
+        htmlHeaders.append(currentResponse.url);
         htmlHeaders.append("<br/>");
         if (headers != null && headers.size() > 0) {
             for (String key : headers.keySet()) {
@@ -83,10 +84,10 @@ public class RawResponseFragment extends ResponseTabFragment {
         headersRow.setContent(headersHtmlTextView);
 
         TextView bodyTextView = new TextView(activity);
-        if (baseContext.currentResponse.body == null) {
+        if (currentResponse.body == null) {
             bodyTextView.setText(getString(R.string.empty_response));
         } else {
-            bodyTextView.setText(baseContext.currentResponse.body);
+            bodyTextView.setText(currentResponse.body);
         }
         bodyRow.setContent(bodyTextView);
     }

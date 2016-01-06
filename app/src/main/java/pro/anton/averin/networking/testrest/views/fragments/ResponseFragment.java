@@ -29,6 +29,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.data.models.Request;
 import pro.anton.averin.networking.testrest.data.models.Response;
@@ -84,6 +85,7 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         contentView = inflater.inflate(R.layout.fragment_response, container, false);
+        ButterKnife.bind(this, contentView);
         return contentView;
     }
 
