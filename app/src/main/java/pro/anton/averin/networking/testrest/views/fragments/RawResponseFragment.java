@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest.legacy.fragments;
+package pro.anton.averin.networking.testrest.views.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import java.util.Map;
 
 import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.R;
-import pro.anton.averin.networking.testrest.legacy.views.ExpandableContentRow;
+import pro.anton.averin.networking.testrest.views.androidviews.ExpandableContentRow;
 
 /**
  * Created by AAverin on 07.12.13.

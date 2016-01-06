@@ -1,4 +1,4 @@
-package pro.anton.averin.networking.testrest.legacy.fragments;
+package pro.anton.averin.networking.testrest.views.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
