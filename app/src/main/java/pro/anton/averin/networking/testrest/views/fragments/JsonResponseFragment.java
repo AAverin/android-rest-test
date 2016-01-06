@@ -21,9 +21,6 @@ import pro.anton.averin.networking.testrest.presenters.JsonResponseView;
 import pro.anton.averin.networking.testrest.views.androidviews.jsonviewer.JsonTreeViewer;
 import pro.anton.averin.networking.testrest.views.base.BaseViewPresenterViewpagerFragment;
 
-/**
- * Created by AAverin on 07.12.13.
- */
 public class JsonResponseFragment extends BaseViewPresenterViewpagerFragment<JsonResponsePresenter> implements JsonResponseView {
 
     @Inject
@@ -35,12 +32,6 @@ public class JsonResponseFragment extends BaseViewPresenterViewpagerFragment<Jso
     TextView blankSlate;
     @Bind(R.id.jsonviewer_tree)
     JsonTreeViewer jsonTreeViewer;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {

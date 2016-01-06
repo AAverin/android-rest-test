@@ -7,11 +7,12 @@ import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.data.Repository;
 import pro.anton.averin.networking.testrest.data.models.Request;
 import pro.anton.averin.networking.testrest.navigation.Navigator;
+import pro.anton.averin.networking.testrest.rx.LogSubscriber;
 import pro.anton.averin.networking.testrest.rx.RxBus;
 import pro.anton.averin.networking.testrest.rx.RxSchedulers;
 import pro.anton.averin.networking.testrest.rx.events.DimBackgroundEvent;
 import pro.anton.averin.networking.testrest.rx.events.UndimBackgroundEvent;
-import rx.Subscriber;
+import pro.anton.averin.networking.testrest.utils.LLogger;
 
 public class RequestPresenter extends BasePresenterImpl<RequestView> {
 
@@ -23,6 +24,8 @@ public class RequestPresenter extends BasePresenterImpl<RequestView> {
     Repository repository;
     @Inject
     RxSchedulers schedulers;
+    @Inject
+    LLogger llogger;
 
     @Inject
     public RequestPresenter(BaseContext baseContext) {
@@ -54,7 +57,7 @@ public class RequestPresenter extends BasePresenterImpl<RequestView> {
 
     public void onSendClicked(Request request) {
         if (request.isValid()) {
-            repository.sendRequest(request).subscribeOn(schedulers.androidMainThread()).subscribe(new Subscriber<Response>() {
+            repository.sendRequest(request).subscribeOn(schedulers.androidMainThread()).subscribe(new LogSubscriber<Response>(llogger) {
                 @Override
                 public void onCompleted() {
                     navigator.navigateToResponseScreen();
@@ -62,12 +65,12 @@ public class RequestPresenter extends BasePresenterImpl<RequestView> {
 
                 @Override
                 public void onError(Throwable e) {
-
+                    super.onError(e);
                 }
 
                 @Override
                 public void onNext(Response s) {
-
+                    llogger.log(this, s.message());
                 }
             });
         } else {

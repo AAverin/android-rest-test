@@ -1,10 +1,12 @@
 package pro.anton.averin.networking.testrest.di;
 
+
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import pro.anton.averin.networking.testrest.ApplicationContext;
 import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.data.Repository;
@@ -34,6 +36,11 @@ public class ApplicationModule {
     @Provides
     @Singleton
     OkHttpClient okHttpClient() {
-        return new OkHttpClient();
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(interceptor).build();
+        return client;
     }
 }

@@ -16,10 +16,14 @@ class Network @Inject constructor() {
     fun sendRequest(request: Request): Observable<Response> {
 
         return Observable.create<Response> { subscriber ->
-            val networkResponse = okhttp.newCall(request).execute();
-
-            subscriber.onNext(networkResponse)
-            subscriber.onCompleted()
+            val networkResponse: Response
+            try {
+                networkResponse = okhttp.newCall(request).execute();
+                subscriber.onNext(networkResponse)
+                subscriber.onCompleted()
+            } catch (e: Throwable) {
+                subscriber.onError(e)
+            }
         }
 
 

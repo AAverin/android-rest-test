@@ -33,12 +33,6 @@ public class RawResponseFragment extends BaseViewPresenterViewpagerFragment<RawR
     ExpandableContentRow bodyRow;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-    }
-
-    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
@@ -56,6 +50,10 @@ public class RawResponseFragment extends BaseViewPresenterViewpagerFragment<RawR
 
     @Override
     public void update(Response currentResponse) {
+        if (currentResponse == null) {
+            return;
+        }
+
         Activity activity = getBaseActivity();
 
         Map<String, List<String>> headers = currentResponse.headers;

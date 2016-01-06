@@ -14,6 +14,13 @@ public class LLogger {
     public LLogger() {
     }
 
+    private static String ensureText(String original) {
+        if (original == null || original.isEmpty()) {
+            original = "_";
+        }
+        return original;
+    }
+
     public static void log_e_static(String TAG, Object... message) {
         if (!Config.isLoggingEnabled) {
             return;
@@ -23,7 +30,7 @@ public class LLogger {
         for (Object msg : message) {
             stringBuilder.append(String.valueOf(msg));
         }
-        Log.e(TAG, stringBuilder.toString());
+        Log.e(ensureText(TAG), ensureText(stringBuilder.toString()));
     }
 
     public void log(String TAG, Object... message) {
@@ -35,7 +42,7 @@ public class LLogger {
         for (Object msg : message) {
             stringBuilder.append(String.valueOf(msg));
         }
-        Log.d(TAG, stringBuilder.toString());
+        Log.d(ensureText(TAG), ensureText(stringBuilder.toString()));
     }
 
     public void log_e(String TAG, Object... message) {
@@ -47,7 +54,7 @@ public class LLogger {
         for (Object msg : message) {
             stringBuilder.append(String.valueOf(msg));
         }
-        Log.e(TAG, stringBuilder.toString());
+        Log.e(ensureText(TAG), ensureText(stringBuilder.toString()));
     }
 
     public void logArray(Object o, String[] array) {
@@ -57,7 +64,7 @@ public class LLogger {
             stringBuilder.append(String.valueOf(msg));
             stringBuilder.append(", ");
         }
-        Log.d(tag, stringBuilder.toString());
+        Log.d(ensureText(tag), ensureText(stringBuilder.toString()));
     }
 
     public void log(Object o, Throwable t, Object... message) {
@@ -70,7 +77,7 @@ public class LLogger {
         for (Object msg : message) {
             stringBuilder.append(String.valueOf(msg));
         }
-        Log.d(tag, stringBuilder.toString(), t);
+        Log.d(ensureText(tag), ensureText(stringBuilder.toString()), t);
     }
 
     public void log_e(Object o, Throwable t, Object... message) {
@@ -83,7 +90,7 @@ public class LLogger {
         for (Object msg : message) {
             stringBuilder.append(String.valueOf(msg));
         }
-        Log.e(tag, stringBuilder.toString(), t);
+        Log.e(ensureText(tag), ensureText(stringBuilder.toString()), t);
     }
 
     public void log(Object o, Object... message) {

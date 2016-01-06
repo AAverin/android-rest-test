@@ -17,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TabHost;
 import android.widget.Toast;
 
 import java.io.File;
@@ -63,20 +62,15 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
 
         initializePresenter(presenter, this);
 
-        tabHost.setup(baseContext, getBaseActivity().getSupportFragmentManager(), R.id.tabFrameLayout);
-        tabHost.addTab(tabHost.newTabSpec("rawResponse")
-                .setIndicator(getString(R.string.raw_response)), RawResponseFragment.class, null);
-        tabHost.addTab(tabHost.newTabSpec("jsonResponse")
-                .setIndicator(getString(R.string.json_response)), JsonResponseFragment.class, null);
-        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-            @Override
-            public void onTabChanged(String tabId) {
-                JsonResponseFragment jsonResponseFragment = ((JsonResponseFragment) (getBaseActivity()).getSupportFragmentManager().findFragmentByTag("jsonResponse"));
-                if (jsonResponseFragment != null) {
-                    jsonResponseFragment.cancel();
-                }
-            }
-        });
+//        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+//            @Override
+//            public void onTabChanged(String tabId) {
+//                JsonResponseFragment jsonResponseFragment = ((JsonResponseFragment) (getBaseActivity()).getSupportFragmentManager().findFragmentByTag("jsonResponse"));
+//                if (jsonResponseFragment != null) {
+//                    jsonResponseFragment.cancel();
+//                }
+//            }
+//        });
 
         setHasOptionsMenu(true);
     }
@@ -86,6 +80,13 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         contentView = inflater.inflate(R.layout.fragment_response, container, false);
         ButterKnife.bind(this, contentView);
+
+        tabHost.setup(getBaseActivity(), getChildFragmentManager(), R.id.tabFrameLayout);
+        tabHost.addTab(tabHost.newTabSpec("rawResponse")
+                .setIndicator(getString(R.string.raw_response)), RawResponseFragment.class, null);
+        tabHost.addTab(tabHost.newTabSpec("jsonResponse")
+                .setIndicator(getString(R.string.json_response)), JsonResponseFragment.class, null);
+
         return contentView;
     }
 

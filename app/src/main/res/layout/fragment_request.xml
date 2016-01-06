@@ -86,7 +86,6 @@
                             android:id="@+id/baseurl"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:editable="true"
                             android:hint="@string/baseurl_hint"
                             android:linksClickable="false" />
 
