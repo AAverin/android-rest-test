@@ -9,13 +9,13 @@
         <!-- Support library compatibility -->
         <item name="actionMenuTextColor">@color/text_light_primary</item>
 
-        <item name="actionBarSize">@dimen/actionbar_height</item>
+        <item name="actionBarSize">@dimen/toolbar</item>
 
         <item name="android:windowBackground">@android:color/white</item>
         <item name="colorPrimary">@color/dark_blue</item>
         <item name="colorPrimaryDark">@color/dark_blue</item>
 
-        <item name="android:textColorPrimary">@color/c_text_light_primary</item>
+        <item name="android:textColorPrimary">@color/c_text_dark_primary</item>
 
         <item name="windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -26,6 +26,10 @@
     <style name="Toolbar" parent="Theme.AppCompat.NoActionBar">
         <item name="android:textColorPrimary">@color/text_light_primary</item>
         <item name="android:background">@color/dark_blue</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="actionModeBackground">@color/light_blue</item>
+        <item name="android:actionModeBackground">@color/light_blue</item>
     </style>
 
     <style name="ToolbarContent">

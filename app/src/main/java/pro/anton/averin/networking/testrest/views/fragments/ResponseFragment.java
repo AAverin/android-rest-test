@@ -80,9 +80,10 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
 
     @Override
     public void setResponseBody(String body) {
-        TextView bodyTextView = (TextView) inflater.inflate(R.layout.expandable_content_response, (ViewGroup) contentView, false);
+        View responseContentView = inflater.inflate(R.layout.expandable_content_response, (ViewGroup) contentView, false);
+        TextView bodyTextView = (TextView) responseContentView.findViewById(R.id.content_text);
         bodyTextView.setText(body);
-        bodyRow.setContent(bodyTextView);
+        bodyRow.setContent(responseContentView);
     }
 
     @Nullable

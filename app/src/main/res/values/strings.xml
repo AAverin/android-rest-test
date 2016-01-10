@@ -71,5 +71,6 @@
     <string name="label_critical_error">Critical Error</string>
     <string name="label_critical_error_message">Sorry, something went wrong, application will be restarted.\n\nSupport have been notified about the problem.</string>
     <string name="label_critical_error_notify">Support have been notified about this issue, please try again later.</string>
+    <string name="label_format_json">Format JSON?</string>
 
 </resources>
