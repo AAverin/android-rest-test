@@ -1,15 +1,12 @@
 package pro.anton.averin.networking.testrest.views.fragments;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,21 +14,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import pro.anton.averin.networking.testrest.R;
-import pro.anton.averin.networking.testrest.data.models.Request;
-import pro.anton.averin.networking.testrest.data.models.Response;
 import pro.anton.averin.networking.testrest.presenters.ResponsePresenter;
 import pro.anton.averin.networking.testrest.presenters.ResponseView;
 import pro.anton.averin.networking.testrest.views.base.BaseViewPresenterViewpagerFragment;
@@ -110,83 +98,8 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
     }
 
     @Override
-    public void updateShareIntent(Response currentResponse, Request currentRequest) {
-        Activity activity = getBaseActivity();
-
-        shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/html");
-
-        StringBuilder subject = new StringBuilder();
-        subject.append("Response to ");
-        subject.append(currentResponse.url);
-        subject.append(" via TestRest Android");
-
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject.toString());
-
-        StringBuffer htmlHeaders = new StringBuffer();
-        htmlHeaders.append("<b>");
-        htmlHeaders.append(currentResponse.method);
-        htmlHeaders.append("</b>");
-        htmlHeaders.append(" ");
-        htmlHeaders.append(currentResponse.url);
-        htmlHeaders.append("<br/>");
-        Map<String, List<String>> headers = currentResponse.headers;
-        if (headers != null && headers.size() > 0) {
-            for (String key : headers.keySet()) {
-                htmlHeaders.append("<b>");
-                htmlHeaders.append(key);
-                htmlHeaders.append("</b>");
-                List<String> values = headers.get(key);
-                for (String value : values) {
-                    htmlHeaders.append(" ");
-                    htmlHeaders.append(value);
-                }
-                htmlHeaders.append("<br/>");
-            }
-        }
-
-        StringBuilder body = new StringBuilder();
-        body.append("<h1>Headers</h1>");
-        body.append(htmlHeaders.toString());
-        body.append("<h1>Response body</h1>");
-
-        String state = Environment.getExternalStorageState();
-        File tempFileForBody = null;
-        boolean isBodyLong = body.length() > 500;
-        if (isBodyLong) {
-
-            if (Environment.MEDIA_MOUNTED.equals(state)) {
-                //we can write to external storage
-                String root = activity.getExternalCacheDir().getAbsolutePath();
-                File storageDir = new File(root + File.separator + "TestRest");
-                storageDir.mkdirs();
-                try {
-                    tempFileForBody = File.createTempFile("testrest", currentRequest.name, storageDir);
-                    FileOutputStream fos = new FileOutputStream(tempFileForBody);
-                    fos.write(currentResponse.body.getBytes());
-                    fos.flush();
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                Toast.makeText(activity, "Unable to save file to external storage", Toast.LENGTH_LONG).show();
-            }
-
-
-            if (tempFileForBody == null) {
-                body.append(currentResponse.body);
-            } else {
-                body.append("see in attachment");
-                shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(tempFileForBody));
-            }
-        } else {
-            body.append(currentResponse.body);
-        }
-
-        String htmlBody = Html.fromHtml(body.toString()).toString();
-        shareIntent.putExtra(Intent.EXTRA_HTML_TEXT, htmlBody);
-        shareIntent.putExtra(Intent.EXTRA_TEXT, htmlBody);
+    public void updateShareIntent(Intent shareIntent) {
+        this.shareIntent = shareIntent;
         if (shareActionProvider != null) {
             shareActionProvider.setShareIntent(shareIntent);
         }
@@ -215,5 +128,10 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
     @Override
     public void hideResponseLayout() {
         responseLayout.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void displayMediaNotMountedMessage() {
+        Snackbar.make(contentView, "Media is not mounted, unable to save body contents into a file", Snackbar.LENGTH_LONG).show();
     }
 }
