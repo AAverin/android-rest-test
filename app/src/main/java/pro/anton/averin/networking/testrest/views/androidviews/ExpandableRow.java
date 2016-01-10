@@ -98,28 +98,11 @@ public class ExpandableRow extends LinearLayout {
         });
     }
 
-    public void setContent(ViewGroup view) {
-        if (isExpanded) {
-            refreshContentHeight(false);
-        }
-//        contentView = view;
-        content.addView(view);
-        if (!isExpanded) {
-            if (contentWidthObtained) {
-                measureNotExpanded();
-            } else {
-                measureNotExpandedDeferred = true;
-            }
-        }
-    }
-
     public void setContent(View view) {
         if (isExpanded) {
             refreshContentHeight(false);
         }
-//        contentView = new LinearLayout(getContext());
-//        contentView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-//        contentView.addView(view);
+        content.removeAllViews();
         content.addView(view);
         if (!isExpanded) {
             if (contentWidthObtained) {
