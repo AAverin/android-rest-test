@@ -1,11 +1,9 @@
 package pro.anton.averin.networking.testrest.presenters;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.text.Html;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import pro.anton.averin.networking.testrest.BaseContext;
@@ -26,10 +23,6 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
 
     @Inject
     Storage storage;
-
-    @Inject
-    @Named("storageDir")
-    File storageDir;
 
     @Inject
     public ResponsePresenter(BaseContext baseContext) {
@@ -141,18 +134,30 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
     private File getBodyInFile(Response currentResponse, String name) {
 
         File tempFileForBody = null;
-
-        storageDir.mkdirs();
-        try {
-            tempFileForBody = File.createTempFile("testrest", name, storageDir);
-            FileOutputStream fos = new FileOutputStream(tempFileForBody);
-            fos.write(currentResponse.body.getBytes());
-            fos.flush();
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        File storageDir = getStorageDir();
+        if (storageDir != null) {
+            storageDir.mkdirs();
+            try {
+                tempFileForBody = File.createTempFile("testrest", name, storageDir);
+                FileOutputStream fos = new FileOutputStream(tempFileForBody);
+                fos.write(currentResponse.body.getBytes());
+                fos.flush();
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return tempFileForBody;
+    }
+
+    private File getStorageDir() {
+        File externalCacheDir = baseContext.getExternalCacheDir();
+        if (externalCacheDir != null) {
+            String root = externalCacheDir.getAbsolutePath();
+            return new File(root + File.separator + "TestRest");
+        } else {
+            return null;
+        }
     }
 }

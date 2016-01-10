@@ -1,9 +1,6 @@
 package pro.anton.averin.networking.testrest.di;
 
 
-import java.io.File;
-
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -45,14 +42,5 @@ public class ApplicationModule {
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(interceptor).build();
         return client;
-    }
-
-    @Provides
-    @Singleton
-    @Named("storageDir")
-    File storageDir() {
-        //we can write to external storage
-        String root = baseContext.getExternalCacheDir().getAbsolutePath();
-        return new File(root + File.separator + "TestRest");
     }
 }
