@@ -12,22 +12,24 @@
         android:orientation="vertical">
 
 
-        <pro.anton.averin.networking.testrest.views.androidviews.ExpandableContentRow
+        <pro.anton.averin.networking.testrest.views.androidviews.ExpandableRow
             android:id="@+id/headers_row"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            aaverin:expandable_row_content="@layout/expandable_content_headers"
-            aaverin:expandable_row_title="@string/header">
+            aaverin:expandablerow_content="@layout/expandable_content_headers"
+            aaverin:expandablerow_isOpened="true"
+            aaverin:expandablerow_title="@string/header">
 
-        </pro.anton.averin.networking.testrest.views.androidviews.ExpandableContentRow>
+        </pro.anton.averin.networking.testrest.views.androidviews.ExpandableRow>
 
-        <pro.anton.averin.networking.testrest.views.androidviews.ExpandableContentRow
+        <pro.anton.averin.networking.testrest.views.androidviews.ExpandableRow
             android:id="@+id/body_row"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            aaverin:expandable_row_title="@string/response">
+            aaverin:expandablerow_isOpened="true"
+            aaverin:expandablerow_title="@string/response">
 
-        </pro.anton.averin.networking.testrest.views.androidviews.ExpandableContentRow>
+        </pro.anton.averin.networking.testrest.views.androidviews.ExpandableRow>
 
     </LinearLayout>
 

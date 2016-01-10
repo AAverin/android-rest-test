@@ -19,7 +19,7 @@ import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.data.models.Response;
 import pro.anton.averin.networking.testrest.presenters.RawResponsePresenter;
 import pro.anton.averin.networking.testrest.presenters.RawResponseView;
-import pro.anton.averin.networking.testrest.views.androidviews.ExpandableContentRow;
+import pro.anton.averin.networking.testrest.views.androidviews.ExpandableRow;
 import pro.anton.averin.networking.testrest.views.base.BaseViewPresenterViewpagerFragment;
 
 public class RawResponseFragment extends BaseViewPresenterViewpagerFragment<RawResponsePresenter> implements RawResponseView {
@@ -28,9 +28,9 @@ public class RawResponseFragment extends BaseViewPresenterViewpagerFragment<RawR
     RawResponsePresenter presenter;
 
     @Bind(R.id.headers_row)
-    ExpandableContentRow headersRow;
+    ExpandableRow headersRow;
     @Bind(R.id.body_row)
-    ExpandableContentRow bodyRow;
+    ExpandableRow bodyRow;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
