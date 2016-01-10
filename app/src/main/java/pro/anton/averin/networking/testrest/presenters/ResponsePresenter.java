@@ -40,6 +40,7 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
             view.hideResponseLayout();
         } else if (storage.getCurrentResponse() != null) {
             //show response
+            view.update(storage.getCurrentResponse());
             view.updateShareIntent(buildShareIntent());
             view.hideNoDataLayout();
             view.hideProgressBar();

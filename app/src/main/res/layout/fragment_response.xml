@@ -11,42 +11,7 @@
         android:orientation="vertical"
         android:visibility="gone">
 
-        <android.support.v4.app.FragmentTabHost
-            android:id="@+id/tabhost"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TabWidget
-                    android:id="@+id/tabs"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="0"
-                    android:orientation="horizontal"/>
-
-                <FrameLayout
-                    android:id="@+id/tabContent"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0">
-
-                </FrameLayout>
-
-            </LinearLayout>
-
-        </android.support.v4.app.FragmentTabHost>
-
-        <FrameLayout
-            android:id="@+id/tabFrameLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1">
-
-        </FrameLayout>
+        <include layout="@layout/fragment_raw_response" />
 
     </LinearLayout>
 

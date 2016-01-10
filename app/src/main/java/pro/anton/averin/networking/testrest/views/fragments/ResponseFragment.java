@@ -1,12 +1,13 @@
 package pro.anton.averin.networking.testrest.views.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,14 +15,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import pro.anton.averin.networking.testrest.R;
+import pro.anton.averin.networking.testrest.data.models.Response;
 import pro.anton.averin.networking.testrest.presenters.ResponsePresenter;
 import pro.anton.averin.networking.testrest.presenters.ResponseView;
+import pro.anton.averin.networking.testrest.views.androidviews.ExpandableRow;
 import pro.anton.averin.networking.testrest.views.base.BaseViewPresenterViewpagerFragment;
 
 public class ResponseFragment extends BaseViewPresenterViewpagerFragment<ResponsePresenter> implements ResponseView {
@@ -35,8 +42,11 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
     LinearLayout progressbarLayout;
     @Bind(R.id.nodata_layout)
     LinearLayout noDataLayout;
-    @Bind(R.id.tabhost)
-    FragmentTabHost tabHost;
+
+    @Bind(R.id.headers_row)
+    ExpandableRow headersRow;
+    @Bind(R.id.body_row)
+    ExpandableRow bodyRow;
 
     private ShareActionProvider shareActionProvider;
     private Intent shareIntent = null;
@@ -50,17 +60,49 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
 
         initializePresenter(presenter, this);
 
-//        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-//            @Override
-//            public void onTabChanged(String tabId) {
-//                JsonResponseFragment jsonResponseFragment = ((JsonResponseFragment) (getBaseActivity()).getSupportFragmentManager().findFragmentByTag("jsonResponse"));
-//                if (jsonResponseFragment != null) {
-//                    jsonResponseFragment.cancel();
-//                }
-//            }
-//        });
-
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void update(Response currentResponse) {
+        if (currentResponse == null) {
+            return;
+        }
+
+        Activity activity = getBaseActivity();
+
+        Map<String, List<String>> headers = currentResponse.headers;
+        StringBuffer htmlHeaders = new StringBuffer();
+        htmlHeaders.append("<b>");
+        htmlHeaders.append(currentResponse.method);
+        htmlHeaders.append("</b>");
+        htmlHeaders.append(" ");
+        htmlHeaders.append(currentResponse.url);
+        htmlHeaders.append("<br/>");
+        if (headers != null && headers.size() > 0) {
+            for (String key : headers.keySet()) {
+                htmlHeaders.append("<b>");
+                htmlHeaders.append(key);
+                htmlHeaders.append("</b>");
+                List<String> values = headers.get(key);
+                for (String value : values) {
+                    htmlHeaders.append(" ");
+                    htmlHeaders.append(value);
+                }
+                htmlHeaders.append("<br/>");
+            }
+        }
+        TextView headersHtmlTextView = new TextView(activity);
+        headersHtmlTextView.setText(Html.fromHtml(htmlHeaders.toString()));
+        headersRow.setContent(headersHtmlTextView);
+
+        TextView bodyTextView = new TextView(activity);
+        if (currentResponse.body == null) {
+            bodyTextView.setText(getString(R.string.empty_response));
+        } else {
+            bodyTextView.setText(currentResponse.body);
+        }
+        bodyRow.setContent(bodyTextView);
     }
 
     @Nullable
@@ -68,13 +110,6 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         contentView = inflater.inflate(R.layout.fragment_response, container, false);
         ButterKnife.bind(this, contentView);
-
-        tabHost.setup(getBaseActivity(), getChildFragmentManager(), R.id.tabFrameLayout);
-        tabHost.addTab(tabHost.newTabSpec("rawResponse")
-                .setIndicator(getString(R.string.raw_response)), RawResponseFragment.class, null);
-        tabHost.addTab(tabHost.newTabSpec("jsonResponse")
-                .setIndicator(getString(R.string.json_response)), JsonResponseFragment.class, null);
-
         return contentView;
     }
 

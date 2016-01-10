@@ -2,7 +2,6 @@ package pro.anton.averin.networking.testrest.presenters;
 
 import android.content.Intent;
 
-import pro.anton.averin.networking.testrest.data.models.Request;
 import pro.anton.averin.networking.testrest.data.models.Response;
 
 public interface ResponseView extends BaseView {
@@ -19,4 +18,6 @@ public interface ResponseView extends BaseView {
     void hideResponseLayout();
 
     void displayMediaNotMountedMessage();
+
+    void update(Response currentResponse);
 }
