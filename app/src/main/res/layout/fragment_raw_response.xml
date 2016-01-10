@@ -16,7 +16,6 @@
             android:id="@+id/headers_row"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            aaverin:expandablerow_content="@layout/expandable_content_headers"
             aaverin:expandablerow_isOpened="true"
             aaverin:expandablerow_title="@string/header">
 

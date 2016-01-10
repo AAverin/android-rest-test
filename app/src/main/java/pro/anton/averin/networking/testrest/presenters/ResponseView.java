@@ -2,10 +2,8 @@ package pro.anton.averin.networking.testrest.presenters;
 
 import android.content.Intent;
 
-import pro.anton.averin.networking.testrest.data.models.Response;
-
 public interface ResponseView extends BaseView {
-    void updateShareIntent(Intent shareIntent);
+    void setShareIntent(Intent shareIntent);
 
     void hideNoDataLayout();
 
@@ -19,5 +17,9 @@ public interface ResponseView extends BaseView {
 
     void displayMediaNotMountedMessage();
 
-    void update(Response currentResponse);
+    void setHeaders(String s);
+
+    void setEmptyBody();
+
+    void setResponseBody(String body);
 }

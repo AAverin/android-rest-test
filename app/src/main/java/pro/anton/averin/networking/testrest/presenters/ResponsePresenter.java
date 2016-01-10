@@ -24,6 +24,8 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
     @Inject
     Storage storage;
 
+    private StringBuilder htmlHeaders;
+
     @Inject
     public ResponsePresenter(BaseContext baseContext) {
         super(baseContext);
@@ -40,8 +42,17 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
             view.hideResponseLayout();
         } else if (storage.getCurrentResponse() != null) {
             //show response
-            view.update(storage.getCurrentResponse());
-            view.updateShareIntent(buildShareIntent());
+            Response currentResponse = storage.getCurrentResponse();
+
+            htmlHeaders = getFormatterHeaders(currentResponse);
+            view.setHeaders(htmlHeaders.toString());
+            if (currentResponse.body == null) {
+                view.setEmptyBody();
+            } else {
+                view.setResponseBody(currentResponse.body);
+            }
+
+            view.setShareIntent(buildShareIntent());
             view.hideNoDataLayout();
             view.hideProgressBar();
             view.showResponseLayout();
@@ -54,8 +65,6 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
 
         StringBuilder shareBody = new StringBuilder();
         StringBuilder subject = getShareSubject(currentResponse);
-        StringBuilder htmlHeaders = getShareHeaders(currentResponse);
-
 
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject.toString());
         shareIntent.setType("text/html");
@@ -100,7 +109,7 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
         return subject;
     }
 
-    private StringBuilder getShareHeaders(Response currentResponse) {
+    private StringBuilder getFormatterHeaders(Response currentResponse) {
         StringBuilder htmlHeaders = new StringBuilder();
         htmlHeaders.append("<b>");
         htmlHeaders.append(currentResponse.method);

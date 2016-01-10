@@ -1,6 +1,5 @@
 package pro.anton.averin.networking.testrest.views.fragments;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,15 +16,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.List;
-import java.util.Map;
-
 import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import pro.anton.averin.networking.testrest.R;
-import pro.anton.averin.networking.testrest.data.models.Response;
 import pro.anton.averin.networking.testrest.presenters.ResponsePresenter;
 import pro.anton.averin.networking.testrest.presenters.ResponseView;
 import pro.anton.averin.networking.testrest.views.androidviews.ExpandableRow;
@@ -50,7 +45,7 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
 
     private ShareActionProvider shareActionProvider;
     private Intent shareIntent = null;
-
+    private LayoutInflater inflater = null;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -60,48 +55,30 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
 
         initializePresenter(presenter, this);
 
+        inflater = getBaseActivity().getLayoutInflater();
+
         setHasOptionsMenu(true);
     }
 
     @Override
-    public void update(Response currentResponse) {
-        if (currentResponse == null) {
-            return;
-        }
-
-        Activity activity = getBaseActivity();
-
-        Map<String, List<String>> headers = currentResponse.headers;
-        StringBuffer htmlHeaders = new StringBuffer();
-        htmlHeaders.append("<b>");
-        htmlHeaders.append(currentResponse.method);
-        htmlHeaders.append("</b>");
-        htmlHeaders.append(" ");
-        htmlHeaders.append(currentResponse.url);
-        htmlHeaders.append("<br/>");
-        if (headers != null && headers.size() > 0) {
-            for (String key : headers.keySet()) {
-                htmlHeaders.append("<b>");
-                htmlHeaders.append(key);
-                htmlHeaders.append("</b>");
-                List<String> values = headers.get(key);
-                for (String value : values) {
-                    htmlHeaders.append(" ");
-                    htmlHeaders.append(value);
-                }
-                htmlHeaders.append("<br/>");
-            }
-        }
-        TextView headersHtmlTextView = new TextView(activity);
-        headersHtmlTextView.setText(Html.fromHtml(htmlHeaders.toString()));
+    public void setHeaders(String htmlHeaders) {
+        TextView headersHtmlTextView = (TextView) inflater.inflate(R.layout.expandable_content_headers, (ViewGroup) contentView, false);
+        headersHtmlTextView.setText(Html.fromHtml(htmlHeaders));
         headersRow.setContent(headersHtmlTextView);
+    }
 
-        TextView bodyTextView = new TextView(activity);
-        if (currentResponse.body == null) {
-            bodyTextView.setText(getString(R.string.empty_response));
-        } else {
-            bodyTextView.setText(currentResponse.body);
-        }
+    @Override
+    public void setEmptyBody() {
+        TextView bodyTextView = (TextView) inflater.inflate(R.layout.expandable_content_response, (ViewGroup) contentView, false);
+        bodyTextView.setText(getString(R.string.empty_response));
+        bodyRow.setContent(bodyTextView);
+
+    }
+
+    @Override
+    public void setResponseBody(String body) {
+        TextView bodyTextView = (TextView) inflater.inflate(R.layout.expandable_content_response, (ViewGroup) contentView, false);
+        bodyTextView.setText(body);
         bodyRow.setContent(bodyTextView);
     }
 
@@ -133,7 +110,7 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
     }
 
     @Override
-    public void updateShareIntent(Intent shareIntent) {
+    public void setShareIntent(Intent shareIntent) {
         this.shareIntent = shareIntent;
         if (shareActionProvider != null) {
             shareActionProvider.setShareIntent(shareIntent);
