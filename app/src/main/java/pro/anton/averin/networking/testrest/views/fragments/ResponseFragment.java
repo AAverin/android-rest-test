@@ -31,6 +31,9 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
     @Inject
     ResponsePresenter presenter;
 
+    @Inject
+    LayoutInflater inflater;
+
     @Bind(R.id.response_layout)
     LinearLayout responseLayout;
     @Bind(R.id.progressbar_layout)
@@ -45,7 +48,7 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
 
     private ShareActionProvider shareActionProvider;
     private Intent shareIntent = null;
-    private LayoutInflater inflater = null;
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {

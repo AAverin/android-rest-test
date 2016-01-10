@@ -26,11 +26,6 @@
     <color name="c_text_light_disabled">#f3f3f3</color>
     <color name="c_text_light_divider">#ffffff</color>
 
-    <color name="primary">#999999</color>
-    <color name="primaryDark">#666666</color>
-    <color name="primaryLight">#F3F3F3</color>
-
-
     <color name="entrieslist_unselected">@android:color/transparent</color>
     <color name="entrieslist_selected">#6FE386</color>
 </resources>

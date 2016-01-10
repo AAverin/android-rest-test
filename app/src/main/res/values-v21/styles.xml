@@ -13,9 +13,12 @@
 
     <style name="Toolbar" parent="Theme.AppCompat.NoActionBar">
         <item name="android:textColorPrimary">@color/text_light_primary</item>
-        <item name="actionMenuTextColor">@color/text_light_primary</item>
         <item name="android:textColorSecondary">@color/text_light_primary</item>
+        <item name="android:background">@color/dark_blue</item>
+        <item name="actionMenuTextColor">@color/text_light_primary</item>
         <item name="android:colorAccent">@color/light_blue</item>
         <item name="android:elevation">4dp</item>
     </style>
+
+    <style name="ToolbarContent"></style>
 </resources>

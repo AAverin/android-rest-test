@@ -12,16 +12,19 @@ import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.presenters.TestRestPresenter;
 import pro.anton.averin.networking.testrest.presenters.TestRestView;
 import pro.anton.averin.networking.testrest.views.adapters.RestPagerAdapter;
-import pro.anton.averin.networking.testrest.views.base.BaseViewPresenterActivity;
+import pro.anton.averin.networking.testrest.views.androidviews.toolbar.DefaultToolbarImpl;
+import pro.anton.averin.networking.testrest.views.base.ToolbarVPActivity;
 
-public class TestRestActivity extends BaseViewPresenterActivity<TestRestPresenter> implements TestRestView {
+public class TestRestActivity extends ToolbarVPActivity<TestRestPresenter> implements TestRestView {
 
     @Inject
     TestRestPresenter presenter;
+    @Inject
+    DefaultToolbarImpl defaultToolbar;
 
     @Bind(R.id.pager)
     ViewPager viewPager;
-    @Bind(R.id.root)
+    @Bind(R.id.rootView)
     FrameLayout root;
 
     RestPagerAdapter pagerAdapter;
@@ -33,7 +36,6 @@ public class TestRestActivity extends BaseViewPresenterActivity<TestRestPresente
         getComponent().injectTo(this);
         initializePresenter(presenter, this);
 
-        setContentView(R.layout.fragment_main);
         ButterKnife.bind(this);
 
         presenter.undim();
@@ -44,7 +46,14 @@ public class TestRestActivity extends BaseViewPresenterActivity<TestRestPresente
         });
 
         viewPager.setAdapter(pagerAdapter);
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (defaultToolbar != null && !isFinishing()) {
+            defaultToolbar.setToolbar(getToolbar());
+        }
 
     }
 

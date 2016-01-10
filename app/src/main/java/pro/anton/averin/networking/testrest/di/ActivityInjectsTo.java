@@ -1,6 +1,7 @@
 package pro.anton.averin.networking.testrest.di;
 
 import pro.anton.averin.networking.testrest.views.activities.TestRestActivity;
+import pro.anton.averin.networking.testrest.views.activities.ToolbarActivity;
 import pro.anton.averin.networking.testrest.views.androidviews.AddHeaderPopup;
 import pro.anton.averin.networking.testrest.views.androidviews.AddQueryPopup;
 import pro.anton.averin.networking.testrest.views.fragments.JsonResponseFragment;
@@ -20,5 +21,7 @@ public interface ActivityInjectsTo {
     void injectTo(AddQueryPopup addQueryPopup);
 
     void injectTo(JsonResponseFragment jsonResponseFragment);
+
+    void injectTo(ToolbarActivity toolbarActivity);
 }
 
