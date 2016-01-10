@@ -2,10 +2,10 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@color/ebebeb" android:state_enabled="true" android:state_pressed="true" />
-    <item android:drawable="@color/ebebeb" android:state_enabled="true" android:state_focused="true" />
+    <item android:drawable="@color/c_text_light_primary" android:state_enabled="true" android:state_pressed="true" />
+    <item android:drawable="@color/c_text_light_primary" android:state_enabled="true" android:state_focused="true" />
     <item android:drawable="@color/light_blue" android:state_enabled="true" android:state_selected="true" />
     <item android:drawable="@color/light_blue" android:state_checked="true" android:state_enabled="true" />
-    <item android:drawable="@color/ebebeb" />
+    <item android:drawable="@color/c_text_light_primary" />
 
 </selector>

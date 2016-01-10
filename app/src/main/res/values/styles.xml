@@ -3,22 +3,27 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="AppTheme.Base" />
 
-    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:actionMenuTextColor">@color/white</item>
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light">
+        <item name="android:actionMenuTextColor">@color/text_light_primary</item>
 
         <!-- Support library compatibility -->
-        <item name="actionMenuTextColor">@color/white</item>
+        <item name="actionMenuTextColor">@color/text_light_primary</item>
 
         <item name="actionBarSize">@dimen/actionbar_height</item>
 
         <item name="colorPrimary">@color/dark_blue</item>
         <item name="colorPrimaryDark">@color/dark_blue</item>
-        <item name="android:textColorPrimary">#607d8b</item>
+        <item name="android:textColorPrimary">@color/text_light_primary</item>
+
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="windowActionBar">false</item>
 
     </style>
 
     <style name="Toolbar" parent="Base.ThemeOverlay.AppCompat.ActionBar">
-        <item name="android:textColorPrimary">#fff</item>
+        <item name="android:textColorPrimary">@color/text_light_primary</item>
         <item name="android:background">@color/dark_blue</item>
     </style>
 

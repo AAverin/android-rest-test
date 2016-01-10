@@ -40,7 +40,9 @@ public class ApplicationModule {
         interceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
 
         OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(interceptor).build();
+                .addInterceptor(interceptor)
+                .build();
         return client;
     }
+
 }

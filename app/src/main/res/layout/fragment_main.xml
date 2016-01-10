@@ -28,7 +28,7 @@
                 android:fadingEdgeLength="50dp"
                 android:paddingBottom="4dp"
                 android:paddingTop="4dp"
-                android:textColor="@color/white" />
+                android:textColor="@color/text_light_primary" />
 
         </android.support.v4.view.ViewPager>
 
