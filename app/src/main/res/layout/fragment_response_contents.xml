@@ -64,9 +64,13 @@
                 <TextView
                     android:id="@+id/content_text"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content" />
 
-                </TextView>
+                <pro.anton.averin.networking.testrest.views.androidviews.jsonviewer.JsonTreeViewer
+                    android:id="@+id/jsonviewer_tree"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:visibility="gone" />
 
             </LinearLayout>
 

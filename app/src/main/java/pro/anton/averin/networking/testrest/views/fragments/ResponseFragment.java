@@ -17,14 +17,18 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
 import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.presenters.ResponsePresenter;
 import pro.anton.averin.networking.testrest.presenters.ResponseView;
 import pro.anton.averin.networking.testrest.views.androidviews.ExpandableRow;
+import pro.anton.averin.networking.testrest.views.androidviews.jsonviewer.JsonTreeViewer;
 import pro.anton.averin.networking.testrest.views.base.BaseViewPresenterViewpagerFragment;
 
 public class ResponseFragment extends BaseViewPresenterViewpagerFragment<ResponsePresenter> implements ResponseView {
@@ -52,6 +56,8 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
     TextView rawResponse;
     @Bind(R.id.format_json_switch)
     SwitchCompat formatJsonSwitch;
+    @Bind(R.id.jsonviewer_tree)
+    JsonTreeViewer jsonTree;
 
     private ShareActionProvider shareActionProvider;
     private Intent shareIntent = null;
@@ -88,6 +94,41 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
         bodyRow.refreshContentHeight(false);
     }
 
+    @Override
+    public void hideRawResponse() {
+        rawResponse.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showJson() {
+        jsonTree.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showRawResponse() {
+        rawResponse.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideJson() {
+        jsonTree.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void enableJson() {
+        formatJsonSwitch.setEnabled(true);
+    }
+
+    @Override
+    public void disableJson() {
+        formatJsonSwitch.setEnabled(false);
+    }
+
+    @Override
+    public void setJson(JSONObject jsonObject) {
+        jsonTree.setJSONObject(jsonObject);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -113,6 +154,15 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
             shareIntent.setType("text/html");
         }
         shareActionProvider.setShareIntent(shareIntent);
+    }
+
+    @OnCheckedChanged(R.id.format_json_switch)
+    public void onJsonSwitchToggled(boolean checked) {
+        if (checked) {
+            presenter.onShowJson();
+        } else {
+            presenter.onHideJson();
+        }
     }
 
     @Override

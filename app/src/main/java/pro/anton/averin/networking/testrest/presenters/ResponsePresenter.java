@@ -5,6 +5,9 @@ import android.net.Uri;
 import android.os.Environment;
 import android.text.Html;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -50,12 +53,29 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
                 view.setEmptyBody();
             } else {
                 view.setResponseBody(currentResponse.body);
+
+                JSONObject jsonObject = parseJson();
+                if (jsonObject != null) {
+                    view.enableJson();
+                    view.setJson(jsonObject);
+                } else {
+                    view.disableJson();
+                }
             }
 
             view.setShareIntent(buildShareIntent());
             view.hideNoDataLayout();
             view.hideProgressBar();
             view.showResponseLayout();
+        }
+    }
+
+    private JSONObject parseJson() {
+        try {
+            return new JSONObject(storage.getCurrentResponse().body);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -169,5 +189,15 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
         } else {
             return null;
         }
+    }
+
+    public void onShowJson() {
+        view.hideRawResponse();
+        view.showJson();
+    }
+
+    public void onHideJson() {
+        view.showRawResponse();
+        view.hideJson();
     }
 }

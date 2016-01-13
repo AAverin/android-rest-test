@@ -16,9 +16,6 @@ import java.util.Iterator;
 
 import pro.anton.averin.networking.testrest.Config;
 
-/**
- * Created by AAverin on 16.01.14.
- */
 public class JsonTreeViewer extends ScrollView {
 
     JsonTreeViewerListener callback = null;
@@ -123,7 +120,7 @@ public class JsonTreeViewer extends ScrollView {
     }
 
     public interface JsonTreeViewerListener {
-        public void onFinish();
+        void onFinish();
     }
 
     private class TreeProcessAsyncTask extends AsyncTask<JSONObject, Void, ViewGroup> {
