@@ -87,7 +87,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/baseurl_hint"
-                            android:linksClickable="false" />
+                            android:linksClickable="false"
+                            android:text="ya.ru" />
 
                     </LinearLayout>
 

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
+import android.support.v7.widget.SwitchCompat;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -43,8 +44,14 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
 
     @Bind(R.id.headers_row)
     ExpandableRow headersRow;
+    @Bind(R.id.tv_headers)
+    TextView headers;
     @Bind(R.id.body_row)
     ExpandableRow bodyRow;
+    @Bind(R.id.content_text)
+    TextView rawResponse;
+    @Bind(R.id.format_json_switch)
+    SwitchCompat formatJsonSwitch;
 
     private ShareActionProvider shareActionProvider;
     private Intent shareIntent = null;
@@ -65,25 +72,20 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
 
     @Override
     public void setHeaders(String htmlHeaders) {
-        TextView headersHtmlTextView = (TextView) inflater.inflate(R.layout.expandable_content_headers, (ViewGroup) contentView, false);
-        headersHtmlTextView.setText(Html.fromHtml(htmlHeaders));
-        headersRow.setContent(headersHtmlTextView);
+        headers.setText(Html.fromHtml(htmlHeaders));
+        headersRow.refreshContentHeight(false);
     }
 
     @Override
     public void setEmptyBody() {
-        TextView bodyTextView = (TextView) inflater.inflate(R.layout.expandable_content_response, (ViewGroup) contentView, false);
-        bodyTextView.setText(getString(R.string.empty_response));
-        bodyRow.setContent(bodyTextView);
-
+        rawResponse.setText(getString(R.string.empty_response));
+        bodyRow.refreshContentHeight(false);
     }
 
     @Override
     public void setResponseBody(String body) {
-        View responseContentView = inflater.inflate(R.layout.expandable_content_response, (ViewGroup) contentView, false);
-        TextView bodyTextView = (TextView) responseContentView.findViewById(R.id.content_text);
-        bodyTextView.setText(body);
-        bodyRow.setContent(responseContentView);
+        rawResponse.setText(body);
+        bodyRow.refreshContentHeight(false);
     }
 
     @Nullable

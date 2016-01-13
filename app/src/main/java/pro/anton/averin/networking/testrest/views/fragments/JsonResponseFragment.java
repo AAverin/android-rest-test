@@ -30,7 +30,7 @@ public class JsonResponseFragment extends BaseViewPresenterViewpagerFragment<Jso
     LinearLayout progressBarLayout;
     @Bind(R.id.jsonResponse_blank_slate)
     TextView blankSlate;
-    @Bind(R.id.jsonviewer_tree)
+
     JsonTreeViewer jsonTreeViewer;
 
     @Override

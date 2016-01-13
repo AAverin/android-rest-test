@@ -11,7 +11,7 @@
         android:orientation="vertical"
         android:visibility="gone">
 
-        <include layout="@layout/fragment_raw_response" />
+        <include layout="@layout/fragment_response_contents" />
 
     </LinearLayout>
 

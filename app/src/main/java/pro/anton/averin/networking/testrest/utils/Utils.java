@@ -26,6 +26,6 @@ public class Utils {
     }
 
     public interface OnGlobalLayoutCallback {
-        public void onGlobalLayout(View view);
+        void onGlobalLayout(View view);
     }
 }

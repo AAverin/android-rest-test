@@ -21,12 +21,10 @@ public class ExpandableRow extends LinearLayout {
     public final static int ANIMATION_DURATION = 300;
     int contentHeight = 0, contentWidth = 0;
     int titleId = -1;
-    int contentId = -1;
     boolean isExpanded = true, collapsible = true;
     TextView titleView = null;
     Drawable upArrow, downArrow = null;
     boolean shouldRefreshOnFirstExpand = false, contentWidthObtained, measureNotExpandedDeferred = false;
-    //    ViewGroup contentView = null;
     private ImageView arrow;
     private LinearLayout content;
 
@@ -37,7 +35,6 @@ public class ExpandableRow extends LinearLayout {
 
     public ExpandableRow(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
-        init();
     }
 
     public ExpandableRow(Context context, AttributeSet attrs, int defStyle) {
@@ -46,17 +43,20 @@ public class ExpandableRow extends LinearLayout {
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.ExpandableRow, 0, 0);
         isExpanded = a.getBoolean(R.styleable.ExpandableRow_expandablerow_isOpened, false);
         titleId = a.getResourceId(R.styleable.ExpandableRow_expandablerow_title, -1);
-        contentId = a.getResourceId(R.styleable.ExpandableRow_expandablerow_content, -1);
         collapsible = a.getBoolean(R.styleable.ExpandableRow_expandablerow_collapsible, true);
         a.recycle();
 
         init();
     }
 
-    void init() {
+    private void inflateExpandableRow(View contentView) {
+        removeAllViews();
         LayoutInflater.from(getContext()).inflate(R.layout.i_exapandable_band, this, true);
+
         arrow = (ImageView) findViewById(R.id.i_exp_row_arrow);
         content = (LinearLayout) findViewById(R.id.i_exp_row_content);
+        setContent(contentView);
+
         Utils.globalLayoutOnce(content, new Utils.OnGlobalLayoutCallback() {
             @Override
             public void onGlobalLayout(View viewGroup) {
@@ -72,9 +72,6 @@ public class ExpandableRow extends LinearLayout {
         titleView = (TextView) findViewById(R.id.i_exp_row_title);
         if (titleId != -1) {
             titleView.setText(titleId);
-        }
-        if (contentId != -1) {
-            setContent(contentId);
         }
 
         upArrow = getResources().getDrawable(R.drawable.ic_arrow_up);
@@ -98,11 +95,24 @@ public class ExpandableRow extends LinearLayout {
         });
     }
 
+    void init() {
+        Utils.globalLayoutOnce(this, new Utils.OnGlobalLayoutCallback() {
+            @Override
+            public void onGlobalLayout(View view) {
+                if (getChildCount() == 0 || getChildCount() > 1) {
+                    throw new RuntimeException("ExpandableRow needs to have 1 child");
+                }
+                inflateExpandableRow(getChildAt(0));
+            }
+        });
+    }
+
     public void setContent(View view) {
+        content.removeAllViews();
+
         if (isExpanded) {
             refreshContentHeight(false);
         }
-        content.removeAllViews();
         content.addView(view);
         if (!isExpanded) {
             if (contentWidthObtained) {

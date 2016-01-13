@@ -6,7 +6,6 @@
 
     <declare-styleable name="ExpandableRow">
         <attr name="expandablerow_title" format="reference" />
-        <attr name="expandablerow_content" format="reference" />
         <attr name="expandablerow_isOpened" format="boolean" />
         <attr name="expandablerow_collapsible" format="boolean" />
     </declare-styleable>
