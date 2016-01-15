@@ -38,4 +38,6 @@ public interface ResponseView extends BaseView {
     void setJson(JsonElement jsonObject);
 
     void disableJson();
+
+    void showJsonConfirmationDialog();
 }

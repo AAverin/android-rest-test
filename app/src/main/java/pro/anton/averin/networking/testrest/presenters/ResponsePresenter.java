@@ -186,6 +186,10 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
         }
     }
 
+    public void onShowJsonRequest() {
+        view.showJsonConfirmationDialog();
+    }
+
     public void onShowJson() {
         view.hideRawResponse();
         view.showJson();

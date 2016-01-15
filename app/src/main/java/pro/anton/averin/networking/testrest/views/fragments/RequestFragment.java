@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.text.style.ClickableSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -34,6 +33,9 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
+import butterknife.OnTextChanged;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.data.ProtocolType;
 import pro.anton.averin.networking.testrest.data.models.Request;
@@ -86,6 +88,42 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
 
     private ArrayList<RequestHeader> headersList = new ArrayList<>();
 
+    @OnCheckedChanged(R.id.use_file_checkbox)
+    public void onUseFileChecked(CompoundButton buttonView, boolean isChecked) {
+        presenter.onUseFileCheckboxChecked(isChecked);
+    }
+
+    @OnClick(R.id.pick_file_button)
+    public void onPickFileClicked() {
+        presenter.onPickFileButtonClicked();
+    }
+
+    @OnClick(R.id.add_query_button)
+    public void onAddQueryClicked() {
+        presenter.onAddQueryButtonClicked();
+    }
+
+    @OnClick(R.id.add_header_button)
+    public void onAddHeaderClicked() {
+        presenter.onAddHeadersButtonClicked();
+    }
+
+    @OnClick(R.id.btn_send)
+    public void onSendClicked() {
+        presenter.onSendClicked(buildRequest());
+    }
+
+    @OnTextChanged(value = R.id.baseurl, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+    public void onAfterBaseUrlChanged(Editable s) {
+        String result = s.toString().replaceAll(" ", "");
+        result = result.replace("https://", "");
+        result = result.replace("http://", "");
+        if (!s.toString().equals(result)) {
+            baseUrlEditText.setText(result);
+        }
+    }
+
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -96,28 +134,6 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
 
         setHasOptionsMenu(true);
 
-        baseUrlEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String result = s.toString().replaceAll(" ", "");
-                result = result.replace("https://", "");
-                result = result.replace("http://", "");
-                if (!s.toString().equals(result)) {
-                    baseUrlEditText.setText(result);
-                }
-            }
-        });
-
         methodRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -126,34 +142,6 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
                 } else {
                     presenter.onPostMethodUnselected();
                 }
-            }
-        });
-
-        useFileCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                presenter.onUseFileCheckboxChecked(isChecked);
-            }
-        });
-
-        pickFileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.onPickFileButtonClicked();
-            }
-        });
-
-        addQueryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.onAddQueryButtonClicked();
-            }
-        });
-
-        addHeadersButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.onAddHeadersButtonClicked();
             }
         });
 
@@ -178,13 +166,6 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
                         edit.setText("?" + text);
                     }
                 }
-            }
-        });
-
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.onSendClicked(buildRequest());
             }
         });
 

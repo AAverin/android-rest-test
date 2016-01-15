@@ -1,10 +1,12 @@
 package pro.anton.averin.networking.testrest.views.fragments;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Html;
@@ -15,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.JsonElement;
@@ -58,8 +59,6 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
     SwitchCompat formatJsonSwitch;
     @Bind(R.id.jsonviewer_tree)
     pro.anton.averin.networking.testrest.views.androidviews.jsonviewer.JsonTreeView jsonTree;
-    @Bind(R.id.format_json_progress)
-    ProgressBar formatJsonProgress;
 
     private ShareActionProvider shareActionProvider;
     private Intent shareIntent = null;
@@ -103,9 +102,8 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
 
     @Override
     public void showJson() {
-        formatJsonProgress.setVisibility(View.VISIBLE);
+
         jsonTree.setVisibility(View.VISIBLE);
-        formatJsonProgress.setVisibility(View.GONE);
     }
 
     @Override
@@ -126,6 +124,28 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
     @Override
     public void disableJson() {
         formatJsonSwitch.setEnabled(false);
+    }
+
+    @Override
+    public void showJsonConfirmationDialog() {
+        new AlertDialog.Builder(getBaseActivity())
+                .setTitle(R.string.label_show_formatted_json)
+                .setMessage(R.string.label_formatted_json_message)
+                .setPositiveButton(R.string.label_continue, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        presenter.onShowJson();
+                    }
+                })
+                .setNegativeButton(R.string.label_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        presenter.onHideJson();
+                    }
+                })
+                .create().show();
     }
 
     @Override
@@ -163,7 +183,7 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
     @OnCheckedChanged(R.id.format_json_switch)
     public void onJsonSwitchToggled(boolean checked) {
         if (checked) {
-            presenter.onShowJson();
+            presenter.onShowJsonRequest();
         } else {
             presenter.onHideJson();
         }
