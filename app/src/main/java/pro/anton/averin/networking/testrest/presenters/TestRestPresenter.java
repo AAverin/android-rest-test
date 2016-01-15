@@ -4,13 +4,13 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import pro.anton.averin.networking.testrest.BaseContext;
-import pro.anton.averin.networking.testrest.rx.HasRxBusEvent;
 import pro.anton.averin.networking.testrest.rx.RxBus;
+import pro.anton.averin.networking.testrest.rx.events.FabClickedEvent;
 import pro.anton.averin.networking.testrest.rx.events.NaviResponseScreenEvent;
 import pro.anton.averin.networking.testrest.rx.events.RxBusEvent;
 
 @Singleton
-public class TestRestPresenter extends BasePresenterImpl<TestRestView> implements HasRxBusEvent {
+public class TestRestPresenter extends RxBusPresenter<TestRestView> {
 
     @Inject
     RxBus rxBus;
@@ -41,5 +41,9 @@ public class TestRestPresenter extends BasePresenterImpl<TestRestView> implement
         if (event instanceof NaviResponseScreenEvent) {
             view.naviResponseScreen();
         }
+    }
+
+    public void onFabClicked() {
+        rxBus.send(new FabClickedEvent());
     }
 }

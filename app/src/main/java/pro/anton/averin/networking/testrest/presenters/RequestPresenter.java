@@ -8,16 +8,15 @@ import pro.anton.averin.networking.testrest.data.Repository;
 import pro.anton.averin.networking.testrest.data.models.Request;
 import pro.anton.averin.networking.testrest.navigation.Navigator;
 import pro.anton.averin.networking.testrest.rx.LogSubscriber;
-import pro.anton.averin.networking.testrest.rx.RxBus;
 import pro.anton.averin.networking.testrest.rx.RxSchedulers;
 import pro.anton.averin.networking.testrest.rx.events.DimBackgroundEvent;
+import pro.anton.averin.networking.testrest.rx.events.FabClickedEvent;
+import pro.anton.averin.networking.testrest.rx.events.RxBusEvent;
 import pro.anton.averin.networking.testrest.rx.events.UndimBackgroundEvent;
 import pro.anton.averin.networking.testrest.utils.LLogger;
 
-public class RequestPresenter extends BasePresenterImpl<RequestView> {
+public class RequestPresenter extends RxBusPresenter<RequestView> {
 
-    @Inject
-    RxBus rxBus;
     @Inject
     Navigator navigator;
     @Inject
@@ -108,5 +107,12 @@ public class RequestPresenter extends BasePresenterImpl<RequestView> {
 
     public void requestDimBackground() {
         rxBus.send(new DimBackgroundEvent());
+    }
+
+    @Override
+    public void onEvent(RxBusEvent event) {
+        if (event instanceof FabClickedEvent && isVisible) {
+            onSendClicked(view.getRequest());
+        }
     }
 }

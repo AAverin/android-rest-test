@@ -14,6 +14,7 @@
         <item name="android:windowBackground">@android:color/white</item>
         <item name="colorPrimary">@color/dark_blue</item>
         <item name="colorPrimaryDark">@color/dark_blue</item>
+        <item name="colorAccent">@color/light_blue</item>
 
         <item name="android:textColorPrimary">@color/c_text_dark_primary</item>
 
@@ -51,10 +52,6 @@
     <style name="donediscard_text">
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">#fff</item>
-    </style>
-
-    <style name="basic_padding">
-        <item name="android:padding">12dp</item>
     </style>
 
     <style name="text_title">

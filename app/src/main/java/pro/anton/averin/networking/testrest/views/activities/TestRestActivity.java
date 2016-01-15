@@ -1,6 +1,7 @@
 package pro.anton.averin.networking.testrest.views.activities;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.widget.FrameLayout;
 
@@ -8,6 +9,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.presenters.TestRestPresenter;
 import pro.anton.averin.networking.testrest.presenters.TestRestView;
@@ -26,8 +28,14 @@ public class TestRestActivity extends ToolbarVPActivity<TestRestPresenter> imple
     ViewPager viewPager;
     @Bind(R.id.rootView)
     FrameLayout root;
-
+    @Bind(R.id.btn_fab)
+    FloatingActionButton sendButton;
     RestPagerAdapter pagerAdapter;
+
+    @OnClick(R.id.btn_fab)
+    public void onFabClicked() {
+        presenter.onFabClicked();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

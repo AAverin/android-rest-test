@@ -76,5 +76,6 @@
     <string name="label_formatted_json_message">If your Json is very long it can take up to a few minutes to display it on screen. In that time application may be unresponsive. Do you want to proceed?</string>
     <string name="label_continue">Continue</string>
     <string name="label_cancel">Cancel</string>
+    <string name="label_pick_file">Pick a file</string>
 
 </resources>

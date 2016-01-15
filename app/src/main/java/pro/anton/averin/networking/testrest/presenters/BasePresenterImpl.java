@@ -43,11 +43,13 @@ public class BasePresenterImpl<B extends BaseView> implements BasePresenter<B> {
 
     @Override
     public void onVisible() {
+        isVisible = true;
         //to add behaviour on onVisible, override this method
     }
 
     @Override
     public void onHidden() {
+        isVisible = false;
         //to add behaviour on onHidden, override this method
     }
 }

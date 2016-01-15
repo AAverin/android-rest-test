@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize" />
 
-        <FrameLayout
+        <android.support.design.widget.CoordinatorLayout
             style="@style/ToolbarContent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -41,7 +41,16 @@
 
             </android.support.v4.view.ViewPager>
 
-        </FrameLayout>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/btn_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="@dimen/margin"
+                android:src="@drawable/ic_action_done_white"
+                android:textColor="@color/text_light_primary" />
+
+        </android.support.design.widget.CoordinatorLayout>
 
     </RelativeLayout>
 

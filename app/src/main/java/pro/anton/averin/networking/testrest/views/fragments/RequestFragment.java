@@ -16,7 +16,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -78,8 +77,6 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
     TextView addHeadersButton;
     @Bind(R.id.method_url)
     TokenizedEditText methodUrlEditText;
-    @Bind(R.id.btn_send)
-    Button sendButton;
 
     @Inject
     RequestPresenter presenter;
@@ -106,11 +103,6 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
     @OnClick(R.id.add_header_button)
     public void onAddHeaderClicked() {
         presenter.onAddHeadersButtonClicked();
-    }
-
-    @OnClick(R.id.btn_send)
-    public void onSendClicked() {
-        presenter.onSendClicked(buildRequest());
     }
 
     @OnTextChanged(value = R.id.baseurl, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
@@ -274,7 +266,7 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
     public void showFileChooser() {
         Intent fileChooserIntent = new Intent(Intent.ACTION_GET_CONTENT);
         fileChooserIntent.setType("*/*");
-        startActivityForResult(Intent.createChooser(fileChooserIntent, "Pick a file"), PICK_FILE_INTENT_ID);
+        startActivityForResult(Intent.createChooser(fileChooserIntent, baseContext.getString(R.string.label_pick_file)), PICK_FILE_INTENT_ID);
     }
 
     @Override
@@ -358,6 +350,20 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
     }
 
     @Override
+    public Request getRequest() {
+        Request request = new Request();
+        request.protocol = protocolSwitcher.getProtocolText();
+        request.baseUrl = baseUrlEditText.getText().toString();
+        RadioButton radioButton = (RadioButton) contentView.findViewById(methodRadioGroup.getCheckedRadioButtonId());
+        request.method = radioButton.getText().toString();
+        request.queryString = methodUrlEditText.getText().toString();
+        request.headers = headersList;
+        request.body = postBody.getText().toString();
+
+        return request;
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == PICK_FILE_INTENT_ID) {
@@ -383,16 +389,4 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
         return -1;
     }
 
-    private Request buildRequest() {
-        Request request = new Request();
-        request.protocol = protocolSwitcher.getProtocolText();
-        request.baseUrl = baseUrlEditText.getText().toString();
-        RadioButton radioButton = (RadioButton) contentView.findViewById(methodRadioGroup.getCheckedRadioButtonId());
-        request.method = radioButton.getText().toString();
-        request.queryString = methodUrlEditText.getText().toString();
-        request.headers = headersList;
-        request.body = postBody.getText().toString();
-
-        return request;
-    }
 }

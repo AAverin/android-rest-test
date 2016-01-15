@@ -1,5 +1,7 @@
 package pro.anton.averin.networking.testrest.presenters;
 
+import pro.anton.averin.networking.testrest.data.models.Request;
+
 public interface RequestView extends BaseView {
     void cleanPostBody();
 
@@ -24,4 +26,6 @@ public interface RequestView extends BaseView {
     void clearFields();
 
     void focusBaseUrl();
+
+    Request getRequest();
 }
