@@ -14,15 +14,15 @@ import pro.anton.averin.networking.testrest.views.base.BaseActivity;
 public class UIResolver {
 
     private final BaseActivity baseActivity;
-    private final ViewGroup root;
+    private final ViewGroup snackbarRoot;
 
     @Inject
     public UIResolver(BaseActivity baseActivity) {
         this.baseActivity = baseActivity;
-        root = (ViewGroup) baseActivity.findViewById(R.id.rootView);
+        snackbarRoot = (ViewGroup) baseActivity.findViewById(R.id.toolbar_content);
     }
 
     public void snackBar(@StringRes int messageResource) {
-        Snackbar.make(root, messageResource, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(snackbarRoot, messageResource, Snackbar.LENGTH_LONG).show();
     }
 }
