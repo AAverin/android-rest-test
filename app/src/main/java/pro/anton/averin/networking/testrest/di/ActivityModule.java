@@ -18,6 +18,12 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
+    BaseActivity baseActivity() {
+        return baseActivity;
+    }
+
+    @Provides
+    @PerActivity
     LayoutInflater layoutInflater() {
         return baseActivity.getLayoutInflater();
     }

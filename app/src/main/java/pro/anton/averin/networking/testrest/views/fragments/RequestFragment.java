@@ -41,6 +41,8 @@ import pro.anton.averin.networking.testrest.data.models.Request;
 import pro.anton.averin.networking.testrest.data.models.RequestHeader;
 import pro.anton.averin.networking.testrest.presenters.RequestPresenter;
 import pro.anton.averin.networking.testrest.presenters.RequestView;
+import pro.anton.averin.networking.testrest.resolution.Resolution;
+import pro.anton.averin.networking.testrest.resolution.UIResolution;
 import pro.anton.averin.networking.testrest.views.adapters.AddedHeadersAdapter;
 import pro.anton.averin.networking.testrest.views.androidviews.AdaptableLinearLayout;
 import pro.anton.averin.networking.testrest.views.androidviews.AddHeaderPopup;
@@ -80,6 +82,8 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
 
     @Inject
     RequestPresenter presenter;
+    @Inject
+    UIResolution uiResolution;
 
     AddedHeadersAdapter addedHeadersAdapter;
 
@@ -364,6 +368,11 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
     }
 
     @Override
+    public Resolution getUiResolution() {
+        return uiResolution;
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == PICK_FILE_INTENT_ID) {
@@ -388,5 +397,4 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
         }
         return -1;
     }
-
 }

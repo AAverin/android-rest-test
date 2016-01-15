@@ -1,13 +1,13 @@
 package pro.anton.averin.networking.testrest.rx;
 
 import pro.anton.averin.networking.testrest.utils.LLogger;
-import rx.Subscriber;
+import rx.Observer;
 
-public abstract class LogSubscriber<T> extends Subscriber<T> {
+public abstract class LogObserver<T> implements Observer<T> {
 
     private final LLogger llogger;
 
-    public LogSubscriber(LLogger llogger) {
+    public LogObserver(LLogger llogger) {
         this.llogger = llogger;
     }
 

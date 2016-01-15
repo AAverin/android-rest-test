@@ -77,5 +77,6 @@
     <string name="label_continue">Continue</string>
     <string name="label_cancel">Cancel</string>
     <string name="label_pick_file">Pick a file</string>
+    <string name="error_connected_exception">ConnectedExeption</string>
 
 </resources>

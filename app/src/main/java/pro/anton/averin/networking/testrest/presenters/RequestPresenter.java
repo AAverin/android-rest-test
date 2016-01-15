@@ -7,7 +7,7 @@ import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.data.Repository;
 import pro.anton.averin.networking.testrest.data.models.Request;
 import pro.anton.averin.networking.testrest.navigation.Navigator;
-import pro.anton.averin.networking.testrest.rx.LogSubscriber;
+import pro.anton.averin.networking.testrest.rx.ResolvedObserver;
 import pro.anton.averin.networking.testrest.rx.RxSchedulers;
 import pro.anton.averin.networking.testrest.rx.events.DimBackgroundEvent;
 import pro.anton.averin.networking.testrest.rx.events.FabClickedEvent;
@@ -25,6 +25,7 @@ public class RequestPresenter extends RxBusPresenter<RequestView> {
     RxSchedulers schedulers;
     @Inject
     LLogger llogger;
+
 
     @Inject
     public RequestPresenter(BaseContext baseContext) {
@@ -56,15 +57,11 @@ public class RequestPresenter extends RxBusPresenter<RequestView> {
 
     public void onSendClicked(Request request) {
         if (request.isValid()) {
-            repository.sendRequest(request).observeOn(schedulers.androidMainThread()).subscribe(new LogSubscriber<Response>(llogger) {
+            repository.sendRequest(request).observeOn(schedulers.androidMainThread()).subscribe(new ResolvedObserver<Response>(view.getUiResolution()) {
                 @Override
                 public void onCompleted() {
+                    super.onCompleted();
                     navigator.navigateToResponseScreen();
-                }
-
-                @Override
-                public void onError(Throwable e) {
-                    super.onError(e);
                 }
 
                 @Override
