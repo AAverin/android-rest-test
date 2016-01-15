@@ -142,10 +142,15 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        presenter.onHideJson();
+                        presenter.cancelJsonConfirmationDialog();
                     }
                 })
                 .create().show();
+    }
+
+    @Override
+    public void turnOffJsonSwitch() {
+        formatJsonSwitch.setChecked(false);
     }
 
     @Override

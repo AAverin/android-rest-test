@@ -7,6 +7,7 @@ import android.text.Html;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,6 +28,8 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
     @Inject
     Storage storage;
 
+    private Response presentedResponse = null;
+
     private StringBuilder htmlHeaders;
 
     @Inject
@@ -39,20 +42,21 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
         super.onVisible();
 
         if (storage.getCurrentRequest() != null && storage.getCurrentResponse() == null) {
-            //send request again
+            presentedResponse = null;
+            view.hideJson();
+            view.turnOffJsonSwitch();
             view.hideNoDataLayout();
             view.showProgressBar();
             view.hideResponseLayout();
-        } else if (storage.getCurrentResponse() != null) {
-            //show response
-            Response currentResponse = storage.getCurrentResponse();
+        } else if (storage.getCurrentResponse() != null && !storage.getCurrentResponse().equals(presentedResponse)) {
+            presentedResponse = storage.getCurrentResponse();
 
-            htmlHeaders = getFormatterHeaders(currentResponse);
+            htmlHeaders = getFormatterHeaders(presentedResponse);
             view.setHeaders(htmlHeaders.toString());
-            if (currentResponse.body == null) {
+            if (presentedResponse.body == null) {
                 view.setEmptyBody();
             } else {
-                view.setResponseBody(currentResponse.body);
+                view.setResponseBody(presentedResponse.body);
 
                 JsonElement jsonObject = parseJson();
                 if (jsonObject != null) {
@@ -71,15 +75,19 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
     }
 
     private JsonElement parseJson() {
-        return new JsonParser().parse(storage.getCurrentResponse().body);
+        try {
+            return new JsonParser().parse(presentedResponse.body);
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private Intent buildShareIntent() {
-        Response currentResponse = storage.getCurrentResponse();
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
 
         StringBuilder shareBody = new StringBuilder();
-        StringBuilder subject = getShareSubject(currentResponse);
+        StringBuilder subject = getShareSubject(presentedResponse);
 
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject.toString());
         shareIntent.setType("text/html");
@@ -93,10 +101,10 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
             if (!isMediaMounted()) {
                 view.displayMediaNotMountedMessage();
             } else {
-                File bodyFile = getBodyInFile(currentResponse, storage.getCurrentRequest().name);
+                File bodyFile = getBodyInFile(presentedResponse, storage.getCurrentRequest().name);
 
                 if (bodyFile == null) {
-                    shareBody.append(currentResponse.body);
+                    shareBody.append(presentedResponse.body);
                 } else {
                     shareBody.append("see in attachment");
                     shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(bodyFile));
@@ -105,7 +113,7 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
 
 
         } else {
-            shareBody.append(currentResponse.body);
+            shareBody.append(presentedResponse.body);
         }
 
         String htmlBody = Html.fromHtml(shareBody.toString()).toString();
@@ -198,5 +206,9 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
     public void onHideJson() {
         view.showRawResponse();
         view.hideJson();
+    }
+
+    public void cancelJsonConfirmationDialog() {
+        view.turnOffJsonSwitch();
     }
 }

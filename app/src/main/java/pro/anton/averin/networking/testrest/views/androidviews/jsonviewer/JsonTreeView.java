@@ -37,6 +37,7 @@ public class JsonTreeView extends ScrollView implements ViewContract {
     }
 
     public void setJson(JsonElement jsonObject) {
+        removeAllViews();
         logic.processJson(jsonObject)
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
