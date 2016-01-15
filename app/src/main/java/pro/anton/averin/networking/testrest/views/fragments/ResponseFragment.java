@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.JsonElement;
@@ -56,7 +57,9 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
     @Bind(R.id.format_json_switch)
     SwitchCompat formatJsonSwitch;
     @Bind(R.id.jsonviewer_tree)
-    pro.anton.averin.networking.testrest.views.androidviews.jsonviewer.View jsonTree;
+    pro.anton.averin.networking.testrest.views.androidviews.jsonviewer.JsonTreeView jsonTree;
+    @Bind(R.id.format_json_progress)
+    ProgressBar formatJsonProgress;
 
     private ShareActionProvider shareActionProvider;
     private Intent shareIntent = null;
@@ -100,7 +103,9 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
 
     @Override
     public void showJson() {
+        formatJsonProgress.setVisibility(View.VISIBLE);
         jsonTree.setVisibility(View.VISIBLE);
+        formatJsonProgress.setVisibility(View.GONE);
     }
 
     @Override

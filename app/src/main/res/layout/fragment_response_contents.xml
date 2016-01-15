@@ -59,6 +59,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
+                    <ProgressBar
+                        android:id="@+id/format_json_progress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:indeterminate="true" />
+
                 </LinearLayout>
 
                 <TextView
@@ -66,7 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <pro.anton.averin.networking.testrest.views.androidviews.jsonviewer.View
+                <pro.anton.averin.networking.testrest.views.androidviews.jsonviewer.JsonTreeView
                     android:id="@+id/jsonviewer_tree"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"

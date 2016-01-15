@@ -12,21 +12,21 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
-public class View extends ScrollView implements ViewContract {
+public class JsonTreeView extends ScrollView implements ViewContract {
 
     private Logic logic;
     private Context context;
 
-    public View(Context context) {
+    public JsonTreeView(Context context) {
         super(context);
         init(context);
     }
 
-    public View(Context context, AttributeSet attrs) {
+    public JsonTreeView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public View(Context context, AttributeSet attrs, int defStyleAttr) {
+    public JsonTreeView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }

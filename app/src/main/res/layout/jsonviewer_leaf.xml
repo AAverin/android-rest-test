@@ -9,12 +9,14 @@
         android:id="@+id/jsonviewer_leafKey"
         style="@style/jsonviewer_leafKey"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textIsSelectable="true" />
 
     <TextView
         android:id="@+id/jsonviewer_leafValue"
         style="@style/jsonviewer_leafValue"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textIsSelectable="true" />
 
 </LinearLayout>

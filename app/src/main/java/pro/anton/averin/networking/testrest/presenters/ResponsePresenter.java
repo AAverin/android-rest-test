@@ -5,8 +5,8 @@ import android.net.Uri;
 import android.os.Environment;
 import android.text.Html;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -71,8 +71,7 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
     }
 
     private JsonElement parseJson() {
-        Gson gson = new Gson();
-        return gson.toJsonTree(storage.getCurrentResponse().body);
+        return new JsonParser().parse(storage.getCurrentResponse().body);
     }
 
     private Intent buildShareIntent() {

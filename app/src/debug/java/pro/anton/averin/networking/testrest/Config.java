@@ -5,7 +5,7 @@ package pro.anton.averin.networking.testrest;
  */
 public class Config {
 
-    public static int MAX_JSON_COLLAPSE_LEVEL = 3;
+    public static int MAX_JSON_COLLAPSE_LEVEL = 10;
 
     public static boolean isCrashlyticsEnabled = false;
     public static boolean isLoggingEnabled = true;

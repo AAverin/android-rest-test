@@ -2,6 +2,7 @@ package pro.anton.averin.networking.testrest.views.androidviews.jsonviewer;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
@@ -63,9 +64,16 @@ public class Logic {
             processJsonArray(key, element.getAsJsonArray(), parent);
         } else if (element.isJsonObject()) {
             processJsonObject(key, element.getAsJsonObject(), parent);
-        } else {
+        } else if (element.isJsonPrimitive()) {
             processJsonPrimitive(key, element.getAsJsonPrimitive(), parent);
+        } else if (element.isJsonNull()) {
+            processJsonNull(key, element.getAsJsonNull(), parent);
         }
+    }
+
+    private void processJsonNull(String key, JsonNull jsonNull, NodeView parent) {
+        LeafView primitiveLeaf = view.getPrimitiveLeaf(key, "null");
+        parent.addView(primitiveLeaf);
     }
 
     private void processJsonPrimitive(String key, JsonPrimitive jsonPrimitive, NodeView parent) {
@@ -82,7 +90,6 @@ public class Logic {
 
         Iterator<Map.Entry<String, JsonElement>> iterator = jsonObject.entrySet().iterator();
         while (iterator.hasNext()) {
-            //check key?
             Map.Entry<String, JsonElement> element = iterator.next();
             processElement(element.getKey(), element.getValue(), objectNode);
         }

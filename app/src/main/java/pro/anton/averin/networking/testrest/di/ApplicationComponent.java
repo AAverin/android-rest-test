@@ -5,7 +5,6 @@ import javax.inject.Singleton;
 import dagger.Component;
 import pro.anton.averin.networking.testrest.presenters.AddHeaderPopupPresenter;
 import pro.anton.averin.networking.testrest.presenters.AddQueryPopupPresenter;
-import pro.anton.averin.networking.testrest.presenters.JsonResponsePresenter;
 import pro.anton.averin.networking.testrest.presenters.RequestPresenter;
 import pro.anton.averin.networking.testrest.presenters.ResponsePresenter;
 import pro.anton.averin.networking.testrest.presenters.TestRestPresenter;
@@ -25,8 +24,6 @@ public interface ApplicationComponent extends ApplicationInjectsTo {
     AddHeaderPopupPresenter addHeaderPopupPresenter();
 
     AddQueryPopupPresenter addQueryPopupPresenter();
-
-    JsonResponsePresenter jsonResponsePresenter();
 
     LLogger llogger();
 }

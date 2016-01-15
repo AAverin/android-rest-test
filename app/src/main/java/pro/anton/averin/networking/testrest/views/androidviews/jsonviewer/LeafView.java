@@ -7,9 +7,6 @@ import android.widget.TextView;
 
 import pro.anton.averin.networking.testrest.R;
 
-/**
- * Created by AAverin on 16.01.14.
- */
 public class LeafView extends LinearLayout {
 
     TextView leafKey;
