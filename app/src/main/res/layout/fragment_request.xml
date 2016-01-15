@@ -88,7 +88,7 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/baseurl_hint"
                             android:linksClickable="false"
-                            android:text="ya.ru" />
+                            android:text="api.github.com/users/aaverin/repos" />
 
                     </LinearLayout>
 

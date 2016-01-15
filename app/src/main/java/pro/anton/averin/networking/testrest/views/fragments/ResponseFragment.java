@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.json.JSONObject;
+import com.google.gson.JsonElement;
 
 import javax.inject.Inject;
 
@@ -28,7 +28,6 @@ import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.presenters.ResponsePresenter;
 import pro.anton.averin.networking.testrest.presenters.ResponseView;
 import pro.anton.averin.networking.testrest.views.androidviews.ExpandableRow;
-import pro.anton.averin.networking.testrest.views.androidviews.jsonviewer.JsonTreeViewer;
 import pro.anton.averin.networking.testrest.views.base.BaseViewPresenterViewpagerFragment;
 
 public class ResponseFragment extends BaseViewPresenterViewpagerFragment<ResponsePresenter> implements ResponseView {
@@ -57,7 +56,7 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
     @Bind(R.id.format_json_switch)
     SwitchCompat formatJsonSwitch;
     @Bind(R.id.jsonviewer_tree)
-    JsonTreeViewer jsonTree;
+    pro.anton.averin.networking.testrest.views.androidviews.jsonviewer.View jsonTree;
 
     private ShareActionProvider shareActionProvider;
     private Intent shareIntent = null;
@@ -125,8 +124,8 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
     }
 
     @Override
-    public void setJson(JSONObject jsonObject) {
-        jsonTree.setJSONObject(jsonObject);
+    public void setJson(JsonElement jsonObject) {
+        jsonTree.setJson(jsonObject);
     }
 
     @Nullable

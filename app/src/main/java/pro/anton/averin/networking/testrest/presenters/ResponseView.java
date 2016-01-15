@@ -2,7 +2,7 @@ package pro.anton.averin.networking.testrest.presenters;
 
 import android.content.Intent;
 
-import org.json.JSONObject;
+import com.google.gson.JsonElement;
 
 public interface ResponseView extends BaseView {
     void setShareIntent(Intent shareIntent);
@@ -35,7 +35,7 @@ public interface ResponseView extends BaseView {
 
     void enableJson();
 
-    void setJson(JSONObject jsonObject);
+    void setJson(JsonElement jsonObject);
 
     void disableJson();
 }

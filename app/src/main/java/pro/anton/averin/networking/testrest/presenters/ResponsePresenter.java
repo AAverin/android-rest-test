@@ -5,8 +5,8 @@ import android.net.Uri;
 import android.os.Environment;
 import android.text.Html;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -54,7 +54,7 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
             } else {
                 view.setResponseBody(currentResponse.body);
 
-                JSONObject jsonObject = parseJson();
+                JsonElement jsonObject = parseJson();
                 if (jsonObject != null) {
                     view.enableJson();
                     view.setJson(jsonObject);
@@ -70,13 +70,9 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
         }
     }
 
-    private JSONObject parseJson() {
-        try {
-            return new JSONObject(storage.getCurrentResponse().body);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
-        }
+    private JsonElement parseJson() {
+        Gson gson = new Gson();
+        return gson.toJsonTree(storage.getCurrentResponse().body);
     }
 
     private Intent buildShareIntent() {
