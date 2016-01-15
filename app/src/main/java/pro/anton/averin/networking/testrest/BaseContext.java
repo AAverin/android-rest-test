@@ -8,9 +8,6 @@ import java.lang.reflect.Field;
 
 import io.fabric.sdk.android.Fabric;
 
-/**
- * Created by AAverin on 13.11.13.
- */
 public class BaseContext extends ApplicationContext {
 
     @Override
