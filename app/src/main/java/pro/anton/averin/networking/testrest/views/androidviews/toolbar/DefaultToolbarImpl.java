@@ -5,9 +5,9 @@ import android.support.v7.widget.Toolbar;
 
 import javax.inject.Inject;
 
-import pro.anton.averin.networking.testrest.di.PerActivity;
+import pro.anton.averin.networking.testrest.di.ActivityScope;
 
-@PerActivity
+@ActivityScope
 public class DefaultToolbarImpl extends BaseToolbar {
 
     @Inject

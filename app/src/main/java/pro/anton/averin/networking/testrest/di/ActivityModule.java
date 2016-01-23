@@ -17,19 +17,19 @@ public class ActivityModule {
     }
 
     @Provides
-    @PerActivity
+    @ActivityScope
     BaseActivity baseActivity() {
         return baseActivity;
     }
 
     @Provides
-    @PerActivity
+    @ActivityScope
     LayoutInflater layoutInflater() {
         return baseActivity.getLayoutInflater();
     }
 
     @Provides
-    @PerActivity
+    @ActivityScope
     ActionBar actionBar() {
         return baseActivity.getSupportActionBar();
     }

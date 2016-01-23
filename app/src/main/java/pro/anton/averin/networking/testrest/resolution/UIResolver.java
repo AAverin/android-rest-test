@@ -7,10 +7,10 @@ import android.view.ViewGroup;
 import javax.inject.Inject;
 
 import pro.anton.averin.networking.testrest.R;
-import pro.anton.averin.networking.testrest.di.PerActivity;
+import pro.anton.averin.networking.testrest.di.ActivityScope;
 import pro.anton.averin.networking.testrest.views.base.BaseActivity;
 
-@PerActivity
+@ActivityScope
 public class UIResolver {
 
     private final BaseActivity baseActivity;

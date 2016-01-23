@@ -5,9 +5,9 @@ import java.net.ConnectException;
 import javax.inject.Inject;
 
 import pro.anton.averin.networking.testrest.R;
-import pro.anton.averin.networking.testrest.di.PerActivity;
+import pro.anton.averin.networking.testrest.di.ActivityScope;
 
-@PerActivity
+@ActivityScope
 public class UIResolution extends BaseResolution {
 
     @Inject
