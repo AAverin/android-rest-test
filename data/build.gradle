@@ -4,14 +4,14 @@ apply plugin: 'com.neenbedankt.android-apt'
 
 android {
 
-    def globalConfiguration = rootProject.extensions.getByName("ext")
+    def globalConf = rootProject.ext
 
-    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
-    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
+    compileSdkVersion globalConf.getAt("androidCompileSdkVersion")
+    buildToolsVersion globalConf.getAt("androidBuildToolsVersion")
 
     defaultConfig {
-        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
-        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
+        minSdkVersion globalConf.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConf.getAt("androidTargetSdkVersion")
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7

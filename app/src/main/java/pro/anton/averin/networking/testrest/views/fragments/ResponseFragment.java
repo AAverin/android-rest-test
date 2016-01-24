@@ -30,9 +30,9 @@ import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.presenters.ResponsePresenter;
 import pro.anton.averin.networking.testrest.presenters.ResponseView;
 import pro.anton.averin.networking.testrest.views.androidviews.ExpandableRow;
-import pro.anton.averin.networking.testrest.views.base.BaseViewPresenterViewpagerFragment;
+import pro.anton.averin.networking.testrest.views.base.ViewpagerPFragment;
 
-public class ResponseFragment extends BaseViewPresenterViewpagerFragment<ResponsePresenter> implements ResponseView {
+public class ResponseFragment extends ViewpagerPFragment<ResponsePresenter> implements ResponseView {
 
     @Inject
     ResponsePresenter presenter;
@@ -63,14 +63,13 @@ public class ResponseFragment extends BaseViewPresenterViewpagerFragment<Respons
     private ShareActionProvider shareActionProvider;
     private Intent shareIntent = null;
 
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         getBaseActivity().getComponent().injectTo(this);
-
-        initializePresenter(presenter, this);
+        initPresenter(presenter, savedInstanceState);
+        presenter.setView(this);
 
         inflater = getBaseActivity().getLayoutInflater();
 

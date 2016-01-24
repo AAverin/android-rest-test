@@ -39,6 +39,7 @@ import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.data.ProtocolType;
 import pro.anton.averin.networking.testrest.data.models.Request;
 import pro.anton.averin.networking.testrest.data.models.RequestHeader;
+import pro.anton.averin.networking.testrest.navigation.UINavigator;
 import pro.anton.averin.networking.testrest.presenters.RequestPresenter;
 import pro.anton.averin.networking.testrest.presenters.RequestView;
 import pro.anton.averin.networking.testrest.resolution.Resolution;
@@ -50,10 +51,10 @@ import pro.anton.averin.networking.testrest.views.androidviews.AddQueryPopup;
 import pro.anton.averin.networking.testrest.views.androidviews.ProtocolSwitcher;
 import pro.anton.averin.networking.testrest.views.androidviews.QuerySpan;
 import pro.anton.averin.networking.testrest.views.androidviews.TokenizedEditText;
-import pro.anton.averin.networking.testrest.views.base.BaseViewPresenterViewpagerFragment;
+import pro.anton.averin.networking.testrest.views.base.ViewpagerPFragment;
 
 
-public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestPresenter> implements RequestView {
+public class RequestFragment extends ViewpagerPFragment<RequestPresenter> implements RequestView {
 
     public final static int PICK_FILE_INTENT_ID = 11;
 
@@ -84,6 +85,8 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
     RequestPresenter presenter;
     @Inject
     UIResolution uiResolution;
+    @Inject
+    UINavigator uiNavigator;
 
     AddedHeadersAdapter addedHeadersAdapter;
 
@@ -119,14 +122,13 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
         }
     }
 
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         getBaseActivity().getComponent().injectTo(this);
-
-        initializePresenter(presenter, this);
+        initPresenter(presenter, savedInstanceState);
+        presenter.setView(this);
 
         setHasOptionsMenu(true);
 
@@ -180,25 +182,28 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.request_screen_menu, menu);
 
-        menu.findItem(R.id.action_save).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                presenter.onSaveItemClicked();
+        menu.findItem(R.id.action_save).setOnMenuItemClickListener(
+                new MenuItem.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        presenter.onSaveItemClicked();
                 return true;
             }
-        });
-        menu.findItem(R.id.action_manager).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                presenter.onManagerItemClicked();
+                });
+        menu.findItem(R.id.action_manager).setOnMenuItemClickListener(
+                new MenuItem.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        presenter.onManagerItemClicked();
                 return true;
-            }
-        });
-        menu.findItem(R.id.action_clear).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                presenter.onClearItemClicked();
-                return true;
+                    }
+                });
+        menu.findItem(R.id.action_clear).setOnMenuItemClickListener(
+                new MenuItem.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        presenter.onClearItemClicked();
+                        return true;
             }
         });
 
@@ -276,23 +281,24 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
     @Override
     public void showAddQueryPopup() {
         AddQueryPopup popup = new AddQueryPopup(getBaseActivity());
-        popup.setQueryPopupListener(new AddQueryPopup.QueryPopupListener() {
-            @Override
-            public void onOk(String key, String value) {
-                StringBuffer newValue = new StringBuffer();
-                String text = methodUrlEditText.getText().toString();
-                newValue.append(methodUrlEditText.getText().toString());
-                if (text.length() > 0) {
-                    if (!text.equals("?")) {
-                        newValue.append("&");
-                    }
-                } else {
-                    newValue.append("?");
-                }
-                newValue.append(key);
-                newValue.append("=");
-                newValue.append(value);
-                methodUrlEditText.setText(newValue.toString());
+        popup.setQueryPopupListener(
+                new AddQueryPopup.QueryPopupListener() {
+                    @Override
+                    public void onOk(String key, String value) {
+                        StringBuffer newValue = new StringBuffer();
+                        String text = methodUrlEditText.getText().toString();
+                        newValue.append(methodUrlEditText.getText().toString());
+                        if (text.length() > 0) {
+                            if (!text.equals("?")) {
+                                newValue.append("&");
+                            }
+                        } else {
+                            newValue.append("?");
+                        }
+                        newValue.append(key);
+                        newValue.append("=");
+                        newValue.append(value);
+                        methodUrlEditText.setText(newValue.toString());
                 presenter.requestUnDimBackground();
             }
         });
@@ -370,6 +376,21 @@ public class RequestFragment extends BaseViewPresenterViewpagerFragment<RequestP
     @Override
     public Resolution getUiResolution() {
         return uiResolution;
+    }
+
+    @Override
+    public void navigateToManagerScreenForSave() {
+        uiNavigator.navigateToManagerScreenForSave();
+    }
+
+    @Override
+    public void navigateToManagerScreen() {
+        uiNavigator.navigateToManagerScreen();
+    }
+
+    @Override
+    public void navigateToResponseScreen() {
+        uiNavigator.navigateToResponseScreen();
     }
 
     @Override

@@ -1,25 +1,27 @@
 package pro.anton.averin.networking.testrest.presenters;
 
+import android.os.Bundle;
+
+import org.jetbrains.annotations.Nullable;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.data.Storage;
 
 @Singleton
-public class JsonResponsePresenter extends BasePresenterImpl<JsonResponseView> {
+public class JsonResponsePresenter extends BasePresenter<JsonResponseView> {
 
     @Inject
     Storage storage;
 
     @Inject
-    public JsonResponsePresenter(BaseContext baseContext) {
-        super(baseContext);
+    public JsonResponsePresenter() {
     }
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        view.update(storage.getCurrentResponse());
+    public void onCreate(@Nullable final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getView().update(storage.getCurrentResponse());
     }
 }

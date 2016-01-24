@@ -23,18 +23,19 @@ import pro.anton.averin.networking.testrest.data.Storage;
 import pro.anton.averin.networking.testrest.data.models.Response;
 
 @Singleton
-public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
+public class ResponsePresenter extends BasePresenter<ResponseView> {
 
     @Inject
     Storage storage;
+    @Inject
+    BaseContext baseContext;
 
     private Response presentedResponse = null;
 
     private StringBuilder htmlHeaders;
 
     @Inject
-    public ResponsePresenter(BaseContext baseContext) {
-        super(baseContext);
+    public ResponsePresenter() {
     }
 
     @Override
@@ -43,34 +44,34 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
 
         if (storage.getCurrentRequest() != null && storage.getCurrentResponse() == null) {
             presentedResponse = null;
-            view.hideJson();
-            view.turnOffJsonSwitch();
-            view.hideNoDataLayout();
-            view.showProgressBar();
-            view.hideResponseLayout();
+            getView().hideJson();
+            getView().turnOffJsonSwitch();
+            getView().hideNoDataLayout();
+            getView().showProgressBar();
+            getView().hideResponseLayout();
         } else if (storage.getCurrentResponse() != null && !storage.getCurrentResponse().equals(presentedResponse)) {
             presentedResponse = storage.getCurrentResponse();
 
             htmlHeaders = getFormatterHeaders(presentedResponse);
-            view.setHeaders(htmlHeaders.toString());
+            getView().setHeaders(htmlHeaders.toString());
             if (presentedResponse.body == null) {
-                view.setEmptyBody();
+                getView().setEmptyBody();
             } else {
-                view.setResponseBody(presentedResponse.body);
+                getView().setResponseBody(presentedResponse.body);
 
                 JsonElement jsonObject = parseJson();
                 if (jsonObject != null) {
-                    view.enableJson();
-                    view.setJson(jsonObject);
+                    getView().enableJson();
+                    getView().setJson(jsonObject);
                 } else {
-                    view.disableJson();
+                    getView().disableJson();
                 }
             }
 
-            view.setShareIntent(buildShareIntent());
-            view.hideNoDataLayout();
-            view.hideProgressBar();
-            view.showResponseLayout();
+            getView().setShareIntent(buildShareIntent());
+            getView().hideNoDataLayout();
+            getView().hideProgressBar();
+            getView().showResponseLayout();
         }
     }
 
@@ -99,7 +100,7 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
         boolean isBodyLong = shareBody.length() > 500;
         if (isBodyLong) {
             if (!isMediaMounted()) {
-                view.displayMediaNotMountedMessage();
+                getView().displayMediaNotMountedMessage();
             } else {
                 File bodyFile = getBodyInFile(presentedResponse, storage.getCurrentRequest().name);
 
@@ -195,20 +196,20 @@ public class ResponsePresenter extends BasePresenterImpl<ResponseView> {
     }
 
     public void onShowJsonRequest() {
-        view.showJsonConfirmationDialog();
+        getView().showJsonConfirmationDialog();
     }
 
     public void onShowJson() {
-        view.hideRawResponse();
-        view.showJson();
+        getView().hideRawResponse();
+        getView().showJson();
     }
 
     public void onHideJson() {
-        view.showRawResponse();
-        view.hideJson();
+        getView().showRawResponse();
+        getView().hideJson();
     }
 
     public void cancelJsonConfirmationDialog() {
-        view.turnOffJsonSwitch();
+        getView().turnOffJsonSwitch();
     }
 }

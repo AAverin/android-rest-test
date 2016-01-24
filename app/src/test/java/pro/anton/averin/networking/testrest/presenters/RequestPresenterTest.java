@@ -9,7 +9,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.MockRxSchedulers;
 import pro.anton.averin.networking.testrest.data.Repository;
-import pro.anton.averin.networking.testrest.navigation.Navigator;
+import pro.anton.averin.networking.testrest.navigation.UINavigator;
 import pro.anton.averin.networking.testrest.rx.RxBus;
 import pro.anton.averin.networking.testrest.rx.events.DimBackgroundEvent;
 import pro.anton.averin.networking.testrest.rx.events.UndimBackgroundEvent;
@@ -27,7 +27,7 @@ public class RequestPresenterTest {
     @Mock
     RxBus rxBus;
     @Mock
-    Navigator navigator;
+    UINavigator navigator;
     @Mock
     Repository repository;
 

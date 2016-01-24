@@ -2,24 +2,18 @@ buildscript {
     repositories {
         maven { url 'https://maven.fabric.io/public' }
     }
-
     dependencies {
         classpath 'io.fabric.tools:gradle:1.+'
     }
 }
-
-apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
-apply plugin: 'android-command'
-apply plugin: 'com.neenbedankt.android-apt'
-
 repositories {
     maven { url 'https://maven.fabric.io/public' }
-    mavenCentral()
-    jcenter()
 }
 
-
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'io.fabric'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     dexOptions {
@@ -31,11 +25,6 @@ android {
         abortOnError false
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
-    }
-
     packagingOptions {
         exclude 'LICENSE.txt'
         exclude 'META-INF/DEPENDENCIES'
@@ -45,21 +34,21 @@ android {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
 
-    def globalConfiguration = rootProject.extensions.getByName("ext")
+    def globalConf = rootProject.ext
 
-    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
-    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
+    compileSdkVersion globalConf.getAt("androidCompileSdkVersion")
+    buildToolsVersion globalConf.getAt("androidBuildToolsVersion")
 
     defaultConfig {
-        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
-        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
+        minSdkVersion globalConf.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConf.getAt("androidTargetSdkVersion")
 
         versionCode 1007
         versionName "1.007"
 
         //applicationId is set in productFlavors
 
-        testInstrumentationRunner globalConfiguration.getAt("testInstrumentationRunner")
+        testInstrumentationRunner globalConf.getAt("testInstrumentationRunner")
     }
 
     applicationVariants.all { variant ->
@@ -131,13 +120,17 @@ dependencies {
 
     provided "org.glassfish:javax.annotation:10.0-b28"
 
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
     compile('com.crashlytics.sdk.android:crashlytics:2.2.2@aar') {
         transitive = true;
     }
 
     testCompile 'junit:junit:4.12'
     testCompile "org.mockito:mockito-core:1.10.19"
-    testCompile "org.hamcrest:hamcrest-all:1.3"
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:2.0.36-beta'
+    testCompile 'org.hamcrest:hamcrest-all:1.3'
 
     androidTestCompile "com.android.support.test:runner:${RUNNER_VERSION}"
     androidTestCompile "com.android.support.test:rules:${RUNNER_VERSION}"

@@ -5,10 +5,8 @@ import org.jetbrains.annotations.NotNull;
 import javax.inject.Inject;
 
 import okhttp3.Response;
-import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.data.Repository;
 import pro.anton.averin.networking.testrest.data.models.Request;
-import pro.anton.averin.networking.testrest.navigation.Navigator;
 import pro.anton.averin.networking.testrest.rx.ResolvedObserver;
 import pro.anton.averin.networking.testrest.rx.RxSchedulers;
 import pro.anton.averin.networking.testrest.rx.events.DimBackgroundEvent;
@@ -19,50 +17,47 @@ import pro.anton.averin.networking.testrest.utils.LLogger;
 public class RequestPresenter extends RxBusPresenter<RequestView> {
 
     @Inject
-    Navigator navigator;
-    @Inject
     Repository repository;
     @Inject
     RxSchedulers schedulers;
     @Inject
     LLogger llogger;
 
-
     @Inject
-    public RequestPresenter(BaseContext baseContext) {
-        super(baseContext);
+    public RequestPresenter() {
     }
 
     public void onUseFileCheckboxChecked(boolean isChecked) {
-        view.cleanPostBody();
+        getView().cleanPostBody();
         if (isChecked) {
-            view.showPickFileButton();
-            view.setPostBodyFileHint();
+            getView().showPickFileButton();
+            getView().setPostBodyFileHint();
         } else {
-            view.hidePickFileButton();
-            view.setPostBodyDefaultHint();
+            getView().hidePickFileButton();
+            getView().setPostBodyDefaultHint();
         }
     }
 
     public void onPickFileButtonClicked() {
-        view.showFileChooser();
+        getView().showFileChooser();
     }
 
     public void onAddQueryButtonClicked() {
-        view.showAddQueryPopup();
+        getView().showAddQueryPopup();
     }
 
     public void onAddHeadersButtonClicked() {
-        view.showAddHeaderPopup();
+        getView().showAddHeaderPopup();
     }
 
     public void onSendClicked(Request request) {
         if (request.isValid()) {
-            repository.sendRequest(request).observeOn(schedulers.androidMainThread()).subscribe(new ResolvedObserver<Response>(view.getUiResolution()) {
+            repository.sendRequest(request).observeOn(schedulers.androidMainThread()).subscribe(new ResolvedObserver<Response>(
+                                                                                                        getView().getUiResolution()) {
                 @Override
                 public void onCompleted() {
                     super.onCompleted();
-                    navigator.navigateToResponseScreen();
+                    view.navigateToResponseScreen();
                 }
 
                 @Override
@@ -71,28 +66,28 @@ public class RequestPresenter extends RxBusPresenter<RequestView> {
                 }
             });
         } else {
-            view.focusBaseUrl();
+            getView().focusBaseUrl();
         }
     }
 
     public void onSaveItemClicked() {
-        navigator.navigateToManagerScreenForSave();
+        view.navigateToManagerScreenForSave();
     }
 
     public void onManagerItemClicked() {
-        navigator.navigateToManagerScreen();
+        view.navigateToManagerScreen();
     }
 
     public void onClearItemClicked() {
-        view.clearFields();
+        getView().clearFields();
     }
 
     public void onPostMethodSelected() {
-        view.showPostLayout();
+        getView().showPostLayout();
     }
 
     public void onPostMethodUnselected() {
-        view.hidePostLayout();
+        getView().hidePostLayout();
     }
 
     public void addQueryPopupDismissed() {
@@ -109,8 +104,8 @@ public class RequestPresenter extends RxBusPresenter<RequestView> {
 
     @Override
     protected void onEvent(@NotNull final Object event) {
-        if (event instanceof FabClickedEvent && isVisible) {
-            onSendClicked(view.getRequest());
+        if (event instanceof FabClickedEvent && getVisible()) {
+            onSendClicked(getView().getRequest());
         }
     }
 }

@@ -5,19 +5,17 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.data.Repository;
 import pro.anton.averin.networking.testrest.data.models.Headers;
 
 @Singleton
-public class AddHeaderPopupPresenter extends BasePresenterImpl<AddHeaderPopupView> {
+public class AddHeaderPopupPresenter extends BasePresenter<AddHeaderPopupView> {
 
     @Inject
     Repository repository;
 
     @Inject
-    public AddHeaderPopupPresenter(BaseContext baseContext) {
-        super(baseContext);
+    public AddHeaderPopupPresenter() {
     }
 
     public List<Headers.Header> getSupportedHeaders() {

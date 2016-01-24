@@ -10,9 +10,8 @@ import pro.anton.averin.networking.testrest.di.DaggerActivityComponent;
 import pro.anton.averin.networking.testrest.di.HasComponent;
 
 
-public class BaseActivity extends AppCompatActivity implements HasComponent<ActivityComponent> {
+public abstract class BaseActivity extends AppCompatActivity implements HasComponent<ActivityComponent> {
 
-    protected BaseContext baseContext;
     private ActivityComponent activityComponent;
 
     @Override
@@ -24,11 +23,7 @@ public class BaseActivity extends AppCompatActivity implements HasComponent<Acti
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        baseContext = (BaseContext) getApplicationContext();
-
-        baseContext.getApplicationComponent().injectTo(this);
-
-
+        BaseContext baseContext = (BaseContext) getApplicationContext();
         activityComponent = DaggerActivityComponent.builder()
                 .applicationComponent(baseContext.getApplicationComponent())
                 .activityModule(new ActivityModule(this))

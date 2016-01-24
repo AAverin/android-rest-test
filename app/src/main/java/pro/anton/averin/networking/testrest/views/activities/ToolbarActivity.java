@@ -8,21 +8,19 @@ import butterknife.ButterKnife;
 import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.views.base.BaseActivity;
 
-public class ToolbarActivity extends BaseActivity {
+public abstract class ToolbarActivity extends BaseActivity {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        getComponent().injectTo(this);
-
         setContentView(R.layout.root);
         ButterKnife.bind(this);
-
         setSupportActionBar(toolbar);
+
+        getComponent().injectTo(this);
     }
 
     public Toolbar getToolbar() {

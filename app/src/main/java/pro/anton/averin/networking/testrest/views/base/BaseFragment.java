@@ -6,7 +6,7 @@ import android.view.View;
 
 import pro.anton.averin.networking.testrest.BaseContext;
 
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
 
     protected View contentView;
     protected BaseContext baseContext;

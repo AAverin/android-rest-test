@@ -19,9 +19,6 @@ import pro.anton.averin.networking.testrest.presenters.AddQueryPopupPresenter;
 import pro.anton.averin.networking.testrest.presenters.AddQueryPopupView;
 import pro.anton.averin.networking.testrest.views.base.BaseActivity;
 
-/**
- * Created by AAverin on 10.11.13.
- */
 public class AddQueryPopup extends PopupWindow implements AddQueryPopupView {
 
     @Inject
@@ -33,7 +30,7 @@ public class AddQueryPopup extends PopupWindow implements AddQueryPopupView {
         super(activity);
 
         activity.getComponent().injectTo(this);
-        presenter.onCreate();
+        presenter.onCreate(null);
 
         View popupView = LayoutInflater.from(activity).inflate(R.layout.addquery_popup, null);
 

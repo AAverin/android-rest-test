@@ -1,17 +1,31 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    ext.kotlin_version = '1.0.0-beta-4584'
     repositories {
         mavenCentral()
         jcenter()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.5.0'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
-
-        // android command plugin
-        classpath 'com.novoda:gradle-android-command-plugin:1.5.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:1.2"
     }
+}
+
+ext {
+    //Android
+    androidBuildToolsVersion = "23.0.1"
+    androidMinSdkVersion = 14
+    androidTargetSdkVersion = 23
+    androidCompileSdkVersion = 23
+
+    testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
 }
 
 allprojects {
@@ -26,14 +40,8 @@ allprojects {
         sourceCompatibility = JavaVersion.VERSION_1_7
         targetCompatibility = JavaVersion.VERSION_1_7
     }
+}
 
-    ext {
-        //Android
-        androidBuildToolsVersion = "23.0.1"
-        androidMinSdkVersion = 14
-        androidTargetSdkVersion = 23
-        androidCompileSdkVersion = 23
-
-        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
-    }
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }

@@ -1,28 +1,26 @@
 package pro.anton.averin.networking.testrest.navigation
 
-import javax.inject.Inject
-
 import pro.anton.averin.networking.testrest.di.ActivityScope
-import pro.anton.averin.networking.testrest.rx.RxBus
+import pro.anton.averin.networking.testrest.rx.UiBus
 import pro.anton.averin.networking.testrest.rx.events.NaviResponseScreenEvent
 import pro.anton.averin.networking.testrest.utils.IntentBuilder
 import pro.anton.averin.networking.testrest.views.base.BaseActivity
-import javax.inject.Named
+import javax.inject.Inject
 
 @ActivityScope
-class Navigator
+class UINavigator
 @Inject
 constructor() {
 
     @Inject
     lateinit var baseActivity: BaseActivity
     @Inject
-    lateinit var rxBus: RxBus
+    lateinit var uiBus: UiBus
     @Inject
     lateinit var intentBuilder: IntentBuilder
 
     fun navigateToResponseScreen() {
-        rxBus.post(NaviResponseScreenEvent())
+        uiBus.post(NaviResponseScreenEvent())
     }
 
     fun navigateToManagerScreenForSave() {

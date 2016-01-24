@@ -3,13 +3,10 @@ package pro.anton.averin.networking.testrest.presenters;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import pro.anton.averin.networking.testrest.BaseContext;
-
 @Singleton
-public class AddQueryPopupPresenter extends BasePresenterImpl<AddQueryPopupView> {
+public class AddQueryPopupPresenter extends BasePresenter<AddQueryPopupView> {
 
     @Inject
-    public AddQueryPopupPresenter(BaseContext baseContext) {
-        super(baseContext);
+    public AddQueryPopupPresenter() {
     }
 }

@@ -1,9 +1,9 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="AppTheme.Base" />
+    <style name="BaseTheme" parent="BaseTheme.Base"/>
 
-    <style name="AppTheme.Base" parent="Theme.AppCompat.Light">
+    <style name="BaseTheme.Base" parent="Theme.AppCompat.Light">
         <item name="android:actionMenuTextColor">@color/text_light_primary</item>
 
         <!-- Support library compatibility -->

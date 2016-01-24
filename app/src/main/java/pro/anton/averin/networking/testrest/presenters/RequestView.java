@@ -31,4 +31,10 @@ public interface RequestView extends BaseView {
     Request getRequest();
 
     Resolution getUiResolution();
+
+    void navigateToManagerScreenForSave();
+
+    void navigateToManagerScreen();
+
+    void navigateToResponseScreen();
 }

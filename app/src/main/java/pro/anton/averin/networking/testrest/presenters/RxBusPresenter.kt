@@ -1,14 +1,11 @@
 package pro.anton.averin.networking.testrest.presenters
 
-import javax.inject.Inject
-
-import pro.anton.averin.networking.testrest.BaseContext
 import pro.anton.averin.networking.testrest.rx.GlobalBus
 import pro.anton.averin.networking.testrest.utils.LLogger
 import rx.Subscription
-import rx.functions.Action1
+import javax.inject.Inject
 
-abstract class RxBusPresenter<B : BaseView>(baseContext: BaseContext) : BasePresenterImpl<B>(baseContext) {
+abstract class RxBusPresenter<B : BaseView>() : BasePresenter<B>() {
 
     @Inject
     lateinit var globalBus: GlobalBus
@@ -19,7 +16,7 @@ abstract class RxBusPresenter<B : BaseView>(baseContext: BaseContext) : BasePres
 
     override fun onResume() {
         super.onResume()
-        if (isVisible) {
+        if (visible) {
             subscribe()
         }
     }

@@ -44,7 +44,7 @@ public class AddHeaderPopup extends PopupWindow implements AddHeaderPopupView {
         super(activity);
 
         activity.getComponent().injectTo(this);
-        presenter.onCreate();
+        presenter.onCreate(null);
 
         View popupView = LayoutInflater.from(activity).inflate(R.layout.addheader_popup, null);
 

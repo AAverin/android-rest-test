@@ -7,7 +7,8 @@ import pro.anton.averin.networking.testrest.views.activities.TestRestActivity
 import javax.inject.Inject
 
 @ActivityScope
-class IntentBuilder @Inject constructor() {
+class IntentBuilder
+@Inject constructor() {
 
     @Inject lateinit var baseContext: BaseContext
 
