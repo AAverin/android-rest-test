@@ -158,7 +158,7 @@ constructor() : BasePresenter<ResponseView>() {
         }
 
 
-    private fun getBodyInFile(currentResponse: Response, name: String): File? {
+    private fun getBodyInFile(currentResponse: Response, name: String?): File? {
 
         var tempFileForBody: File? = null
         val storageDir = storageDir

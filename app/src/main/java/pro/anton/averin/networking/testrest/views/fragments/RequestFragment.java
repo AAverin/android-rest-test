@@ -39,11 +39,13 @@ import pro.anton.averin.networking.testrest.R;
 import pro.anton.averin.networking.testrest.data.ProtocolType;
 import pro.anton.averin.networking.testrest.data.models.Request;
 import pro.anton.averin.networking.testrest.data.models.RequestHeader;
-import pro.anton.averin.networking.testrest.navigation.UINavigator;
 import pro.anton.averin.networking.testrest.presenters.RequestPresenter;
 import pro.anton.averin.networking.testrest.presenters.RequestView;
 import pro.anton.averin.networking.testrest.resolution.Resolution;
 import pro.anton.averin.networking.testrest.resolution.UIResolution;
+import pro.anton.averin.networking.testrest.rx.UiBus;
+import pro.anton.averin.networking.testrest.rx.events.NaviManagerScreenEvent;
+import pro.anton.averin.networking.testrest.rx.events.NaviResponseScreenEvent;
 import pro.anton.averin.networking.testrest.views.adapters.AddedHeadersAdapter;
 import pro.anton.averin.networking.testrest.views.androidviews.AdaptableLinearLayout;
 import pro.anton.averin.networking.testrest.views.androidviews.AddHeaderPopup;
@@ -85,8 +87,10 @@ public class RequestFragment extends ViewpagerPFragment<RequestPresenter> implem
     RequestPresenter presenter;
     @Inject
     UIResolution uiResolution;
+    //    @Inject
+    //    UINavigator uiNavigator;
     @Inject
-    UINavigator uiNavigator;
+    UiBus uiBus;
 
     AddedHeadersAdapter addedHeadersAdapter;
 
@@ -380,17 +384,18 @@ public class RequestFragment extends ViewpagerPFragment<RequestPresenter> implem
 
     @Override
     public void navigateToManagerScreenForSave() {
-        uiNavigator.navigateToManagerScreenForSave();
+        uiBus.post(NaviManagerScreenEvent.withSave());
     }
 
     @Override
     public void navigateToManagerScreen() {
-        uiNavigator.navigateToManagerScreen();
+        uiBus.post(NaviManagerScreenEvent.withoutSave());
+
     }
 
     @Override
     public void navigateToResponseScreen() {
-        uiNavigator.navigateToResponseScreen();
+        uiBus.post(new NaviResponseScreenEvent());
     }
 
     @Override

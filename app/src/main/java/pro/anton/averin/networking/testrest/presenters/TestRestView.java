@@ -3,5 +3,9 @@ package pro.anton.averin.networking.testrest.presenters;
 public interface TestRestView extends BaseView {
     void undim();
 
-    void naviResponseScreen();
+    void navigateToManagerScreenWithSave();
+
+    void navigateToManagerScreenWithoutSave();
+
+    void navigateToResponseScreen();
 }
