@@ -1,5 +1,7 @@
 package pro.anton.averin.networking.testrest.presenters;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.inject.Inject;
 
 import okhttp3.Response;
@@ -11,7 +13,6 @@ import pro.anton.averin.networking.testrest.rx.ResolvedObserver;
 import pro.anton.averin.networking.testrest.rx.RxSchedulers;
 import pro.anton.averin.networking.testrest.rx.events.DimBackgroundEvent;
 import pro.anton.averin.networking.testrest.rx.events.FabClickedEvent;
-import pro.anton.averin.networking.testrest.rx.events.RxBusEvent;
 import pro.anton.averin.networking.testrest.rx.events.UndimBackgroundEvent;
 import pro.anton.averin.networking.testrest.utils.LLogger;
 
@@ -99,15 +100,15 @@ public class RequestPresenter extends RxBusPresenter<RequestView> {
     }
 
     public void requestUnDimBackground() {
-        rxBus.send(new UndimBackgroundEvent());
+        getGlobalBus().post(new UndimBackgroundEvent());
     }
 
     public void requestDimBackground() {
-        rxBus.send(new DimBackgroundEvent());
+        getGlobalBus().post(new DimBackgroundEvent());
     }
 
     @Override
-    public void onEvent(RxBusEvent event) {
+    protected void onEvent(@NotNull final Object event) {
         if (event instanceof FabClickedEvent && isVisible) {
             onSendClicked(view.getRequest());
         }

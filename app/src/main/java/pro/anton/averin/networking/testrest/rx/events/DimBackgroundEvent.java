@@ -1,4 +1,4 @@
 package pro.anton.averin.networking.testrest.rx.events;
 
-public class DimBackgroundEvent extends RxBusEvent {
+public class DimBackgroundEvent {
 }

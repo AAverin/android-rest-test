@@ -7,7 +7,6 @@ import pro.anton.averin.networking.testrest.BaseContext;
 import pro.anton.averin.networking.testrest.rx.RxBus;
 import pro.anton.averin.networking.testrest.rx.events.FabClickedEvent;
 import pro.anton.averin.networking.testrest.rx.events.NaviResponseScreenEvent;
-import pro.anton.averin.networking.testrest.rx.events.RxBusEvent;
 
 @Singleton
 public class TestRestPresenter extends RxBusPresenter<TestRestView> {

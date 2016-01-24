@@ -7,6 +7,7 @@ import pro.anton.averin.networking.testrest.rx.RxBus
 import pro.anton.averin.networking.testrest.rx.events.NaviResponseScreenEvent
 import pro.anton.averin.networking.testrest.utils.IntentBuilder
 import pro.anton.averin.networking.testrest.views.base.BaseActivity
+import javax.inject.Named
 
 @ActivityScope
 class Navigator
@@ -21,7 +22,7 @@ constructor() {
     lateinit var intentBuilder: IntentBuilder
 
     fun navigateToResponseScreen() {
-        rxBus.send(NaviResponseScreenEvent())
+        rxBus.post(NaviResponseScreenEvent())
     }
 
     fun navigateToManagerScreenForSave() {
